@@ -18,8 +18,10 @@ set(CMAKE_DEBUG_POSTFIX "d")
 
 add_library(mpl 
     qdb/mpl/append.hpp
-    qdb/mpl/apply.hpp    
+    qdb/mpl/apply.hpp 
+    qdb/mpl/back.hpp   
     qdb/mpl/count.hpp
+    qdb/mpl/front.hpp
     qdb/mpl/list.hpp
     qdb/mpl/minus.hpp
     qdb/mpl/not.hpp
