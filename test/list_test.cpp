@@ -24,6 +24,14 @@ static_assert(std::is_same<qdb::mpl::push_front<single_bool_list, int>, int_bool
 
 using int_bool_bool_int_list = qdb::mpl::list<int, bool, bool, int>;
 
+static_assert(std::is_same<qdb::mpl::front<int_bool_list>, int>::value, "invalid front result");
+static_assert(std::is_same<qdb::mpl::back<int_bool_list>, bool>::value, "invalid front result");
+
+static_assert(std::is_same<qdb::mpl::front<int_bool_bool_int_list>, int>::value, "invalid front result");
+static_assert(std::is_same<qdb::mpl::back<int_bool_bool_int_list>, int>::value, "invalid front result");
+
+using int_bool_bool_int_list = qdb::mpl::list<int, bool, bool, int>;
+
 using bool_int_list = qdb::mpl::list<bool, int>;
 
 static_assert(std::is_same<qdb::mpl::append<int_bool_list, bool_int_list>, int_bool_bool_int_list>::value, "invalid append result");
