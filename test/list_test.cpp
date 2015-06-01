@@ -4,6 +4,7 @@
 #include <qdb/mpl/append.hpp>
 #include <qdb/mpl/back.hpp>
 #include <qdb/mpl/front.hpp>
+#include <qdb/mpl/at.hpp>
 
 // list tests
 using empty_list = qdb::mpl::list<>;
@@ -39,6 +40,16 @@ static_assert(std::is_same<qdb::mpl::pop_front<single_int_list>, empty_list>::va
 static_assert(std::is_same<qdb::mpl::pop_back<int_bool_list>, qdb::mpl::list<int>>::value, "invalid pop back result");
 static_assert(std::is_same<qdb::mpl::pop_back<int_bool_bool_int_list>, qdb::mpl::list<int, bool, bool>>::value, "invalid pop back result");
 static_assert(std::is_same<qdb::mpl::pop_back<single_int_list>, empty_list>::value, "invalid pop back result");
+
+static_assert(std::is_same<qdb::mpl::at_c<int_bool_bool_int_list, 0>, int>::value,  "invalid at result");
+static_assert(std::is_same<qdb::mpl::at_c<int_bool_bool_int_list, 1>, bool>::value, "invalid at result");
+static_assert(std::is_same<qdb::mpl::at_c<int_bool_bool_int_list, 2>, bool>::value, "invalid at result");
+static_assert(std::is_same<qdb::mpl::at_c<int_bool_bool_int_list, 3>, int>::value,  "invalid at result");
+
+static_assert(std::is_same<qdb::mpl::at<int_bool_bool_int_list, std::integral_constant<int, 0>>, int>::value,  "invalid at result");
+static_assert(std::is_same<qdb::mpl::at<int_bool_bool_int_list, std::integral_constant<int, 1>>, bool>::value, "invalid at result");
+static_assert(std::is_same<qdb::mpl::at<int_bool_bool_int_list, std::integral_constant<int, 2>>, bool>::value, "invalid at result");
+static_assert(std::is_same<qdb::mpl::at<int_bool_bool_int_list, std::integral_constant<int, 3>>, int>::value,  "invalid at result");
 
 using bool_int_list = qdb::mpl::list<bool, int>;
 
