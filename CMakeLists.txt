@@ -56,5 +56,6 @@ add_executable(qdb_mpl_test
     test/integral_test.cpp
     test/logical_test.cpp
     test/comparison_test.cpp
+    test/for_each.cpp
 
     test/mpl_test.cpp)
