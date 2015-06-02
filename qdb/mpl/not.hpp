@@ -3,13 +3,8 @@
 
 #include <type_traits>
 
-namespace qdb
+namespace brigand
 {
-namespace mpl
-{
-
-    template <typename T>
-    using not = std::integral_constant<typename T::value_type, !T::value>;
-
-}
+  template <typename T>
+  using not = std::integral_constant<typename T::value_type, !T::value>;
 }
