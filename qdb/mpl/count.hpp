@@ -3,13 +3,8 @@
 
 #include <type_traits>
 
-namespace qdb
+namespace brigand
 {
-namespace mpl
-{
-
-    template<class... T>
-    using count = std::integral_constant<std::size_t, sizeof...(T)>;
-
-}
+  template<class... T>
+  using count = std::integral_constant<std::size_t, sizeof...(T)>;
 }
