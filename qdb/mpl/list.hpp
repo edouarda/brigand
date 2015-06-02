@@ -1,14 +1,9 @@
 
 #pragma once
 
-namespace qdb
+namespace brigand
 {
-namespace mpl
-{
+  template <class... T> struct list {};
 
-    template <class... T> struct list {};
-
-    using empty_list = qdb::mpl::list<>;
-
-}
+  using empty_list = brigand::list<>;
 }
