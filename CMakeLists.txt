@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(qdb-mpl)
+project(brigand)
 
 if(CLANG OR CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
@@ -16,11 +16,11 @@ ENDIF()
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
-add_library(mpl 
+add_library(mpl
     qdb/mpl/append.hpp
-    qdb/mpl/apply.hpp 
+    qdb/mpl/apply.hpp
      qdb/mpl/at.hpp
-    qdb/mpl/back.hpp   
+    qdb/mpl/back.hpp
     qdb/mpl/count.hpp
     qdb/mpl/front.hpp
     qdb/mpl/list.hpp

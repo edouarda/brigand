@@ -4,13 +4,8 @@
 #include <qdb/mpl/apply.hpp>
 #include <qdb/mpl/count.hpp>
 
-namespace qdb
+namespace brigand
 {
-namespace mpl
-{
-
-    template<class L> 
-    using size = apply<L, count>;
-
-}
+  template<class L>
+  using size = apply<L, count>;
 }

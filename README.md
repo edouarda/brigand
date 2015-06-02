@@ -9,30 +9,30 @@ And now behold the most complete documentation ever written:
 
 # Sequences
 
- * `qdb::mpl::list`
+ * `brigand::list`
 
 # Metafunctions
 
- * `qdb::mpl::size<Sequence> -> IntegralConstant`
- * `qdb::mpl::count<Sequence> -> IntegralConstant`
- * `qdb::mpl::at<Sequence> -> Element`
- * `qdb::mpl::at_c<Sequence> -> Element`
- * `qdb::mpl::front<Sequence> -> Element`
- * `qdb::mpl::push_front<Sequence> -> Sequence`
- * `qdb::mpl::pop_front<Sequence> -> Sequence`
- * `qdb::mpl::back<Sequence> -> Element`
- * `qdb::mpl::push_back<Sequence> -> Sequence`
- * `qdb::mpl::pop_back<Sequence> -> Sequence`
- * `qdb::mpl::plus<IntegralConstant, IntegralConstant> -> IntegralConstant`
- * `qdb::mpl::minus<IntegralConstant, IntegralConstant> -> IntegralConstant`
- * `qdb::mpl::not<IntegralConstant> -> IntegralConstant`
+ * `brigand::size<Sequence> -> IntegralConstant`
+ * `brigand::count<Sequence> -> IntegralConstant`
+ * `brigand::at<Sequence> -> Element`
+ * `brigand::at_c<Sequence> -> Element`
+ * `brigand::front<Sequence> -> Element`
+ * `brigand::push_front<Sequence> -> Sequence`
+ * `brigand::pop_front<Sequence> -> Sequence`
+ * `brigand::back<Sequence> -> Element`
+ * `brigand::push_back<Sequence> -> Sequence`
+ * `brigand::pop_back<Sequence> -> Sequence`
+ * `brigand::plus<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::minus<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::not<IntegralConstant> -> IntegralConstant`
 
 # Algorithms
 
- * `qdb::mpl::apply<Function, Function> -> Function`
- * `qdb::mpl::append<Sequence, Sequence> -> Sequence`
+ * `brigand::apply<Function, Function> -> Function`
+ * `brigand::append<Sequence, Sequence> -> Sequence`
 
 TODO :
 
- * `qdb::mpl::for_each<Sequence, Functor> -> Sequence`
+ * `brigand::for_each<Sequence, Functor> -> Sequence`
  * `make_variant_over<Sequence> -> Boost.Variant`
