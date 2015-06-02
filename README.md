@@ -1,5 +1,5 @@
-quasardb mpl library
-====================
+Brigand Meta-programming library
+================================
 
 Because we don't need everything Boost.MPL has and want faster compilation speed!
 
@@ -10,6 +10,10 @@ And now behold the most complete documentation ever written:
 # Sequences
 
  * `brigand::list`
+
+# Types
+
+ * `brigand::bool_`
 
 # Metafunctions
 
@@ -25,7 +29,15 @@ And now behold the most complete documentation ever written:
  * `brigand::pop_back<Sequence> -> Sequence`
  * `brigand::plus<IntegralConstant, IntegralConstant> -> IntegralConstant`
  * `brigand::minus<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::times<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::divides<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::modulo<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::complement<IntegralConstant> -> IntegralConstant`
+ * `brigand::negate<IntegralConstant> -> IntegralConstant`
  * `brigand::not_<IntegralConstant> -> IntegralConstant`
+ * `brigand::and_<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::or_<IntegralConstant, IntegralConstant> -> IntegralConstant`
+ * `brigand::xor_<IntegralConstant, IntegralConstant> -> IntegralConstant`
 
 # Algorithms
 
@@ -35,4 +47,5 @@ And now behold the most complete documentation ever written:
 TODO :
 
  * `brigand::for_each<Sequence, Functor> -> Sequence`
+ * `brigand::sort<Sequence, Functor> -> Sequence`
  * `make_variant_over<Sequence> -> Boost.Variant`
