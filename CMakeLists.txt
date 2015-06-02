@@ -17,22 +17,27 @@ ENDIF()
 set(CMAKE_DEBUG_POSTFIX "d")
 
 add_library(mpl
+    brigand/and.hpp
     brigand/append.hpp
     brigand/apply.hpp
     brigand/at.hpp
     brigand/back.hpp
+    brigand/bool.hpp
     brigand/complement.hpp
     brigand/count.hpp
     brigand/front.hpp
     brigand/list.hpp
+    brigand/logical.hpp
     brigand/minus.hpp
     brigand/modulo.hpp
     brigand/next.hpp
     brigand/not.hpp
+    brigand/or.hpp
     brigand/plus.hpp
     brigand/prev.hpp
     brigand/size.hpp
     brigand/times.hpp
+    brigand/xor.hpp
 
     brigand/nothing.cpp
 )
@@ -42,5 +47,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(qdb_mpl_test
     test/list_test.cpp
     test/integral_test.cpp
+    test/logical_test.cpp
 
     test/mpl_test.cpp)

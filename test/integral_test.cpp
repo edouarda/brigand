@@ -1,6 +1,5 @@
 
 #include <brigand/arithmetic.hpp>
-#include <brigand/not.hpp>
 
 // integral constant tests
 using value_int_one = std::integral_constant<int, 1>;
@@ -18,5 +17,3 @@ static_assert(brigand::next<value_int_one>::value == 2, "invalid next result");
 static_assert(brigand::prev<value_int_three>::value == 2, "invalid prev result");
 static_assert(brigand::negate<value_int_three>::value == -3, "invalid negate result");
 static_assert(brigand::complement<value_byte_zero>::value == 255, "invalid complement result");
-
-static_assert(brigand::not_<std::integral_constant<bool, false>>::value, "invalid not result");
