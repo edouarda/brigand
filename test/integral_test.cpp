@@ -8,6 +8,8 @@ using value_int_three = std::integral_constant<int, 3>;
 using value_int_ten = std::integral_constant<int, 10>;
 using value_byte_zero = std::integral_constant<unsigned char, 0>;
 
+static_assert(brigand::min<value_int_one, value_int_two>::value == 1, "invalid min result");
+static_assert(brigand::max<value_int_one, value_int_two>::value == 2, "invalid max result");
 static_assert(brigand::plus<value_int_one, value_int_two>::value == 3, "invalid plus result");
 static_assert(brigand::minus<value_int_two, value_int_one>::value == 1, "invalid minus result");
 static_assert(brigand::times<value_int_two, value_int_two>::value == 4, "invalid times result");

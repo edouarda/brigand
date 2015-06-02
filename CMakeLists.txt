@@ -33,6 +33,8 @@ add_library(mpl
     brigand/greater_equal.hpp
     brigand/list.hpp
     brigand/logical.hpp
+    brigand/max.hpp
+    brigand/min.hpp
     brigand/minus.hpp
     brigand/modulo.hpp
     brigand/next.hpp

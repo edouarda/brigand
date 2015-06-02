@@ -5,6 +5,8 @@
 #include <brigand/minus.hpp>
 #include <brigand/times.hpp>
 #include <brigand/divides.hpp>
+#include <brigand/max.hpp>
+#include <brigand/min.hpp>
 #include <brigand/modulo.hpp>
 #include <brigand/next.hpp>
 #include <brigand/prev.hpp>
