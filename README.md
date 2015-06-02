@@ -44,8 +44,11 @@ And now behold the most complete documentation ever written:
  * `brigand::apply<Function, Function> -> Function`
  * `brigand::append<Sequence, Sequence> -> Sequence`
 
+# Adapters
+
+ * `make_variant_over<Sequence> -> Boost.Variant`
+
 TODO :
 
  * `brigand::for_each<Sequence, Functor> -> Sequence`
  * `brigand::sort<Sequence, Functor> -> Sequence`
- * `make_variant_over<Sequence> -> Boost.Variant`
