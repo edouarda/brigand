@@ -21,13 +21,18 @@ add_library(mpl
     brigand/apply.hpp
     brigand/at.hpp
     brigand/back.hpp
+    brigand/complement.hpp
     brigand/count.hpp
     brigand/front.hpp
     brigand/list.hpp
     brigand/minus.hpp
+    brigand/modulo.hpp
+    brigand/next.hpp
     brigand/not.hpp
     brigand/plus.hpp
+    brigand/prev.hpp
     brigand/size.hpp
+    brigand/times.hpp
 
     brigand/nothing.cpp
 )

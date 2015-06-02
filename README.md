@@ -25,7 +25,7 @@ And now behold the most complete documentation ever written:
  * `brigand::pop_back<Sequence> -> Sequence`
  * `brigand::plus<IntegralConstant, IntegralConstant> -> IntegralConstant`
  * `brigand::minus<IntegralConstant, IntegralConstant> -> IntegralConstant`
- * `brigand::not<IntegralConstant> -> IntegralConstant`
+ * `brigand::not_<IntegralConstant> -> IntegralConstant`
 
 # Algorithms
 
