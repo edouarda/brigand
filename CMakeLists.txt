@@ -24,8 +24,13 @@ add_library(mpl
     brigand/back.hpp
     brigand/bool.hpp
     brigand/complement.hpp
+    brigand/comparisons.hpp
     brigand/count.hpp
     brigand/front.hpp
+    brigand/less.hpp
+    brigand/less_equal.hpp
+    brigand/greater.hpp
+    brigand/greater_equal.hpp
     brigand/list.hpp
     brigand/logical.hpp
     brigand/minus.hpp
@@ -48,5 +53,6 @@ add_executable(qdb_mpl_test
     test/list_test.cpp
     test/integral_test.cpp
     test/logical_test.cpp
+    test/comparison_test.cpp
 
     test/mpl_test.cpp)
