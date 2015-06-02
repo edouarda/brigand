@@ -48,7 +48,7 @@ namespace brigand
   template <template <class...> class L, class First, class... R>
   struct without_last_element
   {
-      using type = typename append<L<First>, typename  without_last_element<L, R...>::type>;
+      using type = append<L<First>, typename  without_last_element<L, R...>::type>;
   };
 
   template <template <class...> class L, class Last>

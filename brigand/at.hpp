@@ -28,5 +28,5 @@ namespace brigand
   using at_c = typename at_impl<Index, L>::type;
 
   template <class L, typename Index>
-  using at = typename at_c<L, Index::value>;
+  using at = at_c<L, Index::value>;
 }
