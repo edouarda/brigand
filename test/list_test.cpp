@@ -1,10 +1,10 @@
 
-#include <qdb/mpl/list.hpp>
-#include <qdb/mpl/size.hpp>
-#include <qdb/mpl/append.hpp>
-#include <qdb/mpl/back.hpp>
-#include <qdb/mpl/front.hpp>
-#include <qdb/mpl/at.hpp>
+#include <brigand/list.hpp>
+#include <brigand/size.hpp>
+#include <brigand/append.hpp>
+#include <brigand/back.hpp>
+#include <brigand/front.hpp>
+#include <brigand/at.hpp>
 
 // list tests
 using empty_list = brigand::list<>;

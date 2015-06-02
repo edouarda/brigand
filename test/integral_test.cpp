@@ -1,7 +1,7 @@
 
-#include <qdb/mpl/plus.hpp>
-#include <qdb/mpl/minus.hpp>
-#include <qdb/mpl/not.hpp>
+#include <brigand/plus.hpp>
+#include <brigand/minus.hpp>
+#include <brigand/not.hpp>
 
 // integral constant tests
 using value_int_one = std::integral_constant<int, 1>;
