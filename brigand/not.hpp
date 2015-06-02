@@ -6,5 +6,5 @@
 namespace brigand
 {
   template <typename T>
-  using not = std::integral_constant<typename T::value_type, !T::value>;
+  using not_ = std::integral_constant<typename T::value_type, !T::value>;
 }
