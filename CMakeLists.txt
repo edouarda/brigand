@@ -17,19 +17,19 @@ ENDIF()
 set(CMAKE_DEBUG_POSTFIX "d")
 
 add_library(mpl
-    qdb/mpl/append.hpp
-    qdb/mpl/apply.hpp
-     qdb/mpl/at.hpp
-    qdb/mpl/back.hpp
-    qdb/mpl/count.hpp
-    qdb/mpl/front.hpp
-    qdb/mpl/list.hpp
-    qdb/mpl/minus.hpp
-    qdb/mpl/not.hpp
-    qdb/mpl/plus.hpp
-    qdb/mpl/size.hpp
+    brigand/append.hpp
+    brigand/apply.hpp
+    brigand/at.hpp
+    brigand/back.hpp
+    brigand/count.hpp
+    brigand/front.hpp
+    brigand/list.hpp
+    brigand/minus.hpp
+    brigand/not.hpp
+    brigand/plus.hpp
+    brigand/size.hpp
 
-    qdb/mpl/nothing.cpp
+    brigand/nothing.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

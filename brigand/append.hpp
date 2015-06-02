@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <qdb/mpl/list.hpp>
+#include <brigand/list.hpp>
 
 namespace brigand
 {

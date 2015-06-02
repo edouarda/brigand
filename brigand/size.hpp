@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include <qdb/mpl/apply.hpp>
-#include <qdb/mpl/count.hpp>
+#include <brigand/apply.hpp>
+#include <brigand/count.hpp>
 
 namespace brigand
 {
