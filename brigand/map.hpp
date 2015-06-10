@@ -31,7 +31,6 @@ namespace brigand
     };
 
     // fastlane for constant amortized time
-
     template <class T0, class... T>
     struct map<T0, T...>
     {
@@ -134,11 +133,10 @@ namespace brigand
 
 
 
-
     template <typename M, typename K>
     struct lookup
     {
-        using type = typename decltype(M::at(K{}));
+        using type = decltype(M::at(K{}));
     };
 
 }
