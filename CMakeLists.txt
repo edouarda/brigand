@@ -48,6 +48,7 @@ add_library(brigand
     brigand/prev.hpp
     brigand/size.hpp
     brigand/times.hpp
+    brigand/transform.hpp
     brigand/xor.hpp
     brigand/nothing.cpp
 )
@@ -62,6 +63,7 @@ set(test_files
     test/logical_test.cpp
     test/comparison_test.cpp
     test/for_each.cpp
+    test/transform.cpp
     test/mpl_test.cpp
     )
 
