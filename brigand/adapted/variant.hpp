@@ -13,6 +13,6 @@ namespace brigand
     };
 
     template <typename L>
-    using make_variant_over = apply<L, variant_wrapper>;
+    using as_variant = apply<L, variant_wrapper>;
 
 }

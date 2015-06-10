@@ -37,7 +37,7 @@ add_library(brigand
     brigand/list.hpp
     brigand/logical.hpp
     brigand/max.hpp
-    brigand/variant/make_variant.hpp
+    brigand/adapted/variant.hpp
     brigand/min.hpp
     brigand/minus.hpp
     brigand/modulo.hpp
