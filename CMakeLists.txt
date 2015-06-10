@@ -22,27 +22,36 @@ set(BRIGAND_GROUP
     brigand/and.hpp
     brigand/append.hpp
     brigand/apply.hpp
+    brigand/arithmetic.hpp
     brigand/at.hpp
     brigand/back.hpp
     brigand/bool.hpp
-    brigand/complement.hpp
+    brigand/brigand.hpp
     brigand/comparisons.hpp
+    brigand/complement.hpp
     brigand/count.hpp
+    brigand/divides.hpp
+    brigand/equal_to.hpp
+    brigand/for_each.hpp
+    brigand/for_each_args.hpp
     brigand/front.hpp
-    brigand/less.hpp
-    brigand/less_equal.hpp
     brigand/greater.hpp
     brigand/greater_equal.hpp
     brigand/identity.hpp
+    brigand/less.hpp
+    brigand/less_equal.hpp
     brigand/list.hpp
     brigand/logical.hpp
-    brigand/max.hpp
     brigand/map.hpp
+    brigand/max.hpp
     brigand/min.hpp
     brigand/minus.hpp
     brigand/modulo.hpp
+    brigand/negate.hpp
     brigand/next.hpp
     brigand/not.hpp
+    brigand/not_equal_to.hpp
+    brigand/no_such_type.hpp
     brigand/or.hpp
     brigand/pair.hpp
     brigand/plus.hpp
@@ -50,8 +59,7 @@ set(BRIGAND_GROUP
     brigand/size.hpp
     brigand/times.hpp
     brigand/transform.hpp
-    brigand/xor.hpp
-    brigand/nothing.cpp)
+    brigand/xor.hpp)
 
 set(DETAIL_GROUP
     brigand/detail/last_element.hpp
