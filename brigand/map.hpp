@@ -120,8 +120,6 @@ namespace brigand
         static decltype(typename map<T...>::at(U{})) at(U);
     };
 
-
-
     template <typename M, typename K>
     struct lookup
     {
