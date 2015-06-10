@@ -43,6 +43,8 @@ And now behold the most complete documentation ever written:
 
  * `brigand::apply<Function, Function> -> Function`
  * `brigand::append<Sequence, Sequence> -> Sequence`
+ * `brigand::for_each<Sequence, Functor> -> Sequence`
+ * `brigand::transform<Functor, Sequence...> -> Sequence`
 
 # Adapters
 
@@ -50,5 +52,4 @@ And now behold the most complete documentation ever written:
 
 TODO :
 
- * `brigand::for_each<Sequence, Functor> -> Sequence`
  * `brigand::sort<Sequence, Functor> -> Sequence`
