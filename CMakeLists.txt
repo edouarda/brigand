@@ -37,6 +37,7 @@ add_library(brigand
     brigand/list.hpp
     brigand/logical.hpp
     brigand/max.hpp
+    brigand/adapted/pair.hpp
     brigand/adapted/tuple.hpp
     brigand/adapted/variant.hpp
     brigand/min.hpp
@@ -66,6 +67,7 @@ set(test_files
     test/for_each.cpp
     test/transform.cpp
     test/tuple_test.cpp
+    test/pair_test.cpp
     test/mpl_test.cpp
     )
 
