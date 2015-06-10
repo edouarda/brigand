@@ -33,6 +33,7 @@ add_library(brigand
     brigand/less_equal.hpp
     brigand/greater.hpp
     brigand/greater_equal.hpp
+    brigand/identity.hpp
     brigand/list.hpp
     brigand/logical.hpp
     brigand/max.hpp
@@ -57,15 +58,15 @@ set(test_files
 
     test/list_test.cpp
     test/integral_test.cpp
+    test/identity.cpp
     test/logical_test.cpp
     test/comparison_test.cpp
     test/for_each.cpp
-
     test/mpl_test.cpp
     )
 
 if (${Boost_INCLUDE_DIR})
-    set(test_files ${test_files} test/variant_test.cpp)    
+    set(test_files ${test_files} test/variant_test.cpp)
 endif()
 
 add_executable(brigand_test ${test_files})
