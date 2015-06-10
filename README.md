@@ -48,7 +48,9 @@ And now behold the most complete documentation ever written:
 
 # Adapters
 
- * `make_variant_over<Sequence> -> Boost.Variant`
+ * `as_pair<Sequence> -> std.pair`
+ * `as_tuple<Sequence> -> std.tuple`
+ * `as_variant<Sequence> -> Boost.Variant`
 
 TODO :
 
