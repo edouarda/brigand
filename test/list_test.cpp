@@ -9,6 +9,8 @@
 // list tests
 using empty_list = brigand::list<>;
 
+static_assert(!brigand::detail::has_at_method<empty_list>::value, "wrongly detected at method");
+
 static_assert(brigand::size<empty_list>::value == 0, "invalid empty list size");
 
 using single_int_list = brigand::list<int>;

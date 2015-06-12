@@ -23,7 +23,9 @@ Quel canaillou ce brigand.
 
 ## Sequences
 
+ * `brigand::pair`
  * `brigand::list`
+ * `brigand::map`
 
 ## Types
 
