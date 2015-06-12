@@ -36,21 +36,19 @@ namespace detail
     struct has_at_method
     {
         struct dummy {};
-
         template <typename C, typename P>
-        static auto test(P * p) -> decltype(std::declval<C>().at(*p), std::true_type());
+        static auto test(P * p) -> decltype(C::at(*p), std::true_type());
 
         template <typename, typename>
         static std::false_type test(...);
 
-        typedef decltype(test<T, dummy>(nullptr)) type;
         static const bool value = std::is_same<std::true_type, decltype(test<T, dummy>(nullptr))>::value;
     };
 
     template <class L, typename Index, bool>
-    struct at_dispatch 
+    struct at_dispatch
     {
-        using type = typename at_c<L, Index::value>::type;
+        using type = at_c<L, Index::value>;
     };
 
     template <class L, typename Index>
@@ -61,9 +59,5 @@ namespace detail
 }
 
     template <class Seq, typename K>
-    struct at
-    {
-        using type = typename detail::at_dispatch<Seq, K, detail::has_at_method<Seq>::value>::type;
-    };
-
+    using at = typename detail::at_dispatch<Seq, K, detail::has_at_method<Seq>::value>::type;
 }

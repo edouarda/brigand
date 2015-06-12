@@ -34,15 +34,16 @@ using big_map = brigand::map<
     brigand::pair<type_six, type_five>,
     brigand::pair<type_seven, type_six>,
     brigand::pair<type_eight, type_seven>,
-    brigand::pair<type_nine, type_eight>>;
+    brigand::pair<type_nine, type_eight>
+    >;
 
-static_assert(std::is_same<brigand::at<big_map, type_one>::type, int>::value,                  "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_two>::type, type_one>::value,             "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_three>::type, type_two>::value,           "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_four>::type, type_three>::value,          "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_five>::type, type_four>::value,           "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_six>::type, type_five>::value,            "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_seven>::type, type_six>::value,           "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_eight>::type, type_seven>::value,         "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, type_nine>::type, type_eight>::value,          "not found in big map!");
-static_assert(std::is_same<brigand::at<big_map, bool>::type, brigand::no_such_type_>::value,   "found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_one>, int>::value,                  "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_two>, type_one>::value,             "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_three>, type_two>::value,           "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_four>, type_three>::value,          "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_five>, type_four>::value,           "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_six>, type_five>::value,            "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_seven>, type_six>::value,           "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_eight>, type_seven>::value,         "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, type_nine>, type_eight>::value,          "not found in big map!");
+static_assert(std::is_same<brigand::at<big_map, bool>, brigand::no_such_type_>::value,   "found in big map!");
