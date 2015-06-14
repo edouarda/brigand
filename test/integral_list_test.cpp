@@ -1,10 +1,10 @@
-#include <brigand/list.hpp>
-#include <brigand/integer.hpp>
-#include <brigand/size.hpp>
-#include <brigand/append.hpp>
-#include <brigand/back.hpp>
-#include <brigand/front.hpp>
-#include <brigand/at.hpp>
+#include <brigand/sequences/list.hpp>
+#include <brigand/types/integer.hpp>
+#include <brigand/sequences/size.hpp>
+#include <brigand/sequences/append.hpp>
+#include <brigand/sequences/back.hpp>
+#include <brigand/sequences/front.hpp>
+#include <brigand/sequences/at.hpp>
 
 // list tests
 static_assert(!brigand::detail::has_at_method<brigand::empty_list>::value, "wrongly detected at method");

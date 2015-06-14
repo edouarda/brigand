@@ -1,6 +1,6 @@
 
-#include <brigand/list.hpp>
-#include <brigand/find.hpp>
+#include <brigand/sequences/list.hpp>
+#include <brigand/algorithms/find.hpp>
 #include <type_traits>
 
 template<typename T> using is_float = typename std::is_floating_point<T>::type;

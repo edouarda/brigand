@@ -1,0 +1,14 @@
+ Volume in drive D is beta
+ Volume Serial Number is 8857-D651
+
+ Directory of D:\dev\brigand\brigand\sequences
+
+14/06/2015  20:31             1ÿ000 append.hpp
+14/06/2015  20:31             1ÿ928 at.hpp
+14/06/2015  20:31             1ÿ504 back.hpp
+14/06/2015  20:31             1ÿ538 front.hpp
+14/06/2015  20:31               701 list.hpp
+14/06/2015  20:31             5ÿ529 map.hpp
+14/06/2015  20:31               582 pair.hpp
+               7 File(s)         12ÿ782 bytes
+               0 Dir(s)  136ÿ892ÿ506ÿ112 bytes free

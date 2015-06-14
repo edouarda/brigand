@@ -1,7 +1,7 @@
 
-#include <brigand/map.hpp>
-#include <brigand/size.hpp>
-#include <brigand/at.hpp>
+#include <brigand/sequences/map.hpp>
+#include <brigand/sequences/size.hpp>
+#include <brigand/sequences/at.hpp>
 
 static_assert(brigand::detail::has_at_method<brigand::map<>>::value, "at not detected!");
 

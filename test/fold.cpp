@@ -1,8 +1,8 @@
 
-#include <brigand/list.hpp>
-#include <brigand/fold.hpp>
-#include <brigand/integer.hpp>
-#include <brigand/next.hpp>
+#include <brigand/sequences/list.hpp>
+#include <brigand/algorithms/fold.hpp>
+#include <brigand/types/integer.hpp>
+#include <brigand/functions/next.hpp>
 #include <type_traits>
 #include <utility>
 

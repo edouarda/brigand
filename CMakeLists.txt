@@ -16,91 +16,108 @@ find_package(Boost COMPONENTS variant)
 set(CMAKE_DEBUG_POSTFIX "d")
 
 set(BRIGAND_GROUP
-    brigand/and.hpp
-    brigand/append.hpp
-    brigand/apply.hpp
     brigand/arithmetic.hpp
-    brigand/at.hpp
-    brigand/back.hpp
-    brigand/bool.hpp
     brigand/brigand.hpp
     brigand/comparisons.hpp
-    brigand/complement.hpp
-    brigand/count.hpp
-    brigand/divides.hpp
-    brigand/equal_to.hpp
-    brigand/find.hpp
-    brigand/fold.hpp
-    brigand/for_each.hpp
-    brigand/for_each_args.hpp
-    brigand/front.hpp
-    brigand/greater.hpp
-    brigand/greater_equal.hpp
-    brigand/identity.hpp
-    brigand/less.hpp
-    brigand/less_equal.hpp
-    brigand/list.hpp
-    brigand/logical.hpp
-    brigand/map.hpp
-    brigand/max.hpp
-    brigand/min.hpp
-    brigand/minus.hpp
-    brigand/modulo.hpp
-    brigand/negate.hpp
-    brigand/next.hpp
-    brigand/not.hpp
-    brigand/not_equal_to.hpp
-    brigand/no_such_type.hpp
-    brigand/or.hpp
-    brigand/pair.hpp
-    brigand/plus.hpp
-    brigand/prev.hpp
-    brigand/size.hpp
-    brigand/times.hpp
-    brigand/transform.hpp
-    brigand/xor.hpp)
+    brigand/logical.hpp)
 
-set(DETAIL_GROUP
-    brigand/detail/last_element.hpp
- )
-
-set(ADAPTED_GROUP brigand/adapted/pair.hpp
+set(ADAPTED_GROUP 
+    brigand/adapted/pair.hpp
     brigand/adapted/tuple.hpp
     brigand/adapted/variant.hpp)
+
+set(ALGORITHMS_GROUP 
+    brigand/algorithms/apply.hpp
+    brigand/algorithms/count.hpp
+    brigand/algorithms/find.hpp
+    brigand/algorithms/fold.hpp
+    brigand/algorithms/for_each.hpp
+    brigand/algorithms/for_each_args.hpp
+    brigand/algorithms/transform.hpp)
+
+set(ALGORITHMS_DETAIL_GROUP 
+    brigand/algorithms/detail/find.hpp)
+
+set(FUNCTIONS_GROUPS
+    brigand/functions/and.hpp
+    brigand/functions/complement.hpp
+    brigand/functions/divides.hpp
+    brigand/functions/equal_to.hpp
+    brigand/functions/greater.hpp
+    brigand/functions/greater_equal.hpp
+    brigand/functions/identity.hpp
+    brigand/functions/less.hpp
+    brigand/functions/less_equal.hpp
+    brigand/functions/max.hpp
+    brigand/functions/min.hpp
+    brigand/functions/minus.hpp
+    brigand/functions/modulo.hpp
+    brigand/functions/negate.hpp
+    brigand/functions/next.hpp
+    brigand/functions/not.hpp
+    brigand/functions/not_equal_to.hpp
+    brigand/functions/or.hpp
+    brigand/functions/prev.hpp
+    brigand/functions/plus.hpp
+    brigand/functions/times.hpp
+    brigand/functions/xor.hpp)
+
+set(SEQUENCES_GROUP
+    brigand/sequences/append.hpp
+    brigand/sequences/at.hpp
+    brigand/sequences/back.hpp
+    brigand/sequences/front.hpp
+    brigand/sequences/last_element.hpp
+    brigand/sequences/list.hpp
+    brigand/sequences/map.hpp
+    brigand/sequences/pair.hpp
+    brigand/sequences/size.hpp
+)
+
+set(TYPES_GROUP
+    brigand/types/bool.hpp
+    brigand/types/integer.hpp
+    brigand/types/no_such_type.hpp
+)
 
 set(PLACEHOLDER_GROUP brigand/nothing.cpp)
 
 source_group(brigand FILES ${BRIGAND_GROUP})
-source_group(brigand\\detail FILES ${DETAIL_GROUP})
 source_group(brigand\\adapted FILES ${ADAPTED_GROUP})
+source_group(brigand\\algorithms FILES ${ALGORITHMS_GROUP})
+source_group(brigand\\algorithms\\detail FILES ${ALGORITHMS_DETAIL_GROUP})
+source_group(brigand\\functions FILES ${FUNCTIONS_GROUPS})
+source_group(brigand\\sequences FILES ${SEQUENCES_GROUP})
+source_group(brigand\\types FILES ${TYPES_GROUP})
 source_group(placeholder FILES ${PLACEHOLDER_GROUP})
 
 add_library(brigand
     ${BRIGAND_GROUP}
-    ${DETAIL_GROUP}
     ${ADAPTED_GROUP}
+    ${ALGORITHMS_GROUP}
+    ${ALGORITHMS_DETAIL_GROUP}
+    ${FUNCTIONS_GROUPS}
+    ${SEQUENCES_GROUP}
+    ${TYPES_GROUP}
     ${PLACEHOLDER_GROUP})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(test_files
-
-    test/list_test.cpp
-    test/integral_list_test.cpp
-    test/integral_test.cpp
-    test/identity.cpp
-    test/logical_test.cpp
     test/comparison_test.cpp
+    test/find.cpp
     test/fold.cpp
     test/for_each.cpp
-    test/find.cpp
-    test/transform.cpp
-    test/tuple_test.cpp
+    test/identity.cpp
+    test/integral_list_test.cpp
+    test/integral_test.cpp
+    test/list_test.cpp
+    test/logical_test.cpp
     test/map_test.cpp
     test/mpl_test.cpp
     test/pair_test.cpp
-
-    )
+    test/transform.cpp
+    test/tuple_test.cpp)
 
 if (${Boost_INCLUDE_DIR})
     set(test_files ${test_files} test/variant_test.cpp)

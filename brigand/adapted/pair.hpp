@@ -1,14 +1,13 @@
 /*==================================================================================================
-  Copyright (c) 2015 QuasarDB
-  Copyright (c) 2015 NumScale
+  Copyright (c) 2015 Edouard Alligand and Joel Falcou
 
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
 
-#include <brigand/apply.hpp>
-#include <brigand/no_such_type.hpp>
+#include <brigand/algorithms/apply.hpp>
+#include <brigand/types/no_such_type.hpp>
 
 namespace brigand
 {

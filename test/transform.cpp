@@ -1,6 +1,6 @@
 
-#include <brigand/list.hpp>
-#include <brigand/transform.hpp>
+#include <brigand/sequences/list.hpp>
+#include <brigand/algorithms/transform.hpp>
 #include <type_traits>
 #include <utility>
 

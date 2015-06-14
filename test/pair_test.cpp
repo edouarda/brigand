@@ -1,7 +1,7 @@
 
 #include <utility>
 
-#include <brigand/list.hpp>
+#include <brigand/sequences/list.hpp>
 #include <brigand/adapted/pair.hpp>
 
 using test_list = brigand::list<int, char>;

@@ -1,6 +1,6 @@
 
-#include <brigand/for_each.hpp>
-#include <brigand/list.hpp>
+#include <brigand/algorithms/for_each.hpp>
+#include <brigand/sequences/list.hpp>
 #include <cassert>
 
 struct value_printer
