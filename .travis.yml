@@ -23,7 +23,7 @@ before_script:
   - cmake ..
 
 script:
-  - make
+  - make VERBOSE=1
   - ./brigand_test
 
 os:

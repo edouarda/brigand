@@ -2,13 +2,12 @@ cmake_minimum_required(VERSION 2.8)
 
 project(brigand)
 
-if(CLANG OR CMAKE_COMPILER_IS_GNUCXX)
+if((CMAKE_CXX_COMPILER_ID MATCHES "Clang") OR CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
-IF(CLANG)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++") # tbb will not work under clang with libstdc++
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcxx-exceptions")
 ENDIF()
 
