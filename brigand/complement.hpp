@@ -11,5 +11,7 @@
 namespace brigand
 {
   template <typename A>
-  using complement = std::integral_constant<typename A::value_type, ~A::value>;
+  using complement = std::integral_constant < typename A::value_type
+                                            , typename A::value_type(~A::value)
+                                            >;
 }
