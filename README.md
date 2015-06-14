@@ -1,6 +1,8 @@
 Brigand Meta-programming library
 ================================
 
+[![Build Status](https://travis-ci.org/edouarda/brigand.svg?branch=master)](https://travis-ci.org/edouarda/brigand)
+
 # Introduction
 
 Brigand is a light-weight, fully fonctional, instant-compile time C++ 11 meta-programming library.
