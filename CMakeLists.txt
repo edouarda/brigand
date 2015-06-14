@@ -32,6 +32,7 @@ set(BRIGAND_GROUP
     brigand/count.hpp
     brigand/divides.hpp
     brigand/equal_to.hpp
+    brigand/find.hpp
     brigand/for_each.hpp
     brigand/for_each_args.hpp
     brigand/front.hpp
@@ -87,11 +88,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 set(test_files
 
     test/list_test.cpp
+    test/integral_list_test.cpp
     test/integral_test.cpp
     test/identity.cpp
     test/logical_test.cpp
     test/comparison_test.cpp
     test/for_each.cpp
+    test/find.cpp
     test/transform.cpp
     test/tuple_test.cpp
     test/map_test.cpp

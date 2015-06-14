@@ -7,9 +7,17 @@
 =================================================================================================**/
 #pragma once
 
+#include <type_traits>
+
 namespace brigand
 {
+  // Types list
   template <class... T> struct list {};
 
+  // Values list
+  template<typename T, T... Values>
+  using integral_list = brigand::list< std::integral_constant<T,Values>...>;
+
+  // Empty list
   using empty_list = brigand::list<>;
 }
