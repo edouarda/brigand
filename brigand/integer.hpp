@@ -7,6 +7,7 @@
 =================================================================================================**/
 #pragma once
 #include <type_traits>
+#include <cstddef>
 
 namespace brigand
 {
@@ -21,4 +22,7 @@ namespace brigand
   template<unsigned int V>       using uint_        = std::integral_constant<unsigned int      , V>;
   template<unsigned long V>      using ulong_       = std::integral_constant<unsigned long     , V>;
   template<unsigned long long V> using ulong_long_  = std::integral_constant<unsigned long long, V>;
+
+  template<std::size_t V>     using size_t    = std::integral_constant<std::size_t, V>;
+  template<std::ptrdiff_t V>  using ptrdiff_t = std::integral_constant<std::ptrdiff_t, V>;
 }
