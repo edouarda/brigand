@@ -18,7 +18,7 @@ find_package(Boost COMPONENTS variant)
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
-set(BRIGAND_GROUP     
+set(BRIGAND_GROUP
     brigand/and.hpp
     brigand/append.hpp
     brigand/apply.hpp
@@ -76,7 +76,7 @@ source_group(brigand\\detail FILES ${DETAIL_GROUP})
 source_group(brigand\\adapted FILES ${ADAPTED_GROUP})
 source_group(placeholder FILES ${PLACEHOLDER_GROUP})
 
-add_library(brigand 
+add_library(brigand
     ${BRIGAND_GROUP}
     ${DETAIL_GROUP}
     ${ADAPTED_GROUP}
@@ -107,3 +107,7 @@ endif()
 source_group(tests FILES ${test_files})
 
 add_executable(brigand_test ${test_files})
+
+install ( DIRECTORY ${PROJECT_SOURCE_DIR}/brigand
+          DESTINATION .
+        )
