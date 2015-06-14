@@ -2,11 +2,23 @@
 #pragma once
 
 #include <brigand/apply.hpp>
+#include <brigand/no_such_type.hpp>
 
 namespace brigand
 {
-  template <typename T, typename U>
+  template <typename... T>
   struct pair_wrapper
+  {
+    static_assert (sizeof...(T) == 2
+                  , "as_pair requires a type list of exactly two types"
+                  );
+
+    // type need to be defined or the error becomes a hard, non-static assert error
+    using type = no_such_type_;
+  };
+
+  template <typename T, typename U>
+  struct pair_wrapper<T,U>
   {
       using type = typename std::pair<T,U>;
   };
