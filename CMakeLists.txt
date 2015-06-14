@@ -5,8 +5,6 @@ project(brigand)
 if(CLANG OR CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
-    add_compile_options(-fPIC)
 endif()
 
 IF(CLANG)
