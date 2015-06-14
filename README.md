@@ -25,11 +25,22 @@ Quel canaillou ce brigand.
 
  * `brigand::pair`
  * `brigand::list`
+ * `brigand::integral_list`
  * `brigand::map`
 
 ## Types
 
  * `brigand::bool_`
+ * `brigand::char_`
+ * `brigand::short_`
+ * `brigand::long_`
+ * `brigand::long_long_`
+ * `brigand::uchar_`
+ * `brigand::ushort_`
+ * `brigand::ulong_`
+ * `brigand::ulong_long_`
+ * `brigand::size_t`
+ * `brigand::ptrdiff_t`
 
 ## Metafunctions
 
@@ -61,6 +72,9 @@ Quel canaillou ce brigand.
  * `brigand::append<Sequence, Sequence> -> Sequence`
  * `brigand::for_each<Sequence, Functor> -> Sequence`
  * `brigand::transform<Functor, Sequence...> -> Sequence`
+ * `brigand::find<Sequence, [Predicate]> -> Sequence`
+ * `brigand::found<Sequence, [Predicate]> -> bool_`
+ * `brigand::not_found<Sequence, [Predicate]> -> bool_`
 
 ## Adapters
 
@@ -71,3 +85,4 @@ Quel canaillou ce brigand.
 TODO :
 
  * `brigand::sort<Sequence, Functor> -> Sequence`
+
