@@ -13,4 +13,4 @@ This library is still a work in progress and we welcome your feedback.
 
 # Documentation
 
-The documentation is available [here](https://github.com/edouarda/brigand/wiki/Brigand-documentation)
+The documentation is available [here](https://github.com/edouarda/brigand/wiki)
