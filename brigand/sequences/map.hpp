@@ -11,12 +11,13 @@
 
 namespace brigand
 {
-
+namespace detail 
+{
     template <class... T>
-    struct map;
+    struct map_impl;
 
     template <>
-    struct map<>
+    struct map_impl<>
     {
         template <typename U>
         static no_such_type_ at(U) {}
@@ -24,7 +25,7 @@ namespace brigand
 
     // fastlane for constant amortized time
     template <class T0>
-    struct map<T0>
+    struct map_impl<T0>
     {
         static typename T0::second_type at(typename T0::first_type);
 
@@ -33,7 +34,7 @@ namespace brigand
     };
 
     template <class T0, class T1>
-    struct map<T0, T1>
+    struct map_impl<T0, T1>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -43,7 +44,7 @@ namespace brigand
     };
 
     template <class T0, class T1, class T2>
-    struct map<T0, T1, T2>
+    struct map_impl<T0, T1, T2>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -54,7 +55,7 @@ namespace brigand
     };
 
     template <class T0, class T1, class T2, class T3>
-    struct map<T0, T1, T2, T3>
+    struct map_impl<T0, T1, T2, T3>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -66,7 +67,7 @@ namespace brigand
     };
 
     template <class T0, class T1, class T2, class T3, class T4>
-    struct map<T0, T1, T2, T3, T4>
+    struct map_impl<T0, T1, T2, T3, T4>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -79,7 +80,7 @@ namespace brigand
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5>
-    struct map<T0, T1, T2, T3, T4, T5>
+    struct map_impl<T0, T1, T2, T3, T4, T5>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -93,7 +94,7 @@ namespace brigand
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6>
-    struct map<T0, T1, T2, T3, T4, T5, T6>
+    struct map_impl<T0, T1, T2, T3, T4, T5, T6>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -108,7 +109,7 @@ namespace brigand
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
-    struct map<T0, T1, T2, T3, T4, T5, T6, T7>
+    struct map_impl<T0, T1, T2, T3, T4, T5, T6, T7>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -123,8 +124,9 @@ namespace brigand
         static no_such_type_ at(U) {}
     };
 
+    
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class... T>
-    struct map<T0, T1, T2, T3, T4, T5, T6, T7, T...>
+    struct map_impl<T0, T1, T2, T3, T4, T5, T6, T7, T...>
     {
         static typename T0::second_type at(typename T0::first_type);
         static typename T1::second_type at(typename T1::first_type);
@@ -136,9 +138,19 @@ namespace brigand
         static typename T7::second_type at(typename T7::first_type);
 
         template <typename U>
-        static decltype(map<T...>::at(U{})) at(U);
+        static decltype(map_impl<T...>::at(U{})) at(U);
     };
-
+    
+    template<class T> struct check_unique_key{};
+    
+    template<class... Ts>
+    struct make_map : check_unique_key<typename Ts::first_type>... {
+      using type = map_impl<Ts...>;
+    };
+}
+    template<class... Ts>
+    using map = typename detail::make_map<Ts...>::type;
+    
     template <typename M, typename K>
     struct lookup
     {
