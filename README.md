@@ -72,6 +72,7 @@ Quel canaillou ce brigand.
 
  * `brigand::apply<Function, Function> -> Function`
  * `brigand::append<Sequence, Sequence> -> Sequence`
+ * `brigand::reverse<Sequence> -> Sequence`
  * `brigand::for_each<Sequence, Functor> -> Sequence`
  * `brigand::transform<Functor, Sequence...> -> Sequence`
  * `brigand::find<Sequence, [Predicate]> -> Sequence`
