@@ -143,6 +143,8 @@ namespace detail
     
     template<class T> struct check_unique_key{};
     
+    // if you have a "class already a base" error message, it means you have defined a map with the same key present more 
+    // than once, which is an error
     template<class... Ts>
     struct make_map : check_unique_key<typename Ts::first_type>... {
       using type = map_impl<Ts...>;
