@@ -109,6 +109,7 @@ set(test_files
     test/fold.cpp
     test/for_each.cpp
     test/identity.cpp
+    test/include_test.cpp
     test/integral_list_test.cpp
     test/integral_test.cpp
     test/list_test.cpp

@@ -8,6 +8,14 @@
 
 #include <brigand/algorithms/apply.hpp>
 
+namespace boost
+{
+
+    template <typename... T>
+    class variant;
+
+}
+
 namespace brigand
 {
 
