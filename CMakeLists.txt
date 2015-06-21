@@ -33,6 +33,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/fold.hpp
     brigand/algorithms/for_each.hpp
     brigand/algorithms/for_each_args.hpp
+    brigand/algorithms/reverse.hpp
     brigand/algorithms/transform.hpp)
 
 set(ALGORITHMS_DETAIL_GROUP 
@@ -117,6 +118,7 @@ set(test_files
     test/map_test.cpp
     test/mpl_test.cpp
     test/pair_test.cpp
+    test/reverse_test.cpp
     test/transform.cpp
     test/tuple_test.cpp)
 
