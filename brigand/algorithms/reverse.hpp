@@ -6,8 +6,8 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/types/integer.hpp>
 #include <brigand/sequences/size.hpp>
-
 #include <brigand/sequences/append.hpp>
 
 namespace brigand
@@ -72,16 +72,16 @@ namespace detail
         using type = L<T7, T6, T5, T4, T3, T2, T1, T0>;
     };
 
-    template <std::size_t Count, class L> struct reverse_impl;
+    template <class L, class Count = brigand::size<L>> struct reverse_impl;
 
-    template<std::size_t Count, template<class...> class L, class... U>
-    struct reverse_impl<Count, L<U...>>
+    template<template<class...> class L, class... U, class Count>
+    struct reverse_impl<L<U...>,Count>
     {
         using type = typename reverse_elements<L, U...>::type;
     };
 
     template<template<class...> class L, class... U>
-    struct reverse_impl<0, L<U...>>
+    struct reverse_impl<L<U...>, brigand::size_t<0>>
     {
         using type = L<U...>;
     };
@@ -89,11 +89,5 @@ namespace detail
 }
 
     template <typename L>
-    struct reverse
-    {
-        using this_size = typename brigand::size<L>;
-        using type = typename detail::reverse_impl<this_size::value, L>::type;    
-    };
-
-
+    using reverse = typename detail::reverse_impl<L>::type;
 }
