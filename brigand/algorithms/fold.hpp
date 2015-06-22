@@ -7,7 +7,7 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/detail/fold.hpp>
+#include <brigand/algorithms/detail/fold.hpp>
 
 namespace brigand
 {

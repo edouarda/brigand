@@ -6,7 +6,7 @@
 =================================================================================================**/
 #pragma once
 #include <brigand/algorithms/for_each_args.hpp>
-#include <brigand/type.hpp>
+#include <brigand/types/type.hpp>
 
 namespace brigand
 {

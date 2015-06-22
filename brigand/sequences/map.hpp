@@ -6,7 +6,7 @@
 =================================================================================================**/
 #pragma once
 #include <type_traits>
-#include <brigand/type.hpp>
+#include <brigand/types/type.hpp>
 #include <brigand/sequences/pair.hpp>
 #include <brigand/types/no_such_type.hpp>
 
