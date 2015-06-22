@@ -7,6 +7,7 @@
 #pragma once
 
 #include <brigand/algorithms/detail/find.hpp>
+#include <brigand/algorithms/reverse.hpp>
 #include <brigand/types/bool.hpp>
 #include <brigand/sequences/list.hpp>
 
@@ -23,6 +24,12 @@ namespace brigand
           , template<class> class Predicate = detail::non_null
           >
   using find = typename detail::find_if_impl<Predicate, Sequence>::type;
+
+  // reverse_find uses reverse and find :o
+  template< typename Sequence
+          , template<class> class Predicate = detail::non_null
+          >
+  using reverse_find = reverse< find< reverse<Sequence>, Predicate> >;
 
   // Utility meta-function to check if nothing was found
   template< typename Sequence
