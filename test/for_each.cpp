@@ -7,9 +7,9 @@ struct value_printer
 {
   value_printer() : i{0}, res{1} {}
 
-  template< typename U > void operator()(U x)
+  template< typename U > void operator()(brigand::type_<U> x)
   {
-    res *= sizeof(x);
+    res *= sizeof(U);
     i++;
   }
 
@@ -18,7 +18,7 @@ struct value_printer
 
 struct evil
 {
-  template< typename U > evil const& operator()(U ) const {  return *this;  }
+  template< typename U > evil const& operator()(brigand::type_<U>) const {  return *this;  }
 
   evil& operator, (int) { return *this; } // evel operator coma
 };
@@ -31,7 +31,7 @@ void for_each_test()
   assert(r.i   ==  4);
 
   // test issues with comma operator
-  brigand::for_each< brigand::list<char,short,int,double> >( evil{} );
+  brigand::for_each< brigand::list<char,void,int,double> >( evil{} );
 
   r = brigand::for_each< brigand::list<evil,evil,evil> >( value_printer{} );
   assert(r.res ==  1);

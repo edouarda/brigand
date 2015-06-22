@@ -6,6 +6,7 @@
 =================================================================================================**/
 #pragma once
 #include <brigand/algorithms/for_each_args.hpp>
+#include <brigand/type.hpp>
 
 namespace brigand
 {
@@ -14,7 +15,7 @@ namespace brigand
     template<template<class...> class List, typename... Elements, typename Functor>
     Functor for_each_impl( List<Elements...>&&, Functor f )
     {
-      return for_each_args( f, Elements()... );
+      return for_each_args( f, type_<Elements>()... );
     }
   }
 
