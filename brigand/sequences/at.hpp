@@ -61,7 +61,7 @@ namespace detail
     template <class L, typename Index>
     struct at_dispatch<L, Index, true>
     {
-        using type = typename lookup<L, Index>::type;
+        using type = lookup<L, Index>;
     };
 }
 

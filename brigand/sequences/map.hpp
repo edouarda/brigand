@@ -142,12 +142,10 @@ namespace detail
         static decltype(map_impl<T...>::at(U{})) at(U);
     };
 
-    template<class T> struct check_unique_key{};
-
     // if you have a "class already a base" error message, it means you have defined a map with the same key present more
     // than once, which is an error
     template<class... Ts>
-    struct make_map : check_unique_key<typename Ts::first_type>... {
+    struct make_map : type_<typename Ts::first_type>... {
       using type = map_impl<Ts...>;
     };
 }
@@ -155,9 +153,5 @@ namespace detail
     using map = typename detail::make_map<Ts...>::type;
 
     template <typename M, typename K>
-    struct lookup
-    {
-        using type = decltype(M::at(type_<K>{}));
-    };
-
+    using lookup = decltype(M::at(type_<K>{}));
 }

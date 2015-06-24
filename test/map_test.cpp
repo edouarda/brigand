@@ -7,13 +7,13 @@ static_assert(brigand::detail::has_at_method<brigand::map<>>::value, "at not det
 
 // empty maps are allowed
 static_assert(brigand::size<brigand::map<>>::value == 0, "empty map isn't empty");
-static_assert(std::is_same<brigand::lookup<brigand::map<>, int>::type, brigand::no_such_type_>::value, "should find no such type in empty map");
+static_assert(std::is_same<brigand::lookup<brigand::map<>, int>, brigand::no_such_type_>::value, "should find no such type in empty map");
 
 using map_test = brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>>;
 
-static_assert(std::is_same<brigand::lookup<map_test, int>::type, bool>::value, "should be bool");
-static_assert(std::is_same<brigand::lookup<map_test, char>::type, int>::value, "should be int");
-static_assert(std::is_same<brigand::lookup<map_test, bool>::type, brigand::no_such_type_>::value, "should be not found");
+static_assert(std::is_same<brigand::lookup<map_test, int>, bool>::value, "should be bool");
+static_assert(std::is_same<brigand::lookup<map_test, char>, int>::value, "should be int");
+static_assert(std::is_same<brigand::lookup<map_test, bool>, brigand::no_such_type_>::value, "should be not found");
 
 struct type_one {};
 struct type_two {};
