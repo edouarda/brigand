@@ -21,12 +21,12 @@ set(BRIGAND_GROUP
     brigand/comparisons.hpp
     brigand/logical.hpp)
 
-set(ADAPTED_GROUP 
+set(ADAPTED_GROUP
     brigand/adapted/pair.hpp
     brigand/adapted/tuple.hpp
     brigand/adapted/variant.hpp)
 
-set(ALGORITHMS_GROUP 
+set(ALGORITHMS_GROUP
     brigand/algorithms/apply.hpp
     brigand/algorithms/count.hpp
     brigand/algorithms/find.hpp
@@ -36,7 +36,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/reverse.hpp
     brigand/algorithms/transform.hpp)
 
-set(ALGORITHMS_DETAIL_GROUP 
+set(ALGORITHMS_DETAIL_GROUP
     brigand/algorithms/detail/find.hpp)
 
 set(FUNCTIONS_GROUPS
@@ -73,6 +73,7 @@ set(SEQUENCES_GROUP
     brigand/sequences/map.hpp
     brigand/sequences/pair.hpp
     brigand/sequences/size.hpp
+    brigand/sequences/set.hpp
 )
 
 set(TYPES_GROUP
@@ -119,6 +120,7 @@ set(test_files
     test/mpl_test.cpp
     test/pair_test.cpp
     test/reverse_test.cpp
+    test/set_test.cpp
     test/transform.cpp
     test/tuple_test.cpp)
 
