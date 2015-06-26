@@ -44,31 +44,3 @@ static_assert ( std::is_same< brigand::reverse_find<brigand::integral_list<int,0
                             >::value
               , "invalid reverse_find on values list"
               );
-
-static_assert ( brigand::not_found< brigand::empty_list>::value
-              , "invalid not_found on empty list"
-              );
-
-static_assert ( brigand::not_found< brigand::integral_list<int,0,0,0,0,0,0>>::value
-              , "invalid not_found on values list"
-              );
-
-static_assert ( brigand::not_found< brigand::list<int,int,char>
-                                  , is_float
-                                  >::value
-              , "invalid not_found on list"
-              );
-
-static_assert ( !brigand::found<brigand::empty_list>::value
-              , "invalid found on empty list"
-              );
-
-static_assert ( brigand::found< brigand::integral_list<int,0,0,7,0,0,0>>::value
-              , "invalid found on values list"
-              );
-
-static_assert ( brigand::found< brigand::list<int,int,double,char>
-                              , is_float
-                              >::value
-              , "invalid found on list"
-              );

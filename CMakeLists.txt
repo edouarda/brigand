@@ -27,12 +27,15 @@ set(ADAPTED_GROUP
     brigand/adapted/variant.hpp)
 
 set(ALGORITHMS_GROUP
+    brigand/algorithms/all.hpp
+    brigand/algorithms/any.hpp
     brigand/algorithms/apply.hpp
     brigand/algorithms/count.hpp
     brigand/algorithms/find.hpp
     brigand/algorithms/fold.hpp
     brigand/algorithms/for_each.hpp
     brigand/algorithms/for_each_args.hpp
+    brigand/algorithms/none.hpp
     brigand/algorithms/reverse.hpp
     brigand/algorithms/transform.hpp)
 
@@ -119,6 +122,7 @@ set(test_files
     test/map_test.cpp
     test/mpl_test.cpp
     test/pair_test.cpp
+    test/predicate_reduction_test.cpp
     test/reverse_test.cpp
     test/set_test.cpp
     test/transform.cpp
