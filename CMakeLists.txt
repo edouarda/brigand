@@ -122,7 +122,8 @@ set(test_files
     test/reverse_test.cpp
     test/set_test.cpp
     test/transform.cpp
-    test/tuple_test.cpp)
+    test/tuple_test.cpp
+    test/unique_test.cpp)
 
 if (${Boost_INCLUDE_DIR})
     set(test_files ${test_files} test/variant_test.cpp)
