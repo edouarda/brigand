@@ -12,7 +12,8 @@
 
 namespace brigand
 {
-namespace detail {
+namespace detail
+{
   template<class Ints, class...T>
   struct unique_impl
   {

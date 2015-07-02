@@ -70,6 +70,7 @@ set(SEQUENCES_GROUP
     brigand/sequences/front.hpp
     brigand/sequences/last_element.hpp
     brigand/sequences/list.hpp
+    brigand/sequences/make_sequence.hpp
     brigand/sequences/map.hpp
     brigand/sequences/pair.hpp
     brigand/sequences/size.hpp
@@ -116,6 +117,7 @@ set(test_files
     test/integral_test.cpp
     test/list_test.cpp
     test/logical_test.cpp
+    test/make_sequence_test.cpp
     test/map_test.cpp
     test/mpl_test.cpp
     test/pair_test.cpp
