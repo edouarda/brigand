@@ -6,9 +6,9 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/sequences/make_sequence.hpp>
+#include <brigand/types/integer.hpp>
 #include <brigand/types/type.hpp>
-#include <utility>
-#include <type_traits>
 
 namespace brigand
 {
@@ -23,28 +23,28 @@ namespace detail
     static std::true_type unique();
   };
 
-  template<std::size_t, class T>
-  struct indexed_type
+  template<class, class T>
+  struct unique_x_t
   { operator type_<T> (); };
 
   template<class... T>
   struct unique_set : T... {};
 
-  template<std::size_t Int, std::size_t... Ints, class L, class... R>
-  struct unique_impl<std::integer_sequence<std::size_t, Int, Ints...>, L, R...>
+  template<class Int, class... Ints, class L, class... R>
+  struct unique_impl<list<Int, Ints...>, L, R...>
   {
-    template<class U, class = decltype(static_cast<type_<U>>(unique_set<indexed_type<Int, L>, indexed_type<Ints, R>...>()))>
+    template<class U, class = decltype(static_cast<type_<U>>(unique_set<unique_x_t<Int, L>, unique_x_t<Ints, R>...>()))>
     static std::false_type unique(type_<U>);
 
     template<class U>
-    static decltype(unique_impl<std::integer_sequence<std::size_t, Ints...>, R...>::unique(type_<L>()))
+    static decltype(unique_impl<list<Ints...>, R...>::unique(type_<L>()))
     unique(U);
 
-    static decltype(unique_impl<std::integer_sequence<std::size_t, Ints...>, R...>::unique(type_<L>()))
+    static decltype(unique_impl<list<Ints...>, R...>::unique(type_<L>()))
     unique();
   };
 }
 
   template <class... T>
-  using unique = decltype(detail::unique_impl<std::make_index_sequence<sizeof...(T)>, T...>::unique());
+  using unique = decltype(detail::unique_impl<make_sequence<uint_<0>, sizeof...(T)>, T...>::unique());
 }
