@@ -33,6 +33,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/fold.hpp
     brigand/algorithms/for_each.hpp
     brigand/algorithms/for_each_args.hpp
+    brigand/algorithms/is_set.hpp
     brigand/algorithms/reverse.hpp
     brigand/algorithms/transform.hpp)
 
@@ -115,6 +116,7 @@ set(test_files
     test/include_test.cpp
     test/integral_list_test.cpp
     test/integral_test.cpp
+    test/is_set_test.cpp
     test/list_test.cpp
     test/logical_test.cpp
     test/make_sequence_test.cpp
@@ -124,8 +126,7 @@ set(test_files
     test/reverse_test.cpp
     test/set_test.cpp
     test/transform.cpp
-    test/tuple_test.cpp
-    test/unique_test.cpp)
+    test/tuple_test.cpp)
 
 if (${Boost_INCLUDE_DIR})
     set(test_files ${test_files} test/variant_test.cpp)
