@@ -8,6 +8,12 @@
 
 #include <brigand/algorithms/apply.hpp>
 
+namespace std
+{
+  template<class...>
+  class tuple;
+}
+
 namespace brigand
 {
   template <typename... T>

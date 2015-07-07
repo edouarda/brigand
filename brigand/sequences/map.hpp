@@ -21,7 +21,7 @@ namespace detail
     struct map_impl<>
     {
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     // fastlane for constant amortized time
@@ -31,7 +31,7 @@ namespace detail
         static typename T0::second_type at(type_<typename T0::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     template <class T0, class T1>
@@ -41,7 +41,7 @@ namespace detail
         static typename T1::second_type at(type_<typename T1::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     template <class T0, class T1, class T2>
@@ -52,7 +52,7 @@ namespace detail
         static typename T2::second_type at(type_<typename T2::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     template <class T0, class T1, class T2, class T3>
@@ -64,7 +64,7 @@ namespace detail
         static typename T3::second_type at(type_<typename T3::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     template <class T0, class T1, class T2, class T3, class T4>
@@ -77,7 +77,7 @@ namespace detail
         static typename T4::second_type at(type_<typename T4::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5>
@@ -91,7 +91,7 @@ namespace detail
         static typename T5::second_type at(type_<typename T5::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6>
@@ -106,7 +106,7 @@ namespace detail
         static typename T6::second_type at(type_<typename T6::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
@@ -122,7 +122,7 @@ namespace detail
         static typename T7::second_type at(type_<typename T7::first_type>);
 
         template <typename U>
-        static no_such_type_ at(U) {}
+        static no_such_type_ at(U);
     };
 
 

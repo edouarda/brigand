@@ -9,6 +9,12 @@
 #include <brigand/algorithms/apply.hpp>
 #include <brigand/types/no_such_type.hpp>
 
+namespace std
+{
+  template<class, class>
+  struct pair;
+}
+
 namespace brigand
 {
   template <typename... T>
@@ -25,7 +31,7 @@ namespace brigand
   template <typename T, typename U>
   struct pair_wrapper<T,U>
   {
-      using type = typename std::pair<T,U>;
+      using type = std::pair<T,U>;
   };
 
   template <typename L>
