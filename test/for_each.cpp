@@ -7,7 +7,7 @@ struct value_printer
 {
   value_printer() : i{0}, res{1} {}
 
-  template< typename U > void operator()(brigand::type_<U> x)
+  template< typename U > void operator()(brigand::type_<U>)
   {
     res *= sizeof(U);
     i++;

@@ -20,10 +20,10 @@ namespace detail
     struct set_impl
     {
         template <typename U, typename = decltype(static_cast<type_<U>>(make_set<T...>()))>
-        static true_ contains(type_<U>) {}
+        static true_ contains(type_<U>);
 
         template <typename U>
-        static false_ contains(U) {}
+        static false_ contains(U);
     };
 
     // if you have a "class already a base" error message, it means you have defined a set with the same key present more
