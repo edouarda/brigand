@@ -6,14 +6,23 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/find.hpp>
-#include <brigand/sequences/list.hpp>
+#include <brigand/types/bool.hpp>
+#include <brigand/algorithms/detail/non_null.hpp>
+#include <brigand/algorithms/all.hpp>
 
 namespace brigand
 {
+  namespace detail
+  {
+    template< typename Sequence
+            , template<class> class Predicate = detail::non_null
+            >
+    struct any : bool_<!all<Sequence,Predicate>::value> {};
+  }
+
   // Is a predicate true for at least one type ?
   template< typename Sequence
           , template<class> class Predicate = detail::non_null
           >
-  using any = bool_<!std::is_same<find<Sequence,Predicate>,empty_list>::value>;
+  using any = typename detail::any<Sequence,Predicate>::type;
 }

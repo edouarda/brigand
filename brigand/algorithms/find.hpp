@@ -7,18 +7,13 @@
 #pragma once
 
 #include <brigand/algorithms/detail/find.hpp>
+#include <brigand/algorithms/detail/non_null.hpp>
 #include <brigand/algorithms/reverse.hpp>
 #include <brigand/types/bool.hpp>
 #include <brigand/sequences/list.hpp>
 
 namespace brigand
 {
-  namespace detail
-  {
-    // Default find predicate
-    template<typename T> using non_null = bool_< T::value != 0 >;
-  }
-
   // find uses Predicate, it's very effective
   template< typename Sequence
           , template<class> class Predicate = detail::non_null

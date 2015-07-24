@@ -6,21 +6,22 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/none.hpp>
-#include <brigand/sequences/list.hpp>
+#include <brigand/algorithms/detail/non_null.hpp>
+#include <type_traits>
 
 namespace brigand
 {
   namespace detail
   {
-    template< typename Sequence
-            , template<class> class Predicate = detail::non_null
-            >
-    struct all
-    {
-      template<typename T> using pred = bool_< !Predicate<T>::value >;
-      using type = none<Sequence, pred>;
-    };
+    template <bool...> struct bools_ {};
+    template< typename Sequence, template<class> class Predicate, typename... Ts> struct all;
+
+    template< template<class...> class Sequence, template<class> class Predicate, typename... Ts>
+    struct  all<Sequence<Ts...>,Predicate>
+          : std::is_same< bools_<true, Predicate<Ts>::value...>
+                        , bools_<Predicate<Ts>::value..., true>
+                        >
+    {};
   }
 
   // Is a predicate true for every type ?
