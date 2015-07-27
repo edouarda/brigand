@@ -10,6 +10,7 @@
 #include <brigand/functions/minus.hpp>
 #include <brigand/functions/times.hpp>
 #include <brigand/functions/divides.hpp>
+#include <brigand/functions/identity.hpp>
 #include <brigand/functions/max.hpp>
 #include <brigand/functions/min.hpp>
 #include <brigand/functions/modulo.hpp>

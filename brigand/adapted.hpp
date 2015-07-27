@@ -6,8 +6,6 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/adapted.hpp>
-#include <brigand/algorithms.hpp>
-#include <brigand/functions.hpp>
-#include <brigand/sequences.hpp>
-#include <brigand/types.hpp>
+#include <brigand/adapted/pair.hpp>
+#include <brigand/adapted/tuple.hpp>
+#include <brigand/adapted/variant.hpp>
