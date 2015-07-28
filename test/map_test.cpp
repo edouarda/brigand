@@ -15,6 +15,9 @@ static_assert(std::is_same<brigand::lookup<map_test, int>, bool>::value, "should
 static_assert(std::is_same<brigand::lookup<map_test, char>, int>::value, "should be int");
 static_assert(std::is_same<brigand::lookup<map_test, bool>, brigand::no_such_type_>::value, "should be not found");
 
+static_assert(std::is_same<brigand::insert<map_test, brigand::pair<bool, char>>, brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>, brigand::pair<bool, char>>>::value,   "invalid insert result");
+static_assert(std::is_same<brigand::insert<map_test, brigand::pair<int, int>>, map_test>::value,   "invalid insert result");
+
 struct type_one {};
 struct type_two {};
 struct type_three {};

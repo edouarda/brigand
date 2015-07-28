@@ -13,6 +13,9 @@ static_assert(brigand::contains<set_test, int>::value, "should be bool");
 static_assert(brigand::contains<set_test, char>::value, "should be int");
 static_assert(!brigand::contains<set_test, bool>::value, "should be not found");
 
+static_assert(std::is_same<brigand::insert<set_test, bool>, brigand::set<int, char, bool>>::value,   "invalid insert result");
+static_assert(std::is_same<brigand::insert<set_test, int>, set_test>::value,   "invalid insert result");
+
 struct type_one {};
 struct type_two {};
 struct type_three {};

@@ -36,7 +36,4 @@ namespace detail
 }
     template<class... Ts>
     using set = typename detail::make_set<Ts...>::type;
-
-    template <typename M, typename K>
-    using contains = decltype(M::contains(type_<K>{}));
 }
