@@ -41,7 +41,7 @@ namespace detail
     is_set(U);
 
     static decltype(is_set_impl<list<Ints...>, R...>::is_set(type_<L>()))
-    is_set();
+    is_set(...);
   };
 }
 
