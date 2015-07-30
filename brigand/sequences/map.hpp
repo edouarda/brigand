@@ -58,13 +58,28 @@ namespace detail
         using type = bool_<!std::is_same<lookup<map_impl<Ts...>, T>, no_such_type_>::value>;
     };
 
-    template <class T, class... Ts>
+    template<class P1, class P2>
+    using transform_pair_second = typename std::conditional<
+        std::is_same<typename P1::first_type, typename P2::first_type>::value,
+        P2, P1
+    >::type;
+
+    template <class... Ts, class T>
+    struct insert_default_impl<map_impl<Ts...>, T, true_>
+    {
+        using type = map_impl<transform_pair_second<Ts, T>...>;
+    };
+
+    template <class... Ts, class T>
+    struct insert_default_impl<map_impl<Ts...>, T, false_>
+    {
+        using type = map_impl<Ts..., T>;
+    };
+
+    template <class... Ts, class T>
     struct insert_impl<map_impl<Ts...>, T>
     {
-	//TODO if_<contain<>, nothing, replace>::type
-	// struct nothing { using type = map_impl<Ts...>; };
-	// struct replace { using pair = slice_when<map_impl<Ts...>, pred<is_same, T::first_type>::type>; using type = merge<first_<pair>, replace_value<second_<pair>>; };
-        using type = typename insert_default_impl<map_impl<Ts...>, T, contains<map_impl<Ts...>, typename T::first_type>>::type;
+        using type = typename insert_default_impl<map_impl<Ts...>, T, typename contains_impl<map_impl<Ts...>, typename T::first_type>::type>::type;
     };
 }
 
