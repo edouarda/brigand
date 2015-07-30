@@ -44,7 +44,7 @@ namespace detail
     {
         struct dummy {};
         template <typename C, typename P>
-        static auto test(P * p) -> decltype(C::at(*p), std::true_type());
+        static auto test(P *) -> decltype(C::at(type_<P>{}), std::true_type());
 
         template <typename, typename>
         static std::false_type test(...);
