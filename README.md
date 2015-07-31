@@ -16,3 +16,9 @@ This library is still a work in progress and we welcome your feedback.
 # Documentation
 
 The documentation is available [here](https://github.com/edouarda/brigand/wiki).
+
+# Contributors
+
+We'd like to thank the following contributors:
+
+ * Jonathan Poelen
