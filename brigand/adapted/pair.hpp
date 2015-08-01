@@ -18,7 +18,7 @@ namespace std
 namespace brigand
 {
   template <typename... T>
-  struct pair_wrapper
+  struct pair_wrapper_
   {
     static_assert (sizeof...(T) == 2
                   , "as_pair requires a type list of exactly two types"
@@ -29,10 +29,13 @@ namespace brigand
   };
 
   template <typename T, typename U>
-  struct pair_wrapper<T,U>
+  struct pair_wrapper_<T,U>
   {
       using type = std::pair<T,U>;
   };
+
+  template <typename... T>
+  using pair_wrapper = typename pair_wrapper_<T...>::type;
 
   template <typename L>
   using as_pair = apply<L, pair_wrapper>;

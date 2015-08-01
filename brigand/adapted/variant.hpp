@@ -20,10 +20,7 @@ namespace brigand
 {
 
     template <typename... T>
-    struct variant_wrapper
-    {
-        using type = typename boost::variant<T...>;
-    };
+    using variant_wrapper = typename boost::variant<T...>;
 
     template <typename L>
     using as_variant = apply<L, variant_wrapper>;
