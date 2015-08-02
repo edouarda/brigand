@@ -86,6 +86,7 @@ set(SEQUENCES_GROUP
 set(TYPES_GROUP
     brigand/types/bool.hpp
     brigand/types/integer.hpp
+    brigand/types/compose.hpp
     brigand/types/no_such_type.hpp
 )
 
@@ -114,6 +115,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(test_files
     test/comparison_test.cpp
+    test/compose_test.cpp
     test/find.cpp
     test/fold.cpp
     test/for_each.cpp
