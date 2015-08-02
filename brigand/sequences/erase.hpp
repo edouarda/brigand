@@ -80,7 +80,7 @@ namespace detail
   struct has_erase_method
   {
     template<class C, class P>
-    static decltype(void(C::erase(type_<P>{})), std::true_type()) test(P*);
+    static decltype(void(C::erase(type_<P>())), std::true_type()) test(P*);
 
     template<class, class>
     static std::false_type test(...);
