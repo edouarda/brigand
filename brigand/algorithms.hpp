@@ -16,5 +16,6 @@
 #include <brigand/algorithms/for_each_args.hpp>
 #include <brigand/algorithms/is_set.hpp>
 #include <brigand/algorithms/none.hpp>
+#include <brigand/algorithms/remove.hpp>
 #include <brigand/algorithms/reverse.hpp>
 #include <brigand/algorithms/transform.hpp>

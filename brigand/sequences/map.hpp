@@ -60,7 +60,7 @@ namespace detail
 
     public:
         template<class P>
-        static decltype(insert_impl<P>(has_key(type_<first<P>>{}))) insert(type_<P>);
+        static auto insert(type_<P>) -> decltype(insert_impl<P>(has_key(type_<first<P>>{})));
     };
 
     // if you have a "class already a base" error message, it means you have defined a map with the same key present more
