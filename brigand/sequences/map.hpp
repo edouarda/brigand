@@ -7,9 +7,11 @@
 #pragma once
 #include <type_traits>
 #include <brigand/types/type.hpp>
+#include <brigand/types/bool.hpp>
+#include <brigand/sequences/list.hpp>
 #include <brigand/sequences/pair.hpp>
-#include <brigand/sequences/insert.hpp>
-#include <brigand/sequences/contains.hpp>
+#include <brigand/sequences/erase.hpp>
+#include <brigand/algorithms/apply.hpp>
 #include <brigand/types/no_such_type.hpp>
 
 namespace brigand
@@ -28,11 +30,37 @@ namespace detail
         static no_such_type_ at(...);
     };
 
+    template<class K>
+    struct is_same_first
+    {
+        template<class P>
+        using type = std::is_same<K, first<P>>;
+    };
+
     template<class... T>
     struct map_impl
     {
         template<class K>
         static decltype(map_at_impl<K>::at(make_map<T...>{})) at(type_<K>);
+
+        template <typename K>
+        static bool_<!std::is_same<decltype(map_at_impl<K>::at(make_map<T...>{})), no_such_type_>::value> has_key(type_<K>);
+
+        template<class K>
+        static apply<typename erase_if_impl<list<T...>, is_same_first<K>::template type, list<>>::type, detail::map_impl> erase(type_<K>);
+
+    private:
+        template<class P>
+        static map_impl<typename std::conditional<
+            std::is_same<first<T>, first<P>>::value, P, T
+        >::type...> insert_impl(true_);
+
+        template<class P>
+        static map_impl<T..., P> insert_impl(false_);
+
+    public:
+        template<class P>
+        static decltype(insert_impl<P>(has_key(type_<first<P>>{}))) insert(type_<P>);
     };
 
     // if you have a "class already a base" error message, it means you have defined a map with the same key present more
@@ -46,41 +74,4 @@ namespace detail
 }
     template<class... Ts>
     using map = typename detail::make_map<Ts...>::type;
-
-    template <typename M, typename K>
-    using lookup = decltype(M::at(type_<K>{}));
-
-namespace detail
-{
-    template <class... Ts, class T>
-    struct contains_impl<map_impl<Ts...>, T>
-    {
-        using type = bool_<!std::is_same<lookup<map_impl<Ts...>, T>, no_such_type_>::value>;
-    };
-
-    template<class P1, class P2>
-    using transform_pair_second = typename std::conditional<
-        std::is_same<typename P1::first_type, typename P2::first_type>::value,
-        P2, P1
-    >::type;
-
-    template <class... Ts, class T>
-    struct insert_default_impl<map_impl<Ts...>, T, true_>
-    {
-        using type = map_impl<transform_pair_second<Ts, T>...>;
-    };
-
-    template <class... Ts, class T>
-    struct insert_default_impl<map_impl<Ts...>, T, false_>
-    {
-        using type = map_impl<Ts..., T>;
-    };
-
-    template <class... Ts, class T>
-    struct insert_impl<map_impl<Ts...>, T>
-    {
-        using type = typename insert_default_impl<map_impl<Ts...>, T, typename contains_impl<map_impl<Ts...>, typename T::first_type>::type>::type;
-    };
-}
-
 }

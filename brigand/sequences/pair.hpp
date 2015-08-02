@@ -15,4 +15,9 @@ namespace brigand
         using second_type = Second;
     };
 
+    template<class P>
+    using first = typename P::first_type;
+
+    template<class P>
+    using second = typename P::second_type;
 }

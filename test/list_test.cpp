@@ -5,6 +5,8 @@
 #include <brigand/sequences/back.hpp>
 #include <brigand/sequences/front.hpp>
 #include <brigand/sequences/at.hpp>
+#include <brigand/sequences/erase.hpp>
+#include <brigand/types/integer.hpp>
 
 // list tests
 static_assert(!brigand::detail::has_at_method<brigand::empty_list>::value, "wrongly detected at method");
@@ -50,6 +52,9 @@ static_assert(std::is_same<brigand::at<int_bool_bool_int_list, std::integral_con
 static_assert(std::is_same<brigand::at<int_bool_bool_int_list, std::integral_constant<int, 1>>, bool>::value, "invalid at result");
 static_assert(std::is_same<brigand::at<int_bool_bool_int_list, std::integral_constant<int, 2>>, bool>::value, "invalid at result");
 static_assert(std::is_same<brigand::at<int_bool_bool_int_list, std::integral_constant<int, 3>>, int>::value,  "invalid at result");
+
+static_assert(std::is_same<brigand::erase_c<int_bool_bool_int_list, 1>, brigand::list<int, bool, int>>::value,  "invalid erase result");
+static_assert(std::is_same<brigand::erase<int_bool_bool_int_list, brigand::int_<1>>, brigand::list<int, bool, int>>::value,  "invalid erase result");
 
 using bool_int_list = brigand::list<bool, int>;
 

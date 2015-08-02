@@ -2,6 +2,9 @@
 #include <brigand/sequences/map.hpp>
 #include <brigand/sequences/size.hpp>
 #include <brigand/sequences/at.hpp>
+#include <brigand/sequences/erase.hpp>
+#include <brigand/sequences/insert.hpp>
+#include <brigand/sequences/has_key.hpp>
 
 static_assert(brigand::detail::has_at_method<brigand::map<>>::value, "at not detected!");
 
@@ -15,9 +18,17 @@ static_assert(std::is_same<brigand::lookup<map_test, int>, bool>::value, "should
 static_assert(std::is_same<brigand::lookup<map_test, char>, int>::value, "should be int");
 static_assert(std::is_same<brigand::lookup<map_test, bool>, brigand::no_such_type_>::value, "should be not found");
 
+static_assert(std::is_same<brigand::has_key<map_test, int>, brigand::true_>::value, "invalid has_key result");
+static_assert(std::is_same<brigand::has_key<map_test, bool>, brigand::false_>::value, "invalid has_key result");
+//static_assert(std::is_same);
+
 static_assert(std::is_same<brigand::insert<map_test, brigand::pair<bool, char>>, brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>, brigand::pair<bool, char>>>::value,   "invalid insert result");
 static_assert(std::is_same<brigand::insert<map_test, brigand::pair<int, bool>>, map_test>::value,   "invalid insert result");
 static_assert(std::is_same<brigand::insert<map_test, brigand::pair<int, int>>, brigand::map<brigand::pair<int, int>, brigand::pair<char, int>>>::value,   "invalid insert result");
+
+static_assert(std::is_same<brigand::erase<map_test, int>, brigand::map<brigand::pair<char, int>>>::value,   "invalid erase result");
+static_assert(std::is_same<brigand::erase<map_test, char>, brigand::map<brigand::pair<int, bool>>>::value,   "invalid erase result");
+static_assert(std::is_same<brigand::erase<map_test, bool>, map_test>::value,   "invalid erase result");
 
 struct type_one {};
 struct type_two {};

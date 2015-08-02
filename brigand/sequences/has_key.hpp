@@ -11,13 +11,16 @@ namespace brigand
 {
 namespace detail
 {
-    template <class C, class T>
-    struct insert_impl
-    {
-        using type = decltype(C::insert(type_<T>{}));
-    };
+  template<class L, class K>
+  struct has_key_impl;
+
+  template <class C, class K>
+  decltype(C::has_key(type_<K>{})) has_key_dispatch(K *);
+
+  template <class L, class I>
+  typename has_key_impl<L, I>::type has_key_dispatch(...);
 }
 
-    template<class L, class T>
-    using insert = typename detail::insert_impl<L, T>::type;
+  template<class L, class K>
+  using has_key = decltype(detail::has_key_dispatch<L, K>(nullptr));
 }
