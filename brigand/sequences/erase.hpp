@@ -88,30 +88,6 @@ namespace detail
     static const bool value = std::is_same<std::true_type, decltype(test<T, U>(nullptr))>::value;
   };
 
-  //TODO
-  template<template<class...> class Tpl, class... Ts>
-  struct compose
-  {
-    template<class... Us>
-    using type = Tpl<Ts..., Us...>;
-  };
-
-  //TODO
-  template<template<class...> class Tpl, class... Ts>
-  struct unary_compose
-  {
-    template<class T>
-    using type = Tpl<Ts..., T>;
-  };
-
-  //TODO
-  template<template<class...> class Tpl, class... Ts>
-  struct binary_compose
-  {
-    template<class T, class U>
-    using type = Tpl<Ts..., T, U>;
-  };
-
   template<class L, class I, bool = has_erase_method<L, I>::value>
   struct erase_dispatch
   {

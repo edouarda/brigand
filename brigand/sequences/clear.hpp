@@ -13,7 +13,7 @@ namespace detail
 {
   template<class L>
   struct clear_impl;
-  
+
   template<template<class...> class L, class... Ts>
   struct clear_impl<L<Ts...>>
   {
