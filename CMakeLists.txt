@@ -85,6 +85,7 @@ set(SEQUENCES_GROUP
 )
 
 set(TYPES_GROUP
+    brigand/types/bind.hpp
     brigand/types/bool.hpp
     brigand/types/integer.hpp
     brigand/types/compose.hpp
@@ -115,6 +116,7 @@ add_library(brigand
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(test_files
+    test/bind_test.cpp
     test/comparison_test.cpp
     test/compose_test.cpp
     test/find.cpp

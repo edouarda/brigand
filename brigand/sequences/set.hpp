@@ -8,7 +8,7 @@
 #include <type_traits>
 #include <brigand/types/type.hpp>
 #include <brigand/types/bool.hpp>
-#include <brigand/types/compose.hpp>
+#include <brigand/types/bind.hpp>
 #include <brigand/algorithms/apply.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/erase.hpp>
@@ -36,7 +36,7 @@ namespace detail
         static decltype(set_impl::contains(type_<U>())) has_key(type_<U>);
 
         template<class K>
-        static apply<typename erase_if_impl<list<T...>, unary_compose<std::is_same, K>::template type, list<>>::type, detail::set_impl> erase(type_<K>);
+        static apply<typename erase_if_impl<list<T...>, unary_bind<std::is_same, K>::template type, list<>>::type, detail::set_impl> erase(type_<K>);
 
     private:
         template<class K>

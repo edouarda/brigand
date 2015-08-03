@@ -5,7 +5,7 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <brigand/types/compose.hpp>
+#include <brigand/types/bind.hpp>
 #include <brigand/sequences/clear.hpp>
 #include <brigand/functions/not.hpp>
 
@@ -53,5 +53,5 @@ namespace detail
   using remove_if = typename detail::remove_if_impl<L, Pred>::type;
 
   template<class L, class T>
-  using remove = typename detail::remove_if_impl<L, unary_compose<std::is_same, T>::template type>::type;
+  using remove = typename detail::remove_if_impl<L, unary_bind<std::is_same, T>::template type>::type;
 }

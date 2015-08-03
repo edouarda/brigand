@@ -44,23 +44,37 @@ namespace detail
         static decltype(map_at_impl<K>::at(make_map<T...>{})) at(type_<K>);
 
         template <typename K>
-        static bool_<!std::is_same<decltype(map_at_impl<K>::at(make_map<T...>{})), no_such_type_>::value> has_key(type_<K>);
+        static bool_<!std::is_same<
+            decltype(map_at_impl<K>::at(make_map<T...>{})),
+            no_such_type_
+        >::value> has_key(type_<K>);
 
         template<class K>
-        static apply<typename erase_if_impl<list<T...>, is_same_first<K>::template type, list<>>::type, detail::map_impl> erase(type_<K>);
+        static apply<
+            typename erase_if_impl<list<T...>, is_same_first<K>::template type, list<>>::type,
+            detail::map_impl
+        > erase(type_<K>);
 
     private:
-        template<class P>
-        static map_impl<typename std::conditional<
-            std::is_same<first<T>, first<P>>::value, P, T
-        >::type...> insert_impl(true_);
+        template<class P, class>
+        struct insert_impl
+        {
+            using type = map_impl<typename std::conditional<
+                std::is_same<first<T>, first<P>>::value, P, T
+            >::type...>;
+        };
 
         template<class P>
-        static map_impl<T..., P> insert_impl(false_);
+        struct insert_impl<P, std::false_type>
+        {
+            using type = map_impl<T..., P>;
+        };
 
     public:
         template<class P>
-        static auto insert(type_<P>) -> decltype(insert_impl<P>(has_key(type_<first<P>>{})));
+        static typename insert_impl<
+            P, decltype(has_key(type_<first<P>>{}))
+        >::type insert(type_<P>);
     };
 
     // if you have a "class already a base" error message, it means you have defined a map with the same key present more
