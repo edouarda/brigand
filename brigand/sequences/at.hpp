@@ -5,7 +5,8 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <brigand/sequences/map.hpp>
+#include <type_traits>
+#include <brigand/types/type.hpp>
 #include <brigand/sequences/list.hpp>
 
 namespace brigand
@@ -37,6 +38,9 @@ namespace detail
     template <class L, int Index>
     using at_c = typename detail::at_impl<Index, L>::type;
 
+    template <typename M, typename K>
+    using lookup = decltype(M::at(type_<K>{}));
+
 namespace detail
 {
     template <typename T>
@@ -44,7 +48,7 @@ namespace detail
     {
         struct dummy {};
         template <typename C, typename P>
-        static auto test(P * p) -> decltype(C::at(*p), std::true_type());
+        static auto test(P *) -> decltype(C::at(type_<P>{}), std::true_type());
 
         template <typename, typename>
         static std::false_type test(...);

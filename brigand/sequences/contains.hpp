@@ -1,23 +1,23 @@
 /*==================================================================================================
-  Copyright (c) 2015 Edouard Alligand and Joel Falcou
+  Copyright (c) 2015 Edouard Alligan and Joel Falcou
 
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
 
+#include <brigand/types/type.hpp>
+
 namespace brigand
 {
-    template <typename First, typename Second>
-    struct pair
+namespace detail
+{
+    template <class L, class K>
+    struct contains_impl
     {
-        using first_type = First;
-        using second_type = Second;
+        using type = decltype(L::contains(type_<K>{}));
     };
-
-    template<class P>
-    using first = typename P::first_type;
-
-    template<class P>
-    using second = typename P::second_type;
+}
+    template <class L, class K>
+    using contains = typename detail::contains_impl<L, K>::type;
 }

@@ -39,6 +39,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/for_each_args.hpp
     brigand/algorithms/is_set.hpp
     brigand/algorithms/none.hpp
+    brigand/algorithms/remove.hpp
     brigand/algorithms/reverse.hpp
     brigand/algorithms/transform.hpp)
 
@@ -84,8 +85,10 @@ set(SEQUENCES_GROUP
 )
 
 set(TYPES_GROUP
+    brigand/types/bind.hpp
     brigand/types/bool.hpp
     brigand/types/integer.hpp
+    brigand/types/compose.hpp
     brigand/types/no_such_type.hpp
 )
 
@@ -113,7 +116,9 @@ add_library(brigand
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(test_files
+    test/bind_test.cpp
     test/comparison_test.cpp
+    test/compose_test.cpp
     test/find.cpp
     test/fold.cpp
     test/for_each.cpp
@@ -129,6 +134,7 @@ set(test_files
     test/mpl_test.cpp
     test/pair_test.cpp
     test/predicate_reduction_test.cpp
+    test/remove_test.cpp
     test/reverse_test.cpp
     test/set_test.cpp
     test/transform.cpp

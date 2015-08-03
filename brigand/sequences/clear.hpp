@@ -5,19 +5,22 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
+#include <type_traits>
 
 namespace brigand
 {
-    template <typename First, typename Second>
-    struct pair
-    {
-        using first_type = First;
-        using second_type = Second;
-    };
+namespace detail
+{
+  template<class L>
+  struct clear_impl;
 
-    template<class P>
-    using first = typename P::first_type;
+  template<template<class...> class L, class... Ts>
+  struct clear_impl<L<Ts...>>
+  {
+    using type = L<>;
+  };
+}
 
-    template<class P>
-    using second = typename P::second_type;
+  template<class L>
+  using clear = typename detail::clear_impl<L>::type;
 }
