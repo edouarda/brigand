@@ -66,6 +66,7 @@ set(FUNCTIONS_GROUPS
     brigand/functions/or.hpp
     brigand/functions/prev.hpp
     brigand/functions/plus.hpp
+    brigand/functions/repeat.hpp
     brigand/functions/times.hpp
     brigand/functions/xor.hpp)
 
@@ -129,6 +130,7 @@ set(test_files
     test/mpl_test.cpp
     test/pair_test.cpp
     test/predicate_reduction_test.cpp
+    test/repeat_test.cpp
     test/reverse_test.cpp
     test/set_test.cpp
     test/transform.cpp
