@@ -15,5 +15,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <brigand/sequences/make_sequence.hpp>
 #include <brigand/sequences/map.hpp>
 #include <brigand/sequences/pair.hpp>
+#include <brigand/sequences/range.hpp>
 #include <brigand/sequences/set.hpp>
 #include <brigand/sequences/size.hpp>
