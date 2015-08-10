@@ -10,49 +10,49 @@ namespace brigand
 {
 namespace detail
 {
-    template<template<class> class F, int N, class T>
+    template<template<class> class F, unsigned N, class T>
     struct repeat_impl
     : repeat_impl<F, N-7, F<F<F<F<F<F<F<T>>>>>>>>
     {};
 
     template<template<class> class F, class T>
-    struct repeat_impl<F, 7,T>
+    struct repeat_impl<F, 7, T>
     {
         using type = F<F<F<F<F<F<F<T>>>>>>>;
     };
 
     template<template<class> class F, class T>
-    struct repeat_impl<F, 6,T>
+    struct repeat_impl<F, 6, T>
     {
         using type = F<F<F<F<F<F<T>>>>>>;
     };
 
     template<template<class> class F, class T>
-    struct repeat_impl<F, 5,T>
+    struct repeat_impl<F, 5, T>
     {
         using type = F<F<F<F<F<T>>>>>;
     };
 
     template<template<class> class F, class T>
-    struct repeat_impl<F, 4,T>
+    struct repeat_impl<F, 4, T>
     {
         using type = F<F<F<F<T>>>>;
     };
 
     template<template<class> class F, class T>
-    struct repeat_impl<F, 3,T>
+    struct repeat_impl<F, 3, T>
     {
         using type = F<F<F<T>>>;
     };
 
     template<template<class> class F, class T>
-    struct repeat_impl<F, 2,T>
+    struct repeat_impl<F, 2, T>
     {
         using type = F<F<T>>;
     };
 
     template<template<class> class F, class T>
-    struct repeat_impl<F, 1,T>
+    struct repeat_impl<F, 1, T>
     {
         using type = F<T>;
     };
@@ -64,6 +64,6 @@ namespace detail
     };
 }
 
-    template<template<class> class F, int N, class T>
-    using repeat = typename detail::repeat_impl<F, N, T>::type;
+    template<template<class> class F, class N, class T>
+    using repeat = typename detail::repeat_impl<F, N::value, T>::type;
 }
