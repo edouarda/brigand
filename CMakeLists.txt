@@ -79,6 +79,7 @@ set(SEQUENCES_GROUP
     brigand/sequences/make_sequence.hpp
     brigand/sequences/map.hpp
     brigand/sequences/pair.hpp
+    brigand/sequences/range.hpp
     brigand/sequences/size.hpp
     brigand/sequences/set.hpp
 )
@@ -129,6 +130,7 @@ set(test_files
     test/mpl_test.cpp
     test/pair_test.cpp
     test/predicate_reduction_test.cpp
+    test/range_test.cpp
     test/reverse_test.cpp
     test/set_test.cpp
     test/transform.cpp
