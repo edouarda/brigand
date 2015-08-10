@@ -7,4 +7,5 @@
 #pragma once
 
 #include <brigand/adapted/pair.hpp>
+#include <brigand/adapted/fusion.hpp>
 #include <brigand/adapted/tuple.hpp>
