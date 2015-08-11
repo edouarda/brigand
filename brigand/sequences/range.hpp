@@ -1,0 +1,18 @@
+/*==================================================================================================
+  Copyright (c) 2015 Edouard Alligand and Joel Falcou
+
+  Distributed under the Boost Software License, Version 1.0.
+  (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
+=================================================================================================**/
+#pragma once
+#include <brigand/sequences/make_sequence.hpp>
+#include <brigand/functions/prev.hpp>
+
+namespace brigand
+{
+    template<class T, T Start, T Stop>
+    using range = make_sequence<std::integral_constant<T, Start>, Stop - Start>;
+
+    template<class T, T Start, T Stop>
+    using reverse_range = make_sequence<std::integral_constant<T, Start>, Start - Stop, prev>;
+}
