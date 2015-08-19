@@ -39,6 +39,8 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/for_each_args.hpp
     brigand/algorithms/is_set.hpp
     brigand/algorithms/none.hpp
+    brigand/algorithms/partition.hpp
+    brigand/algorithms/sort.hpp
     brigand/algorithms/reverse.hpp
     brigand/algorithms/transform.hpp)
 
@@ -136,6 +138,8 @@ set(test_files
     test/reverse_test.cpp
     test/set_test.cpp
     test/transform.cpp
+    test/sort.cpp
+    test/partition.cpp
     test/tuple_test.cpp)
 
 if (${Boost_INCLUDE_DIR})
