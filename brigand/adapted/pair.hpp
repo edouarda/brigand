@@ -8,12 +8,7 @@
 
 #include <brigand/algorithms/apply.hpp>
 #include <brigand/types/no_such_type.hpp>
-
-namespace std
-{
-  template<class, class>
-  struct pair;
-}
+#include <utility>
 
 namespace brigand
 {
