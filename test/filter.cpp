@@ -1,68 +1,53 @@
 
 #include <brigand/types/bool.hpp>
-#include <brigand/types/integer.hpp>
-#include <brigand/functions/plus.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/algorithms/filter.hpp>
-#include <brigand/algorithms/fold.hpp>
-#include <brigand/algorithms/reverse.hpp>
-#include <boost/mpl/identity.hpp>
-#include <limits>
 #include <type_traits>
-#include <cstddef>
-#include <cstdint>
 
-template<typename UpperBound>
-struct generate_fibonacci_sequence;
-
-template<typename T, T UpperBound>
-struct generate_fibonacci_sequence<std::integral_constant<T, UpperBound> >
-{
-  template<T B, T A, T... Ns>
-  struct apply
-       : std::conditional< (A + B > B && A + B <= UpperBound)
-                         , apply<A + B, B, A, Ns...>
-                         , boost::mpl::identity<
-                             brigand::reverse<
-                               brigand::integral_list<T, B, A, Ns...>
-                             >
-                           >
-                         >::type
-    {};
-
-    using type = typename apply<2, 1>::type;
-};
+template<typename N>
+using is_odd = brigand::bool_<(N::value & 1) != 0>;
 
 template<typename T>
-struct generate_fibonacci_sequence<std::integral_constant<T, 1> >
-{
-  using type = brigand::integral_list<T, 1>;
-};
+using is_float = typename std::is_floating_point<T>::type;
 
-template<typename T>
-struct generate_fibonacci_sequence<std::integral_constant<T, 0> >
-{
-  using type = brigand::empty_list;
-};
+template <std::size_t... List>
+using size_t_list = brigand::integral_list<std::size_t, List...>;
 
-template< typename T   = std::uintmax_t
-        , T UpperBound = std::numeric_limits<T>::max()
-        >
-using fibonacci_sequence = typename generate_fibonacci_sequence<
-  std::integral_constant<T, UpperBound>
->::type;
+using  odd_list = size_t_list<1, 3, 5, 7, 9, 11>;
+using even_list = size_t_list<0, 2, 4, 6, 8, 10>;
+using full_list = size_t_list<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11>;
 
-template<typename T>
-using is_even = brigand::bool_<!(T::value & 1)>;
+namespace test1 {
+using result = brigand::filter<full_list, is_odd>;
+static_assert ( std::is_same<result, odd_list>::value
+              , "invalid filter on odd/even list"
+              );
+}
 
-using project_euler_problem_2_answer =
-  brigand::fold< brigand::plus
-               , brigand::uint_<0>
-               , brigand::filter< fibonacci_sequence<unsigned, 4000000U>
-                                , is_even
-                                >
-               >;
+namespace test2 {
+using result = brigand::filter<odd_list, is_odd>;
+static_assert ( std::is_same<result, odd_list>::value
+              , "invalid filter on odd list"
+              );
+}
 
-static_assert( project_euler_problem_2_answer::value == 4613732U
-             , "filter test invaild (calculating answer to project euler #2)"
-             );
+namespace test3 {
+using result = brigand::filter<even_list, is_odd>;
+static_assert ( std::is_same<result, brigand::empty_list>::value
+              , "invalid filter on even list"
+              );
+}
+
+namespace test4 {
+using result = brigand::filter<brigand::empty_list, is_odd>;
+static_assert ( std::is_same<result, brigand::empty_list>::value
+              , "invalid filter on empty_list"
+              );
+}
+
+namespace test5 {
+using result = brigand::filter<brigand::list<int, float, char, double>, is_float>;
+static_assert ( std::is_same<result, brigand::list<float, double> >::value
+              , "invalid filter on types list"
+              );
+}

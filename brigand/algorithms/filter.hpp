@@ -7,50 +7,175 @@
 #pragma once
 
 #include <brigand/sequences/clear.hpp>
+#include <brigand/sequences/list.hpp>
 #include <brigand/algorithms/detail/non_null.hpp>
-#include <type_traits>
 
 namespace brigand
 {
   namespace detail
   {
-    template<typename Sequence, typename State, template<class> class Predicate>
-    struct filter_impl;
-
-    template< template<class...> class Sequence
-            , typename T
-            , typename... Ts
-            , template<class...> class State
-            , typename... FilteredTs
-            , template<class> class Predicate
-            >
-    struct  filter_impl<Sequence<T, Ts...>, State<FilteredTs...>, Predicate>
-         :  std::conditional< Predicate<T>::value
-                            , filter_impl<Sequence<Ts...>, State<FilteredTs..., T>, Predicate>
-                            , filter_impl<Sequence<Ts...>, State<FilteredTs...   >, Predicate>
-                            >::type
-    {};
-
-    template< template<class...> class Sequence
-            , template<class...> class State
-            , typename... FilteredTs
-            , template<class> class Predicate
-            >
-    struct  filter_impl<Sequence<>, State<FilteredTs...>, Predicate>
+    template<typename State, typename, bool...>
+    struct update_state_impl
     {
-      using type = State<FilteredTs...>;
+      using type = State;
     };
 
-    template<typename Sequence, template<class> class Predicate>
-    using filter = typename filter_impl< Sequence
-                                       , clear<Sequence>
-                                       , Predicate
-                                       >::type;
+    template< template<class...> class State, typename... KeptTs
+            , typename T0
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0>
+                             , true
+                             >
+    {
+      using type = State<KeptTs..., T0>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1>
+                             , true, true
+                             >
+    {
+      using type = State<KeptTs..., T0, T1>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1>
+                             , true, false
+                             >
+    {
+      using type = State<KeptTs..., T0>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1>
+                             , false, true
+                             >
+    {
+      using type = State<KeptTs..., T1>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1, typename T2
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
+                             , true, true, true
+                             >
+    {
+      using type = State<KeptTs..., T0, T1, T2>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1, typename T2
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
+                             , true, true, false
+                             >
+    {
+      using type = State<KeptTs..., T0, T1>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1, typename T2
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
+                             , true, false, false
+                             >
+    {
+      using type = State<KeptTs..., T0>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1, typename T2
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
+                             , false, false, true
+                             >
+    {
+      using type = State<KeptTs..., T2>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1, typename T2
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
+                             , false, true, true
+                             >
+    {
+      using type = State<KeptTs..., T1, T2>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1, typename T2
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
+                             , true, false, true
+                             >
+    {
+      using type = State<KeptTs..., T0, T2>;
+    };
+
+    template< template<class...> class State, typename... KeptTs
+            , typename T0, typename T1, typename T2
+            >
+    struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
+                             , false, true, false
+                             >
+    {
+      using type = State<KeptTs..., T1>;
+    };
+
+    template<template<class> class Predicate, typename State, typename... Ts>
+    using update_state = typename update_state_impl< State
+                                                   , list<Ts...>
+                                                   , !!Predicate<Ts>::value...
+                                                   >::type;
+
+    template<template<class> class Predicate, typename State, typename Sequence>
+    struct filter;
+
+    template< template<class> class Predicate
+            , typename State
+            , template<class...> class Sequence, typename T0, typename... Ts
+            >
+    struct  filter<Predicate, State, Sequence<T0, Ts...> >
+         :  filter<Predicate, update_state<Predicate, State, T0>, Sequence<Ts...> >
+    {};
+
+    template< template<class> class Predicate
+            , typename State
+            , template<class...> class Sequence, typename T0, typename T1, typename... Ts
+            >
+    struct  filter<Predicate, State, Sequence<T0, T1, Ts...> >
+         :  filter<Predicate, update_state<Predicate, State, T0, T1>, Sequence<Ts...> >
+    {};
+
+    template< template<class> class Predicate
+            , typename State
+            , template<class...> class Sequence, typename T0, typename T1, typename T2, typename... Ts
+            >
+    struct  filter<Predicate, State, Sequence<T0, T1, T2, Ts...> >
+         :  filter<Predicate, update_state<Predicate, State, T0, T1, T2>, Sequence<Ts...> >
+    {};
+
+    template< template<class> class Predicate
+            , typename State
+            , template<class...> class Sequence
+            >
+    struct  filter<Predicate, State, Sequence<> >
+    {
+      using type = State;
+    };
   }
 
   // return Sequence with elements for which Predicate returns false removed
   template< typename Sequence
           , template<class> class Predicate = detail::non_null
           >
-  using filter = typename detail::filter<Sequence, Predicate>;
+  using filter = typename detail::filter<Predicate, clear<Sequence>, Sequence>::type;
 }
