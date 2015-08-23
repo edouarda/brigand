@@ -6,6 +6,7 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/sequences/clear.hpp>
 #include <brigand/algorithms/detail/non_null.hpp>
 #include <type_traits>
 
@@ -13,17 +14,6 @@ namespace brigand
 {
   namespace detail
   {
-    template<typename Sequence> struct empty_sequence_for_impl;
-
-    template<template<class...> class Sequence, typename... Ts>
-    struct empty_sequence_for_impl<Sequence<Ts...>>
-    {
-      using type = Sequence<>;
-    };
-
-    template<typename Sequence>
-    using empty_sequence_for = typename empty_sequence_for_impl<Sequence>::type;
-
     template<typename Sequence, typename State, template<class> class Predicate>
     struct filter_impl;
 
@@ -53,7 +43,7 @@ namespace brigand
 
     template<typename Sequence, template<class> class Predicate>
     using filter = typename filter_impl< Sequence
-                                       , empty_sequence_for<Sequence>
+                                       , clear<Sequence>
                                        , Predicate
                                        >::type;
   }
