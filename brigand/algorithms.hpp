@@ -10,6 +10,7 @@
 #include <brigand/algorithms/any.hpp>
 #include <brigand/algorithms/apply.hpp>
 #include <brigand/algorithms/count.hpp>
+#include <brigand/algorithms/filter.hpp>
 #include <brigand/algorithms/find.hpp>
 #include <brigand/algorithms/fold.hpp>
 #include <brigand/algorithms/for_each.hpp>
