@@ -8,82 +8,83 @@
 
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/pair.hpp>
-#include <brigand/algorithms/detail/lazy_identity.hpp>
 
 namespace brigand
 {
   namespace detail
   {
+    template<typename T> struct id_ { using type = T; };
+
     template<typename State, typename Us, bool... PredResults> struct update_state_impl;
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0        >, true >
-         : lazy_identity<pair<Seq<Ts..., U0        >, Seq<Fs...            > > >
+         : id_<pair<Seq<Ts..., U0        >, Seq<Fs...            > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0        >, false>
-         : lazy_identity<pair<Seq<Ts...            >, Seq<Fs..., U0        > > >
+         : id_<pair<Seq<Ts...            >, Seq<Fs..., U0        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, true,  true >
-         : lazy_identity<pair<Seq<Ts..., U0, U1    >, Seq<Fs...            > > >
+         : id_<pair<Seq<Ts..., U0, U1    >, Seq<Fs...            > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, true,  false>
-         : lazy_identity<pair<Seq<Ts..., U0        >, Seq<Fs..., U1        > > >
+         : id_<pair<Seq<Ts..., U0        >, Seq<Fs..., U1        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, false, false>
-         : lazy_identity<pair<Seq<Ts...            >, Seq<Fs..., U0, U1    > > >
+         : id_<pair<Seq<Ts...            >, Seq<Fs..., U0, U1    > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, false, true >
-         : lazy_identity<pair<Seq<Ts..., U1        >, Seq<Fs..., U0        > > >
+         : id_<pair<Seq<Ts..., U1        >, Seq<Fs..., U0        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  true,  true >
-         : lazy_identity<pair<Seq<Ts..., U0, U1, U2>, Seq<Fs...            > > >
+         : id_<pair<Seq<Ts..., U0, U1, U2>, Seq<Fs...            > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  true,  false>
-         : lazy_identity<pair<Seq<Ts..., U0, U1    >, Seq<Fs..., U2        > > >
+         : id_<pair<Seq<Ts..., U0, U1    >, Seq<Fs..., U2        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  false, false>
-         : lazy_identity<pair<Seq<Ts..., U0        >, Seq<Fs..., U1, U2    > > >
+         : id_<pair<Seq<Ts..., U0        >, Seq<Fs..., U1, U2    > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, false, false>
-         : lazy_identity<pair<Seq<Ts...            >, Seq<Fs..., U0, U1, U2> > >
+         : id_<pair<Seq<Ts...            >, Seq<Fs..., U0, U1, U2> > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, false, true >
-         : lazy_identity<pair<Seq<Ts..., U2        >, Seq<Fs..., U0, U1    > > >
+         : id_<pair<Seq<Ts..., U2        >, Seq<Fs..., U0, U1    > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, true,  true >
-         : lazy_identity<pair<Seq<Ts..., U1, U2    >, Seq<Fs..., U0        > > >
+         : id_<pair<Seq<Ts..., U1, U2    >, Seq<Fs..., U0        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  false, true >
-         : lazy_identity<pair<Seq<Ts..., U0, U2    >, Seq<Fs..., U1        > > >
+         : id_<pair<Seq<Ts..., U0, U2    >, Seq<Fs..., U1        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, true,  false>
-         : lazy_identity<pair<Seq<Ts..., U1        >, Seq<Fs..., U0, U2    > > >
+         : id_<pair<Seq<Ts..., U1        >, Seq<Fs..., U0, U2    > > >
     {};
 
     template<template<class> class Predicate, typename State, typename... Us>
@@ -109,8 +110,9 @@ namespace brigand
             , typename U0, typename... Us
             >
     struct  partition_impl<Predicate, State, Sequence<U0, Us...> >
-         :  partition_impl<Predicate, update_state<Predicate, State, U0>, Sequence<Us...> >
-    {};
+    {
+      using type = typename partition_impl<Predicate, update_state<Predicate, State, U0        >, Sequence<Us...> >::type;
+    };
 
     template< template<class> class Predicate
             , typename State
@@ -118,8 +120,9 @@ namespace brigand
             , typename U0, typename U1, typename... Us
             >
     struct  partition_impl<Predicate, State, Sequence<U0, U1, Us...> >
-         :  partition_impl<Predicate, update_state<Predicate, State, U0, U1>, Sequence<Us...> >
-    {};
+    {
+      using type = typename partition_impl<Predicate, update_state<Predicate, State, U0, U1    >, Sequence<Us...> >::type;
+    };
 
     template< template<class> class Predicate
             , typename State
@@ -127,8 +130,9 @@ namespace brigand
             , typename U0, typename U1, typename U2, typename... Us
             >
     struct  partition_impl<Predicate, State, Sequence<U0, U1, U2, Us...> >
-         :  partition_impl<Predicate, update_state<Predicate, State, U0, U1, U2>, Sequence<Us...> >
-    {};
+    {
+      using type = typename partition_impl<Predicate, update_state<Predicate, State, U0, U1, U2>, Sequence<Us...> >::type;
+    };
   }
 
   // return a pair:
