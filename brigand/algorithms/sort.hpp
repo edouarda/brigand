@@ -14,6 +14,14 @@ namespace brigand
 {
   namespace detail
   {
+    template <typename Ls, typename P, typename Rs> struct concat_sort_state;
+
+    template<template<class...> class Seq, typename... Ls, typename P, typename... Rs>
+    struct concat_sort_state<Seq<Ls...>, P, Seq<Rs...> >
+    {
+      using type = Seq<Ls..., P, Rs...>;
+    };
+
     template < template<class, class> class Pred
              , typename Seq
              >
@@ -40,23 +48,15 @@ namespace brigand
              , typename... Ts
              >
     struct sort_impl<Pred, Seq<Pivot, Ts...> > {
-      template <typename Ls, typename P, typename Rs> struct concat;
-
-      template<template<class...> class Seq, typename... Ls, typename P, typename... Rs>
-      struct concat<Seq<Ls...>, P, Seq<Rs...> >
-      {
-        using type = Seq<Ls..., P, Rs...>;
-      };
-
       template <typename T>
       struct lambda : bool_<!!Pred<Pivot, T>::value>
       {};
 
       using p = brigand::partition<Seq<Ts...>, lambda>;
-      using type = typename concat< typename sort_impl<Pred, typename p::second_type>::type
-                                  , Pivot
-                                  , typename sort_impl<Pred, typename p::first_type >::type
-                                  >::type;
+      using type = typename concat_sort_state< typename sort_impl<Pred, typename p::second_type>::type
+                                             , Pivot
+                                             , typename sort_impl<Pred, typename p::first_type >::type
+                                             >::type;
     };
   }
 
