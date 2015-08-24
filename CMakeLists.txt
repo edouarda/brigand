@@ -33,7 +33,6 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/any.hpp
     brigand/algorithms/apply.hpp
     brigand/algorithms/count.hpp
-    brigand/algorithms/filter.hpp
     brigand/algorithms/find.hpp
     brigand/algorithms/fold.hpp
     brigand/algorithms/for_each.hpp
@@ -119,7 +118,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(test_files
     test/comparison_test.cpp
-    test/filter.cpp
     test/find.cpp
     test/fold.cpp
     test/for_each.cpp
