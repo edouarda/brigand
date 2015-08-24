@@ -137,45 +137,45 @@ namespace brigand
                                                    >::type;
 
     template<template<class> class Predicate, typename State, typename Sequence>
-    struct filter;
+    struct filter_impl;
+
+    template< template<class> class Predicate
+            , typename State
+            , template<class...> class Sequence
+            >
+    struct  filter_impl<Predicate, State, Sequence<> >
+    {
+      using type = State;
+    };
 
     template< template<class> class Predicate
             , typename State
             , template<class...> class Sequence, typename T0, typename... Ts
             >
-    struct  filter<Predicate, State, Sequence<T0, Ts...> >
-         :  filter<Predicate, update_state<Predicate, State, T0>, Sequence<Ts...> >
+    struct  filter_impl<Predicate, State, Sequence<T0, Ts...> >
+         :  filter_impl<Predicate, update_state<Predicate, State, T0>, Sequence<Ts...> >
     {};
 
     template< template<class> class Predicate
             , typename State
             , template<class...> class Sequence, typename T0, typename T1, typename... Ts
             >
-    struct  filter<Predicate, State, Sequence<T0, T1, Ts...> >
-         :  filter<Predicate, update_state<Predicate, State, T0, T1>, Sequence<Ts...> >
+    struct  filter_impl<Predicate, State, Sequence<T0, T1, Ts...> >
+         :  filter_impl<Predicate, update_state<Predicate, State, T0, T1>, Sequence<Ts...> >
     {};
 
     template< template<class> class Predicate
             , typename State
             , template<class...> class Sequence, typename T0, typename T1, typename T2, typename... Ts
             >
-    struct  filter<Predicate, State, Sequence<T0, T1, T2, Ts...> >
-         :  filter<Predicate, update_state<Predicate, State, T0, T1, T2>, Sequence<Ts...> >
+    struct  filter_impl<Predicate, State, Sequence<T0, T1, T2, Ts...> >
+         :  filter_impl<Predicate, update_state<Predicate, State, T0, T1, T2>, Sequence<Ts...> >
     {};
-
-    template< template<class> class Predicate
-            , typename State
-            , template<class...> class Sequence
-            >
-    struct  filter<Predicate, State, Sequence<> >
-    {
-      using type = State;
-    };
   }
 
   // return Sequence with elements for which Predicate returns false removed
   template< typename Sequence
           , template<class> class Predicate = detail::non_null
           >
-  using filter = typename detail::filter<Predicate, clear<Sequence>, Sequence>::type;
+  using filter = typename detail::filter_impl<Predicate, clear<Sequence>, Sequence>::type;
 }
