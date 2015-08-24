@@ -8,7 +8,7 @@
 
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/pair.hpp>
-#include <boost/mpl/identity.hpp>
+#include <brigand/algorithms/detail/lazy_identity.hpp>
 
 namespace brigand
 {
@@ -18,72 +18,72 @@ namespace brigand
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0        >, true >
-         : boost::mpl::identity<pair<Seq<Ts..., U0        >, Seq<Fs...            > > >
+         : lazy_identity<pair<Seq<Ts..., U0        >, Seq<Fs...            > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0        >, false>
-         : boost::mpl::identity<pair<Seq<Ts...            >, Seq<Fs..., U0        > > >
+         : lazy_identity<pair<Seq<Ts...            >, Seq<Fs..., U0        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, true,  true >
-         : boost::mpl::identity<pair<Seq<Ts..., U0, U1    >, Seq<Fs...            > > >
+         : lazy_identity<pair<Seq<Ts..., U0, U1    >, Seq<Fs...            > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, true,  false>
-         : boost::mpl::identity<pair<Seq<Ts..., U0        >, Seq<Fs..., U1        > > >
+         : lazy_identity<pair<Seq<Ts..., U0        >, Seq<Fs..., U1        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, false, false>
-         : boost::mpl::identity<pair<Seq<Ts...            >, Seq<Fs..., U0, U1    > > >
+         : lazy_identity<pair<Seq<Ts...            >, Seq<Fs..., U0, U1    > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1    >, false, true >
-         : boost::mpl::identity<pair<Seq<Ts..., U1        >, Seq<Fs..., U0        > > >
+         : lazy_identity<pair<Seq<Ts..., U1        >, Seq<Fs..., U0        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  true,  true >
-         : boost::mpl::identity<pair<Seq<Ts..., U0, U1, U2>, Seq<Fs...            > > >
+         : lazy_identity<pair<Seq<Ts..., U0, U1, U2>, Seq<Fs...            > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  true,  false>
-         : boost::mpl::identity<pair<Seq<Ts..., U0, U1    >, Seq<Fs..., U2        > > >
+         : lazy_identity<pair<Seq<Ts..., U0, U1    >, Seq<Fs..., U2        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  false, false>
-         : boost::mpl::identity<pair<Seq<Ts..., U0        >, Seq<Fs..., U1, U2    > > >
+         : lazy_identity<pair<Seq<Ts..., U0        >, Seq<Fs..., U1, U2    > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, false, false>
-         : boost::mpl::identity<pair<Seq<Ts...            >, Seq<Fs..., U0, U1, U2> > >
+         : lazy_identity<pair<Seq<Ts...            >, Seq<Fs..., U0, U1, U2> > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, false, true >
-         : boost::mpl::identity<pair<Seq<Ts..., U2        >, Seq<Fs..., U0, U1    > > >
+         : lazy_identity<pair<Seq<Ts..., U2        >, Seq<Fs..., U0, U1    > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, true,  true >
-         : boost::mpl::identity<pair<Seq<Ts..., U1, U2    >, Seq<Fs..., U0        > > >
+         : lazy_identity<pair<Seq<Ts..., U1, U2    >, Seq<Fs..., U0        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, true,  false, true >
-         : boost::mpl::identity<pair<Seq<Ts..., U0, U2    >, Seq<Fs..., U1        > > >
+         : lazy_identity<pair<Seq<Ts..., U0, U2    >, Seq<Fs..., U1        > > >
     {};
 
     template<template<class...> class Seq, typename... Ts, typename... Fs, typename U0, typename U1, typename U2>
     struct update_state_impl<pair<Seq<Ts...>, Seq<Fs...> >, list<U0, U1, U2>, false, true,  false>
-         : boost::mpl::identity<pair<Seq<Ts..., U1        >, Seq<Fs..., U0, U2    > > >
+         : lazy_identity<pair<Seq<Ts..., U1        >, Seq<Fs..., U0, U2    > > >
     {};
 
     template<template<class> class Predicate, typename State, typename... Us>
