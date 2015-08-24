@@ -34,7 +34,7 @@ namespace brigand
             , typename T0, typename T1
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1>
-                             , true, true
+                             , true,  true
                              >
     {
       using type = State<KeptTs..., T0, T1>;
@@ -44,7 +44,7 @@ namespace brigand
             , typename T0, typename T1
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1>
-                             , true, false
+                             , true,  false
                              >
     {
       using type = State<KeptTs..., T0>;
@@ -64,7 +64,7 @@ namespace brigand
             , typename T0, typename T1, typename T2
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
-                             , true, true, true
+                             , true,  true,  true
                              >
     {
       using type = State<KeptTs..., T0, T1, T2>;
@@ -74,7 +74,7 @@ namespace brigand
             , typename T0, typename T1, typename T2
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
-                             , true, true, false
+                             , true,  true,  false
                              >
     {
       using type = State<KeptTs..., T0, T1>;
@@ -84,7 +84,7 @@ namespace brigand
             , typename T0, typename T1, typename T2
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
-                             , true, false, false
+                             , true,  false, false
                              >
     {
       using type = State<KeptTs..., T0>;
@@ -104,7 +104,7 @@ namespace brigand
             , typename T0, typename T1, typename T2
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
-                             , false, true, true
+                             , false, true,  true
                              >
     {
       using type = State<KeptTs..., T1, T2>;
@@ -114,7 +114,7 @@ namespace brigand
             , typename T0, typename T1, typename T2
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
-                             , true, false, true
+                             , true,  false, true
                              >
     {
       using type = State<KeptTs..., T0, T2>;
@@ -124,7 +124,7 @@ namespace brigand
             , typename T0, typename T1, typename T2
             >
     struct  update_state_impl< State<KeptTs...>, list<T0, T1, T2>
-                             , false, true, false
+                             , false, true,  false
                              >
     {
       using type = State<KeptTs..., T1>;
@@ -153,24 +153,36 @@ namespace brigand
             , template<class...> class Sequence, typename T0, typename... Ts
             >
     struct  filter_impl<Predicate, State, Sequence<T0, Ts...> >
-         :  filter_impl<Predicate, update_state<Predicate, State, T0>, Sequence<Ts...> >
-    {};
+    {
+      using type = typename filter_impl< Predicate
+                                       , update_state<Predicate, State, T0>
+                                       , Sequence<Ts...>
+                                       >::type;
+    };
 
     template< template<class> class Predicate
             , typename State
             , template<class...> class Sequence, typename T0, typename T1, typename... Ts
             >
     struct  filter_impl<Predicate, State, Sequence<T0, T1, Ts...> >
-         :  filter_impl<Predicate, update_state<Predicate, State, T0, T1>, Sequence<Ts...> >
-    {};
+    {
+      using type = typename filter_impl< Predicate
+                                       , update_state<Predicate, State, T0, T1>
+                                       , Sequence<Ts...>
+                                       >::type;
+    };
 
     template< template<class> class Predicate
             , typename State
             , template<class...> class Sequence, typename T0, typename T1, typename T2, typename... Ts
             >
     struct  filter_impl<Predicate, State, Sequence<T0, T1, T2, Ts...> >
-         :  filter_impl<Predicate, update_state<Predicate, State, T0, T1, T2>, Sequence<Ts...> >
-    {};
+    {
+      using type = typename filter_impl< Predicate
+                                       , update_state<Predicate, State, T0, T1, T2>
+                                       , Sequence<Ts...>
+                                       >::type;
+    };
   }
 
   // return Sequence with elements for which Predicate returns false removed
