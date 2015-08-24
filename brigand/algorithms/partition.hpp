@@ -97,6 +97,15 @@ namespace brigand
     template< template<class> class Predicate
             , typename State
             , template<class...> class Sequence
+            >
+    struct  partition_impl<Predicate, State, Sequence<> >
+    {
+      using type = State;
+    };
+
+    template< template<class> class Predicate
+            , typename State
+            , template<class...> class Sequence
             , typename U0, typename... Us
             >
     struct  partition_impl<Predicate, State, Sequence<U0, Us...> >
@@ -120,15 +129,6 @@ namespace brigand
     struct  partition_impl<Predicate, State, Sequence<U0, U1, U2, Us...> >
          :  partition_impl<Predicate, update_state<Predicate, State, U0, U1, U2>, Sequence<Us...> >
     {};
-
-    template< template<class> class Predicate
-            , typename State
-            , template<class...> class Sequence
-            >
-    struct  partition_impl<Predicate, State, Sequence<> >
-    {
-      using type = State;
-    };
   }
 
   // return a pair:
