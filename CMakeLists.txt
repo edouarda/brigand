@@ -41,7 +41,8 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/none.hpp
     brigand/algorithms/remove.hpp
     brigand/algorithms/reverse.hpp
-    brigand/algorithms/transform.hpp)
+    brigand/algorithms/transform.hpp
+    brigand/algorithms/select.hpp)
 
 set(ALGORITHMS_DETAIL_GROUP
     brigand/algorithms/detail/find.hpp)
@@ -136,6 +137,7 @@ set(test_files
     test/repeat_test.cpp
     test/range_test.cpp
     test/reverse_test.cpp
+    test/select.cpp
     test/set_test.cpp
     test/transform.cpp
     test/tuple_test.cpp)

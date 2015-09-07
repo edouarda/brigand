@@ -19,3 +19,4 @@
 #include <brigand/algorithms/remove.hpp>
 #include <brigand/algorithms/reverse.hpp>
 #include <brigand/algorithms/transform.hpp>
+#include <brigand/algorithms/select.hpp>
