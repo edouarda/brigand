@@ -10,24 +10,32 @@
 
 namespace brigand
 {
-  template <class... L> struct append_impl;
-
-  template <class... L> using append = typename append_impl<L...>::type;
-
-  template <> struct append_impl<>
+  namespace detail
   {
-    using type = brigand::empty_list;
-  };
+    template <typename... Ls> struct append_impl;
 
-  template<template<class...> class L, class... T>
-  struct append_impl<L<T...>>
-  {
-    using type = L<T...>;
-  };
+    template <>
+    struct append_impl<>
+    {
+      using type = empty_list;
+    };
 
-  template<template<class...> class L1, class... T1, template<class...> class L2, class... T2, class... Lr>
-  struct append_impl<L1<T1...>, L2<T2...>, Lr...>
-  {
-    using type = append<L1<T1..., T2...>, Lr...>;
-  };
+    template< template<class...> class L
+            , typename... Ts
+            >
+    struct  append_impl<L<Ts...> >
+    {
+      using type = L<Ts...>;
+    };
+
+    template< template<class...> class L1, typename... Ts1
+            , template<class...> class L2, typename... Ts2
+            , typename... Ls>
+    struct  append_impl<L1<Ts1...>, L2<Ts2...>, Ls...>
+         :  append_impl<L1<Ts1..., Ts2...>, Ls...>
+    {};
+  }
+
+  template<typename... L>
+  using append = typename detail::append_impl<L...>::type;
 }
