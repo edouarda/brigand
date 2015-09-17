@@ -13,7 +13,13 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcxx-exceptions")
 endif()
 
-find_package(Boost COMPONENTS variant)
+find_package(Boost REQUIRED)
+
+if(Boost_FOUND)
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
+else()
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+endif()
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
@@ -114,8 +120,6 @@ add_library(brigand
     ${TYPES_GROUP}
     ${PLACEHOLDER_GROUP})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
 set(test_files
     test/comparison_test.cpp
     test/find.cpp
@@ -142,7 +146,7 @@ set(test_files
     test/transform.cpp
     test/tuple_test.cpp)
 
-if (${Boost_INCLUDE_DIR})
+if(Boost_FOUND)
     set(test_files ${test_files} test/variant_test.cpp)
 endif()
 

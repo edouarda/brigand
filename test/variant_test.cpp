@@ -1,7 +1,7 @@
 
 #include <boost/variant.hpp>
 
-#include <brigand/list.hpp>
+#include <brigand/sequences/list.hpp>
 #include <brigand/adapted/variant.hpp>
 
 using test_list = brigand::list<int, bool, char>;

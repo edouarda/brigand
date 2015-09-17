@@ -8,4 +8,3 @@
 
 #include <brigand/adapted/pair.hpp>
 #include <brigand/adapted/tuple.hpp>
-#include <brigand/adapted/variant.hpp>
