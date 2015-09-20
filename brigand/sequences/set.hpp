@@ -10,7 +10,6 @@
 
 #include <brigand/types/type.hpp>
 #include <brigand/types/bool.hpp>
-#include <brigand/types/bind.hpp>
 
 #include <brigand/algorithms/apply.hpp>
 
@@ -24,8 +23,6 @@ namespace brigand
 {
 namespace detail
 {
-
-
 
     template<class... Ts>
     struct make_set;

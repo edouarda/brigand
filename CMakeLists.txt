@@ -97,6 +97,7 @@ set(TYPES_GROUP
     brigand/types/bool.hpp
     brigand/types/integer.hpp
     brigand/types/no_such_type.hpp
+    brigand/types/type.hpp
 )
 
 set(PLACEHOLDER_GROUP brigand/nothing.cpp)
