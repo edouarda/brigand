@@ -31,7 +31,7 @@ namespace brigand
     // Try to find a ::invoke<...>
     template<typename Lambda, template<class...> class List, typename... Args>
     struct invoke < Lambda, List<Args...>
-                  , typename enable_if_type<typename Lambda::template invoke<Args>>::type
+                  , typename enable_if_type<typename Lambda::template invoke<Args...>>::type
                   >
     {
       using type = typename Lambda::template invoke<Args...>::type;
@@ -41,7 +41,7 @@ namespace brigand
             , template<class...> class List, typename... Args
             >
     struct invoke < Lambda<Types...>, List<Args...>
-                  , typename enable_if_type<typename Lambda<Types...>::template invoke<Args>>::type
+                  , typename enable_if_type<typename Lambda<Types...>::template invoke<Args...>>::type
                   >
     {
       using type = typename Lambda<Types...>::template invoke<Args...>::type;
