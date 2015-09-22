@@ -7,7 +7,7 @@
 #pragma once
 
 #include <brigand/types/bool.hpp>
-#include <brigand/functions/invoke.hpp>
+#include <brigand/functions/apply.hpp>
 
 namespace brigand { namespace detail
 {
@@ -28,7 +28,7 @@ namespace brigand { namespace detail
           , typename H, typename... T
           >
   struct  find_if_impl<Predicate,Sequence<H,T...>>
-        : find_if_shortcut<brigand::invoke<Predicate,H>, Predicate, Sequence<H,T...> >
+        : find_if_shortcut<brigand::apply<Predicate,H>, Predicate, Sequence<H,T...> >
   {};
 
   // Stop ! We found it

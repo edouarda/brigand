@@ -48,6 +48,7 @@ static_assert ( std::is_same< brigand::transform<ptr_t,list1>
               , "invalid unary transform on list"
               );
 
+
 static_assert ( std::is_same< brigand::transform<std::add_pointer<brigand::_1>,list1>
                             , expect1
                             >::value

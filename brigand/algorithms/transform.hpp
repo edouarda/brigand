@@ -6,7 +6,7 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/functions/invoke.hpp>
+#include <brigand/functions/apply.hpp>
 
 namespace brigand
 {
@@ -21,7 +21,7 @@ namespace brigand
             >
     struct transform_impl<Functor, Sequence<T...>>
     {
-      using type = Sequence< brigand::invoke<Functor,T>... >;
+      using type = Sequence< brigand::apply<Functor,T>... >;
     };
 
     // Binary transform implementation
@@ -35,7 +35,7 @@ namespace brigand
                     , "The arguments of transform should be of the same size"
                     );
 
-      using type = Sequence1< brigand::invoke<Functor,T1,T2>... >;
+      using type = Sequence1< brigand::apply<Functor,T1,T2>... >;
     };
   }
 

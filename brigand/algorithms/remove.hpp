@@ -7,13 +7,13 @@
 #pragma once
 
 #include <brigand/sequences/clear.hpp>
-#include <brigand/functions/invoke.hpp>
+#include <brigand/functions/apply.hpp>
 #include <type_traits>
 
 namespace brigand
 {
-namespace detail
-{
+  namespace detail
+  {
     template< class L1, typename Pred, class L2 = clear<L1>>
     struct remove_if_impl
     {
@@ -37,7 +37,7 @@ namespace detail
     : remove_if_impl<L1<Ts...>, Pred, L2<Us..., T>>
     {};
 
-    template<typename Pred, typename T> using pred = brigand::invoke<Pred,T>;
+    template<typename Pred, typename T> using pred = brigand::apply<Pred,T>;
 
     template< template<class...> class L1, class T, class... Ts,
               typename Pred, class L2 >
@@ -46,7 +46,7 @@ namespace detail
                         , bool(pred<Pred,T>::value)
                         >
     {};
-}
+  }
 
     template<typename L, typename Pred>
     using remove = typename detail::remove_if_impl<L, Pred>::type;

@@ -7,27 +7,11 @@
 #pragma once
 
 #include <brigand/sequences/at.hpp>
+#include <brigand/functions/substitute.hpp>
 
 namespace brigand
 {
   template<std::size_t Index> struct placeholders {};
-
-  namespace detail
-  {
-    template<typename T, typename List> struct substitute
-    {
-      using type = T;
-    };
-
-    template<std::size_t Index, typename List>
-    struct substitute<placeholders<Index>,List>
-    {
-      using type = brigand::at_c<List,Index>;
-    };
-  }
-
-  template<typename T, typename List>
-  using substitute = typename detail::substitute<T,List>::type;
 
   using _  = placeholders<0>;
   using _1 = placeholders<0>;
@@ -40,25 +24,18 @@ namespace brigand
   using _8 = placeholders<7>;
   using _9 = placeholders<8>;
 
-namespace detail
-{
-	template <template <class> class T>
-	struct unary_placeholder_adaptor
-	{
+  namespace detail
+  {
+    template <template <class> class T>
+    struct unary_placeholder_adaptor
+    {
+      template <class P> struct apply : T<P> {};
+    };
 
-		template <class P>
-		struct invoke : T<P> {};
-
-	};
-
-	template <template <class, class> class T>
-	struct binary_placeholder_adaptor
-	{
-
-		template <class P1, class P2>
-		struct invoke : T<P1, P2> {};
-
-	};
-
-}
+    template <template <class, class> class T>
+    struct binary_placeholder_adaptor
+    {
+      template <class P1, class P2> struct apply : T<P1, P2> {};
+    };
+  }
 }

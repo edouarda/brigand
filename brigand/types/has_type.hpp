@@ -6,13 +6,10 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/types/bool.hpp>
-
-namespace brigand { namespace detail
+namespace brigand
 {
-  // Default find-like predicate
-  struct non_null
+  template<typename T, typename R = void > struct has_type
   {
-    template<typename Args> struct apply : bool_< Args::value != 0> {};
+    using type = R;
   };
-} }
+}
