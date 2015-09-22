@@ -11,5 +11,8 @@
 namespace brigand { namespace detail
 {
   // Default find-like predicate
-  template<typename T> using non_null = bool_< T::value != 0 >;
+  struct non_null
+  {
+    template<typename Args> struct invoke : bool_< Args::value != 0> {};
+  };
 } }

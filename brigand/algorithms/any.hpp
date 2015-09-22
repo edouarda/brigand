@@ -18,12 +18,10 @@ namespace brigand
     template< typename Sequence
             , template<class> class Predicate = detail::non_null
             >
-	struct any : bool_<!none<Sequence, Predicate>::type::value> {};
+    struct any : bool_<!none<Sequence, Predicate>::type::value> {};
   }
 
   // Is a predicate true for at least one type ?
-  template< typename Sequence
-          , template<class> class Predicate = detail::non_null
-          >
+  template<typename Sequence, typename Predicate = detail::non_null>
   using any = typename detail::any<Sequence,Predicate>::type;
 }
