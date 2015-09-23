@@ -7,35 +7,35 @@
 #pragma once
 #include <brigand/sequences/map.hpp>
 #include <brigand/sequences/list.hpp>
+#include <brigand/sequences/range.hpp>
+#include <brigand/types/type.hpp>
 
 namespace brigand
 {
-namespace detail
-{
-    // at
-    template <int Index, class First, class... T>
-    struct element_at
+  namespace detail
+  {
+    template<typename T> struct element_at;
+
+    template<template<typename...> class L, typename... N>
+    struct element_at<L<N...>>
     {
-        using type = typename element_at<Index - 1, T...>::type;
+      template<typename T> T operator()(decltype(N(), void())*..., T*, ...);
     };
 
-    template <class First, class... T>
-    struct element_at<0, First, T...>
+    template<std::size_t N, typename Seq> struct at_impl;
+
+    template<std::size_t N, template<typename...> class L, typename... Ts >
+    struct at_impl<N,L<Ts...>>
     {
-        using type = First;
+      using base = decltype (element_at<brigand::range<int,0,N>>()
+                              (static_cast<brigand::type_<Ts>*>(nullptr)...)
+                            );
+      using type = typename base::type;
     };
+  }
 
-    template <int Index, class L> struct at_impl;
-
-    template<int Index, template<class...> class L, class... U>
-    struct at_impl<Index, L<U...>>
-    {
-        using type = typename element_at<Index, U...>::type;
-    };
-}
-
-    template <class L, int Index>
-    using at_c = typename detail::at_impl<Index, L>::type;
+  template <class L, int Index>
+  using at_c = typename detail::at_impl<Index, L>::type;
 
 namespace detail
 {
