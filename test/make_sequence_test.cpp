@@ -3,9 +3,6 @@
 #include <brigand/types/integer.hpp>
 #include <brigand/adapted/integral_list.hpp>
 
-int y = brigand::make_sequence<brigand::int_<0>, 3>();
-int x = brigand::as_integral_list < brigand::make_sequence<brigand::int_<0>, 3> >() ;
-
 static_assert(std::is_same<brigand::as_integral_list<brigand::make_sequence<brigand::int_<0>, 3>>,
 	brigand::integral_list<int, 0, 1, 2>>::value, "invalid make_sequence result");
 static_assert(std::is_same<brigand::as_integral_list<brigand::make_sequence<brigand::int_<2>, 4, brigand::prev>>, 
