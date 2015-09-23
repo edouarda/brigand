@@ -30,6 +30,8 @@ set(BRIGAND_GROUP
     brigand/logical.hpp)
 
 set(ADAPTED_GROUP
+    brigand/adapted/fusion.hpp
+    brigand/adapted/integral_list.hpp
     brigand/adapted/pair.hpp
     brigand/adapted/tuple.hpp
     brigand/adapted/fusion.hpp
