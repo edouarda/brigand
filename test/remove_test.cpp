@@ -1,6 +1,7 @@
 #include <brigand/algorithms/remove.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/functions/not.hpp>
+#include <brigand/functions/and.hpp>
 #include <brigand/types/integer.hpp>
 #include <brigand/types/placeholders.hpp>
 
@@ -26,6 +27,10 @@ static_assert ( std::is_same< brigand::remove < remove_test_int_list
                             >::value
               , "invalid remove_if result"
               );
+
+static_assert(std::is_same < brigand::remove < remove_test_int_list,
+	brigand::and_ < brigand::_1, brigand::_1 >> ,
+	brigand::integral_list<int, 0, 0>> ::value, "invalid remove result");
 
 static_assert ( std::is_same< brigand::remove_element<remove_test_list, int>
                             , brigand::list<bool, char, float, double>

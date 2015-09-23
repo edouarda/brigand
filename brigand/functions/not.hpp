@@ -6,16 +6,9 @@
 =================================================================================================**/
 #pragma once
 #include <type_traits>
-#include <brigand/types/placeholders.hpp>
 
 namespace brigand
 {
   template <typename T>
   struct not_ : std::integral_constant<typename T::value_type, !T::value> {};
-
-  template <std::size_t Index>
-  struct not_<placeholders<Index>>
-  {
-    template<typename T> struct invoke : not_<T> {};
-  };
 }

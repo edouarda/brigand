@@ -39,4 +39,26 @@ namespace brigand
   using _7 = placeholders<6>;
   using _8 = placeholders<7>;
   using _9 = placeholders<8>;
+
+namespace detail
+{
+	template <template <class> class T>
+	struct unary_placeholder_adaptor
+	{
+
+		template <class P>
+		struct invoke : T<P> {};
+
+	};
+
+	template <template <class, class> class T>
+	struct binary_placeholder_adaptor
+	{
+
+		template <class P1, class P2>
+		struct invoke : T<P1, P2> {};
+
+	};
+
+}
 }
