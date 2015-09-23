@@ -9,5 +9,8 @@
 namespace brigand
 {
   template<class T>
-  using identity = T;
+  struct identity
+  {
+	  using type = T;
+  };
 }

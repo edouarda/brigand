@@ -16,6 +16,9 @@ static_assert(brigand::times<value_int_two, value_int_two>::value == 4, "invalid
 static_assert(brigand::divides<value_int_ten, value_int_two>::value == 5, "invalid divides result");
 static_assert(brigand::modulo<value_int_ten, value_int_three>::value == 1, "invalid modulo result");
 static_assert(brigand::next<value_int_one>::value == 2, "invalid next result");
+static_assert(brigand::next<brigand::next<value_int_one>>::value == 3, "invalid next result");
 static_assert(brigand::prev<value_int_three>::value == 2, "invalid prev result");
+static_assert(brigand::prev<brigand::prev<value_int_three>>::value == 1, "invalid prev result");
+static_assert(brigand::prev<brigand::next<value_int_one>>::value == 1, "invalid prev next result");
 static_assert(brigand::negate<value_int_three>::value == -3, "invalid negate result");
 static_assert(brigand::complement<value_byte_zero>::value == 255, "invalid complement result");
