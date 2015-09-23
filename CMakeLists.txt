@@ -137,7 +137,7 @@ set(test_files
     test/logical_test.cpp
     test/make_sequence_test.cpp
     test/map_test.cpp
-    test/mpl_test.cpp
+    test/main.cpp
     test/pair_test.cpp
     test/predicate_reduction_test.cpp
     test/remove_test.cpp

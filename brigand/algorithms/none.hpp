@@ -14,7 +14,8 @@ namespace brigand
 {
   namespace detail
   {
-    template<typename Sequence, template<class> class Predicate> struct none
+    template<typename Sequence, template<class> class Predicate> 
+	struct none
     {
       template<typename T> struct nope : bool_< !Predicate<T>::value > {};
       using type = all<Sequence, nope>;
