@@ -8,7 +8,8 @@
 
 #include <brigand/types/bool.hpp>
 #include <brigand/algorithms/detail/non_null.hpp>
-#include <brigand/algorithms/all.hpp>
+#include <brigand/functions/not.hpp>
+#include <brigand/algorithms/none.hpp>
 
 namespace brigand
 {
@@ -17,7 +18,7 @@ namespace brigand
     template< typename Sequence
             , template<class> class Predicate = detail::non_null
             >
-    struct any : bool_<!all<Sequence,Predicate>::value> {};
+	struct any : bool_<!none<Sequence, Predicate>::type::value> {};
   }
 
   // Is a predicate true for at least one type ?
