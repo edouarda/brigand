@@ -11,7 +11,7 @@
 #include <brigand/types/type.hpp>
 #include <brigand/types/bool.hpp>
 
-#include <brigand/algorithms/apply.hpp>
+#include <brigand/algorithms/wrap.hpp>
 
 #include <brigand/sequences/append.hpp>
 #include <brigand/sequences/list.hpp>
@@ -53,7 +53,7 @@ namespace detail
 
     public:
         template <class K>
-        static apply<decltype(exact_eraser<T...>::erase(type_<K>{})), detail::set_impl> erase(type_<K>);
+        static wrap<decltype(exact_eraser<T...>::erase(type_<K>{})), detail::set_impl> erase(type_<K>);
 
     private:
         template<class K>
@@ -65,7 +65,7 @@ namespace detail
     public:
         template<class K>
         static decltype(set_impl<T...>::insert_impl<K>(contains_predicate<type_<K>>())) insert(type_<K>);
-            
+
     };
 
     // if you have a "class already a base" error message, it means you have defined a set with the same key present more

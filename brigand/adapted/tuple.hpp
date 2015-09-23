@@ -6,7 +6,7 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/apply.hpp>
+#include <brigand/algorithms/wrap.hpp>
 #include <tuple>
 
 namespace brigand
@@ -15,5 +15,5 @@ namespace brigand
   using tuple_wrapper = typename std::tuple<T...>;
 
   template <typename L>
-  using as_tuple = apply<L, tuple_wrapper>;
+  using as_tuple = wrap<L, tuple_wrapper>;
 }

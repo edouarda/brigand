@@ -38,7 +38,7 @@ set(ADAPTED_GROUP
 set(ALGORITHMS_GROUP
     brigand/algorithms/all.hpp
     brigand/algorithms/any.hpp
-    brigand/algorithms/apply.hpp
+    brigand/algorithms/wrap.hpp
     brigand/algorithms/count.hpp
     brigand/algorithms/find.hpp
     brigand/algorithms/fold.hpp

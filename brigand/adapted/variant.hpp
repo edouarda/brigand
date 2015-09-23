@@ -6,15 +6,13 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/apply.hpp>
+#include <brigand/algorithms/wrap.hpp>
 
 namespace brigand
 {
+  template <typename... T>
+  using variant_wrapper = typename boost::variant<T...>;
 
-    template <typename... T>
-    using variant_wrapper = typename boost::variant<T...>;
-
-    template <typename L>
-    using as_variant = apply<L, variant_wrapper>;
-
+  template <typename L>
+  using as_variant = wrap<L, variant_wrapper>;
 }
