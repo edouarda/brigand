@@ -7,6 +7,7 @@
 #pragma once
 
 #include <brigand/algorithms/detail/non_null.hpp>
+#include <brigand/functions/apply.hpp>
 #include <type_traits>
 
 namespace brigand
@@ -14,19 +15,19 @@ namespace brigand
   namespace detail
   {
     template <bool...> struct bools_ {};
-    template< typename Sequence, template<class> class Predicate, typename... Ts> struct all;
+    template< typename Sequence, typename Predicate, typename... Ts> struct all_impl;
 
-    template< template<class...> class Sequence, template<class> class Predicate, typename... Ts>
-    struct  all<Sequence<Ts...>,Predicate>
-          : std::is_same< bools_<true, Predicate<Ts>::value...>
-                        , bools_<Predicate<Ts>::value..., true>
+    template<typename P, typename T> using invoked = brigand::apply<P,T>;
+
+    template< template<class...> class Sequence, typename Predicate, typename... Ts>
+    struct  all_impl<Sequence<Ts...>,Predicate>
+          : std::is_same< bools_<true, invoked<Predicate,Ts>::value...>
+                        , bools_<invoked<Predicate,Ts>::value..., true>
                         >
     {};
   }
 
   // Is a predicate true for every type ?
-  template< typename Sequence
-          , template<class> class Predicate = detail::non_null
-          >
-  using all = typename detail::all<Sequence,Predicate>::type;
+  template<typename Sequence, typename Predicate = detail::non_null>
+  using all = typename detail::all_impl<Sequence,Predicate>::type;
 }

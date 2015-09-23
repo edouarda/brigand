@@ -6,6 +6,8 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/types/placeholders.hpp>
+
 namespace brigand
 {
 namespace detail

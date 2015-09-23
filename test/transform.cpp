@@ -1,5 +1,6 @@
 
 #include <brigand/sequences/list.hpp>
+#include <brigand/types/placeholders.hpp>
 #include <brigand/algorithms/transform.hpp>
 #include <type_traits>
 #include <utility>
@@ -20,8 +21,14 @@ using expect2b  = brigand::list < std::pair<float,float>
                                 >;
 
 // local functors to apply
-template<class T>         using ptr_t = T*;
-template<class U,class V> using pair_t = std::pair<U,V>;
+using ptr_t  = std::add_pointer<brigand::_1>;
+using pair_t = std::pair<brigand::_1,brigand::_2>;
+
+static_assert ( std::is_same< brigand::transform<std::add_pointer<brigand::_1>,list0>
+                            , list0
+                            >::value
+              , "invalid unary transform on empty list"
+              );
 
 static_assert ( std::is_same< brigand::transform<ptr_t,list0>
                             , list0
@@ -36,6 +43,13 @@ static_assert ( std::is_same< brigand::transform<pair_t,list0,list0>
               );
 
 static_assert ( std::is_same< brigand::transform<ptr_t,list1>
+                            , expect1
+                            >::value
+              , "invalid unary transform on list"
+              );
+
+
+static_assert ( std::is_same< brigand::transform<std::add_pointer<brigand::_1>,list1>
                             , expect1
                             >::value
               , "invalid unary transform on list"

@@ -16,10 +16,11 @@ namespace brigand
   {
     template<typename T> struct element_at;
 
+    template<typename T> struct ignore { template<typename U> ignore(U&&); };
+
     template<template<typename...> class L, typename... N>
     struct element_at<L<N...>>
     {
-      template<typename T> struct ignore { template<typename U> ignore(U&&); };
       template<typename T> type_<T> operator()(ignore<N>..., type_<T>, ...);
     };
 

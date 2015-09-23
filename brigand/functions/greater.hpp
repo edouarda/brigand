@@ -10,5 +10,5 @@
 namespace brigand
 {
   template <typename A, typename B>
-  using greater = bool_<(A::value > B::value)>;
+  struct greater : bool_<(A::value > B::value) > {};
 }
