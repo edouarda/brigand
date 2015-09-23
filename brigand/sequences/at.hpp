@@ -19,7 +19,8 @@ namespace brigand
     template<template<typename...> class L, typename... N>
     struct element_at<L<N...>>
     {
-      template<typename T> T operator()(decltype(N(), void())*..., T*, ...);
+      template<typename T> struct ignore { template<typename U> ignore(U&&); };
+      template<typename T> type_<T> operator()(ignore<N>..., type_<T>, ...);
     };
 
     template<std::size_t N, typename Seq> struct at_impl;
@@ -27,9 +28,7 @@ namespace brigand
     template<std::size_t N, template<typename...> class L, typename... Ts >
     struct at_impl<N,L<Ts...>>
     {
-      using base = decltype (element_at<brigand::range<int,0,N>>()
-                              (static_cast<brigand::type_<Ts>*>(nullptr)...)
-                            );
+      using base = decltype(element_at<brigand::range<int,0,N>>()(brigand::type_<Ts>()...));
       using type = typename base::type;
     };
   }
