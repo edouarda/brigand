@@ -3,22 +3,20 @@
 #include <brigand/algorithms/find.hpp>
 #include <type_traits>
 
-template<typename T> using is_float = typename std::is_floating_point<T>::type;
-
-static_assert ( std::is_same< brigand::find<brigand::list<>,is_float>
+static_assert ( std::is_same< brigand::find<brigand::list<>,std::is_floating_point<brigand::_1>>
                             , brigand::list<>
                             >::value
               , "invalid find on empty list"
               );
 
-static_assert ( std::is_same< brigand::reverse_find<brigand::list<>,is_float>
+static_assert ( std::is_same< brigand::reverse_find<brigand::list<>,std::is_floating_point<brigand::_1>>
                             , brigand::list<>
                             >::value
               , "invalid reverse_find on empty list"
               );
 
 static_assert ( std::is_same< brigand::find < brigand::list<int,int,int,float,char>
-                                            , is_float
+                                            , std::is_floating_point<brigand::_1>
                                             >
                             , brigand::list<float,char>
                             >::value
@@ -26,7 +24,7 @@ static_assert ( std::is_same< brigand::find < brigand::list<int,int,int,float,ch
               );
 
 static_assert ( std::is_same< brigand::reverse_find < brigand::list<int,int,int,float,char>
-                                                    , is_float
+                                                    , std::is_floating_point<brigand::_1>
                                                     >
                             , brigand::list<int,int,int,float>
                             >::value
@@ -54,7 +52,7 @@ static_assert ( brigand::not_found< brigand::integral_list<int,0,0,0,0,0,0>>::va
               );
 
 static_assert ( brigand::not_found< brigand::list<int,int,char>
-                                  , is_float
+                                  , std::is_floating_point<brigand::_1>
                                   >::value
               , "invalid not_found on list"
               );
@@ -68,7 +66,7 @@ static_assert ( brigand::found< brigand::integral_list<int,0,0,7,0,0,0>>::value
               );
 
 static_assert ( brigand::found< brigand::list<int,int,double,char>
-                              , is_float
+                              , std::is_floating_point<brigand::_1>
                               >::value
               , "invalid found on list"
               );

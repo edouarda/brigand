@@ -6,7 +6,7 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/apply.hpp>
+#include <brigand/algorithms/wrap.hpp>
 #include <boost/fusion/container/vector/vector_fwd.hpp>
 #include <boost/fusion/container/deque/deque_fwd.hpp>
 #include <boost/fusion/container/list/list_fwd.hpp>
@@ -26,8 +26,8 @@ namespace brigand
   template <typename... T>
   using fusion_set_wrapper = boost::fusion::set<T...>;
 
-  template <typename L> using as_fusion_vector = apply<L, fusion_vector_wrapper>;
-  template <typename L> using as_fusion_deque  = apply<L, fusion_deque_wrapper>;
-  template <typename L> using as_fusion_list   = apply<L, fusion_list_wrapper>;
-  template <typename L> using as_fusion_set    = apply<L, fusion_set_wrapper>;
+  template <typename L> using as_fusion_vector = wrap<L, fusion_vector_wrapper>;
+  template <typename L> using as_fusion_deque  = wrap<L, fusion_deque_wrapper>;
+  template <typename L> using as_fusion_list   = wrap<L, fusion_list_wrapper>;
+  template <typename L> using as_fusion_set    = wrap<L, fusion_set_wrapper>;
 }

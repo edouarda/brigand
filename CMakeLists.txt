@@ -40,7 +40,7 @@ set(ADAPTED_GROUP
 set(ALGORITHMS_GROUP
     brigand/algorithms/all.hpp
     brigand/algorithms/any.hpp
-    brigand/algorithms/apply.hpp
+    brigand/algorithms/wrap.hpp
     brigand/algorithms/count.hpp
     brigand/algorithms/find.hpp
     brigand/algorithms/fold.hpp
@@ -64,6 +64,7 @@ set(FUNCTIONS_GROUPS
     brigand/functions/greater.hpp
     brigand/functions/greater_equal.hpp
     brigand/functions/identity.hpp
+    brigand/functions/apply.hpp
     brigand/functions/less.hpp
     brigand/functions/less_equal.hpp
     brigand/functions/max.hpp
@@ -99,6 +100,7 @@ set(SEQUENCES_GROUP
 set(TYPES_GROUP
     brigand/types/bool.hpp
     brigand/types/integer.hpp
+    brigand/types/placeholders.hpp
     brigand/types/no_such_type.hpp
     brigand/types/type.hpp
 )
@@ -125,6 +127,7 @@ add_library(brigand
     ${PLACEHOLDER_GROUP})
 
 set(test_files
+    test/apply.cpp
     test/comparison_test.cpp
     test/find.cpp
     test/fold.cpp
@@ -134,6 +137,7 @@ set(test_files
     test/include_test.cpp
     test/integral_list_test.cpp
     test/integral_test.cpp
+    test/is_placeholder.cpp
     test/is_set_test.cpp
     test/list_test.cpp
     test/logical_test.cpp
@@ -142,14 +146,15 @@ set(test_files
     test/main.cpp
     test/pair_test.cpp
     test/predicate_reduction_test.cpp
+    test/range_test.cpp
     test/remove_test.cpp
     test/repeat_test.cpp
-    test/range_test.cpp
     test/reverse_test.cpp
     test/select.cpp
     test/set_test.cpp
     test/transform.cpp
-    test/tuple_test.cpp)
+    test/tuple_test.cpp
+  )
 
 if(Boost_FOUND)
     set(test_files ${test_files} test/variant_test.cpp)

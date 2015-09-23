@@ -7,38 +7,39 @@
 #pragma once
 
 #include <brigand/types/bool.hpp>
+#include <brigand/functions/apply.hpp>
 
 namespace brigand { namespace detail
 {
   // By default, consider we found nothing
-  template< template<class> class Predicate, class Sequence>
+  template< typename Predicate, class Sequence>
   struct find_if_impl
   {
     using type = Sequence;
   };
 
   // Use Predicate result in Status to stop recursion when something was found
-  template<typename Status, template<class> class Predicate, class Sequence>
+  template<typename Status, typename Predicate, class Sequence>
   struct find_if_shortcut;
 
   // Try to see if we found something and try to short-cut
-  template< template<class> class Predicate
+  template< typename Predicate
           , template<class...> class Sequence
           , typename H, typename... T
           >
   struct  find_if_impl<Predicate,Sequence<H,T...>>
-        : find_if_shortcut<Predicate<H>, Predicate, Sequence<H,T...> >
+        : find_if_shortcut<brigand::apply<Predicate,H>, Predicate, Sequence<H,T...> >
   {};
 
   // Stop ! We found it
-  template<template<class> class Predicate, class Sequence>
+  template<typename Predicate, class Sequence>
   struct find_if_shortcut<true_,Predicate,Sequence>
   {
     using type = Sequence;
   };
 
   // Consume head and go forward
-  template< template<class> class Predicate
+  template< typename Predicate
           , template<class...> class Sequence
           , typename H, typename... T
           >

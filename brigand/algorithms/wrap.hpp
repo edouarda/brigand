@@ -5,10 +5,20 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <type_traits>
 
 namespace brigand
 {
-  template <typename A, typename B>
-  struct plus : std::integral_constant < typename A::value_type, A::value + B::value > {};
+  namespace detail
+  {
+    template <class A, template<class...> class B> struct wrap_impl;
+
+    template<template<class...> class A, class... T, template<class...> class B>
+    struct wrap_impl<A<T...>, B>
+    {
+      using type = B<T...>;
+    };
+  }
+
+  template<class A, template<class...> class B>
+  using wrap = typename detail::wrap_impl<A, B>::type;
 }

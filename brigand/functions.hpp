@@ -8,5 +8,6 @@ Distributed under the Boost Software License, Version 1.0.
 
 #include <brigand/arithmetic.hpp>
 #include <brigand/comparisons.hpp>
-#include <brigand/logical.hpp>
+#include <brigand/functions/apply.hpp>
 #include <brigand/functions/repeat.hpp>
+#include <brigand/logical.hpp>

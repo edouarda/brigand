@@ -10,5 +10,5 @@
 namespace brigand
 {
   template <typename A>
-  using negate = std::integral_constant<typename A::value_type, -A::value>;
+  struct negate : std::integral_constant < typename A::value_type, -A::value > {};
 }

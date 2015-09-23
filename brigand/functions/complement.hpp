@@ -7,10 +7,15 @@
 #pragma once
 #include <type_traits>
 
+#include <brigand/types/placeholders.hpp>
+
 namespace brigand
 {
   template <typename A>
-  using complement = std::integral_constant < typename A::value_type
-                                            , typename A::value_type(~A::value)
-                                            >;
+  struct complement : std::integral_constant < typename A::value_type
+	  , typename A::value_type(~A::value)
+  > {};
+
+  template <std::size_t Index>
+  struct complement<placeholders<Index>> : detail::unary_placeholder_adaptor<brigand::complement> {};
 }

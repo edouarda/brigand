@@ -8,7 +8,6 @@
 
 #include <brigand/algorithms/all.hpp>
 #include <brigand/algorithms/any.hpp>
-#include <brigand/algorithms/apply.hpp>
 #include <brigand/algorithms/count.hpp>
 #include <brigand/algorithms/find.hpp>
 #include <brigand/algorithms/fold.hpp>
@@ -18,5 +17,6 @@
 #include <brigand/algorithms/none.hpp>
 #include <brigand/algorithms/remove.hpp>
 #include <brigand/algorithms/reverse.hpp>
-#include <brigand/algorithms/transform.hpp>
 #include <brigand/algorithms/select.hpp>
+#include <brigand/algorithms/transform.hpp>
+#include <brigand/algorithms/wrap.hpp>

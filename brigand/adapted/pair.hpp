@@ -6,7 +6,7 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/apply.hpp>
+#include <brigand/algorithms/wrap.hpp>
 #include <brigand/types/no_such_type.hpp>
 #include <utility>
 
@@ -33,5 +33,5 @@ namespace brigand
   using pair_wrapper = typename pair_wrapper_<T...>::type;
 
   template <typename L>
-  using as_pair = apply<L, pair_wrapper>;
+  using as_pair = wrap<L, pair_wrapper>;
 }

@@ -10,5 +10,5 @@
 namespace brigand
 {
   template <typename A, typename B>
-  using divides = std::integral_constant<typename A::value_type, A::value / B::value>;
+  struct divides : std::integral_constant < typename A::value_type, A::value / B::value > {};
 }
