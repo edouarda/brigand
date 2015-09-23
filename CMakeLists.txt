@@ -32,6 +32,7 @@ set(BRIGAND_GROUP
 set(ADAPTED_GROUP
     brigand/adapted/pair.hpp
     brigand/adapted/tuple.hpp
+    brigand/adapted/fusion.hpp
     brigand/adapted/variant.hpp)
 
 set(ALGORITHMS_GROUP
@@ -126,6 +127,7 @@ set(test_files
     test/find.cpp
     test/fold.cpp
     test/for_each.cpp
+    test/fusion_test.cpp
     test/identity.cpp
     test/include_test.cpp
     test/integral_list_test.cpp
