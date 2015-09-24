@@ -1,5 +1,5 @@
 
-#include <brigand/comparisons.hpp>
+#include <brigand/functions/comparisons.hpp>
 
 // integral constant tests
 using value_int_one = std::integral_constant<int, 1>;

@@ -6,7 +6,7 @@
 =================================================================================================**/
 #pragma once
 #include <brigand/sequences/make_sequence.hpp>
-#include <brigand/functions/prev.hpp>
+#include <brigand/functions/arithmetic/prev.hpp>
 
 namespace brigand
 {

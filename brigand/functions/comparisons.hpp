@@ -6,8 +6,9 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/types/bool.hpp>
-#include <brigand/functions/not.hpp>
-#include <brigand/functions/and.hpp>
-#include <brigand/functions/xor.hpp>
-#include <brigand/functions/or.hpp>
+#include <brigand/functions/comparison/equal_to.hpp>
+#include <brigand/functions/comparison/greater.hpp>
+#include <brigand/functions/comparison/greater_equal.hpp>
+#include <brigand/functions/comparison/less.hpp>
+#include <brigand/functions/comparison/less_equal.hpp>
+#include <brigand/functions/comparison/not_equal_to.hpp>

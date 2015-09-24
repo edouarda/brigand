@@ -1,7 +1,7 @@
 #include <brigand/algorithms/remove.hpp>
 #include <brigand/sequences/list.hpp>
-#include <brigand/functions/not.hpp>
-#include <brigand/functions/and.hpp>
+#include <brigand/functions/logical/not.hpp>
+#include <brigand/functions/logical/and.hpp>
 #include <brigand/types/integer.hpp>
 #include <brigand/types/bool.hpp>
 #include <brigand/types/placeholders.hpp>

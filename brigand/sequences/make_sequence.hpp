@@ -7,7 +7,7 @@
 #pragma once
 
 #include <brigand/sequences/list.hpp>
-#include <brigand/functions/next.hpp>
+#include <brigand/functions/arithmetic/next.hpp>
 
 namespace brigand
 {

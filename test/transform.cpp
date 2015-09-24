@@ -2,7 +2,7 @@
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/placeholders.hpp>
 #include <brigand/algorithms/transform.hpp>
-#include <brigand/functions/identity.hpp>
+#include <brigand/functions/arithmetic/identity.hpp>
 #include <brigand/functions/if.hpp>
 #include <type_traits>
 #include <utility>
