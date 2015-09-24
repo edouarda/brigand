@@ -6,6 +6,6 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/adapted/integral_list.hpp>
 #include <brigand/adapted/pair.hpp>
-#include <brigand/adapted/fusion.hpp>
 #include <brigand/adapted/tuple.hpp>
