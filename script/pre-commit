@@ -1,0 +1,126 @@
+#!/bin/bash
+
+export LANG=C
+export LC_CTYPE=C
+
+IFS=$'\n'
+color_option=''
+if grep --help 2>&1 | grep -q -e --color
+then
+  color_option='--color=auto'
+fi
+
+if git diff --cached | grep -E '^\+.*'$'\t' > /dev/null
+then
+cat<<END;
+error: tabulations were found in staged changes, which is against Brigand coding standards.
+
+If you *really* know what you are doing, you can force this commit
+with 'git commit --no-verify'
+
+Incriminated changes:
+END
+  for i in `git diff --cached --name-only`
+  do
+    git blame $i \
+  | sed 's@[0-9a-f]\{1,\} (Not Committed Yet [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} \{1,\}[0-9]\{2\}:[0-9]\{2\}:[0-9]\{2\} \{1,\}[+-][0-9]\{1,4\} \{1,\}\([0-9]\{1,\}\)) \(.*\)@'$i':\1: \2@g;tx;d;:x' \
+  | GREP_COLOR='1;37;41' grep -F $'\t' $color_option
+  done
+  exit 1
+fi
+
+if git diff --cached | grep -E '^\+.* +$' > /dev/null
+then
+cat<<END;
+error: spaces at end of lines were found in staged changes, which is against Brigand coding standards.
+
+If you *really* know what you are doing, you can force this commit
+with 'git commit --no-verify'
+
+Incriminated changes:
+END
+  for i in `git diff --cached --name-only`
+  do
+    git blame $i \
+  | sed 's@[0-9a-f]\{1,\} (Not Committed Yet [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} \{1,\}[0-9]\{2\}:[0-9]\{2\}:[0-9]\{2\} \{1,\}[+-][0-9]\{1,4\} \{1,\}\([0-9]\{1,\}\)) \(.*\)@'$i':\1: \2@g;tx;d;:x' \
+  | grep -v -E '^[^:]*:[^:]+: $' | GREP_COLOR='1;37;41' grep -E ' +$' $color_option
+  done
+  exit 1
+fi
+
+if git diff --cached | grep -E '^\+.*'$'\r' > /dev/null
+then
+cat<<END;
+error: carriage returns were found in staged changes, which is against Brigand coding standards.
+
+If you *really* know what you are doing, you can force this commit with 'git commit --no-verify'
+
+Incriminated files:
+END
+  git diff --cached --name-only
+  exit 1
+fi
+
+no_newline=
+for i in `git diff --cached --name-only`
+do
+  if [ -e "$i" ] && [ $(tail -n 1 "$i" | wc -l | tr -d ' ') != 1 ]
+  then
+    no_newline=$no_newline$i$'\n'
+  fi
+done
+if [ "$no_newline" != "" ]
+then
+cat<<END;
+error: no newline at end of file, which is against Brigand coding standards.
+
+If you *really* know what you are doing, you can force this commit
+with 'git commit --no-verify'
+
+Incriminated files:
+END
+  for i in $no_newline
+  do
+    echo $i
+  done
+  exit 1
+fi
+
+if git diff --cached | grep -E $'^\+.*[^\x01-\xBF\xC2-\xF4]' > /dev/null
+then
+cat<<END;
+error: non-UTF-8 characters were found in staged changes, which is against Brigand coding standards.
+
+If you *really* know what you are doing, you can force this commit
+with 'git commit --no-verify'
+
+Incriminated changes:
+END
+  GREP_COLOR='1;37;41' grep -EH $color_option $'[^\x01-\xBF\xC2-\xF4]' `git diff --cached --name-only`
+  exit 1
+fi
+
+no_utf8=
+for i in `git diff --cached --name-only`
+do
+  if [ -e "$i" ] && grep -qI $'\xEF\xBB\xBF' "$i"
+  then
+    no_utf8=$no_utf8$i$'\n'
+  fi
+done
+if [ "$no_utf8" != "" ]
+then
+cat<<END;
+error: UTF-8 BOM found in a file, which is against Brigand coding standards.
+
+If you *really* know what you are doing, you can force this commit
+with 'git commit --no-verify'
+
+Incriminated files:
+END
+  for i in $no_utf8
+  do
+    echo $i
+  done
+  exit 1
+fi

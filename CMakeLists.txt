@@ -21,6 +21,12 @@ else()
     include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 endif()
 
+# Install pre-commit git hook
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy
+                ${PROJECT_SOURCE_DIR}/script/pre-commit
+                ${PROJECT_SOURCE_DIR}/.git/hooks
+               )
+
 set(CMAKE_DEBUG_POSTFIX "d")
 
 set ( BRIGAND_GROUP
