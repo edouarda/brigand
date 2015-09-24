@@ -15,6 +15,6 @@ namespace brigand
 	struct make_integral : std::integral_constant < typename T::value_type, T::value > {};
 	
 	template <typename L>
-	using as_integral_list = transform < make_integral<brigand::_1>, L > ;
+	using as_integral_list = transform <L, make_integral<brigand::_1>> ;
 
 }
