@@ -2,6 +2,8 @@
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/placeholders.hpp>
 #include <brigand/algorithms/transform.hpp>
+#include <brigand/functions/identity.hpp>
+#include <brigand/functions/if.hpp>
 #include <type_traits>
 #include <utility>
 
@@ -72,3 +74,16 @@ static_assert ( std::is_same< brigand::transform<pair_t,list2,list2>
                             >::value
               , "invalid binary transform on list"
               );
+
+
+int x = brigand::transform <
+	brigand::if_<std::is_pointer<brigand::_1>, brigand::identity<brigand::_1>, std::add_pointer < brigand::_1 >>,
+
+
+	//brigand::if_ < ,
+	//,
+	//> ,
+
+	
+		list2
+	> ();
