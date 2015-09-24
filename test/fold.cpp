@@ -23,8 +23,8 @@ using f_ = typename  std::conditional < std::is_floating_point<Element>::value
                                       , State
                                       >::type;
 
-static_assert(brigand::fold<f_,leet_,list0>::type::value  == 1337 , "invalid fold on empty list"    );
-static_assert(brigand::fold<f_,zero_,list1y>::type::value == 1    , "invalid fold on 1 element list");
-static_assert(brigand::fold<f_,zero_,list1n>::type::value == 0    , "invalid fold on 1 element list");
-static_assert(brigand::fold<f_,zero_,list6>::type::value  == 3    , "invalid fold on list"          );
-static_assert(brigand::fold<f_,c88,list12>::type::value   == 100  , "invalid fold with state"       );
+static_assert(brigand::fold<list0, leet_, f_>::type::value == 1337, "invalid fold on empty list");
+static_assert(brigand::fold<list1y, zero_, f_>::type::value == 1, "invalid fold on 1 element list");
+static_assert(brigand::fold<list1n, zero_, f_>::type::value == 0, "invalid fold on 1 element list");
+static_assert(brigand::fold<list6, zero_, f_>::type::value == 3, "invalid fold on list");
+static_assert(brigand::fold<list12, c88, f_>::type::value == 100, "invalid fold with state");
