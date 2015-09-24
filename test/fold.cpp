@@ -2,7 +2,7 @@
 #include <brigand/sequences/list.hpp>
 #include <brigand/algorithms/fold.hpp>
 #include <brigand/types/integer.hpp>
-#include <brigand/functions/next.hpp>
+#include <brigand/functions/arithmetic/next.hpp>
 #include <type_traits>
 #include <utility>
 

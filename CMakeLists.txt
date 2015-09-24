@@ -23,11 +23,14 @@ endif()
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
-set(BRIGAND_GROUP
-    brigand/arithmetic.hpp
-    brigand/brigand.hpp
-    brigand/comparisons.hpp
-    brigand/logical.hpp)
+set ( BRIGAND_GROUP
+      brigand/adapted.hpp
+      brigand/algorithms.hpp
+      brigand/brigand.hpp
+      brigand/functions.hpp
+      brigand/sequences.hpp
+      brigand/types.hpp
+    )
 
 set(ADAPTED_GROUP
     brigand/adapted/fusion.hpp
@@ -56,32 +59,47 @@ set(ALGORITHMS_GROUP
 set(ALGORITHMS_DETAIL_GROUP
     brigand/algorithms/detail/find.hpp)
 
-set(FUNCTIONS_GROUPS
-    brigand/functions/and.hpp
-    brigand/functions/complement.hpp
-    brigand/functions/divides.hpp
-    brigand/functions/equal_to.hpp
-    brigand/functions/greater.hpp
-    brigand/functions/greater_equal.hpp
-    brigand/functions/identity.hpp
-    brigand/functions/if.hpp
-    brigand/functions/apply.hpp
-    brigand/functions/less.hpp
-    brigand/functions/less_equal.hpp
-    brigand/functions/max.hpp
-    brigand/functions/min.hpp
-    brigand/functions/minus.hpp
-    brigand/functions/modulo.hpp
-    brigand/functions/negate.hpp
-    brigand/functions/next.hpp
-    brigand/functions/not.hpp
-    brigand/functions/not_equal_to.hpp
-    brigand/functions/or.hpp
-    brigand/functions/prev.hpp
-    brigand/functions/plus.hpp
-    brigand/functions/repeat.hpp
-    brigand/functions/times.hpp
-    brigand/functions/xor.hpp)
+set ( FUNCTIONS_ARITHMETIC_GROUP
+      brigand/functions/arithmetic/complement.hpp
+      brigand/functions/arithmetic/divides.hpp
+      brigand/functions/arithmetic/identity.hpp
+      brigand/functions/arithmetic/max.hpp>
+      brigand/functions/arithmetic/min.hpp
+      brigand/functions/arithmetic/minus.hpp
+      brigand/functions/arithmetic/modulo.hpp
+      brigand/functions/arithmetic/negate.hpp
+      brigand/functions/arithmetic/next.hpp
+      brigand/functions/arithmetic/plus.hpp
+      brigand/functions/arithmetic/prev.hpp
+      brigand/functions/arithmetic/times.hpp
+    )
+
+set ( FUNCTIONS_COMPARISON_GROUP
+      brigand/functions/comparison/equal_to.hpp
+      brigand/functions/comparison/greater.hpp
+      brigand/functions/comparison/greater_equal.hpp
+      brigand/functions/comparison/less.hpp
+      brigand/functions/comparison/less_equal.hpp
+      brigand/functions/comparison/not_equal_to.hpp
+    )
+
+set ( FUNCTIONS_LOGICAL_GROUP
+      brigand/functions/logical/and.hpp
+      brigand/functions/logical/not.hpp
+      brigand/functions/logical/or.hpp
+      brigand/functions/logical/xor.hpp
+    )
+
+set ( FUNCTIONS_GROUPS
+      brigand/functions/apply.hpp
+      brigand/functions/arithmetic.hpp
+      brigand/functions/comparisons.hpp
+      brigand/functions/if.hpp
+      brigand/functions/lambda.hpp
+      brigand/functions/logical.hpp
+      brigand/functions/repeat.hpp
+      brigand/functions/substitute.hpp
+    )
 
 set(SEQUENCES_GROUP
     brigand/sequences/append.hpp
@@ -113,6 +131,9 @@ source_group(brigand\\adapted FILES ${ADAPTED_GROUP})
 source_group(brigand\\algorithms FILES ${ALGORITHMS_GROUP})
 source_group(brigand\\algorithms\\detail FILES ${ALGORITHMS_DETAIL_GROUP})
 source_group(brigand\\functions FILES ${FUNCTIONS_GROUPS})
+source_group(brigand\\functions\\arithmetic FILES ${FUNCTIONS_ARITHMETIC_GROUP})
+source_group(brigand\\functions\\logical FILES ${FUNCTIONS_LOGICAL_GROUP})
+source_group(brigand\\functions\\comparison FILES ${FUNCTIONS_COMPARISON_GROUP})
 source_group(brigand\\sequences FILES ${SEQUENCES_GROUP})
 source_group(brigand\\types FILES ${TYPES_GROUP})
 source_group(placeholder FILES ${PLACEHOLDER_GROUP})
