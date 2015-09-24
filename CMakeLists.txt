@@ -64,6 +64,7 @@ set(FUNCTIONS_GROUPS
     brigand/functions/greater.hpp
     brigand/functions/greater_equal.hpp
     brigand/functions/identity.hpp
+    brigand/functions/if.hpp
     brigand/functions/apply.hpp
     brigand/functions/less.hpp
     brigand/functions/less_equal.hpp
@@ -137,6 +138,7 @@ set(test_files
     test/include_test.cpp
     test/integral_list_test.cpp
     test/integral_test.cpp
+    test/if_test.cpp
     test/is_placeholder.cpp
     test/is_set_test.cpp
     test/list_test.cpp

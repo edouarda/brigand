@@ -15,14 +15,24 @@ namespace brigand
 {
   namespace detail
   {
-    template<typename T, typename If = void> struct eval_
+    template<typename T, typename If = void> struct eval_;
+
+    template<typename T> struct recurse { using type = T; };
+
+    template<template<class...> class U, typename... T> struct recurse<U<T...>>
     {
-      using type = T;
+      template<typename X> using get = typename eval_<X>::type;
+      using type = U<get<T>...>;
+    };
+
+    template<typename T, typename If> struct eval_
+    {
+      using type = typename recurse<T>::type;
     };
 
     template<typename T> struct eval_<T,typename has_type<typename T::type>::type>
     {
-      using type = typename T::type;
+      using type = typename recurse<T>::type::type;
     };
 
     template<typename F, typename Xs, typename If = void> struct lambda_impl;

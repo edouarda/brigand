@@ -14,7 +14,17 @@ namespace brigand
 
   namespace detail
   {
-    template<typename T, typename List> struct substitute_impl { using type = T; };
+    template<typename T, typename List>
+    struct substitute_impl
+    {
+      using type = T;
+    };
+
+    template<template<class...> class T, typename... Ts, typename List>
+    struct substitute_impl<T<Ts...>,List>
+    {
+      using type = T<typename substitute_impl<Ts,List>::type...>;
+    };
 
     template<std::size_t Index, typename List>
     struct substitute_impl<placeholders<Index>,List>

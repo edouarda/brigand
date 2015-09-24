@@ -2,6 +2,8 @@
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/placeholders.hpp>
 #include <brigand/algorithms/transform.hpp>
+#include <brigand/functions/identity.hpp>
+#include <brigand/functions/if.hpp>
 #include <type_traits>
 #include <utility>
 
@@ -19,6 +21,7 @@ using expect2b  = brigand::list < std::pair<float,float>
                                 , std::pair<char,char>
                                 , std::pair<void*,void*>
                                 >;
+using expect2c  = brigand::list<float*,double*,int*,char*,void*>;
 
 // local functors to apply
 using ptr_t  = std::add_pointer<brigand::_1>;
@@ -69,6 +72,30 @@ static_assert ( std::is_same< brigand::transform<ptr_t,list2>
 
 static_assert ( std::is_same< brigand::transform<pair_t,list2,list2>
                             , expect2b
+                            >::value
+              , "invalid binary transform on list"
+              );
+
+static_assert ( std::is_same< brigand::transform<pair_t,list2,list2>
+                            , expect2b
+                            >::value
+              , "invalid binary transform on list"
+              );
+
+static_assert (std::is_same < brigand::transform < std::add_pointer<std::add_pointer<std::add_pointer<brigand::_1>>>,
+			brigand::list<void, char, int>>,
+			brigand::list<void ***, char ***, int ***>>::value
+, "invalid transform on list"
+);
+
+
+static_assert ( std::is_same< brigand::transform< brigand::if_< std::is_pointer<brigand::_1>
+                                                              , brigand::identity<brigand::_1>
+                                                              , std::add_pointer < brigand::_1 >
+                                                              >
+                                                , list2
+                                                >
+                            , expect2c
                             >::value
               , "invalid binary transform on list"
               );
