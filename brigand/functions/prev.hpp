@@ -10,5 +10,5 @@
 namespace brigand
 {
   template <typename A>
-  using prev = std::integral_constant<typename A::value_type, A::value-1>;
+  struct prev : std::integral_constant < typename A::value_type, A::value - 1 > {};
 }
