@@ -1,5 +1,5 @@
 #include <brigand/sequences/range.hpp>
-#include <brigand/functions/prev.hpp>
+#include <brigand/functions/arithmetic/prev.hpp>
 #include <brigand/types/integer.hpp>
 #include <brigand/adapted/integral_list.hpp>
 

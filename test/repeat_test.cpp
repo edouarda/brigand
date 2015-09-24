@@ -1,5 +1,5 @@
 #include <brigand/functions/repeat.hpp>
-#include <brigand/functions/next.hpp>
+#include <brigand/functions/arithmetic/next.hpp>
 #include <brigand/types/integer.hpp>
 
 static_assert(brigand::repeat<brigand::next, brigand::int_<0>, brigand::int_<0>>::value == 0, "invalid result");

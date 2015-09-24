@@ -1,5 +1,5 @@
 
-#include <brigand/logical.hpp>
+#include <brigand/functions/logical.hpp>
 
 static_assert(brigand::not_<brigand::true_>::value == false, "invalid not result");
 static_assert(brigand::not_<brigand::false_>::value == true, "invalid not result");
