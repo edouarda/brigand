@@ -6,7 +6,14 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/adapted/integral_list.hpp>
-#include <brigand/adapted/list.hpp>
-#include <brigand/adapted/pair.hpp>
-#include <brigand/adapted/tuple.hpp>
+#include <brigand/algorithms/wrap.hpp>
+#include <brigand/sequences/list.hpp>
+
+namespace brigand
+{
+  template <typename... T>
+  using list_wrapper = typename brigand::list<T...>;
+
+  template <typename L>
+  using as_list = wrap<L, list_wrapper>;
+}
