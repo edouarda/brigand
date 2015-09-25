@@ -1,8 +1,11 @@
 
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/placeholders.hpp>
+#include <brigand/adapted/integral_list.hpp>
 #include <brigand/algorithms/transform.hpp>
 #include <brigand/functions/arithmetic/identity.hpp>
+#include <brigand/functions/arithmetic/plus.hpp>
+#include <brigand/functions/arithmetic/minus.hpp>
 #include <brigand/functions/if.hpp>
 #include <type_traits>
 #include <utility>
@@ -101,3 +104,13 @@ static_assert ( std::is_same< brigand::transform<list2, brigand::if_< std::is_po
               , "invalid binary transform on list"
               );
 			  
+using sum_list = brigand::integral_list<int, 1, 2, 3 > ;
+
+static_assert (std::is_same < brigand::as_integral_list<brigand::transform<sum_list, sum_list, brigand::plus<brigand::_1, brigand::_2>>>,
+    brigand::integral_list<int, 2, 4, 6 >> ::value, "invalid transform sum");
+
+static_assert (std::is_same < brigand::as_integral_list<brigand::transform<sum_list, brigand::plus<brigand::_1, std::integral_constant<int, 2>>>>,
+    brigand::integral_list<int, 3, 4, 5 >> ::value, "invalid transform sum");
+
+static_assert (std::is_same < brigand::as_integral_list<brigand::transform<sum_list, brigand::minus<std::integral_constant<int, 10>, brigand::_1>>>,
+    brigand::integral_list<int, 9, 8, 7 >> ::value, "invalid transform sum");
