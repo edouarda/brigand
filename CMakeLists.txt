@@ -98,6 +98,7 @@ set ( FUNCTIONS_LOGICAL_GROUP
 
 set ( FUNCTIONS_LAMBDA_GROUP
       brigand/functions/lambda/lambda.hpp
+      brigand/functions/lambda/quote.hpp
     )
 
 set ( FUNCTIONS_GROUPS
@@ -179,6 +180,7 @@ set(test_files
     test/main.cpp
     test/pair_test.cpp
     test/predicate_reduction_test.cpp
+    test/quote.cpp
     test/range_test.cpp
     test/remove_test.cpp
     test/repeat_test.cpp
