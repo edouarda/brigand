@@ -7,34 +7,14 @@
 #pragma once
 
 #include <brigand/types/bool.hpp>
-#include <brigand/sequences/list.hpp>
 #include <brigand/types/placeholders.hpp>
 
 namespace brigand
 {
-  template<typename... T> struct is_placeholder;
+  template<typename T> struct is_placeholder : brigand::false_ {};
 
-  template<typename T> struct is_placeholder<T> : brigand::false_ {};
-
-  template<template<class...>class T,typename... Ts>
-  struct is_placeholder<T<Ts...>> : is_placeholder<Ts...> {};
+  //template<typename T> struct is_placeholder<protect<T>> : brigand::false_ {};
 
   template<std::size_t I>
   struct is_placeholder< brigand::placeholders<I>> : brigand::true_ {};
-
-  template <bool...> struct checks_ {};
-
-  template<typename T, typename U, typename... Ts>
-  struct is_placeholder<T,U,Ts...>
-        : bool_ < !std::is_same < checks_ < true
-                                          , !is_placeholder<T>::value, !is_placeholder<U>::value
-                                          , !is_placeholder<Ts>::value...
-                                          >
-                                , checks_ < !is_placeholder<T>::value, !is_placeholder<U>::value
-                                          , !is_placeholder<Ts>::value...
-                                          , true
-                                          >
-                                >::value
-                >
-  {};
 }
