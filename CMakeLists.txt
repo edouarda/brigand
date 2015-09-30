@@ -96,12 +96,15 @@ set ( FUNCTIONS_LOGICAL_GROUP
       brigand/functions/logical/xor.hpp
     )
 
+set ( FUNCTIONS_LAMBDA_GROUP
+      brigand/functions/lambda/lambda.hpp
+    )
+
 set ( FUNCTIONS_GROUPS
       brigand/functions/apply.hpp
       brigand/functions/arithmetic.hpp
       brigand/functions/comparisons.hpp
       brigand/functions/if.hpp
-      brigand/functions/lambda.hpp
       brigand/functions/logical.hpp
       brigand/functions/repeat.hpp
       brigand/functions/substitute.hpp
@@ -138,6 +141,7 @@ source_group(brigand\\algorithms FILES ${ALGORITHMS_GROUP})
 source_group(brigand\\algorithms\\detail FILES ${ALGORITHMS_DETAIL_GROUP})
 source_group(brigand\\functions FILES ${FUNCTIONS_GROUPS})
 source_group(brigand\\functions\\arithmetic FILES ${FUNCTIONS_ARITHMETIC_GROUP})
+source_group(brigand\\functions\\lambda FILES ${FUNCTIONS_LAMBDA_GROUP})
 source_group(brigand\\functions\\logical FILES ${FUNCTIONS_LOGICAL_GROUP})
 source_group(brigand\\functions\\comparison FILES ${FUNCTIONS_COMPARISON_GROUP})
 source_group(brigand\\sequences FILES ${SEQUENCES_GROUP})
