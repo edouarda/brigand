@@ -107,6 +107,7 @@ set ( FUNCTIONS_GROUPS
       brigand/functions/arithmetic.hpp
       brigand/functions/comparisons.hpp
       brigand/functions/if.hpp
+      brigand/functions/eval_if.hpp
       brigand/functions/logical.hpp
       brigand/functions/repeat.hpp
       brigand/functions/substitute.hpp
@@ -173,6 +174,7 @@ set(test_files
     test/integral_list_test.cpp
     test/integral_test.cpp
     test/if_test.cpp
+    test/eval_if_test.cpp
     test/is_placeholder.cpp
     test/is_set_test.cpp
     test/list_test.cpp
