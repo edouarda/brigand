@@ -6,7 +6,17 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/functions/lambda/bind.hpp>
-#include <brigand/functions/lambda/quote.hpp>
 #include <brigand/functions/lambda/lambda.hpp>
-#include <brigand/functions/lambda/protect.hpp>
+
+namespace brigand
+{
+  template<class T> struct protect
+  {
+    using type = T;
+  };
+
+  template<class F> struct lambda<protect<F>>
+  {
+    template<class... X> struct apply { using type = F; };
+  };
+}
