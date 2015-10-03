@@ -13,8 +13,6 @@ namespace brigand
 {
   template<typename T> struct is_placeholder : brigand::false_ {};
 
-  //template<typename T> struct is_placeholder<protect<T>> : brigand::false_ {};
-
   template<std::size_t I>
   struct is_placeholder< brigand::placeholders<I>> : brigand::true_ {};
 }
