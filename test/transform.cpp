@@ -1,6 +1,6 @@
 
 #include <brigand/sequences/list.hpp>
-#include <brigand/types/placeholders.hpp>
+#include <brigand/types/args.hpp>
 #include <brigand/adapted/integral_list.hpp>
 #include <brigand/algorithms/transform.hpp>
 #include <brigand/functions/arithmetic/identity.hpp>

@@ -4,7 +4,7 @@
 #include <brigand/functions/logical/and.hpp>
 #include <brigand/types/integer.hpp>
 #include <brigand/types/bool.hpp>
-#include <brigand/types/placeholders.hpp>
+#include <brigand/types/args.hpp>
 
 using remove_test_list = brigand::list<int, bool, int, char, float, double>;
 using remove_test_int_list = brigand::integral_list<int,1,0,0,2>;

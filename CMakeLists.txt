@@ -144,7 +144,7 @@ set(TYPES_GROUP
     brigand/types/integer.hpp
     brigand/types/inherit.hpp
     brigand/types/is_placeholder.hpp
-    brigand/types/placeholders.hpp
+    brigand/types/args.hpp
     brigand/types/no_such_type.hpp
     brigand/types/type.hpp
 )
@@ -177,6 +177,7 @@ add_library(brigand
 
 set(test_files
     test/apply.cpp
+    test/args.cpp
     test/always.cpp
     test/bind.cpp
     test/comparison_test.cpp

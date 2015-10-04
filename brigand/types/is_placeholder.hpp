@@ -7,12 +7,12 @@
 #pragma once
 
 #include <brigand/types/bool.hpp>
-#include <brigand/types/placeholders.hpp>
+#include <brigand/types/args.hpp>
 
 namespace brigand
 {
   template<typename T> struct is_placeholder : brigand::false_ {};
 
   template<std::size_t I>
-  struct is_placeholder< brigand::placeholders<I>> : brigand::true_ {};
+  struct is_placeholder< brigand::args<I>> : brigand::true_ {};
 }

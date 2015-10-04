@@ -1,7 +1,7 @@
 
 #include <utility>
 
-#include <brigand/types/placeholders.hpp>
+#include <brigand/types/args.hpp>
 #include <brigand/types/is_placeholder.hpp>
 #include <brigand/types/has_placeholders.hpp>
 

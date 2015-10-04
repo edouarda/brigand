@@ -10,7 +10,7 @@
 
 namespace brigand
 {
-  template<std::size_t Index> struct placeholders;
+  template<std::size_t Index> struct args;
 
   namespace detail
   {
@@ -27,7 +27,7 @@ namespace brigand
     };
 
     template<std::size_t Index, typename List>
-    struct substitute_impl<placeholders<Index>,List>
+    struct substitute_impl<args<Index>,List>
     {
       using type = brigand::at_c<List,Index>;
     };
