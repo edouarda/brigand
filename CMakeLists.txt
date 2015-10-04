@@ -138,9 +138,11 @@ set(SEQUENCES_GROUP
 
 set(TYPES_GROUP
     brigand/types/bool.hpp
+    brigand/types/empty_base.hpp
     brigand/types/has_placeholders.hpp
     brigand/types/has_type.hpp
     brigand/types/integer.hpp
+    brigand/types/inherit.hpp
     brigand/types/is_placeholder.hpp
     brigand/types/placeholders.hpp
     brigand/types/no_such_type.hpp
@@ -186,6 +188,7 @@ set(test_files
     test/include_test.cpp
     test/integral_list_test.cpp
     test/integral_test.cpp
+    test/inherit.cpp
     test/if_test.cpp
     test/is_placeholder.cpp
     test/is_set_test.cpp
