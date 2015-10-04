@@ -101,6 +101,7 @@ set ( FUNCTIONS_LAMBDA_GROUP
       brigand/functions/lambda/lambda.hpp
       brigand/functions/lambda/protect.hpp
       brigand/functions/lambda/quote.hpp
+      brigand/functions/lambda/unpack.hpp
     )
 
 set ( FUNCTIONS_GROUPS
@@ -193,6 +194,7 @@ set(test_files
     test/set_test.cpp
     test/transform.cpp
     test/tuple_test.cpp
+    test/unpack.cpp
   )
 
 if(Boost_FOUND)
