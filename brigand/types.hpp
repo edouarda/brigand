@@ -7,6 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 #pragma once
 
 #include <brigand/types/bool.hpp>
+#include <brigand/types/empty_base.hpp>
 #include <brigand/types/has_placeholders.hpp>
 #include <brigand/types/has_type.hpp>
 #include <brigand/types/integer.hpp>
