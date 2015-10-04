@@ -105,6 +105,10 @@ set ( FUNCTIONS_LAMBDA_GROUP
       brigand/functions/lambda/unpack.hpp
     )
 
+set ( FUNCTIONS_MISC_GROUP
+      brigand/functions/lambda/sizeof.hpp
+    )
+
 set ( FUNCTIONS_GROUPS
       brigand/functions/apply.hpp
       brigand/functions/arithmetic.hpp
@@ -148,6 +152,7 @@ source_group(brigand\\functions FILES ${FUNCTIONS_GROUPS})
 source_group(brigand\\functions\\arithmetic FILES ${FUNCTIONS_ARITHMETIC_GROUP})
 source_group(brigand\\functions\\lambda FILES ${FUNCTIONS_LAMBDA_GROUP})
 source_group(brigand\\functions\\logical FILES ${FUNCTIONS_LOGICAL_GROUP})
+source_group(brigand\\functions\\misc FILES ${FUNCTIONS_MISC_GROUP})
 source_group(brigand\\functions\\comparison FILES ${FUNCTIONS_COMPARISON_GROUP})
 source_group(brigand\\sequences FILES ${SEQUENCES_GROUP})
 source_group(brigand\\types FILES ${TYPES_GROUP})
@@ -194,6 +199,7 @@ set(test_files
     test/reverse_test.cpp
     test/select.cpp
     test/set_test.cpp
+    test/sizeof.cpp
     test/transform.cpp
     test/tuple_test.cpp
     test/unpack.cpp
