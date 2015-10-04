@@ -97,6 +97,7 @@ set ( FUNCTIONS_LOGICAL_GROUP
     )
 
 set ( FUNCTIONS_LAMBDA_GROUP
+      brigand/functions/lambda/always.hpp
       brigand/functions/lambda/bind.hpp
       brigand/functions/lambda/lambda.hpp
       brigand/functions/lambda/protect.hpp
@@ -164,6 +165,7 @@ add_library(brigand
 
 set(test_files
     test/apply.cpp
+    test/always.cpp
     test/bind.cpp
     test/comparison_test.cpp
     test/find.cpp
