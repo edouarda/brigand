@@ -7,7 +7,7 @@
 #pragma once
 
 #include <brigand/sequences/clear.hpp>
-#include <brigand/functions/apply.hpp>
+#include <brigand/functions/lambda/apply.hpp>
 #include <type_traits>
 
 namespace brigand

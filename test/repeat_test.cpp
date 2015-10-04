@@ -1,4 +1,4 @@
-#include <brigand/functions/repeat.hpp>
+#include <brigand/functions/misc/repeat.hpp>
 #include <brigand/functions/arithmetic/next.hpp>
 #include <brigand/types/integer.hpp>
 

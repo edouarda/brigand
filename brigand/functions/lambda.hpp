@@ -6,9 +6,10 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/functions/lambda/always.hpp>
+#include <brigand/functions/lambda/apply.hpp>
 #include <brigand/functions/lambda/bind.hpp>
 #include <brigand/functions/lambda/quote.hpp>
 #include <brigand/functions/lambda/lambda.hpp>
 #include <brigand/functions/lambda/protect.hpp>
+#include <brigand/functions/lambda/substitute.hpp>
 #include <brigand/functions/lambda/unpack.hpp>

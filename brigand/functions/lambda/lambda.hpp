@@ -9,7 +9,7 @@
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/has_type.hpp>
 #include <brigand/types/has_placeholders.hpp>
-#include <brigand/functions/substitute.hpp>
+#include <brigand/functions/lambda/substitute.hpp>
 
 namespace brigand
 {

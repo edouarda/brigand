@@ -6,4 +6,6 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/functions/misc/always.hpp>
+#include <brigand/functions/misc/repeat.hpp>
 #include <brigand/functions/misc/sizeof.hpp>

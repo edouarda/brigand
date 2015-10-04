@@ -6,10 +6,8 @@ Distributed under the Boost Software License, Version 1.0.
 =================================================================================================**/
 #pragma once
 
-#include <brigand/functions/apply.hpp>
 #include <brigand/functions/arithmetic.hpp>
 #include <brigand/functions/comparisons.hpp>
 #include <brigand/functions/lambda.hpp>
 #include <brigand/functions/logical.hpp>
 #include <brigand/functions/misc.hpp>
-#include <brigand/functions/repeat.hpp>

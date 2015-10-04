@@ -7,7 +7,7 @@
 #pragma once
 
 #include <brigand/sequences/at.hpp>
-#include <brigand/functions/substitute.hpp>
+#include <brigand/functions/lambda/substitute.hpp>
 
 namespace brigand
 {
