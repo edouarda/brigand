@@ -13,7 +13,7 @@ namespace brigand
 {
   template <typename A>
   struct complement : std::integral_constant < typename A::value_type
-	  , typename A::value_type(~A::value)
+    , typename A::value_type(~A::value)
   > {};
 
   template <std::size_t Index>

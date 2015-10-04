@@ -11,7 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 namespace brigand
 {
 
-	template <typename Condition, typename A, typename B>
-	struct if_ : std::conditional<Condition::value, A, B> {};
+  template <typename Condition, typename A, typename B>
+  struct if_ : std::conditional<Condition::value, A, B> {};
 
 }

@@ -85,11 +85,11 @@ static_assert (std::is_same< brigand::transform<list2, list2, pair_t>
               , "invalid binary transform on list"
               );
 
-static_assert (std::is_same < 
-					brigand::transform <brigand::list<void, char, int>, 
-										std::add_pointer<std::add_pointer<std::add_pointer<brigand::_1>>>
-										>,			
-			brigand::list<void ***, char ***, int ***>>::value
+static_assert (std::is_same <
+          brigand::transform <brigand::list<void, char, int>,
+                    std::add_pointer<std::add_pointer<std::add_pointer<brigand::_1>>>
+                    >,
+      brigand::list<void ***, char ***, int ***>>::value
 , "invalid transform on list"
 );
 
@@ -103,7 +103,7 @@ static_assert ( std::is_same< brigand::transform<list2, brigand::if_< std::is_po
                             >::value
               , "invalid binary transform on list"
               );
-			  
+
 using sum_list = brigand::integral_list<int, 1, 2, 3 > ;
 
 static_assert (std::is_same < brigand::as_integral_list<brigand::transform<sum_list, sum_list, brigand::plus<brigand::_1, brigand::_2>>>,

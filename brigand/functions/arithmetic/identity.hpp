@@ -11,6 +11,6 @@ namespace brigand
   template<class T>
   struct identity
   {
-	  using type = T;
+    using type = T;
   };
 }

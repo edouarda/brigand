@@ -19,7 +19,7 @@ namespace detail
 
     template< int Index,
             template<class...> class L1, class First, class... T,
-	    template<class...> class L2, class... U >
+      template<class...> class L2, class... U >
     struct erase_c_impl<Index, L1<First, T...>, L2<U...>>
     {
         using type = typename erase_c_impl<Index-1, L1<T...>, L2<U..., First>>::type;
