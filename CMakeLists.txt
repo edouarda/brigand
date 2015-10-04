@@ -136,7 +136,10 @@ set(SEQUENCES_GROUP
 
 set(TYPES_GROUP
     brigand/types/bool.hpp
+    brigand/types/has_placeholders.hpp
+    brigand/types/has_type.hpp
     brigand/types/integer.hpp
+    brigand/types/is_placeholder.hpp
     brigand/types/placeholders.hpp
     brigand/types/no_such_type.hpp
     brigand/types/type.hpp
