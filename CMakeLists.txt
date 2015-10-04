@@ -97,7 +97,8 @@ set ( FUNCTIONS_LOGICAL_GROUP
     )
 
 set ( FUNCTIONS_LAMBDA_GROUP
-      brigand/functions/lambda/always.hpp
+      brigand/functions/lambda/substitute.hpp
+      brigand/functions/lambda/apply.hpp
       brigand/functions/lambda/bind.hpp
       brigand/functions/lambda/lambda.hpp
       brigand/functions/lambda/protect.hpp
@@ -106,17 +107,18 @@ set ( FUNCTIONS_LAMBDA_GROUP
     )
 
 set ( FUNCTIONS_MISC_GROUP
-      brigand/functions/lambda/sizeof.hpp
+      brigand/functions/misc/always.hpp
+      brigand/functions/misc/sizeof.hpp
+      brigand/functions/misc/repeat.hpp
     )
 
 set ( FUNCTIONS_GROUPS
-      brigand/functions/apply.hpp
       brigand/functions/arithmetic.hpp
       brigand/functions/comparisons.hpp
       brigand/functions/if.hpp
       brigand/functions/logical.hpp
-      brigand/functions/repeat.hpp
-      brigand/functions/substitute.hpp
+      brigand/functions/lambda.hpp
+      brigand/functions/misc.hpp
     )
 
 set(SEQUENCES_GROUP
