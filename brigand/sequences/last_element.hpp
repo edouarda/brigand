@@ -19,7 +19,7 @@ namespace brigand { namespace detail
   template <template <class...> class L, class Last>
   struct without_last_element<L, Last>
   {
-    using type = empty_list;
+    using type = empty_sequence;
   };
 
   // Provides fast-lane for 1-8 elements

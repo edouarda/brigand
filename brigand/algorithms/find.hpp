@@ -24,10 +24,10 @@ namespace brigand
 
   // Utility meta-function to check if nothing was found
   template<typename Sequence, typename Predicate = detail::non_null>
-  using not_found = typename std::is_same<find<Sequence,Predicate>,empty_list>::type;
+  using not_found = typename std::is_same<find<Sequence,Predicate>,empty_sequence>::type;
 
   // Utility meta-function to check if something was found
   // Note: MSVC doesn't like the factoring with not found
   template<typename Sequence, typename Predicate = detail::non_null>
-  using found = bool_<!std::is_same<find<Sequence,Predicate>,empty_list>::value>;
+  using found = bool_<!std::is_same<find<Sequence,Predicate>,empty_sequence>::value>;
 }

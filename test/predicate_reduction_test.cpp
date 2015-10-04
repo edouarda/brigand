@@ -4,7 +4,7 @@
 #include <brigand/algorithms/none.hpp>
 #include <type_traits>
 
-static_assert ( brigand::none< brigand::empty_list>::value
+static_assert ( brigand::none< brigand::empty_sequence>::value
               , "invalid none on empty list"
               );
 
@@ -18,7 +18,7 @@ static_assert ( brigand::none < brigand::list<int,int,char>
               , "invalid none on list"
               );
 
-static_assert ( !brigand::any<brigand::empty_list>::value
+static_assert ( !brigand::any<brigand::empty_sequence>::value
               , "invalid any on empty list"
               );
 
@@ -32,7 +32,7 @@ static_assert ( brigand::any< brigand::list<int,int,double,char>
               , "invalid any on list"
               );
 
-static_assert ( brigand::all<brigand::empty_list>::value
+static_assert ( brigand::all<brigand::empty_sequence>::value
               , "invalid all on empty list"
               );
 

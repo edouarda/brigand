@@ -18,5 +18,5 @@ namespace brigand
   using integral_list = brigand::list< std::integral_constant<T,Values>...>;
 
   // Empty list
-  using empty_list = brigand::list<>;
+  using empty_sequence = brigand::list<>;
 }

@@ -7,16 +7,16 @@
 #include <brigand/sequences/at.hpp>
 
 // list tests
-static_assert(!brigand::detail::has_at_method<brigand::empty_list>::value, "wrongly detected at method");
+static_assert(!brigand::detail::has_at_method<brigand::empty_sequence>::value, "wrongly detected at method");
 
-static_assert(brigand::size<brigand::empty_list>::value == 0, "invalid empty list size");
+static_assert(brigand::size<brigand::empty_sequence>::value == 0, "invalid empty list size");
 
 using single_int_list = brigand::list<int>;
 
 static_assert(brigand::size<single_int_list>::value == 1, "invalid single list size");
 
-static_assert(std::is_same<brigand::push_back<brigand::empty_list, int>, single_int_list>::value, "invalid push back int");
-static_assert(std::is_same<brigand::push_front<brigand::empty_list, int>, single_int_list>::value, "invalid push back int");
+static_assert(std::is_same<brigand::push_back<brigand::empty_sequence, int>, single_int_list>::value, "invalid push back int");
+static_assert(std::is_same<brigand::push_front<brigand::empty_sequence, int>, single_int_list>::value, "invalid push back int");
 
 using int_bool_list = brigand::list<int, bool>;
 
@@ -35,11 +35,11 @@ static_assert(std::is_same<brigand::back<int_bool_bool_int_list>, int>::value, "
 
 static_assert(std::is_same<brigand::pop_front<int_bool_list>, brigand::list<bool>>::value, "invalid pop front result");
 static_assert(std::is_same<brigand::pop_front<int_bool_bool_int_list>, brigand::list<bool, bool, int>>::value, "invalid pop front result");
-static_assert(std::is_same<brigand::pop_front<single_int_list>, brigand::empty_list>::value, "invalid pop front result");
+static_assert(std::is_same<brigand::pop_front<single_int_list>, brigand::empty_sequence>::value, "invalid pop front result");
 
 static_assert(std::is_same<brigand::pop_back<int_bool_list>, brigand::list<int>>::value, "invalid pop back result");
 static_assert(std::is_same<brigand::pop_back<int_bool_bool_int_list>, brigand::list<int, bool, bool>>::value, "invalid pop back result");
-static_assert(std::is_same<brigand::pop_back<single_int_list>, brigand::empty_list>::value, "invalid pop back result");
+static_assert(std::is_same<brigand::pop_back<single_int_list>, brigand::empty_sequence>::value, "invalid pop back result");
 
 static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 0>, int>::value,  "invalid at result");
 static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 1>, bool>::value, "invalid at result");

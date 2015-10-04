@@ -16,7 +16,7 @@ namespace brigand
 
   template <> struct append_impl<>
   {
-    using type = brigand::empty_list;
+    using type = brigand::empty_sequence;
   };
 
   template<template<class...> class L, class... T>

@@ -4,7 +4,7 @@
 #include <brigand/sequences/list.hpp>
 
 
-static_assert(std::is_same<brigand::empty_list, brigand::reverse<brigand::empty_list>>::value, "reversing an empty list should return the same empty list");
+static_assert(std::is_same<brigand::empty_sequence, brigand::reverse<brigand::empty_sequence>>::value, "reversing an empty list should return the same empty list");
 
 using one_list = brigand::list<char>;
 
