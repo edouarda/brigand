@@ -7,6 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 #pragma once
 
 #include <brigand/functions/arithmetic.hpp>
+#include <brigand/functions/bitwise.hpp>
 #include <brigand/functions/comparisons.hpp>
 #include <brigand/functions/lambda.hpp>
 #include <brigand/functions/logical.hpp>

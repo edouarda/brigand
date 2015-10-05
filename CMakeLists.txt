@@ -80,6 +80,14 @@ set ( FUNCTIONS_ARITHMETIC_GROUP
       brigand/functions/arithmetic/times.hpp
     )
 
+set ( FUNCTIONS_BITWISE_GROUP
+      brigand/functions/bitwise/bitand.hpp
+      brigand/functions/bitwise/bitor.hpp
+      brigand/functions/bitwise/bitxor.hpp
+      brigand/functions/bitwise/shift_left.hpp
+      brigand/functions/bitwise/shift_right.hpp
+    )
+
 set ( FUNCTIONS_COMPARISON_GROUP
       brigand/functions/comparison/equal_to.hpp
       brigand/functions/comparison/greater.hpp
@@ -114,6 +122,7 @@ set ( FUNCTIONS_MISC_GROUP
 
 set ( FUNCTIONS_GROUPS
       brigand/functions/arithmetic.hpp
+      brigand/functions/bitwise.hpp
       brigand/functions/comparisons.hpp
       brigand/functions/if.hpp
       brigand/functions/eval_if.hpp
@@ -158,6 +167,7 @@ source_group(brigand\\algorithms FILES ${ALGORITHMS_GROUP})
 source_group(brigand\\algorithms\\detail FILES ${ALGORITHMS_DETAIL_GROUP})
 source_group(brigand\\functions FILES ${FUNCTIONS_GROUPS})
 source_group(brigand\\functions\\arithmetic FILES ${FUNCTIONS_ARITHMETIC_GROUP})
+source_group(brigand\\functions\\bitwise FILES ${FUNCTIONS_BITWISE_GROUP})
 source_group(brigand\\functions\\lambda FILES ${FUNCTIONS_LAMBDA_GROUP})
 source_group(brigand\\functions\\logical FILES ${FUNCTIONS_LOGICAL_GROUP})
 source_group(brigand\\functions\\misc FILES ${FUNCTIONS_MISC_GROUP})
@@ -181,6 +191,7 @@ set(test_files
     test/args.cpp
     test/always.cpp
     test/bind.cpp
+    test/bitwise_test.cpp
     test/comparison_test.cpp
     test/find.cpp
     test/fold.cpp
