@@ -21,7 +21,7 @@ namespace brigand
     inline operator value_type() const
     {
       value_type that;
-      std::memcpy(&that, &parent::value, sizeof value_type);
+      std::memcpy(&that, &parent::value, sizeof(value_type));
       return that;
     }
   };
