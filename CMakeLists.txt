@@ -157,6 +157,7 @@ set(TYPES_GROUP
     brigand/types/args.hpp
     brigand/types/no_such_type.hpp
     brigand/types/type.hpp
+    brigand/types/real.hpp
 )
 
 set(PLACEHOLDER_GROUP brigand/nothing.cpp)
@@ -216,6 +217,7 @@ set(test_files
     test/protect.cpp
     test/quote.cpp
     test/range_test.cpp
+    test/real.cpp
     test/remove_test.cpp
     test/repeat_test.cpp
     test/reverse_test.cpp
