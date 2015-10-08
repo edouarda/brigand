@@ -9,6 +9,8 @@ Distributed under the Boost Software License, Version 1.0.
 #include <brigand/functions/arithmetic.hpp>
 #include <brigand/functions/bitwise.hpp>
 #include <brigand/functions/comparisons.hpp>
+#include <brigand/functions/eval_if.hpp>
+#include <brigand/functions/if.hpp>
 #include <brigand/functions/lambda.hpp>
 #include <brigand/functions/logical.hpp>
 #include <brigand/functions/misc.hpp>
