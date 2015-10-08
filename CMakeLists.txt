@@ -27,6 +27,14 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/.git/hooks
                )
 
+add_custom_target(standalone
+    COMMAND ${CMAKE_COMMAND} -E remove ${PROJECT_SOURCE_DIR}/standalone/brigand.hpp
+    COMMAND python ${PROJECT_SOURCE_DIR}/script/embed.py -I./ --include-match=brigand/* brigand/brigand.hpp -o standalone/brigand.hpp
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMENT "Building standalone header file"
+    VERBATIM
+)
+
 set(CMAKE_DEBUG_POSTFIX "d")
 
 set ( BRIGAND_GROUP

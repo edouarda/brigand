@@ -7,6 +7,7 @@
 #pragma once
 
 #include <brigand/algorithms/wrap.hpp>
+#include <boost/variant.hpp>
 
 namespace brigand
 {

@@ -10,3 +10,8 @@
 #include <brigand/adapted/list.hpp>
 #include <brigand/adapted/pair.hpp>
 #include <brigand/adapted/tuple.hpp>
+
+#if !defined(BRIGAND_NO_BOOST_SUPPORT)
+#include <brigand/adapted/fusion.hpp>
+#include <brigand/adapted/variant.hpp>
+#endif
