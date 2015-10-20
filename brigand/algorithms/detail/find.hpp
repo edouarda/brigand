@@ -33,7 +33,7 @@ namespace brigand { namespace detail
 
   // Stop ! We found it
   template<typename Predicate, class Sequence>
-  struct find_if_shortcut<true_,Predicate,Sequence>
+  struct find_if_shortcut<std::true_type,Predicate,Sequence>
   {
     using type = Sequence;
   };
@@ -43,7 +43,7 @@ namespace brigand { namespace detail
           , template<class...> class Sequence
           , typename H, typename... T
           >
-  struct  find_if_shortcut<false_,Predicate, Sequence<H,T...>>
+  struct  find_if_shortcut<std::false_type,Predicate, Sequence<H,T...>>
         : find_if_impl<Predicate,Sequence<T...>>
   {};
 } }

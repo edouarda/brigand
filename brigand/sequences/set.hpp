@@ -31,10 +31,10 @@ namespace detail
     struct set_impl
     {
         template <typename U, typename = decltype(static_cast<type_<U>>(make_set<T...>()))>
-        static true_ contains(type_<U>);
+        static std::true_type contains(type_<U>);
 
         template <typename U>
-        static false_ contains(U);
+        static std::false_type contains(U);
 
     private:
         // Visual Studio helper
@@ -57,10 +57,10 @@ namespace detail
 
     private:
         template<class K>
-        static set_impl<T..., K> insert_impl(false_);
+        static set_impl<T..., K> insert_impl(std::false_type);
 
         template<class K>
-        static set_impl insert_impl(true_);
+        static set_impl insert_impl(std::true_type);
 
     public:
         template<class K>

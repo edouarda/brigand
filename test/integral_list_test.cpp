@@ -11,18 +11,18 @@ static_assert(!brigand::detail::has_at_method<brigand::empty_sequence>::value, "
 
 static_assert(brigand::size<brigand::empty_sequence>::value == 0, "invalid empty list size");
 
-using list1 = brigand::integral_list<int,42>;
+using list1 = brigand::integral_list<std::uint32_t,42>;
 
 static_assert(brigand::size<list1>::value == 1, "invalid single value list size");
 
-using n_ = brigand::int_<42>;
-using m_ = brigand::int_<69>;
+using n_ = brigand::uint32_t<42>;
+using m_ = brigand::uint32_t<69>;
 
 static_assert(std::is_same<brigand::push_back<brigand::empty_sequence, n_>, list1>::value, "invalid push back int");
 static_assert(std::is_same<brigand::push_front<brigand::empty_sequence, n_>, list1>::value, "invalid push back int");
 
-using list2 = brigand::integral_list<int,69>;
-using listref = brigand::integral_list<int,42,69>;
+using list2 = brigand::integral_list<std::uint32_t,69>;
+using listref = brigand::integral_list<std::uint32_t,42,69>;
 
 static_assert(std::is_same<brigand::push_back<list1, m_>, listref>::value, "invalid push back result");
 static_assert(std::is_same<brigand::push_front<list2, n_>, listref>::value, "invalid push front result");

@@ -16,9 +16,9 @@ static_assert(brigand::contains<set_test, int>::value, "should be bool");
 static_assert(brigand::contains<set_test, char>::value, "should be int");
 static_assert(!brigand::contains<set_test, bool>::value, "should be not found");
 
-static_assert(std::is_same<brigand::has_key<set_test, bool>, brigand::false_>::value,   "invalid has_key result");
-static_assert(std::is_same<brigand::has_key<set_test, int>, brigand::true_>::value,   "invalid has_key result");
-static_assert(std::is_same<brigand::has_key<set_test, void>, brigand::false_>::value,   "invalid has_key result");
+static_assert(std::is_same<brigand::has_key<set_test, bool>, std::false_type>::value,   "invalid has_key result");
+static_assert(std::is_same<brigand::has_key<set_test, int>, std::true_type>::value,   "invalid has_key result");
+static_assert(std::is_same<brigand::has_key<set_test, void>, std::false_type>::value,   "invalid has_key result");
 
 static_assert(std::is_same<brigand::insert<set_test, void>, brigand::set<int, char, void>>::value,   "invalid insert result");
 static_assert(std::is_same<brigand::insert<set_test, bool>, brigand::set<int, char, bool>>::value,   "invalid insert result");

@@ -46,5 +46,5 @@ namespace detail
 }
 
   template <class... T>
-  using is_set = decltype(detail::is_set_impl<make_sequence<uint_<0>, sizeof...(T)>, T...>::is_set());
+  using is_set = decltype(detail::is_set_impl<make_sequence<uint32_t<0>, sizeof...(T)>, T...>::is_set());
 }

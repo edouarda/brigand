@@ -12,9 +12,9 @@ using list1n   = brigand::list<int*>;
 using list6    = brigand::list<int,float,double,long,char,float>;
 using list12   = brigand::list<float,double,float,double,float,double,float,double,float,double,float,double>;
 
-using zero_ = brigand::int_<0>;
-using c88   = brigand::int_<88>;
-using leet_ = brigand::int_<1337>;
+using zero_ = brigand::uint32_t<0>;
+using c88   = brigand::uint32_t<88>;
+using leet_ = brigand::uint32_t<1337>;
 
 // local functor to apply
 template<class State,class Element>
