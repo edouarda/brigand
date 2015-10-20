@@ -6,22 +6,38 @@
 =================================================================================================**/
 #pragma once
 #include <type_traits>
+#include <cstdint>
 #include <cstddef>
 
 namespace brigand
 {
-  template<char V>      using char_       = std::integral_constant<char     , V>;
-  template<short V>     using short_      = std::integral_constant<short    , V>;
-  template<int V>       using int_        = std::integral_constant<int      , V>;
-  template<long V>      using long_       = std::integral_constant<long     , V>;
-  template<long long V> using long_long_  = std::integral_constant<long long, V>;
+  template <std::int8_t V>
+  using int8_t = std::integral_constant<std::int8_t, V>;
 
-  template<unsigned char V>      using uchar_       = std::integral_constant<unsigned char     , V>;
-  template<unsigned short V>     using ushort_      = std::integral_constant<unsigned short    , V>;
-  template<unsigned int V>       using uint_        = std::integral_constant<unsigned int      , V>;
-  template<unsigned long V>      using ulong_       = std::integral_constant<unsigned long     , V>;
-  template<unsigned long long V> using ulong_long_  = std::integral_constant<unsigned long long, V>;
+  template <std::uint8_t V>
+  using uint8_t = std::integral_constant<std::uint8_t, V>;
 
-  template<std::size_t V>     using size_t    = std::integral_constant<std::size_t, V>;
-  template<std::ptrdiff_t V>  using ptrdiff_t = std::integral_constant<std::ptrdiff_t, V>;
+  template <std::int16_t V>
+  using int16_t = std::integral_constant<std::int16_t, V>;
+
+  template <std::uint16_t V>
+  using uint16_t = std::integral_constant<std::uint16_t, V>;
+
+  template <std::int32_t V>
+  using int32_t = std::integral_constant<std::int32_t, V>;
+
+  template <std::uint32_t V>
+  using uint32_t = std::integral_constant<std::uint32_t, V>;
+
+  template <std::int64_t V>
+  using int64_t = std::integral_constant<std::int64_t, V>;
+
+  template <std::uint64_t V>
+  using uint64_t = std::integral_constant<std::uint64_t, V>;
+
+  template<std::size_t V>
+  using size_t    = std::integral_constant<std::size_t, V>;
+
+  template<std::ptrdiff_t V>
+  using ptrdiff_t = std::integral_constant<std::ptrdiff_t, V>;
 }

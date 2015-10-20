@@ -22,7 +22,7 @@ namespace brigand
   template<typename F, typename... T> struct bind;
 
   template<typename F, typename... T>
-  struct has_placeholders<bind<F,T...>> : brigand::false_ {};
+  struct has_placeholders<bind<F,T...>> : std::false_type {};
 
   template <bool...> struct checks_ {};
 

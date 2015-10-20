@@ -210,6 +210,7 @@ set(test_files
     test/include_test.cpp
     test/integral_list_test.cpp
     test/integral_test.cpp
+    test/integer.cpp
     test/inherit.cpp
     test/if_test.cpp
     test/eval_if_test.cpp

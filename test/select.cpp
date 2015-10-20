@@ -25,17 +25,17 @@ struct C
 void select_test()
 {
   // test regular cases
-  auto ri = brigand::select<brigand::true_>( 14, 3.6f);
+  auto ri = brigand::select<std::true_type>( 14, 3.6f);
   assert(ri == 14);
 
-  auto rf = brigand::select<brigand::false_>( 14, 3.6f);
+  auto rf = brigand::select<std::false_type>( 14, 3.6f);
   assert(rf == 3.6f);
 
   // test with move-only types
   M x;
-  x = brigand::select<brigand::true_>( M{}, x );
+  x = brigand::select<std::true_type>( M{}, x );
 
   // test with copy-only types
   C a;
-  a = brigand::select<brigand::true_>( a, C{} );
+  a = brigand::select<std::true_type>( a, C{} );
 }
