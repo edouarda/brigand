@@ -12,6 +12,6 @@
 namespace brigand
 {
   // Main fold entry point
-  template <class Sequence, class State, template<class,class> class Functor>
+  template <class Sequence, class State, class Functor>
   using fold = typename detail::fold_impl<Functor, State, Sequence>::type;
 }

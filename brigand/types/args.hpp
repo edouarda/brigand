@@ -30,4 +30,7 @@ namespace brigand
   using _7 = args<6>;
   using _8 = args<7>;
   using _9 = args<8>;
+
+  using _state = _1;
+  using _element = _2;
 }
