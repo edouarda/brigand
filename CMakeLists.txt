@@ -65,6 +65,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/for_each_args.hpp
     brigand/algorithms/is_set.hpp
     brigand/algorithms/none.hpp
+    brigand/algorithms/partition.hpp
     brigand/algorithms/remove.hpp
     brigand/algorithms/reverse.hpp
     brigand/algorithms/transform.hpp
@@ -222,6 +223,7 @@ set(test_files
     test/map_test.cpp
     test/main.cpp
     test/pair_test.cpp
+    test/partition_test.cpp
     test/predicate_reduction_test.cpp
     test/protect.cpp
     test/quote.cpp
