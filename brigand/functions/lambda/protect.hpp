@@ -7,6 +7,7 @@
 #pragma once
 
 #include <brigand/functions/lambda/lambda.hpp>
+#include <brigand/types/has_placeholders.hpp>
 
 namespace brigand
 {
@@ -19,4 +20,9 @@ namespace brigand
   {
     template<class... X> struct apply { using type = F; };
   };
+
+  template<class T>
+  struct has_placeholders<protect<T>>
+  : std::false_type
+  {};
 }
