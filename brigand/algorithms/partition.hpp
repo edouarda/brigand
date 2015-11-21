@@ -7,27 +7,28 @@
 #pragma once
 
 #include <brigand/algorithms/fold.hpp>
-#include <brigand/sequences/list.hpp>
+#include <brigand/sequences/clear.hpp>
 #include <brigand/sequences/pair.hpp>
 #include <brigand/functions/lambda/protect.hpp>
+#include <brigand/functions/lambda/apply.hpp>
 
 namespace brigand
 {
   namespace detail
   {
-    template<class Pred, class T, class P, bool = brigand::apply<Pred, T>::value>
-    struct partition_test_impl;
+    template<bool, class T, class P>
+    struct partition_impl;
 
-    template<class Pred, class T, class... L, class... R>
-    struct partition_test_impl<Pred, T, pair<list<L...>, list<R...>>, true>
+    template<class T, template<class...> class Seq, class... L, class... R>
+    struct partition_impl<true, T, pair<Seq<L...>, Seq<R...>>>
     {
-      using type = pair<list<L..., T>, list<R...>>;
+      using type = pair<Seq<L..., T>, Seq<R...>>;
     };
 
-    template<class Pred, class T, class... L, class... R>
-    struct partition_test_impl<Pred, T, pair<list<L...>, list<R...>>, false>
+    template<class T, template<class...> class Seq, class... L, class... R>
+    struct partition_impl<false, T, pair<Seq<L...>, Seq<R...>>>
     {
-      using type = pair<list<L...>, list<R..., T>>;
+      using type = pair<Seq<L...>, Seq<R..., T>>;
     };
 
     template<class Protect>
@@ -36,7 +37,7 @@ namespace brigand
       template<class S, class E>
       struct apply
       {
-        using type = typename partition_test_impl<typename Protect::type, E, S>::type;
+        using type = typename partition_impl<brigand::apply<typename Protect::type, E>::value, E, S>::type;
       };
     };
   }
@@ -44,7 +45,7 @@ namespace brigand
   template<class Seq, class Pred>
   using partition = fold<
     Seq,
-    pair<list<>, list<>>,
+    pair<clear<Seq>, clear<Seq>>,
     detail::partition_test<protect<Pred>>
   >;
 }
