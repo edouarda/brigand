@@ -16,25 +16,16 @@ namespace brigand
   namespace detail
   {
     template<class Comp, class Seq>
-    struct sort_impl;
-
-    template<class Comp, template<class...> class Seq>
-    struct sort_impl<Comp, Seq<>>
+    struct sort_impl
     {
-      using type = Seq<>;
+      using type = Seq;
     };
 
-    template<class Comp, template<class...> class Seq, class T>
-    struct sort_impl<Comp, Seq<T>>
-    {
-      using type = Seq<T>;
-    };
-
-    template<class Comp, template<class...> class Seq, class Pivot, class... Ts>
-    struct sort_impl<Comp, Seq<Pivot, Ts...>>
+    template<class Comp, template<class...> class Seq, class Pivot, class T, class... Ts>
+    struct sort_impl<Comp, Seq<Pivot, T, Ts...>>
     {
       template<class U> struct Pred { using type = brigand::apply<Comp, U, Pivot>; };
-      using p = brigand::partition<Seq<Ts...>, Pred<brigand::_1>>;
+      using p = brigand::partition<Seq<T, Ts...>, Pred<brigand::_1>>;
       using type = brigand::append<
         typename sort_impl<Comp, typename p::first_type>::type,
         brigand::list<Pivot>,
