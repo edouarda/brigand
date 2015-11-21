@@ -16,9 +16,12 @@ namespace brigand
   namespace detail
   {
     template<class Comp, class Seq>
-    struct sort_impl
+    struct sort_impl;
+
+    template<class Comp, template<class...> class Seq, class... T>
+    struct sort_impl<Comp, Seq<T...>>
     {
-      using type = Seq;
+      using type = Seq<T...>;
     };
 
     template<class Comp, template<class...> class Seq, class Pivot, class T, class... Ts>

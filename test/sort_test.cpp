@@ -26,3 +26,6 @@ using less_sizeof = brigand::bool_<sizeof(Lhs) < sizeof(Rhs)>;
 
 sorted_type_list sort_test5 = brigand::sort<type_list, brigand::quote<less_sizeof>>{};
 sorted_type_list sort_test6 = brigand::sort<type_list, brigand::less<brigand::sizeof_<brigand::_1>, brigand::sizeof_<brigand::_2>>>{};
+
+size_t_list<1, 2> sort_test7 = brigand::sort<size_t_list<2, 1>>{};
+size_t_list<1> sort_test8 = brigand::sort<size_t_list<1>>{};
