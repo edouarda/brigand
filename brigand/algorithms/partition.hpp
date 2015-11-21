@@ -31,13 +31,14 @@ namespace brigand
       using type = pair<Seq<L...>, Seq<R..., T>>;
     };
 
-    template<class Protect>
+    template<class ProtectedPred>
     struct partition_test
     {
       template<class S, class E>
       struct apply
       {
-        using type = typename partition_impl<brigand::apply<typename Protect::type, E>::value, E, S>::type;
+        using bool_ = brigand::apply<typename ProtectedPred::type, E>;
+        using type = typename partition_impl<bool_::value, E, S>::type;
       };
     };
   }
