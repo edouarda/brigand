@@ -163,6 +163,7 @@ set(TYPES_GROUP
     brigand/types/has_type.hpp
     brigand/types/integer.hpp
     brigand/types/inherit.hpp
+    brigand/types/inherit_linearly.hpp
     brigand/types/is_placeholder.hpp
     brigand/types/args.hpp
     brigand/types/no_such_type.hpp
@@ -214,6 +215,7 @@ set(test_files
     test/integral_test.cpp
     test/integer.cpp
     test/inherit.cpp
+    test/inherit_linearly.cpp
     test/if_test.cpp
     test/eval_if_test.cpp
     test/is_placeholder.cpp

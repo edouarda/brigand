@@ -11,6 +11,7 @@ Distributed under the Boost Software License, Version 1.0.
 #include <brigand/types/has_placeholders.hpp>
 #include <brigand/types/has_type.hpp>
 #include <brigand/types/inherit.hpp>
+#include <brigand/types/inherit_linearly.hpp>
 #include <brigand/types/integer.hpp>
 #include <brigand/types/is_placeholder.hpp>
 #include <brigand/types/no_such_type.hpp>
