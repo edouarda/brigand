@@ -11,7 +11,13 @@
 
 namespace brigand
 {
+namespace lazy
+{
+    template <class Sequence, class State, class Functor>
+    using fold = typename detail::fold_impl<Functor, State, Sequence>;
+}
+
   // Main fold entry point
   template <class Sequence, class State, class Functor>
-  using fold = typename detail::fold_impl<Functor, State, Sequence>::type;
+  using fold = typename ::brigand::lazy::fold<Sequence, State, Functor>::type;
 }

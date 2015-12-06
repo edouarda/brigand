@@ -88,6 +88,15 @@ namespace detail
 
 }
 
+namespace lazy
+{
+
+    template <typename L>
+    using reverse = typename detail::reverse_impl<L>;
+
+}
+
     template <typename L>
     using reverse = typename detail::reverse_impl<L>::type;
+
 }

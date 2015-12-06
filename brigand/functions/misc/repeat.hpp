@@ -64,6 +64,12 @@ namespace detail
     };
 }
 
+namespace lazy
+{
     template<template<class> class F, class N, class T>
-    using repeat = typename detail::repeat_impl<F, N::value, T>::type;
+    using repeat = typename detail::repeat_impl<F, N::value, T>;
+}
+
+    template<template<class> class F, class N, class T>
+    using repeat = typename ::brigand::lazy::repeat<F, N, T>::type;
 }
