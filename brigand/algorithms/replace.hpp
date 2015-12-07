@@ -16,17 +16,16 @@ namespace brigand
 namespace lazy
 {
 
-    template<typename Sequence, typename Predicate, typename NewType>
-    using replace_if = typename detail::replace_if_impl<Sequence, Predicate, NewType>;
+template <typename Sequence, typename Predicate, typename NewType>
+using replace_if = typename detail::replace_if_impl<Sequence, Predicate, NewType>;
 
-    template<typename Sequence, typename OldType, typename NewType>
-    using replace = typename detail::replace_if_impl<Sequence,
-        brigand::bind<brigand::quote<std::is_same>, OldType, brigand::_1>,
-        NewType>;
-
+template <typename Sequence, typename OldType, typename NewType>
+using replace = typename detail::replace_if_impl<Sequence,
+                                                 brigand::bind<brigand::quote<std::is_same>, OldType, brigand::_1>,
+                                                 NewType>;
 }
 
-template<typename Sequence, typename Predicate, typename NewType>
+template <typename Sequence, typename Predicate, typename NewType>
 using replace_if = typename ::brigand::lazy::replace_if<Sequence, Predicate, NewType>::type;
 
 template<typename Sequence, typename OldType, typename NewType>
