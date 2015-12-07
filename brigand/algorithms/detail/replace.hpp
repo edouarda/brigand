@@ -8,10 +8,17 @@
 
 #include <brigand/types/bool.hpp>
 #include <brigand/functions/lambda/apply.hpp>
+#include <type_traits>
+
+#ifdef _MSC_VER
+#  define BRIGAND_DEDUCED_TEMPLATE template
+#else
+#  define BRIGAND_DEDUCED_TEMPLATE
+#endif
 
 namespace brigand { namespace detail
 {
-  // By default, consider we found nothing
+  // By default, consider we replace nothing
   template< class Sequence, typename Predicate, typename NewType>
   struct replace_if_impl
   {
@@ -22,7 +29,7 @@ namespace brigand { namespace detail
   struct replace_if_impl<Sequence<T...>, Predicate, NewType>
   {
     using type = Sequence<typename std::conditional<
-        /*B=*/brigand::template apply<Predicate, T>::type::value,
+        /*B=*/brigand::BRIGAND_DEDUCED_TEMPLATE apply<Predicate, T>::type::value,
         /*T=*/NewType,
         /*F=*/T>::type...>;
   };
