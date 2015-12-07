@@ -67,13 +67,18 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/none.hpp
     brigand/algorithms/partition.hpp
     brigand/algorithms/remove.hpp
+    brigand/algorithms/replace.hpp
     brigand/algorithms/reverse.hpp
     brigand/algorithms/sort.hpp
     brigand/algorithms/transform.hpp
     brigand/algorithms/select.hpp)
 
 set(ALGORITHMS_DETAIL_GROUP
-    brigand/algorithms/detail/find.hpp)
+    brigand/algorithms/detail/find.hpp
+    brigand/algorithms/detail/fold.hpp
+    brigand/algorithms/detail/non_null.hpp
+    brigand/algorithms/detail/replace.hpp
+)
 
 set ( FUNCTIONS_ARITHMETIC_GROUP
       brigand/functions/arithmetic/complement.hpp
@@ -234,6 +239,7 @@ set(test_files
     test/real.cpp
     test/remove_test.cpp
     test/repeat_test.cpp
+    test/replace.cpp
     test/reverse_test.cpp
     test/select.cpp
     test/set_test.cpp
