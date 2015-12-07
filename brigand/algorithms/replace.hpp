@@ -19,7 +19,6 @@ namespace lazy
     template<typename Sequence, typename Predicate, typename NewType>
     using replace_if = typename detail::replace_if_impl<Sequence, Predicate, NewType>;
 
-    // use bind/quote?
     template<typename Sequence, typename OldType, typename NewType>
     using replace = typename detail::replace_if_impl<Sequence,
         brigand::bind<brigand::quote<std::is_same>, OldType, brigand::_1>,
