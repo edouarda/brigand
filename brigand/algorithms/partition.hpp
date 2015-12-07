@@ -34,11 +34,11 @@ namespace brigand
     template<class ProtectedPred>
     struct partition_test
     {
-      template<class S, class E>
+      template<class State, class Element>
       struct apply
       {
-        using bool_ = brigand::apply<typename ProtectedPred::type, E>;
-        using type = typename partition_impl<bool_::value, E, S>::type;
+        using bool_ = brigand::apply<typename ProtectedPred::type, Element>;
+        using type = typename partition_impl<bool_::value, Element, State>::type;
       };
     };
   }
