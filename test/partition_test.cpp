@@ -6,13 +6,13 @@
 #include <type_traits>
 
 template<typename N>
-using is_odd = brigand::size_t<N::value % 2 == 0>;
+using is_odd = brigand::size_t<(N::value % 2) != 0>;
 
 template <std::size_t... List>
 using size_t_list = brigand::integral_list<std::size_t, List...>;
 
-using  odd_list = size_t_list<0, 2, 4, 6, 8, 10>;
-using even_list = size_t_list<1, 3, 5, 7, 9, 11>;
+using  odd_list = size_t_list<1, 3, 5, 7, 9, 11>;
+using even_list = size_t_list<0, 2, 4, 6, 8, 10>;
 using full_list = size_t_list<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11>;
 
 
