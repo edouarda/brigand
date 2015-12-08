@@ -28,7 +28,6 @@ using replace = typename detail::replace_if_impl<Sequence,
 template <typename Sequence, typename Predicate, typename NewType>
 using replace_if = typename ::brigand::lazy::replace_if<Sequence, Predicate, NewType>::type;
 
-template<typename Sequence, typename OldType, typename NewType>
+template <typename Sequence, typename OldType, typename NewType>
 using replace = typename ::brigand::lazy::replace<Sequence, OldType, NewType>::type;
-
 }
