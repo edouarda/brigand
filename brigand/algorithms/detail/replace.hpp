@@ -11,7 +11,7 @@
 #include <brigand/types/bool.hpp>
 #include <type_traits>
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && (_MSC_VER < 1900)
 #define BRIGAND_DEDUCED_TEMPLATE template
 #else
 #define BRIGAND_DEDUCED_TEMPLATE
