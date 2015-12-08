@@ -18,7 +18,6 @@
 #include <brigand/algorithms/partition.hpp>
 #include <brigand/algorithms/remove.hpp>
 #include <brigand/algorithms/replace.hpp>
-//#include <brigand/algorithms/replace_if.hpp>
 #include <brigand/algorithms/reverse.hpp>
 #include <brigand/algorithms/select.hpp>
 #include <brigand/algorithms/sort.hpp>
