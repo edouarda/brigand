@@ -213,7 +213,6 @@ set(test_files
     test/find.cpp
     test/fold.cpp
     test/for_each.cpp
-    test/fusion_test.cpp
     test/identity.cpp
     test/include_test.cpp
     test/integral_list_test.cpp
@@ -251,7 +250,10 @@ set(test_files
   )
 
 if(Boost_FOUND)
-    set(test_files ${test_files} test/variant_test.cpp)
+    set(test_files 
+    ${test_files} 
+    test/variant_test.cpp
+    test/fusion_test.cpp)
 endif()
 
 source_group(tests FILES ${test_files})
