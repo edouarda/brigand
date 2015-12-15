@@ -13,12 +13,13 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcxx-exceptions")
 endif()
 
-find_package(Boost REQUIRED)
+find_package(Boost)
 
 if(Boost_FOUND)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
 else()
     include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBRIGAND_NO_BOOST_SUPPORT")
 endif()
 
 # Install pre-commit git hook
@@ -213,7 +214,6 @@ set(test_files
     test/find.cpp
     test/fold.cpp
     test/for_each.cpp
-    test/fusion_test.cpp
     test/identity.cpp
     test/include_test.cpp
     test/integral_list_test.cpp
@@ -251,7 +251,10 @@ set(test_files
   )
 
 if(Boost_FOUND)
-    set(test_files ${test_files} test/variant_test.cpp)
+    set(test_files 
+    ${test_files} 
+    test/variant_test.cpp
+    test/fusion_test.cpp)
 endif()
 
 source_group(tests FILES ${test_files})
