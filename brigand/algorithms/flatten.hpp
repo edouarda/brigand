@@ -7,8 +7,7 @@ Distributed under the Boost Software License, Version 1.0.
 #pragma once
 
 #include <brigand/sequences/list.hpp>
-#include <brigand/sequences/back.hpp>
-#include <brigand/algorithms/wrap.hpp>
+#include <brigand/sequences/append.hpp>
 
 namespace brigand
 {
