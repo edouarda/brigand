@@ -9,9 +9,9 @@ Brigand Meta-programming library
 
 Brigand is a light-weight, fully functional, instant-compile time C++ 11 meta-programming library.
 
-It provides a sequence called brigand::list (but will work with any MPL sequence) and a solid amount of meta-algorithms and meta-functions to work fully functional MPL programs.
+Everything you were doing with Boost.MPL can be done with Brigand. And if that's not the case, open an issue!
 
-This library is still a work in progress and we welcome your feedback.
+Should you wish to learn more, feel free to [watch our Meeting C++ 2015 lightning talk](https://www.youtube.com/watch?v=B8XSDhWx7hY)!
 
 # Documentation
 
