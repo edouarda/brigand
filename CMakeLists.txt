@@ -61,6 +61,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/wrap.hpp
     brigand/algorithms/count.hpp
     brigand/algorithms/find.hpp
+    brigand/algorithms/flatten.hpp
     brigand/algorithms/fold.hpp
     brigand/algorithms/for_each.hpp
     brigand/algorithms/for_each_args.hpp
@@ -212,6 +213,7 @@ set(test_files
     test/bitwise_test.cpp
     test/comparison_test.cpp
     test/find.cpp
+    test/flatten.cpp
     test/fold.cpp
     test/for_each.cpp
     test/identity.cpp
