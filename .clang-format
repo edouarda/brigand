@@ -1,0 +1,12 @@
+# http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+BasedOnStyle: LLVM
+
+AccessModifierOffset: -4
+BreakBeforeBraces: Allman
+ColumnLimit: 100
+IndentWidth: 4
+NamespaceIndentation: Inner
+PointerAlignment: Middle
+TabWidth: 4
+UseTab: Never
