@@ -3,6 +3,7 @@
 BasedOnStyle: LLVM
 
 AccessModifierOffset: -4
+AlwaysBreakTemplateDeclarations: true
 BreakBeforeBraces: Allman
 ColumnLimit: 100
 IndentWidth: 4

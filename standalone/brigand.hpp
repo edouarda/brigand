@@ -1135,10 +1135,10 @@ namespace brigand
 namespace lazy
 {
     template<typename L, typename Pred>
-    using remove = typename detail::remove_if_impl<L, Pred>;
+    using remove_if = typename detail::remove_if_impl<L, Pred>;
 }
-    template<typename L, typename Pred>
-    using remove = typename ::brigand::lazy::remove<L, Pred>::type;
+template <typename L, typename Pred>
+using remove_if = typename ::brigand::lazy::remove_if<L, Pred>::type;
 namespace detail
 {
     template< typename L1, typename T, typename L2 = clear<L1>>
@@ -1159,11 +1159,11 @@ namespace detail
 }
 namespace lazy
 {
-    template<typename L, typename T>
-    using remove_element = typename detail::remove_element_impl<L, T>;
+    template <typename L, typename T>
+    using remove = typename detail::remove_element_impl<L, T>;
 }
-template<typename L, typename T>
-using remove_element = typename ::brigand::lazy::remove_element<L, T>::type;
+template <typename L, typename T>
+using remove = typename ::brigand::lazy::remove<L, T>::type;
 }
 #include <type_traits>
 #if defined(_MSC_VER) && (_MSC_VER < 1900)
