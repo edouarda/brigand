@@ -28,8 +28,8 @@ namespace detail
         using type = typename brigand::append<L<Head>, flattened_tail_type>;
     };
 
-    template <template<class...> class L, template <class...> class Head, class... HeadElements, class... Tail>
-    struct flatten_impl<L<Head<HeadElements...>, Tail...>>
+    template <template<class...> class L, class... HeadElements, class... Tail>
+    struct flatten_impl<L<L<HeadElements...>, Tail...>>
     {
         using head_type = L<HeadElements...>;
         using flattened_head_type = typename flatten_impl<head_type>::type;

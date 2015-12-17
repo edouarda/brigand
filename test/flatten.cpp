@@ -1,6 +1,9 @@
 
 #include <brigand/algorithms/flatten.hpp>
 
+#include <vector>
+#include <string>
+
 static_assert(std::is_same<brigand::flatten<brigand::empty_sequence>, brigand::empty_sequence>::value, "invalid flatten on empty sequence");
 
 using flat_seq = brigand::list<char, bool, int>;
@@ -20,4 +23,9 @@ static_assert(std::is_same<brigand::flatten<two_levels>, flat_two_levels>::value
 using three_levels = brigand::list<brigand::list<flat_seq, bool, int>, brigand::empty_sequence, brigand::list<brigand::list<brigand::list<char>>>, int>;
 using flat_three_levels = brigand::list<char, bool, int, bool, int, char, int>;
 
-static_assert(std::is_same<brigand::flatten<three_levels>, flat_three_levels>::value, "invalid flatten on two levels sequence");
+static_assert(std::is_same<brigand::flatten<three_levels>, flat_three_levels>::value, "invalid flatten on three levels sequence");
+
+using proper_filter = brigand::list<std::vector<char>, std::string, flat_seq>;
+using flat_proper_filter = brigand::list<std::vector<char>, std::string, char, bool, int>;
+
+static_assert(std::is_same<brigand::flatten<proper_filter>, flat_proper_filter>::value, "invalid flatten on heterogenous sequence");
