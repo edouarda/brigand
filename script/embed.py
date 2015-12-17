@@ -33,7 +33,7 @@ r_pp_if = re.compile('^\s*#\s*if.*$')
 r_pp_endif = re.compile('^\s*#\s*endif.*$')
 r_pp_define = re.compile('^\s*#\s*define\s+(.*)\s*$')
 r_pp_pragma_once = re.compile('^\s*#\s*pragma\s+once\s*$')
-r_C_one_line_comment = re.compile('^.*//.*$')
+r_C_one_line_comment = re.compile('^(.*?)\s*//.*$')
 r_C_one_line_block_comment = re.compile('^(.*)/\*.*\*/(.*)$')
 r_C_block_begin_comment = re.compile('(.*)/\*.*')
 r_C_block_end_comment = re.compile('.*\*/(.*)')
@@ -106,8 +106,9 @@ def pp_line(line, output, opts):
     # its content may be a license or whatever else important
     if not keep_guard:
         # C comments (one line) '//'
-        if r_C_one_line_comment.match(line):
-            line = line.split('//')[0]
+        m = r_C_one_line_comment.match(line)
+        if m:
+            line = m.group(1)
         # C (block) comments (one line) '/* */'
         m = r_C_one_line_block_comment.match(line)
         if m:
