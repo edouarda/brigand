@@ -10,6 +10,12 @@ then
   color_option='--color=auto'
 fi
 
+(
+cd $GIT_DIR/..
+python ./script/embed.py -I./ --include-match=brigand/* brigand/brigand.hpp -o standalone/brigand.hpp
+git add standalone/brigand.hpp
+)
+
 if git diff --cached | grep -E '^\+.*'$'\t' > /dev/null
 then
 cat<<END;
