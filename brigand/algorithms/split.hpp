@@ -36,6 +36,10 @@ namespace detail
 	struct split_impl<L<Os...>, L<>, TDelim, TDelim> { //next is delim, we have no more
 		using type = L<Os...>;
 	};
+	template<template<typename...> class L, typename... Os, typename TDelim>
+	struct split_impl<L<Os...>, L<>, TDelim> { //done
+		using type = L<Os...>;
+	};
 
 
 

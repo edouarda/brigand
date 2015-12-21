@@ -2,7 +2,7 @@
 #include <brigand/algorithms/split.hpp>
 
 
-static_assert(std::is_same<brigand::split<brigand::empty_sequence, void>, brigand::list<brigand::empty_sequence>>::value, "invalid split on empty sequence");
+static_assert(std::is_same<brigand::split<brigand::empty_sequence, void>, brigand::empty_sequence>::value, "invalid split on empty sequence");
 
 using no_delim_seq = brigand::list<char, bool, int>;
 
