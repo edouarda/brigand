@@ -6,7 +6,7 @@ static_assert(std::is_same<brigand::split<brigand::empty_sequence, void>, brigan
 
 using no_delim_seq = brigand::list<char, bool, int>;
 
-static_assert(std::is_same<brigand::split<no_delim_seq, void>, list<no_delim_seq>>::value, "invalid split on sequence with no delim");
+static_assert(std::is_same<brigand::split<no_delim_seq, void>, brigand::list<no_delim_seq>>::value, "invalid split on sequence with no delim");
 
 using one_delim = brigand::list<char, bool, int, void, char, char>;
 
