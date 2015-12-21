@@ -45,8 +45,12 @@ namespace detail
 
 	template<typename TList, typename TDelim>
 	struct split_helper;
-	template<template<typename...> class L, typename... Ts, typename TDelim>
-	struct split_helper<L<Ts...>, TDelim> : split_impl<L<>, L<>, TDelim, Ts...> {};
+    template<template<typename...> class L, typename T, typename... Ts, typename TDelim>
+    struct split_helper<L<T,Ts...>, TDelim> : split_impl<L<>, L<>, TDelim, T, Ts...>{};
+    template<template<typename...> class L, typename... T, typename TDelim>
+    struct split_helper<L<T...>, TDelim> { //done
+        using type = L<>;
+    };
 
 }
 
