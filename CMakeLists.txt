@@ -77,6 +77,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/remove.hpp
     brigand/algorithms/replace.hpp
     brigand/algorithms/reverse.hpp
+    brigand/algorithms/split.hpp
     brigand/algorithms/sort.hpp
     brigand/algorithms/transform.hpp
     brigand/algorithms/select.hpp)
@@ -251,6 +252,7 @@ set(test_files
     test/reverse_test.cpp
     test/select.cpp
     test/set_test.cpp
+    test/split.cpp
     test/sort_test.cpp
     test/sizeof.cpp
     test/transform.cpp
