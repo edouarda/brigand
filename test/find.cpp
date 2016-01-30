@@ -70,3 +70,8 @@ static_assert ( brigand::found< brigand::list<int,int,double,char>
                               >::value
               , "invalid found on list"
               );
+
+
+template <class ...> class custom_list;
+
+static_assert(brigand::not_found<custom_list<int, int, char>, std::is_floating_point<brigand::_1>>::value, "invalid not_found on list");
