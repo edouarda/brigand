@@ -44,14 +44,14 @@ add_custom_target(standalone
 
 set(CMAKE_DEBUG_POSTFIX "d")
 
-set ( BRIGAND_GROUP
-      brigand/adapted.hpp
-      brigand/algorithms.hpp
-      brigand/brigand.hpp
-      brigand/functions.hpp
-      brigand/sequences.hpp
-      brigand/types.hpp
-    )
+set(BRIGAND_GROUP
+    brigand/adapted.hpp
+    brigand/algorithms.hpp
+    brigand/brigand.hpp
+    brigand/functions.hpp
+    brigand/sequences.hpp
+    brigand/types.hpp
+)
 
 set(ADAPTED_GROUP
     brigand/adapted/fusion.hpp
@@ -60,7 +60,8 @@ set(ADAPTED_GROUP
     brigand/adapted/pair.hpp
     brigand/adapted/tuple.hpp
     brigand/adapted/fusion.hpp
-    brigand/adapted/variant.hpp)
+    brigand/adapted/variant.hpp
+)
 
 set(ALGORITHMS_GROUP
     brigand/algorithms/all.hpp
@@ -72,6 +73,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/fold.hpp
     brigand/algorithms/for_each.hpp
     brigand/algorithms/for_each_args.hpp
+    brigand/algorithms/index_of.hpp
     brigand/algorithms/is_set.hpp
     brigand/algorithms/none.hpp
     brigand/algorithms/partition.hpp
@@ -81,7 +83,8 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/split.hpp
     brigand/algorithms/sort.hpp
     brigand/algorithms/transform.hpp
-    brigand/algorithms/select.hpp)
+    brigand/algorithms/select.hpp
+)
 
 set(ALGORITHMS_DETAIL_GROUP
     brigand/algorithms/detail/find.hpp
@@ -90,71 +93,71 @@ set(ALGORITHMS_DETAIL_GROUP
     brigand/algorithms/detail/replace.hpp
 )
 
-set ( FUNCTIONS_ARITHMETIC_GROUP
-      brigand/functions/arithmetic/complement.hpp
-      brigand/functions/arithmetic/divides.hpp
-      brigand/functions/arithmetic/identity.hpp
-      brigand/functions/arithmetic/max.hpp>
-      brigand/functions/arithmetic/min.hpp
-      brigand/functions/arithmetic/minus.hpp
-      brigand/functions/arithmetic/modulo.hpp
-      brigand/functions/arithmetic/negate.hpp
-      brigand/functions/arithmetic/next.hpp
-      brigand/functions/arithmetic/plus.hpp
-      brigand/functions/arithmetic/prev.hpp
-      brigand/functions/arithmetic/times.hpp
-    )
+set(FUNCTIONS_ARITHMETIC_GROUP
+    brigand/functions/arithmetic/complement.hpp
+    brigand/functions/arithmetic/divides.hpp
+    brigand/functions/arithmetic/identity.hpp
+    brigand/functions/arithmetic/max.hpp>
+    brigand/functions/arithmetic/min.hpp
+    brigand/functions/arithmetic/minus.hpp
+    brigand/functions/arithmetic/modulo.hpp
+    brigand/functions/arithmetic/negate.hpp
+    brigand/functions/arithmetic/next.hpp
+    brigand/functions/arithmetic/plus.hpp
+    brigand/functions/arithmetic/prev.hpp
+    brigand/functions/arithmetic/times.hpp
+)
 
-set ( FUNCTIONS_BITWISE_GROUP
-      brigand/functions/bitwise/bitand.hpp
-      brigand/functions/bitwise/bitor.hpp
-      brigand/functions/bitwise/bitxor.hpp
-      brigand/functions/bitwise/shift_left.hpp
-      brigand/functions/bitwise/shift_right.hpp
-    )
+set(FUNCTIONS_BITWISE_GROUP
+    brigand/functions/bitwise/bitand.hpp
+    brigand/functions/bitwise/bitor.hpp
+    brigand/functions/bitwise/bitxor.hpp
+    brigand/functions/bitwise/shift_left.hpp
+    brigand/functions/bitwise/shift_right.hpp
+)
 
-set ( FUNCTIONS_COMPARISON_GROUP
-      brigand/functions/comparison/equal_to.hpp
-      brigand/functions/comparison/greater.hpp
-      brigand/functions/comparison/greater_equal.hpp
-      brigand/functions/comparison/less.hpp
-      brigand/functions/comparison/less_equal.hpp
-      brigand/functions/comparison/not_equal_to.hpp
-    )
+set(FUNCTIONS_COMPARISON_GROUP
+    brigand/functions/comparison/equal_to.hpp
+    brigand/functions/comparison/greater.hpp
+    brigand/functions/comparison/greater_equal.hpp
+    brigand/functions/comparison/less.hpp
+    brigand/functions/comparison/less_equal.hpp
+    brigand/functions/comparison/not_equal_to.hpp
+)
 
-set ( FUNCTIONS_LOGICAL_GROUP
-      brigand/functions/logical/and.hpp
-      brigand/functions/logical/not.hpp
-      brigand/functions/logical/or.hpp
-      brigand/functions/logical/xor.hpp
-    )
+set(FUNCTIONS_LOGICAL_GROUP
+    brigand/functions/logical/and.hpp
+    brigand/functions/logical/not.hpp
+    brigand/functions/logical/or.hpp
+    brigand/functions/logical/xor.hpp
+)
 
-set ( FUNCTIONS_LAMBDA_GROUP
-      brigand/functions/lambda/substitute.hpp
-      brigand/functions/lambda/apply.hpp
-      brigand/functions/lambda/bind.hpp
-      brigand/functions/lambda/lambda.hpp
-      brigand/functions/lambda/protect.hpp
-      brigand/functions/lambda/quote.hpp
-      brigand/functions/lambda/unpack.hpp
-    )
+set(FUNCTIONS_LAMBDA_GROUP
+    brigand/functions/lambda/substitute.hpp
+    brigand/functions/lambda/apply.hpp
+    brigand/functions/lambda/bind.hpp
+    brigand/functions/lambda/lambda.hpp
+    brigand/functions/lambda/protect.hpp
+    brigand/functions/lambda/quote.hpp
+    brigand/functions/lambda/unpack.hpp
+)
 
-set ( FUNCTIONS_MISC_GROUP
-      brigand/functions/misc/always.hpp
-      brigand/functions/misc/sizeof.hpp
-      brigand/functions/misc/repeat.hpp
-    )
+set(FUNCTIONS_MISC_GROUP
+    brigand/functions/misc/always.hpp
+    brigand/functions/misc/sizeof.hpp
+    brigand/functions/misc/repeat.hpp
+)
 
-set ( FUNCTIONS_GROUPS
-      brigand/functions/arithmetic.hpp
-      brigand/functions/bitwise.hpp
-      brigand/functions/comparisons.hpp
-      brigand/functions/if.hpp
-      brigand/functions/eval_if.hpp
-      brigand/functions/logical.hpp
-      brigand/functions/lambda.hpp
-      brigand/functions/misc.hpp
-    )
+set(FUNCTIONS_GROUPS
+    brigand/functions/arithmetic.hpp
+    brigand/functions/bitwise.hpp
+    brigand/functions/comparisons.hpp
+    brigand/functions/if.hpp
+    brigand/functions/eval_if.hpp
+    brigand/functions/logical.hpp
+    brigand/functions/lambda.hpp
+    brigand/functions/misc.hpp
+)
 
 set(SEQUENCES_GROUP
     brigand/sequences/append.hpp
@@ -213,7 +216,8 @@ add_library(brigand
     ${FUNCTIONS_GROUPS}
     ${SEQUENCES_GROUP}
     ${TYPES_GROUP}
-    ${PLACEHOLDER_GROUP})
+    ${PLACEHOLDER_GROUP}
+)
 
 set(test_files
     test/always.cpp
@@ -243,7 +247,6 @@ set(test_files
     test/main.cpp
     test/make_sequence_test.cpp
     test/map_test.cpp
-    test/map_test.hpp
     test/pair_test.cpp
     test/partition_test.cpp
     test/predicate_reduction_test.cpp
@@ -264,7 +267,7 @@ set(test_files
     test/tuple_test.cpp
     test/unpack.cpp
     test/values_as_sequence.cpp
-  )
+)
 
 if(Boost_FOUND)
     set(test_files
@@ -279,6 +282,6 @@ add_executable(brigand_test ${test_files})
 
 add_test(brigand brigand_test)
 
-install ( DIRECTORY ${PROJECT_SOURCE_DIR}/brigand
-          DESTINATION .
-        )
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/brigand
+    DESTINATION .
+)
