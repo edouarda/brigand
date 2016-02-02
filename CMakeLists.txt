@@ -56,6 +56,7 @@ set ( BRIGAND_GROUP
 set(ADAPTED_GROUP
     brigand/adapted/fusion.hpp
     brigand/adapted/integral_list.hpp
+    brigand/adapted/list.hpp
     brigand/adapted/pair.hpp
     brigand/adapted/tuple.hpp
     brigand/adapted/fusion.hpp
@@ -161,6 +162,7 @@ set(SEQUENCES_GROUP
     brigand/sequences/back.hpp
     brigand/sequences/front.hpp
     brigand/sequences/last_element.hpp
+    brigand/sequences/keys_as_sequence.hpp
     brigand/sequences/list.hpp
     brigand/sequences/make_sequence.hpp
     brigand/sequences/map.hpp
@@ -168,6 +170,7 @@ set(SEQUENCES_GROUP
     brigand/sequences/range.hpp
     brigand/sequences/size.hpp
     brigand/sequences/set.hpp
+    brigand/sequences/values_as_sequence.hpp
 )
 
 set(TYPES_GROUP
@@ -213,32 +216,34 @@ add_library(brigand
     ${PLACEHOLDER_GROUP})
 
 set(test_files
+    test/always.cpp
     test/apply.cpp
     test/args.cpp
-    test/always.cpp
     test/bind.cpp
     test/bitwise_test.cpp
     test/comparison_test.cpp
+    test/eval_if_test.cpp
     test/find.cpp
     test/flatten.cpp
     test/fold.cpp
     test/for_each.cpp
     test/identity.cpp
+    test/if_test.cpp
     test/include_test.cpp
-    test/integral_list_test.cpp
-    test/integral_test.cpp
-    test/integer.cpp
     test/inherit.cpp
     test/inherit_linearly.cpp
-    test/if_test.cpp
-    test/eval_if_test.cpp
+    test/integer.cpp
+    test/integral_list_test.cpp
+    test/integral_test.cpp
     test/is_placeholder.cpp
     test/is_set_test.cpp
+    test/keys_as_sequence.cpp
     test/list_test.cpp
     test/logical_test.cpp
+    test/main.cpp
     test/make_sequence_test.cpp
     test/map_test.cpp
-    test/main.cpp
+    test/map_test.hpp
     test/pair_test.cpp
     test/partition_test.cpp
     test/predicate_reduction_test.cpp
@@ -252,12 +257,13 @@ set(test_files
     test/reverse_test.cpp
     test/select.cpp
     test/set_test.cpp
-    test/split.cpp
-    test/sort_test.cpp
     test/sizeof.cpp
+    test/sort_test.cpp
+    test/split.cpp
     test/transform.cpp
     test/tuple_test.cpp
     test/unpack.cpp
+    test/values_as_sequence.cpp
   )
 
 if(Boost_FOUND)

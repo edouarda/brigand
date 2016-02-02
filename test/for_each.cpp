@@ -20,7 +20,7 @@ struct evil
 {
   template< typename U > evil const& operator()(brigand::type_<U>) const {  return *this;  }
 
-  evil& operator, (int) { return *this; } // evel operator coma
+  evil& operator, (int) { return *this; } // evil operator comma
 };
 
 void for_each_test()
