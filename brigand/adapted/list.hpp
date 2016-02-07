@@ -11,9 +11,19 @@
 
 namespace brigand
 {
-  template <typename... T>
-  using list_wrapper = typename brigand::list<T...>;
+namespace detail
+{
+    template <typename L, template <class...> class Sequence>
+    struct as_sequence_impl
+    {
+        using type = wrap<L, Sequence>;
+    };
+} // namespace detail
 
-  template <typename L>
-  using as_list = wrap<L, list_wrapper>;
-}
+template <typename L, template <class...> class Sequence>
+using as_sequence = typename detail::as_sequence_impl<L, Sequence>::type;
+
+template <typename L>
+using as_list = as_sequence<L, brigand::list>;
+
+} // namespace brigand

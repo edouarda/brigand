@@ -1,3 +1,4 @@
+#include "map_test.hpp"
 
 #include <brigand/sequences/map.hpp>
 #include <brigand/sequences/size.hpp>
@@ -15,16 +16,6 @@ using map_test = brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>
 static_assert(std::is_same<brigand::lookup<map_test, int>, bool>::value, "should be bool");
 static_assert(std::is_same<brigand::lookup<map_test, char>, int>::value, "should be int");
 static_assert(std::is_same<brigand::lookup<map_test, bool>, brigand::no_such_type_>::value, "should be not found");
-
-struct type_one {};
-struct type_two {};
-struct type_three {};
-struct type_four {};
-struct type_five {};
-struct type_six {};
-struct type_seven {};
-struct type_eight {};
-struct type_nine {};
 
 using big_map = brigand::map<
     brigand::pair<type_one, int>,
@@ -52,17 +43,6 @@ static_assert(std::is_same<brigand::at<big_map, void>, float****>::value,       
 static_assert(std::is_same<brigand::at<big_map, bool>, brigand::no_such_type_>::value,   "found in big map!");
 
 // test insertions all the way up to the fast lanes
-
-using pair_one = brigand::pair<type_one, int>;
-using pair_two = brigand::pair<type_two, type_one>;
-using pair_three = brigand::pair<type_three, type_two>;
-using pair_four = brigand::pair<type_four, type_three>;
-using pair_five = brigand::pair<type_five, type_four>;
-using pair_six = brigand::pair<type_six, type_five>;
-using pair_seven = brigand::pair<type_seven, type_six>;
-using pair_eight = brigand::pair<type_eight, type_seven>;
-using pair_nine = brigand::pair<type_nine, type_eight>;
-using pair_ten = brigand::pair<void, float****>;
 
 using map_of_one = brigand::map<pair_one>;
 static_assert(std::is_same<brigand::insert<brigand::map<>, pair_one>, map_of_one>::value, "insertion failed");
