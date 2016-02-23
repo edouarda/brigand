@@ -18,7 +18,8 @@ namespace brigand
 			struct S
 			{
 				template<typename T, typename U>
-					using Pred = typename brigand::apply<P, T, U>::type;
+				struct Pred : brigand::apply < P, T, U > {};
+
 				template<typename Out, typename In, bool Tag, bool FTag, typename ... Ts>
 					struct insert;
 
@@ -202,9 +203,9 @@ namespace brigand
 		template<typename Seq, typename Comp>
 			struct sort_impl;
 			//empty input case
-		template<template<class...> class Seq, typename Comp>
-			struct sort_impl<Seq<>, Comp> {
-				using type = list<>;
+		template<template<class...> class Seq, typename...T, typename Comp>
+			struct sort_impl<Seq<T...>, Comp> {
+				using type = Seq<T...>;
 			};
 			//one element case
 		template<template<class...> class Seq, typename T, typename Comp>
