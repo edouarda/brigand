@@ -8,13 +8,14 @@
 
 #include <brigand/functions/comparison/less.hpp>
 #include <brigand/functions/lambda/quote.hpp>
-#include <brigand/algorithms/partition.hpp>
+#include <brigand/functions/lambda/apply.hpp>
+#include <brigand/algorithms/wrap.hpp>
 #include <brigand/sequences/append.hpp>
 
 namespace brigand
 {
 	namespace detail {
-		template<typename P, template<class...> class Seq>
+		template<typename P>
 			struct S
 			{
 				template<typename T, typename U>
@@ -26,13 +27,13 @@ namespace brigand
 									//next is not less than insert, no more ins, terminate
 				template<typename ... Os, typename In, typename ... Ts>
 					struct insert<list<Os...>, list<In>, false, false, Ts...> {
-						using type = Seq<Os..., In, Ts...>;
+						using type = list<Os..., In, Ts...>;
 					};
 				
 					//next is less than insert, next is end, terminate
 				template<typename ... Os, typename... Ins, typename T>
 					struct insert<list<Os...>, list<Ins...>, true, false, T> {
-						using type = Seq<Os..., T, Ins...>;
+						using type = list<Os..., T, Ins...>;
 					};
 				
 					//next is not less than insert, have more next and have more ins, can't fast track
@@ -83,7 +84,7 @@ namespace brigand
 				//fast track is less than insert, no more
 				template<typename ... Os, typename In, typename...Ins, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
 					struct insert<list<Os...>, list<In, Ins...>, true, true, T1, T2, T3, T4, T5, T6, T7, T8> {
-						using type = Seq<Os..., T1, T2, T3, T4, T5, T6, T7, T8, In, Ins...>;
+						using type = list<Os..., T1, T2, T3, T4, T5, T6, T7, T8, In, Ins...>;
 					};
 				
 					//fast track is less than insert, not enough to fast track again
@@ -214,7 +215,9 @@ namespace brigand
 			};
 			//two or more elements case
 		template<template<class...> class Seq, typename T, typename U, typename ... Ts, typename Comp>
-			struct sort_impl<Seq<T, U, Ts...>, Comp> : S<Comp,Seq>::template sort_loop<list<T>, U, Ts...> {};
+			struct sort_impl<Seq<T, U, Ts...>, Comp>{
+				using type = brigand::wrap<typename S<Comp>::template sort_loop<list<T>, U, Ts...>::type, Seq>;
+			};
 	}
 
 	template<typename Seq, typename Comp = quote<less>>
