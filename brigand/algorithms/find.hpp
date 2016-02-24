@@ -16,17 +16,18 @@
 
 namespace brigand
 {
+
 namespace lazy
 {
 
     // find uses Predicate, it's very effective
-    template <typename Sequence, typename Predicate = detail::non_null>
+    template <typename Sequence, typename Predicate = brigand::detail::non_null>
     using find = typename detail::find_if_impl<Predicate, Sequence>;
 }
 
 // find uses Predicate, it's very effective
-template <typename Sequence, typename Predicate = detail::non_null>
-using find = typename ::brigand::lazy::find<Sequence, Predicate>::type;
+template <typename Sequence, typename Predicate = brigand::detail::non_null>
+using find = typename lazy::find<Sequence, Predicate>::type;
 
 namespace lazy
 {
