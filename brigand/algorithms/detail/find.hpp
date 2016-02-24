@@ -25,7 +25,7 @@ namespace detail
         template <bool C, bool F, typename... Ts>
         struct find
         {
-            using type = Sequence<Ts...>;
+            using type = Sequence<>;
         };
 
         // found it, terminate
