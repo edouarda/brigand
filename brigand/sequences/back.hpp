@@ -6,6 +6,7 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/types/voidp.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/last_element.hpp>
 
@@ -31,10 +32,11 @@ namespace brigand
   {
     template<class L> struct back_impl;
 
-    template<template<class...> class L, class... U>
-    struct back_impl<L<U...>>
+    template<template<class...> class L, class T, class... Ts>
+    struct back_impl<L<T, Ts...>>
     {
-      using type = typename last_element<U...>::type;
+      template<class U> static U back(typename voidp<Ts>::type..., U*);
+      using type = decltype(back(nullptr, static_cast<Ts*>(nullptr)...));
     };
 
   }

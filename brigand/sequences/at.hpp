@@ -9,13 +9,12 @@
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/range.hpp>
 #include <brigand/types/type.hpp>
+#include <brigand/types/voidp.hpp>
 
 namespace brigand
 {
   namespace detail
   {
-    template<class> struct voidp { using type = void const *; };
-
     template<class T> struct element_at;
 
     template<template<typename...> class L, class... N>
