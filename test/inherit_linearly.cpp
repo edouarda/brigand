@@ -22,7 +22,7 @@ static_assert(
                  brigand::inherit_linearly<l1, f<brigand::_element, brigand::_state>>>::value,
     "invalid inherit_linearly");
 
-using l2 = brigand::custom_list<int, char const *, bool>;
+using l2 = custom_list<int, char const *, bool>;
 using eb2 = brigand::empty_base;
 
 static_assert(
