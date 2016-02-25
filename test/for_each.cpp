@@ -5,35 +5,46 @@
 
 struct value_printer
 {
-  value_printer() : i{0}, res{1} {}
+    value_printer() : i{0}, res{1} {}
 
-  template< typename U > void operator()(brigand::type_<U>)
-  {
-    res *= sizeof(U);
-    i++;
-  }
+    template <typename U>
+    void operator()(brigand::type_<U>)
+    {
+        res *= sizeof(U);
+        i++;
+    }
 
-  int i,res;
+    int i, res;
 };
 
 struct evil
 {
-  template< typename U > evil const& operator()(brigand::type_<U>) const {  return *this;  }
+    template <typename U>
+    evil const & operator()(brigand::type_<U>) const
+    {
+        return *this;
+    }
 
-  evil& operator, (int) { return *this; } // evil operator comma
+    evil & operator,(int) { return *this; } // evil operator comma
 };
 
 void for_each_test()
 {
-  // test regular cases
-  auto r = brigand::for_each< brigand::list<char,short,int,double> >( value_printer{} );
-  assert(r.res == 64);
-  assert(r.i   ==  4);
+    // test regular cases
+    auto r = brigand::for_each<brigand::list<char, short, int, double>>(value_printer{});
+    assert(r.res == 64);
+    assert(r.i == 4);
 
-  // test issues with comma operator
-  brigand::for_each< brigand::list<char,void,int,double> >( evil{} );
+    // test with custom list
+	template <class ...> class custom_list;
+	auto r = brigand::for_each<custom_list<char, short, int, double>>(value_printer{});
+    assert(r.res == 64);
+    assert(r.i == 4);
 
-  r = brigand::for_each< brigand::list<evil,evil,evil> >( value_printer{} );
-  assert(r.res ==  1);
-  assert(r.i   ==  3);
+    // test issues with comma operator
+    brigand::for_each<brigand::list<char, void, int, double>>(evil{});
+
+    r = brigand::for_each<brigand::list<evil, evil, evil>>(value_printer{});
+    assert(r.res == 1);
+    assert(r.i == 3);
 }
