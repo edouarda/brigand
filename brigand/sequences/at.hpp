@@ -14,23 +14,22 @@ namespace brigand
 {
   namespace detail
   {
-    template<typename T> struct element_at;
+    template<class> struct voidp { using type = void const *; };
 
-    template<typename T> struct ignore { template<typename U> ignore(U&&); };
+    template<class T> struct element_at;
 
-    template<template<typename...> class L, typename... N>
+    template<template<typename...> class L, class... N>
     struct element_at<L<N...>>
     {
-      template<typename T> type_<T> operator()(ignore<N>..., type_<T>, ...);
+      template<typename T> T static at(typename voidp<N>::type..., T*, ...);
     };
 
-    template<std::size_t N, typename Seq> struct at_impl;
+    template<int N, typename Seq> struct at_impl;
 
-    template<std::size_t N, template<typename...> class L, typename... Ts >
+    template<int N, template<typename...> class L, class... Ts >
     struct at_impl<N,L<Ts...>>
     {
-      using base = decltype(element_at<brigand::range<int,0,N>>()(brigand::type_<Ts>()...));
-      using type = typename base::type;
+      using type = decltype(element_at<range<int,0,N>>::at(static_cast<Ts*>(nullptr)...));
     };
   }
 
