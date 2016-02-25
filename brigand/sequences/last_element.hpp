@@ -32,4 +32,11 @@ namespace brigand { namespace detail
 
     using type = decltype(last(nullptr, static_cast<Ts*>(nullptr)...));
   };
+
+  // fix msvc 2013
+  template<class T>
+  struct last_element<T>
+  {
+    using type = T;
+  };
 } }
