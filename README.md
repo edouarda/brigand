@@ -19,6 +19,8 @@ The documentation is available [here](https://github.com/edouarda/brigand/wiki).
 
 # Contributors
 
-We'd like to thank the following contributors:
+We'd like to thank the following contributors, in alphabetical order
 
+ * Odin Holmes
+ * Marek Kurdej
  * Jonathan Poelen
