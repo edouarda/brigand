@@ -22,60 +22,28 @@ namespace brigand { namespace detail
     using type = empty_sequence;
   };
 
-  // Provides fast-lane for 1-8 elements
-  template <class... R> struct last_element;
+  template<class> using voidp = void const *;
 
-  template <class T0>
-  struct last_element<T0>
+  template<class T, class... Ts>
+  struct last_element
   {
-    using type = T0;
+    template<class Us>
+    static Us last(voidp<Ts>..., Us*);
+
+    using type = decltype(last(nullptr, static_cast<Ts*>(nullptr)...));
   };
 
-  template <class T0,class T1>
-  struct last_element<T0,T1>
+  // fix msvc 2013
+  template<class T>
+  struct last_element<T>
   {
-    using type = T1;
+    using type = T;
   };
 
-  template <class T0,class T1,class T2>
-  struct last_element<T0,T1,T2>
+  // fix msvc 2013
+  template<class T, class U>
+  struct last_element<T, U>
   {
-    using type = T2;
-  };
-
-  template <class T0,class T1,class T2,class T3>
-  struct last_element<T0,T1,T2,T3>
-  {
-    using type = T3;
-  };
-
-  template <class T0,class T1,class T2,class T3,class T4>
-  struct last_element<T0,T1,T2,T3,T4>
-  {
-    using type = T4;
-  };
-
-  template <class T0,class T1,class T2,class T3,class T4,class T5>
-  struct last_element<T0,T1,T2,T3,T4,T5>
-  {
-    using type = T5;
-  };
-
-  template <class T0,class T1,class T2,class T3,class T4,class T5,class T6>
-  struct last_element<T0,T1,T2,T3,T4,T5,T6>
-  {
-    using type = T6;
-  };
-
-  template <class T0,class T1,class T2,class T3,class T4,class T5,class T6,class T7>
-  struct last_element<T0,T1,T2,T3,T4,T5,T6,T7>
-  {
-    using type = T7;
-  };
-
-  template <class T0,class T1,class T2,class T3,class T4,class T5,class T6,class T7,class... R>
-  struct last_element<T0,T1,T2,T3,T4,T5,T6,T7,R...>
-  {
-    using type = typename last_element<R...>::type;
+    using type = U;
   };
 } }
