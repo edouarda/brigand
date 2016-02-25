@@ -47,4 +47,4 @@ using ordered_result = brigand::if_<
     brigand::times<brigand::_state, brigand::_element>,
    brigand::plus<brigand::_state, brigand::_element>>;
 
-static_assert(brigand::fold<big_fat_list, brigand::int32_t<0>, ordered_result>::value == 1265, "invalid fold on empty list");
+static_assert(brigand::fold<big_fat_list, brigand::int32_t<0>, ordered_result>::value == 1265, "invalid fold result");
