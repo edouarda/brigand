@@ -22,11 +22,13 @@ namespace brigand { namespace detail
     using type = empty_sequence;
   };
 
+  template<class> using voidp = void const *;
+
   template<class T, class... Ts>
   struct last_element
   {
     template<class Us>
-    static Us last(decltype(static_cast<void const*>(static_cast<Ts*>(nullptr)))..., Us*);
+    static Us last(voidp<Ts>..., Us*);
 
     using type = decltype(last(nullptr, static_cast<Ts*>(nullptr)...));
   };
