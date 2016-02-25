@@ -28,6 +28,11 @@ struct evil
     evil & operator,(int) { return *this; } // evil operator comma
 };
 
+template <class...>
+class custom_list
+{
+};
+
 void for_each_test()
 {
     // test regular cases
@@ -36,10 +41,9 @@ void for_each_test()
     assert(r.i == 4);
 
     // test with custom list
-	template <class ...> class custom_list;
-	auto r = brigand::for_each<custom_list<char, short, int, double>>(value_printer{});
-    assert(r.res == 64);
-    assert(r.i == 4);
+    auto r2 = brigand::for_each<custom_list<char, short, int, double>>(value_printer{});
+    assert(r2.res == 64);
+    assert(r2.i == 4);
 
     // test issues with comma operator
     brigand::for_each<brigand::list<char, void, int, double>>(evil{});
