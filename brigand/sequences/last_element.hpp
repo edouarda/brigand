@@ -39,4 +39,11 @@ namespace brigand { namespace detail
   {
     using type = T;
   };
+
+  // fix msvc 2013
+  template<class T, class U>
+  struct last_element<T, U>
+  {
+    using type = U;
+  };
 } }
