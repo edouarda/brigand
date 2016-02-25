@@ -48,3 +48,8 @@ using ordered_result = brigand::if_<
    brigand::plus<brigand::_state, brigand::_element>>;
 
 static_assert(brigand::fold<big_fat_list, brigand::int32_t<0>, ordered_result>::value == 1265, "invalid fold result");
+
+
+template <class ...> class custom_list;
+using list12_custom = custom_list<float, double, float, double, float, double, float, double, float, double, float, double>;
+static_assert(brigand::fold<list12_custom, c88, f_>::value == 100, "invalid fold with custom sequence");
