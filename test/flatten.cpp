@@ -29,3 +29,11 @@ using proper_filter = brigand::list<std::vector<char>, std::string, flat_seq>;
 using flat_proper_filter = brigand::list<std::vector<char>, std::string, char, bool, int>;
 
 static_assert(std::is_same<brigand::flatten<proper_filter>, flat_proper_filter>::value, "invalid flatten on heterogenous sequence");
+
+template <class ...> class custom_list;
+
+using flat_seq_custom = custom_list<char, bool, int>;
+using one_level_custom = custom_list<custom_list<char, bool, int>, flat_seq_custom, char, char>;
+using flat_one_level_custom = custom_list<char, bool, int, char, bool, int, char, char>;
+
+static_assert(std::is_same<brigand::flatten<one_level_custom>, flat_one_level_custom>::value, "invalid flatten on three levels sequence");
