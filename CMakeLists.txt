@@ -189,6 +189,7 @@ set(TYPES_GROUP
     brigand/types/no_such_type.hpp
     brigand/types/type.hpp
     brigand/types/real.hpp
+    brigand/types/voidp.hpp
 )
 
 set(PLACEHOLDER_GROUP brigand/nothing.cpp)
