@@ -12,23 +12,18 @@ namespace brigand
 {
   namespace detail
   {
-    template<template<class ...> class Metafunction,typename Us, typename If = void>
-    struct quote_impl;
-
-    template< template<class ...> class Metafunction
-            , template<class...> class L, typename... Us
-            , typename If
-            >
-    struct quote_impl<Metafunction,L<Us...>, If>
+    template<template<class ...> class Metafunction, typename If, typename... Us>
+    struct quote_impl
     {
       using type = Metafunction<Us...>;
     };
 
     template< template<class ...> class Metafunction
-            , template<class...> class L, typename... Us
+            , typename... Us
             >
-    struct quote_impl < Metafunction, L<Us...>
+    struct quote_impl < Metafunction
                 , typename has_type<typename Metafunction<Us...>::type>::type
+                , Us...
                 >
     {
       using type = typename Metafunction<Us...>::type;
@@ -38,6 +33,6 @@ namespace brigand
 
   template<template<class ...> class Metafunction> struct quote
   {
-    template<typename... Us> struct apply : detail::quote_impl<Metafunction,list<Us...>> {};
+    template<typename... Us> struct apply : detail::quote_impl<Metafunction, void, Us...> {};
   };
 }
