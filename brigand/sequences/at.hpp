@@ -6,8 +6,8 @@
 =================================================================================================**/
 #pragma once
 #include <brigand/sequences/map.hpp>
+#include <brigand/sequences/filled_list.hpp>
 #include <brigand/sequences/list.hpp>
-#include <brigand/sequences/range.hpp>
 #include <brigand/types/type.hpp>
 
 namespace brigand
@@ -29,7 +29,7 @@ namespace brigand
     template<std::size_t N, template<typename...> class L, typename... Ts >
     struct at_impl<N,L<Ts...>>
     {
-      using base = decltype(element_at<brigand::range<int,0,N>>()(brigand::type_<Ts>()...));
+      using base = decltype(element_at<brigand::filled_list<int,N>>()(brigand::type_<Ts>()...));
       using type = typename base::type;
     };
   }
