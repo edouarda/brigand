@@ -9,6 +9,7 @@
 #include <brigand/functions/lambda/apply.hpp>
 #include <brigand/algorithms/wrap.hpp>
 #include <brigand/algorithms/transform.hpp>
+#include <brigand/sequences/append.hpp>
 #include <brigand/sequences/clear.hpp>
 #include <type_traits>
 
