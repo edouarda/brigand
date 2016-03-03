@@ -12,7 +12,7 @@
 
 namespace brigand
 {
-  template<typename... T> struct has_placeholders;
+	template<typename... T> struct has_placeholders : std::false_type {};
 
   template<typename T> struct has_placeholders<T> : is_placeholder<T> {};
 
