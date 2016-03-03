@@ -61,24 +61,19 @@ using remove_if = typename ::brigand::lazy::remove_if<L, Pred>::type;
 
 namespace detail
 {
+	template <typename T, typename U>
+	struct  remove_pred{
+		using type = brigand::list<U>;
+	};
 	template <typename T>
-	struct remove_pred{
-		template <typename U>
-		struct apply
-		{
-			using type = brigand::list<U>;
-		};
-		template <>
-		struct apply<T>
-		{
-			using type = brigand::list<>;
-		};
+	struct remove_pred<T,T>{
+		using type = brigand::list<>;
 	};
 }
 namespace lazy
 {
     template <typename L, typename T>
-    using remove = brigand::wrap<brigand::append<brigand::list<brigand::clear<L>>,brigand::transform<L, detail::remove_pred<T>>>, brigand::append>;
+    using remove = brigand::wrap<brigand::append<brigand::list<brigand::clear<L>>,brigand::transform<L, detail::remove_pred<T,brigand::_1>>>, brigand::append>;
 }
 
 template <typename L, typename T>
