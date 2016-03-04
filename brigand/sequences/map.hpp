@@ -9,8 +9,8 @@
 #include <brigand/types/type.hpp>
 #include <brigand/sequences/pair.hpp>
 #include <brigand/types/no_such_type.hpp>
-#include <brigand/types/bool.hpp>
 #include <brigand/algorithms/wrap.hpp>
+#include <brigand/functions/lambda/apply.hpp>
 
 namespace brigand
 {
@@ -23,11 +23,13 @@ namespace brigand
 
 namespace detail
 {
-    template<class P, class F> struct update_elem;
+    template<class P, class F>
+    struct update_elem;
+
     template< template<class, class> class Pair, class K, class V, class F >
     struct update_elem< Pair<K,V>, F >
     {
-        using NewValue = typename F::template apply<V>::type;
+        using NewValue = brigand::apply<F, V>;
         using type = typename std::conditional<
                          std::is_same<NewValue, no_such_type_ >::value,
                          no_such_type_,
@@ -58,8 +60,8 @@ namespace detail
         static map_impl<> alter_impl(no_such_type_);
 
         template<class K, class F>
-        static decltype( alter_impl( typename update_elem< pair<K, no_such_type_>, F>::type {} ) )
-            alter( type_<K>, type_<F> );
+        static auto alter( type_<K>, type_<F> ) ->
+            decltype( alter_impl( typename update_elem< pair<K, no_such_type_>, F>::type {} ) );
     };
 
     template<class T0>
@@ -76,12 +78,12 @@ namespace detail
         static map_impl<> alter_impl(no_such_type_);
 
         template<class K, class F>
-        static decltype( alter_impl( typename update_elem< pair<K, no_such_type_>, F >::type {} ))
-             alter( type_<K>, type_<F> );
+        static auto alter( type_<K>, type_<F> ) ->
+            decltype( alter_impl( typename update_elem< pair<K, no_such_type_>, F >::type {} ));
 
         template<class F>
-        static decltype( alter_impl( typename update_elem< T0, F >::type {} ))
-             alter( type_<typename T0::first_type>, type_<F> );
+        static auto alter( type_<typename T0::first_type>, type_<F> ) ->
+            decltype( alter_impl( typename update_elem< T0, F >::type {} ));
     };
 
     template<class T0, class T1, class ... Ts>
@@ -100,19 +102,20 @@ namespace detail
         using remapped = map_impl<T0, T1, Us ... >;
 
         template<class K, class F>
-        static wrap<
-            decltype(map_alterer<Ts...>::alter(type_<K>{}, type_<F>{}) ),
-            remapped > alter(type_<K>, type_<F> );
+        static auto alter(type_<K>, type_<F> ) ->
+            wrap<
+                decltype(map_alterer<Ts...>::alter(type_<K>{}, type_<F>{}) ),
+                remapped >;
 
         template<class F>
-        static decltype(alter_impl( type_<typename T0::first_type>{},
-                                    typename update_elem<T0, F>::type{} ))
-            alter(type_<typename T0::first_type>, type_<F> );
+        static auto alter(type_<typename T0::first_type>, type_<F> ) ->
+            decltype(alter_impl( type_<typename T0::first_type>{},
+                                 typename update_elem<T0, F>::type{} ));
 
         template<class F>
-        static decltype(alter_impl( type_<typename T1::first_type>{},
-                                    typename update_elem<T1, F>::type{} ))
-            alter(type_<typename T1::first_type>, type_<F> );
+        static auto alter(type_<typename T1::first_type>, type_<F> ) ->
+            decltype(alter_impl( type_<typename T1::first_type>{},
+                                 typename update_elem<T1, F>::type{} ));
     };
 
     template <class... T>

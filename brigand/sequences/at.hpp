@@ -5,13 +5,16 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <brigand/sequences/map.hpp>
 #include <brigand/sequences/filled_list.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/type.hpp>
 
 namespace brigand
 {
+  template <typename M, typename K>
+  using lookup = decltype(M::at(type_<K>{}));
+
+
   namespace detail
   {
     template<typename T> struct element_at;
