@@ -9,6 +9,8 @@
 #include <brigand/types/type.hpp>
 #include <brigand/sequences/pair.hpp>
 #include <brigand/types/no_such_type.hpp>
+#include <brigand/types/bool.hpp>
+#include <brigand/algorithms/wrap.hpp>
 
 namespace brigand
 {
@@ -16,8 +18,22 @@ namespace brigand
     template <typename M, typename K>
     using lookup = decltype(M::at(type_<K>{}));
 
+    template <typename M, typename K, typename F>
+    using alter = decltype(M::alter(type_<K>{}, type_<F>{}));
+
 namespace detail
 {
+    template<class P, class F> struct update_elem;
+    template< template<class, class> class Pair, class K, class V, class F >
+    struct update_elem< Pair<K,V>, F >
+    {
+        using NewValue = typename F::template apply<V>::type;
+        using type = typename std::conditional<
+                         std::is_same<NewValue, no_such_type_ >::value,
+                         no_such_type_,
+                         Pair<K, NewValue> >::type;
+    };
+
     template <class... T>
     struct map_impl;
 
@@ -28,6 +44,75 @@ namespace detail
         using map_type = map_impl<T...>;
         using find_result = lookup<map_type, index_type>;
         using type = decltype(map_type::template insert_impl<K>(find_result{}));
+    };
+
+    template<class ... >
+    struct map_alterer;
+
+    template<>
+    struct map_alterer<>
+    {
+        template<class N>
+        static map_impl< N > alter_impl(N);
+
+        static map_impl<> alter_impl(no_such_type_);
+
+        template<class K, class F>
+        static decltype( alter_impl( typename update_elem< pair<K, no_such_type_>, F>::type {} ) )
+            alter( type_<K>, type_<F> );
+    };
+
+    template<class T0>
+    struct map_alterer<T0>
+    {
+        template<class N>
+        static map_impl< N > alter_impl(type_<typename T0::first_type>, N);
+
+        static map_impl<> alter_impl(type_<typename T0::first_type>, no_such_type_);
+
+        template<class N>
+        static map_impl< N > alter_impl(N);
+
+        static map_impl<> alter_impl(no_such_type_);
+
+        template<class K, class F>
+        static decltype( alter_impl( typename update_elem< pair<K, no_such_type_>, F >::type {} ))
+             alter( type_<K>, type_<F> );
+
+        template<class F>
+        static decltype( alter_impl( typename update_elem< T0, F >::type {} ))
+             alter( type_<typename T0::first_type>, type_<F> );
+    };
+
+    template<class T0, class T1, class ... Ts>
+    struct map_alterer<T0, T1, Ts ... >
+    {
+        template<class N>
+        static map_impl< N, T1, Ts ... > alter_impl(type_<typename T0::first_type>, N);
+
+        template<class N>
+        static map_impl< T0, N, Ts ... > alter_impl(type_<typename T1::first_type>, N);
+
+        static map_impl<T1, Ts ...> alter_impl(type_<typename T0::first_type>, no_such_type_);
+        static map_impl<T0, Ts ...> alter_impl(type_<typename T1::first_type>, no_such_type_);
+
+        template<class ... Us>
+        using remapped = map_impl<T0, T1, Us ... >;
+
+        template<class K, class F>
+        static wrap<
+            decltype(map_alterer<Ts...>::alter(type_<K>{}, type_<F>{}) ),
+            remapped > alter(type_<K>, type_<F> );
+
+        template<class F>
+        static decltype(alter_impl( type_<typename T0::first_type>{},
+                                    typename update_elem<T0, F>::type{} ))
+            alter(type_<typename T0::first_type>, type_<F> );
+
+        template<class F>
+        static decltype(alter_impl( type_<typename T1::first_type>{},
+                                    typename update_elem<T1, F>::type{} ))
+            alter(type_<typename T1::first_type>, type_<F> );
     };
 
     template <class... T>
@@ -51,11 +136,14 @@ namespace detail
 
         template <class K>
         static map_impl<K> insert(type_<K>);
+
+        template<class F, class K>
+        static map_impl<> update( type_<K>, type_<F> );
     };
 
     // fastlane for constant amortized time
     template <class T0>
-    struct map_impl<T0> : map_inserter<T0>
+    struct map_impl<T0> : map_inserter<T0>, map_alterer<T0>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
 
@@ -64,7 +152,7 @@ namespace detail
     };
 
     template <class T0, class T1>
-    struct map_impl<T0, T1> : map_inserter<T0, T1>
+    struct map_impl<T0, T1> : map_inserter<T0, T1>, map_alterer<T0, T1>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);
@@ -74,7 +162,7 @@ namespace detail
     };
 
     template <class T0, class T1, class T2>
-    struct map_impl<T0, T1, T2> : map_inserter<T0, T1, T2>
+    struct map_impl<T0, T1, T2> : map_inserter<T0, T1, T2>, map_alterer<T0, T1, T2>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);
@@ -85,7 +173,8 @@ namespace detail
     };
 
     template <class T0, class T1, class T2, class T3>
-    struct map_impl<T0, T1, T2, T3> : map_inserter<T0, T1, T2, T3>
+    struct map_impl<T0, T1, T2, T3> : map_inserter<T0, T1, T2, T3>,
+                                      map_alterer<T0, T1, T2, T3>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);
@@ -97,7 +186,8 @@ namespace detail
     };
 
     template <class T0, class T1, class T2, class T3, class T4>
-    struct map_impl<T0, T1, T2, T3, T4> : map_inserter<T0, T1, T2, T3, T4>
+    struct map_impl<T0, T1, T2, T3, T4> : map_inserter<T0, T1, T2, T3, T4>,
+                                          map_alterer<T0, T1, T2, T3, T4>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);
@@ -110,7 +200,8 @@ namespace detail
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5>
-    struct map_impl<T0, T1, T2, T3, T4, T5> : map_inserter<T0, T1, T2, T3, T4, T5>
+    struct map_impl<T0, T1, T2, T3, T4, T5> : map_inserter<T0, T1, T2, T3, T4, T5>,
+                                              map_alterer<T0, T1, T2, T3, T4, T5>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);
@@ -124,7 +215,8 @@ namespace detail
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6>
-    struct map_impl<T0, T1, T2, T3, T4, T5, T6> : map_inserter<T0, T1, T2, T3, T4, T5, T6>
+    struct map_impl<T0, T1, T2, T3, T4, T5, T6> : map_inserter<T0, T1, T2, T3, T4, T5, T6>,
+                                                  map_alterer<T0, T1, T2, T3, T4, T5, T6>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);
@@ -139,7 +231,8 @@ namespace detail
     };
 
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
-    struct map_impl<T0, T1, T2, T3, T4, T5, T6, T7> : map_inserter<T0, T1, T2, T3, T4, T5, T6, T7>
+    struct map_impl<T0, T1, T2, T3, T4, T5, T6, T7> : map_inserter<T0, T1, T2, T3, T4, T5, T6, T7>,
+                                                      map_alterer<T0, T1, T2, T3, T4, T5, T6, T7>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);
@@ -156,7 +249,8 @@ namespace detail
 
 
     template <class T0, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class... T>
-    struct map_impl<T0, T1, T2, T3, T4, T5, T6, T7, T...> : map_inserter<T0, T1, T2, T3, T4, T5, T6, T7, T...>
+    struct map_impl<T0, T1, T2, T3, T4, T5, T6, T7, T...> : map_inserter<T0, T1, T2, T3, T4, T5, T6, T7, T...>,
+                                                            map_alterer<T0, T1, T2, T3, T4, T5, T6, T7, T...>
     {
         static typename T0::second_type at(type_<typename T0::first_type>);
         static typename T1::second_type at(type_<typename T1::first_type>);

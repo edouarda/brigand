@@ -4,6 +4,7 @@
 #include <brigand/sequences/size.hpp>
 #include <brigand/sequences/at.hpp>
 #include <brigand/sequences/insert.hpp>
+#include <brigand/functions/lambda/quote.hpp>
 
 static_assert(brigand::detail::has_at_method<brigand::map<>>::value, "at not detected!");
 
@@ -96,3 +97,54 @@ static_assert(std::is_same<brigand::insert<big_map, pair_seven>, big_map>::value
 static_assert(std::is_same<brigand::insert<big_map, pair_eight>, big_map>::value, "insertion failed");
 static_assert(std::is_same<brigand::insert<big_map, pair_nine>, big_map>::value, "insertion failed");
 static_assert(std::is_same<brigand::insert<big_map, pair_ten>, big_map>::value, "insertion failed");
+
+//
+static_assert(std::is_same<brigand::alter<map_test, int, brigand::quote<std::add_pointer> >,
+                           brigand::map< brigand::pair<int, bool*>, brigand::pair<char,int> > >::value, "alter failed");
+
+static_assert(std::is_same<brigand::alter<map_test, long, brigand::quote<std::add_pointer> >,
+                           brigand::map< brigand::pair<int, bool>, brigand::pair<char,int>, brigand::pair<long,brigand::no_such_type_*> > >::value, "alter failed");
+
+static_assert(std::is_same<brigand::alter<big_map, type_seven, brigand::quote<std::add_pointer> >,
+                           brigand::map<
+                                brigand::pair<type_one, int>,
+                                brigand::pair<type_two, type_one>,
+                                brigand::pair<type_three, type_two>,
+                                brigand::pair<type_four, type_three>,
+                                brigand::pair<type_five, type_four>,
+                                brigand::pair<type_six, type_five>,
+                                brigand::pair<type_seven, type_six*>,
+                                brigand::pair<type_eight, type_seven>,
+                                brigand::pair<type_nine, type_eight>,
+                                brigand::pair<void, float****>
+                           >
+                    >::value, "alter failed");
+
+struct remove_type_three
+{
+    template<class T, class = void>
+    struct apply
+    {
+        typedef T type;
+    };
+
+    template<class X>
+    struct apply<type_three, X>
+    {
+        typedef brigand::no_such_type_ type;
+    };
+};
+
+static_assert(std::is_same<brigand::alter<big_map, type_four, remove_type_three >,
+                           brigand::map<
+                                brigand::pair<type_one, int>,
+                                brigand::pair<type_two, type_one>,
+                                brigand::pair<type_three, type_two>,
+                                brigand::pair<type_five, type_four>,
+                                brigand::pair<type_six, type_five>,
+                                brigand::pair<type_seven, type_six>,
+                                brigand::pair<type_eight, type_seven>,
+                                brigand::pair<type_nine, type_eight>,
+                                brigand::pair<void, float****>
+                           >
+                    >::value, "alter failed");
