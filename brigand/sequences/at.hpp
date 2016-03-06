@@ -23,16 +23,16 @@ namespace brigand
       template<typename T> T static at(typename voidp<N>::type..., T*, ...);
     };
 
-    template<int N, typename Seq> struct at_impl;
+    template<std::size_t N, typename Seq> struct at_impl;
 
-    template<int N, template<typename...> class L, class... Ts>
+    template<std::size_t N, template<typename...> class L, class... Ts>
     struct at_impl<N,L<Ts...>>
     {
       using type = decltype(element_at<brigand::filled_list<int,N>>::at(static_cast<Ts*>(nullptr)...));
     };
   }
 
-  template <class L, int Index>
+  template <class L, std::size_t Index>
   using at_c = typename detail::at_impl<Index, L>::type;
 
 namespace detail
