@@ -9,7 +9,6 @@
 #include <brigand/sequences/filled_list.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/type.hpp>
-#include <brigand/types/voidp.hpp>
 
 namespace brigand
 {
@@ -17,10 +16,10 @@ namespace brigand
   {
     template<class T> struct element_at;
 
-    template<template<typename...> class L, class... N>
-    struct element_at<L<N...>>
+    template<class... Ts>
+    struct element_at<list<Ts...>>
     {
-      template<typename T> T static at(typename voidp<N>::type..., T*, ...);
+      template<class T> T static at(Ts..., T*, ...);
     };
 
     template<std::size_t N, typename Seq> struct at_impl;
@@ -28,7 +27,7 @@ namespace brigand
     template<std::size_t N, template<typename...> class L, class... Ts>
     struct at_impl<N,L<Ts...>>
     {
-      using type = decltype(element_at<brigand::filled_list<int,N>>::at(static_cast<Ts*>(nullptr)...));
+      using type = decltype(element_at<brigand::filled_list<void const *, N>>::at(static_cast<Ts*>(nullptr)...));
     };
   }
 
