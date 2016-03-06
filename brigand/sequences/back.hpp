@@ -44,21 +44,6 @@ namespace brigand
   template <class L>
   using back = typename detail::back_impl<L>::type;
 
-  // pop back
-  namespace detail
-  {
-    template <class L> struct pop_back_impl;
-
-    template<template<class...> class L, class... U>
-    struct pop_back_impl<L<U...>>
-    {
-        using type = typename without_last_element<L, U...>::type;
-    };
-  }
-
-  template <class L>
-  using pop_back = typename detail::pop_back_impl<L>::type;
-
   // pop back n
   namespace detail
   {
@@ -93,4 +78,8 @@ namespace brigand
 
   template <class L, class I>
   using pop_back_n = typename detail::pop_back_n_impl<L, I::value>::type;
+
+  // pop back
+  template <class L>
+  using pop_back = typename detail::pop_back_n_impl<L, 1>::type;
 }
