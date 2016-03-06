@@ -59,35 +59,68 @@ static_assert(std::is_same<brigand::pop_back<single_int_list>, brigand::empty_se
               "invalid pop back result");
 
 static_assert(std::is_same<brigand::pop_front_n_c<int_bool_list, 0>, int_bool_list>::value,
-              "invalid pop front result");
+              "invalid pop front n result");
 static_assert(std::is_same<brigand::pop_front_n_c<int_bool_list, 1>, brigand::list<bool>>::value,
-              "invalid pop front result");
+              "invalid pop front n result");
 static_assert(std::is_same<brigand::pop_front_n_c<int_bool_list, 2>, brigand::list<>>::value,
-              "invalid pop front result");
+              "invalid pop front n result");
 static_assert(std::is_same<brigand::pop_front_n_c<int_bool_list, 3>, brigand::list<>>::value,
-              "invalid pop front result");
+              "invalid pop front n result");
 
 static_assert(
     std::is_same<brigand::pop_front_n_c<int_bool_bool_int_list, 1>, brigand::list<bool, bool, int>>::value,
-    "invalid pop front result");
+    "invalid pop front n result");
 static_assert(
     std::is_same<brigand::pop_front_n_c<int_bool_bool_int_list, 3>, brigand::list<int>>::value,
-    "invalid pop front result");
+    "invalid pop front n result");
 static_assert(
     std::is_same<brigand::pop_front_n_c<int_bool_bool_int_list, 4>, brigand::list<>>::value,
-    "invalid pop front result");
+    "invalid pop front n result");
 static_assert(
     std::is_same<brigand::pop_front_n_c<int_bool_bool_int_list, 5>, brigand::list<>>::value,
-    "invalid pop front result");
+    "invalid pop front n result");
 
 static_assert(
     std::is_same<brigand::pop_front_n_c<int_bool_bool_int_list, 3>, brigand::pop_front_n<int_bool_bool_int_list, std::integral_constant<int, 3>>>::value,
-    "invalid pop front result");
+    "invalid pop front n result");
 
 static_assert(std::is_same<brigand::pop_front_n_c<brigand::empty_sequence, 0>, brigand::empty_sequence>::value,
-              "invalid pop front result");
+              "invalid pop front n result");
 static_assert(std::is_same<brigand::pop_front_n_c<brigand::empty_sequence, 1>, brigand::empty_sequence>::value,
-              "invalid pop front result");
+              "invalid pop front n result");
+
+
+static_assert(std::is_same<brigand::pop_back_n_c<int_bool_list, 0>, int_bool_list>::value,
+              "invalid pop back n result");
+static_assert(std::is_same<brigand::pop_back_n_c<int_bool_list, 1>, brigand::list<int>>::value,
+              "invalid pop back n result");
+static_assert(std::is_same<brigand::pop_back_n_c<int_bool_list, 2>, brigand::list<>>::value,
+              "invalid pop back n result");
+static_assert(std::is_same<brigand::pop_back_n_c<int_bool_list, 3>, brigand::list<>>::value,
+              "invalid pop back n result");
+
+static_assert(
+    std::is_same<brigand::pop_back_n_c<int_bool_bool_int_list, 1>, brigand::list<int, bool, bool>>::value,
+    "invalid pop back n result");
+static_assert(
+    std::is_same<brigand::pop_back_n_c<int_bool_bool_int_list, 3>, brigand::list<int>>::value,
+    "invalid pop back n result");
+static_assert(
+    std::is_same<brigand::pop_back_n_c<int_bool_bool_int_list, 4>, brigand::list<>>::value,
+    "invalid pop back n result");
+static_assert(
+    std::is_same<brigand::pop_back_n_c<int_bool_bool_int_list, 5>, brigand::list<>>::value,
+    "invalid pop back n result");
+
+static_assert(
+    std::is_same<brigand::pop_back_n_c<int_bool_bool_int_list, 3>, brigand::pop_back_n<int_bool_bool_int_list, std::integral_constant<int, 3>>>::value,
+    "invalid pop back n result");
+
+static_assert(std::is_same<brigand::pop_back_n_c<brigand::empty_sequence, 0>, brigand::empty_sequence>::value,
+              "invalid pop back n result");
+static_assert(std::is_same<brigand::pop_back_n_c<brigand::empty_sequence, 1>, brigand::empty_sequence>::value,
+              "invalid pop back n result");
+
 
 static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 0>, int>::value,
               "invalid at result");
