@@ -6,6 +6,8 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/sequences/filled_list.hpp>
+
 namespace brigand
 {
   // push_front
@@ -52,4 +54,34 @@ namespace brigand
 
   template <class L>
   using pop_front = typename detail::pop_front_impl<L>::type;
+
+  // pop front n
+  namespace detail
+  {
+    template<class L, std::size_t N> struct pop_front_n_impl;
+
+    template<template<class...> class L, class> struct pop_element;
+
+    template<template<class...> class L, class... Ts>
+    struct pop_element<L, list<Ts...>>
+    {
+      template<class... Us>
+      static L<Us...> impl(Ts..., Us*...);
+    };
+
+    template<template<class...> class L, class... Ts, std::size_t N>
+    struct pop_front_n_impl<L<Ts...>, N>
+    {
+      using type = decltype(pop_element<L, filled_list<
+        void const *,
+        (N < sizeof...(Ts) ? N : sizeof...(Ts))
+      >>::impl(static_cast<Ts*>(nullptr)...));
+    };
+  }
+
+  template <class L, std::size_t N>
+  using pop_front_n_c = typename detail::pop_front_n_impl<L, N>::type;
+
+  template <class L, class I>
+  using pop_front_n = typename detail::pop_front_n_impl<L, I::value>::type;
 }
