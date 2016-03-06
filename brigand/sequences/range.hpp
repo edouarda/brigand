@@ -54,10 +54,16 @@ namespace brigand
     template<class T, T Start, class L, std::size_t N>
     struct reverse_range_adapt;
 
+    template<class T, T Start, T Int>
+    struct int_minus
+    {
+      using type = std::integral_constant<T, Start - Int>;
+    };
+
     template<class T, T Start, std::size_t... Ints, std::size_t N>
     struct reverse_range_adapt<T, Start, list<std::integral_constant<T, Ints>...>, N>
     {
-      using type = list<typename int_plus<T, T(N - Ints), Start>::type...>;
+      using type = list<typename int_minus<T, N + Start, Ints>::type...>;
     };
 
     template<class T, T Start, std::size_t N>
