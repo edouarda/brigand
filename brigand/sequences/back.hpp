@@ -67,8 +67,9 @@ namespace brigand
     {
       using type = typename pop_back_element<
         L<Ts...>,
-        range<std::size_t, 0, sizeof...(Ts)>,
-        range<std::size_t, 0, (N < sizeof...(Ts) ? sizeof...(Ts) - N : 0)>
+        // TODO replaced by range_impl (pull request #144)
+        make_sequence<std::integral_constant<std::size_t, 0>, sizeof...(Ts)>,
+        make_sequence<std::integral_constant<std::size_t, 0>, (N < sizeof...(Ts) ? sizeof...(Ts) - N : 0)>
       >::type;
     };
   }
