@@ -10,24 +10,48 @@
 
 namespace brigand
 {
-  template <class... L> struct append_impl;
+namespace detail
+{
+    template <typename... Ts>
+    struct append_impl
+    {
+        using type = brigand::empty_sequence;
+    };
 
-  template <class... L> using append = typename append_impl<L...>::type;
+    template <typename T>
+    struct append_impl<T>
+    {
+        using type = T;
+    };
 
-  template <> struct append_impl<>
-  {
-    using type = brigand::empty_sequence;
-  };
-
-  template<template<class...> class L, class... T>
-  struct append_impl<L<T...>>
-  {
-    using type = L<T...>;
-  };
-
-  template<template<class...> class L1, class... T1, template<class...> class L2, class... T2, class... Lr>
-  struct append_impl<L1<T1...>, L2<T2...>, Lr...>
-  {
-    using type = append<L1<T1..., T2...>, Lr...>;
-  };
+    template <template <typename...> class L1, template <typename...> class L2, typename... T1s,
+              typename... T2s, typename... Ts>
+    struct append_impl<L1<T1s...>, L2<T2s...>, Ts...> : append_impl<L1<T1s..., T2s...>, Ts...>
+    {
+    };
+    // fast track
+    template <template <typename...> class L, template <typename...> class L1,
+              template <typename...> class L2, template <typename...> class L3,
+              template <typename...> class L4, template <typename...> class L5,
+              template <typename...> class L6, template <typename...> class L7,
+              template <typename...> class L8, template <typename...> class L9,
+              template <typename...> class L10, template <typename...> class L11,
+              template <typename...> class L12, template <typename...> class L13,
+              template <typename...> class L14, template <typename...> class L15,
+              template <typename...> class L16, typename... Ts, typename... T1s, typename... T2s,
+              typename... T3s, typename... T4s, typename... T5s, typename... T6s, typename... T7s,
+              typename... T8s, typename... T9s, typename... T10s, typename... T11s,
+              typename... T12s, typename... T13s, typename... T14s, typename... T15s,
+              typename... T16s, typename... Us>
+    struct append_impl<L<Ts...>, L1<T1s...>, L2<T2s...>, L3<T3s...>, L4<T4s...>, L5<T5s...>,
+                     L6<T6s...>, L7<T7s...>, L8<T8s...>, L9<T9s...>, L10<T10s...>, L11<T11s...>,
+                     L12<T12s...>, L13<T13s...>, L14<T14s...>, L15<T15s...>, L16<T16s...>, Us...>
+        : append_impl<L<Ts..., T1s..., T2s..., T3s..., T4s..., T5s..., T6s..., T7s..., T8s...,
+                        T9s..., T10s..., T11s..., T12s..., T13s..., T14s..., T15s..., T16s...>,
+                      Us...>
+    {
+    };
+}
+template <typename... Ts>
+using append = typename detail::append_impl<Ts...>::type;
 }
