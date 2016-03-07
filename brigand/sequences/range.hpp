@@ -14,5 +14,5 @@ namespace brigand
     using range = make_sequence<std::integral_constant<T, Start>, Stop - Start>;
 
     template<class T, T Start, T Stop>
-    using reverse_range = make_sequence<std::integral_constant<T, Start>, Start - Stop, prev>;
+    using reverse_range = make_sequence<std::integral_constant<T, Start>, Start - Stop, quote<prev>>;
 }
