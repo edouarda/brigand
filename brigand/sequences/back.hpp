@@ -56,10 +56,15 @@ namespace brigand
     {
       struct Pack : pair<Ints, Ts>... {};
 
-      template<class Int, class T>
-      static T get_type(pair<Int, T>);
+      template<class Int>
+      struct get_type
+      {
+         template<class T>
+         static T impl(pair<Int, T>);
+         using type = decltype(impl(Pack()));
+       };
 
-      using type = L<decltype(get_type<I>(Pack()))...>;
+      using type = L<typename get_type<I>::type...>;
     };
 
     template<template<class...> class L, class... Ts, std::size_t N>
