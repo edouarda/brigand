@@ -6,9 +6,9 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/functions/lambda/apply.hpp>
-#include <brigand/algorithms/wrap.hpp>
 #include <brigand/algorithms/transform.hpp>
+#include <brigand/algorithms/wrap.hpp>
+#include <brigand/functions/lambda/apply.hpp>
 #include <brigand/sequences/append.hpp>
 #include <brigand/sequences/clear.hpp>
 #include <type_traits>
@@ -17,36 +17,33 @@ namespace brigand
 {
 namespace detail
 {
-    template <class L1, typename Pred, class L2 = clear<L1>>
-    struct remove_if_impl
+    template <bool B, typename T>
+    struct remove_if_wrap
     {
-        using type = L2;
+        using type = brigand::list<T>;
+    };
+    template <typename T>
+    struct remove_if_wrap<true, T>
+    {
+        using type = brigand::list<>;
     };
 
-    template <class L1, typename Pred, class L2, bool>
-    struct remove_if_shortcut;
-
-    template <template <class...> class L1, class T, class... Ts, typename Pred,
-              template <class...> class L2, class... Us>
-    struct remove_if_shortcut<L1<T, Ts...>, Pred, L2<Us...>, true>
-        : remove_if_impl<L1<Ts...>, Pred, L2<Us...>>
+    template <typename Pred, typename T> // MSVC work around
+    using remove_if_pred = brigand::apply<Pred, T>;
+    template <typename T,
+              typename U> // MSVC can't expand two instances of the same pack in one expression
+    struct call_remove_if_wrap
     {
+        using type = typename remove_if_wrap<remove_if_pred<T, U>::value, U>::type;
     };
 
-    template <template <class...> class L1, class T, class... Ts, typename Pred,
-              template <class...> class L2, class... Us>
-    struct remove_if_shortcut<L1<T, Ts...>, Pred, L2<Us...>, false>
-        : remove_if_impl<L1<Ts...>, Pred, L2<Us..., T>>
-    {
-    };
+    template <typename T, typename Pred>
+    struct remove_if_impl;
 
-    template <typename Pred, typename T>
-    using pred = brigand::apply<Pred, T>;
-
-    template <template <class...> class L1, class T, class... Ts, typename Pred, class L2>
-    struct remove_if_impl<L1<T, Ts...>, Pred, L2>
-        : remove_if_shortcut<L1<T, Ts...>, Pred, L2, bool(pred<Pred, T>::value)>
+    template <template <class...> class L, typename... Ts, typename Pred>
+    struct remove_if_impl<L<Ts...>, Pred>
     {
+        using type = brigand::append<L<>, typename call_remove_if_wrap<Pred, Ts>::type...>;
     };
 }
 
