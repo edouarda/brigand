@@ -6,21 +6,7 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/sequences/append.hpp>
-
 namespace brigand
 {
-namespace detail
-{
-    template <template <class...> class L, class First, class... R>
-    struct without_last_element
-    {
-        using type = append<L<First>, typename without_last_element<L, R...>::type>;
-    };
-
-    template <template <class...> class L, class Last>
-    struct without_last_element<L, Last>
-    {
-      using type = L<>;
-    };
-} }
+  template<typename T> struct voidp { using type = void const *; };
+}
