@@ -1,17 +1,10 @@
 #include <brigand/algorithms/remove.hpp>
-#include <brigand/algorithms/remove.hpp>
 #include <brigand/algorithms/wrap.hpp>
 #include <brigand/functions/logical/and.hpp>
-#include <brigand/functions/logical/and.hpp>
-#include <brigand/functions/logical/not.hpp>
 #include <brigand/functions/logical/not.hpp>
 #include <brigand/sequences/list.hpp>
-#include <brigand/sequences/list.hpp>
-#include <brigand/types/args.hpp>
 #include <brigand/types/args.hpp>
 #include <brigand/types/bool.hpp>
-#include <brigand/types/bool.hpp>
-#include <brigand/types/integer.hpp>#include <brigand/algorithms/remove.hpp>
 #include <brigand/types/integer.hpp>
 
 using remove_test_list = brigand::list<int, bool, int, char, float, double>;
