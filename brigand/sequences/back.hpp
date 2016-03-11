@@ -8,10 +8,9 @@
 
 #include <brigand/sequences/at.hpp>
 #include <brigand/sequences/list.hpp>
-#include <brigand/sequences/last_element.hpp>
-#include <brigand/sequences/pair.hpp>
-#include <brigand/sequences/range.hpp>
 #include <brigand/sequences/size.hpp>
+#include <brigand/sequences/front.hpp>
+#include <brigand/algorithms/split_at.hpp>
 
 namespace brigand
 {
@@ -33,48 +32,26 @@ namespace brigand
   template <class L>
   using back = at_c<L, size<L>::value-1>;
 
-  // pop back n
+  // pop back
   namespace detail
   {
-    template<class L, std::size_t N> struct pop_back_n_impl;
+    template<class L, class N>
+    struct pop_back_impl;
 
-    template<class L, class, class> struct pop_back_element;
-
-    template<template<class...> class L, class... Ts, class... Ints, class... I>
-    struct pop_back_element<L<Ts...>, list<Ints...>, list<I...>>
+    template<template<class...> class L, class... Ts>
+    struct pop_back_impl<L<Ts...>, void>
     {
-      struct Pack : pair<Ints, Ts>... {};
-
-      template<class Int>
-      struct get_type
-      {
-         template<class T>
-         static T impl(pair<Int, T>);
-         using type = decltype(impl(Pack()));
-       };
-
-      using type = L<typename get_type<I>::type...>;
+      using type = front<split_at<L<Ts...>, std::integral_constant<std::size_t, sizeof...(Ts)-1>>>;
     };
 
-    template<template<class...> class L, class... Ts, std::size_t N>
-    struct pop_back_n_impl<L<Ts...>, N>
+    template<template<class...> class L, class... Ts, class N>
+    struct pop_back_impl<L<Ts...>, N>
     {
-      using type = typename pop_back_element<
-        L<Ts...>,
-        // TODO replaced by range_impl (pull request #144)
-        make_sequence<std::integral_constant<std::size_t, 0>, sizeof...(Ts)>,
-        make_sequence<std::integral_constant<std::size_t, 0>, (N < sizeof...(Ts) ? sizeof...(Ts) - N : 0)>
-      >::type;
+      using type = front<split_at<L<Ts...>, std::integral_constant<std::size_t, (N::value < sizeof...(Ts) ? sizeof...(Ts) - N::value : 0)>>>;
     };
   }
 
-  template <class L, std::size_t N>
-  using pop_back_n_c = typename detail::pop_back_n_impl<L, N>::type;
-
-  template <class L, class I>
-  using pop_back_n = typename detail::pop_back_n_impl<L, I::value>::type;
-
   // pop back
-  template <class L>
-  using pop_back = typename detail::pop_back_n_impl<L, 1>::type;
+  template <class L, class N = void>
+  using pop_back = typename detail::pop_back_impl<L, N>::type;
 }

@@ -43,22 +43,13 @@ namespace brigand
   // pop front
   namespace detail
   {
-    template <class L> struct pop_front_impl;
+    template <class L, class> struct pop_front_impl;
 
     template<template<class...> class L, class T, class... U>
-    struct pop_front_impl<L<T, U...>>
+    struct pop_front_impl<L<T, U...>, void>
     {
       using type = L<U...>;
     };
-  }
-
-  template <class L>
-  using pop_front = typename detail::pop_front_impl<L>::type;
-
-  // pop front n
-  namespace detail
-  {
-    template<class L, std::size_t N> struct pop_front_n_impl;
 
     template<template<class...> class L, class> struct pop_front_element;
 
@@ -69,19 +60,16 @@ namespace brigand
       static L<Us...> impl(Ts..., Us*...);
     };
 
-    template<template<class...> class L, class... Ts, std::size_t N>
-    struct pop_front_n_impl<L<Ts...>, N>
+    template<template<class...> class L, class... Ts, class N>
+    struct pop_front_impl<L<Ts...>, N>
     {
       using type = decltype(pop_front_element<L, filled_list<
         void const *,
-        (N < sizeof...(Ts) ? N : sizeof...(Ts))
+        (N::value < sizeof...(Ts) ? N::value : sizeof...(Ts))
       >>::impl(static_cast<Ts*>(nullptr)...));
     };
   }
 
-  template <class L, std::size_t N>
-  using pop_front_n_c = typename detail::pop_front_n_impl<L, N>::type;
-
-  template <class L, class I>
-  using pop_front_n = typename detail::pop_front_n_impl<L, I::value>::type;
+  template <class L, class N = void>
+  using pop_front = typename detail::pop_front_impl<L, N>::type;
 }
