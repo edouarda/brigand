@@ -22,6 +22,7 @@
 #include <brigand/algorithms/reverse.hpp>
 #include <brigand/algorithms/select.hpp>
 #include <brigand/algorithms/split.hpp>
+#include <brigand/algorithms/split_at.hpp>
 #include <brigand/algorithms/sort.hpp>
 #include <brigand/algorithms/transform.hpp>
 #include <brigand/algorithms/wrap.hpp>

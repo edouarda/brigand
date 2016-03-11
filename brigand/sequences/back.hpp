@@ -6,10 +6,12 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/sequences/at.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/last_element.hpp>
 #include <brigand/sequences/pair.hpp>
 #include <brigand/sequences/range.hpp>
+#include <brigand/sequences/size.hpp>
 
 namespace brigand
 {
@@ -28,21 +30,8 @@ namespace brigand
   template<class L, class... T>
   using push_back = typename detail::push_back_impl<L, T...>::type;
 
-  // back
-  namespace detail
-  {
-    template<class L> struct back_impl;
-
-    template<template<class...> class L, class... U>
-    struct back_impl<L<U...>>
-    {
-      using type = typename last_element<U...>::type;
-    };
-
-  }
-
   template <class L>
-  using back = typename detail::back_impl<L>::type;
+  using back = at_c<L, size<L>::value-1>;
 
   // pop back n
   namespace detail

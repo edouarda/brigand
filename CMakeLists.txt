@@ -81,6 +81,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/replace.hpp
     brigand/algorithms/reverse.hpp
     brigand/algorithms/split.hpp
+    brigand/algorithms/split_at.hpp
     brigand/algorithms/sort.hpp
     brigand/algorithms/transform.hpp
     brigand/algorithms/select.hpp
@@ -189,6 +190,7 @@ set(TYPES_GROUP
     brigand/types/no_such_type.hpp
     brigand/types/type.hpp
     brigand/types/real.hpp
+    brigand/types/voidp.hpp
 )
 
 set(PLACEHOLDER_GROUP brigand/nothing.cpp)
@@ -263,6 +265,7 @@ set(test_files
     test/sizeof.cpp
     test/sort_test.cpp
     test/split.cpp
+    test/split_at.cpp
     test/transform.cpp
     test/tuple_test.cpp
     test/unpack.cpp
