@@ -8,8 +8,9 @@
 
 #include <brigand/sequences/at.hpp>
 #include <brigand/sequences/list.hpp>
-#include <brigand/sequences/last_element.hpp>
 #include <brigand/sequences/size.hpp>
+#include <brigand/sequences/front.hpp>
+#include <brigand/algorithms/split_at.hpp>
 
 namespace brigand
 {
@@ -34,15 +35,23 @@ namespace brigand
   // pop back
   namespace detail
   {
-    template <class L> struct pop_back_impl;
+    template<class L, class N>
+    struct pop_back_impl;
 
-    template<template<class...> class L, class... U>
-    struct pop_back_impl<L<U...>>
+    template<template<class...> class L, class... Ts>
+    struct pop_back_impl<L<Ts...>, void>
     {
-        using type = typename without_last_element<L, U...>::type;
+      using type = front<split_at<L<Ts...>, std::integral_constant<std::size_t, sizeof...(Ts)-1>>>;
+    };
+
+    template<template<class...> class L, class... Ts, class N>
+    struct pop_back_impl<L<Ts...>, N>
+    {
+      using type = front<split_at<L<Ts...>, std::integral_constant<std::size_t, (N::value < sizeof...(Ts) ? sizeof...(Ts) - N::value : 0)>>>;
     };
   }
 
-  template <class L>
-  using pop_back = typename detail::pop_back_impl<L>::type;
+  // pop back
+  template <class L, class N = void>
+  using pop_back = typename detail::pop_back_impl<L, N>::type;
 }
