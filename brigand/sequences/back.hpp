@@ -32,26 +32,6 @@ namespace brigand
   template <class L>
   using back = at_c<L, size<L>::value-1>;
 
-  // pop back
-  namespace detail
-  {
-    template<class L, class N>
-    struct pop_back_impl;
-
-    template<template<class...> class L, class... Ts>
-    struct pop_back_impl<L<Ts...>, void>
-    {
-      using type = front<split_at<L<Ts...>, std::integral_constant<std::size_t, sizeof...(Ts)-1>>>;
-    };
-
-    template<template<class...> class L, class... Ts, class N>
-    struct pop_back_impl<L<Ts...>, N>
-    {
-      using type = front<split_at<L<Ts...>, std::integral_constant<std::size_t, (N::value < sizeof...(Ts) ? sizeof...(Ts) - N::value : 0)>>>;
-    };
-  }
-
-  // pop back
-  template <class L, class N = void>
-  using pop_back = typename detail::pop_back_impl<L, N>::type;
+  template <class L, class N = std::integral_constant<std::size_t, 1>>
+  using pop_back = front<split_at<L, std::integral_constant<std::size_t, size<L>::value - N::value>>>;
 }
