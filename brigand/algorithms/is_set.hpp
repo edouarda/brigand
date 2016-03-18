@@ -15,7 +15,7 @@ namespace brigand
 {
 namespace detail
 {
-  template<int, class T> struct unique_x_t
+  template<class, class T> struct unique_x_t
   // :type_<T> // best with g++
   { operator type_<T> (); };
 
@@ -28,13 +28,15 @@ namespace detail
     using type = std::true_type;
   };
 
-  template<int... Ints, class... Ts>
-  struct is_set_impl<list<std::integral_constant<int, Ints>...>, Ts...>
+  std::true_type true_fn(...);
+
+  template<class... Ints, class... Ts>
+  struct is_set_impl<list<Ints...>, Ts...>
   {
     struct Pack : unique_x_t<Ints, Ts>... {};
 
     template<class... Us>
-    static auto is_set(Us...) -> decltype(std::initializer_list<int>{(static_cast<Us>(Pack()), 1)...}, std::true_type{});
+    static auto is_set(Us...) -> decltype(true_fn(static_cast<Us>(Pack())...));
     static std::false_type is_set(...);
 
     using type = decltype(is_set(type_<Ts>()...));
