@@ -16,7 +16,7 @@ namespace brigand
 namespace detail
 {
   template<class, class T> struct unique_x_t
-  // :type_<T> // best with g++
+  // :type_<T> // better with gcc, very bad with clang when the list contains many same elements
   { operator type_<T> (); };
 
   template<class Ints, class... Ts>
@@ -28,7 +28,7 @@ namespace detail
     using type = std::true_type;
   };
 
-  std::true_type true_fn(...);
+  inline std::true_type true_fn(...);
 
   template<class... Ints, class... Ts>
   struct is_set_impl<list<Ints...>, Ts...>
