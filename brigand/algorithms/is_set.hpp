@@ -6,8 +6,6 @@
 =================================================================================================**/
 #pragma once
 
-#include <initializer_list>
-
 #include <brigand/sequences/range.hpp>
 #include <brigand/types/type.hpp>
 
