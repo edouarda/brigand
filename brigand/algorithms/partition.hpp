@@ -20,9 +20,12 @@ namespace brigand
     struct not_pred
     {
       template<class... Ts>
-      struct apply
+      class apply
       {
-        using type = bool_<!brigand::apply<typename ProtectedPred::type, Ts...>::value>;
+        using bool_type = brigand::apply<typename ProtectedPred::type, Ts...>;
+
+      public:
+        using type = bool_<!bool_type::value>;
       };
     };
   }
