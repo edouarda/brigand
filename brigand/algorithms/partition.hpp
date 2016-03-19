@@ -6,47 +6,27 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/fold.hpp>
-#include <brigand/sequences/clear.hpp>
-#include <brigand/sequences/pair.hpp>
 #include <brigand/functions/lambda/protect.hpp>
 #include <brigand/functions/lambda/apply.hpp>
+#include <brigand/algorithms/remove.hpp>
+#include <brigand/sequences/pair.hpp>
+#include <brigand/types/bool.hpp>
 
 namespace brigand
 {
   namespace detail
   {
-    template<bool, class T, class P>
-    struct partition_impl;
-
-    template<class T, template<class...> class Seq, class... L, class... R>
-    struct partition_impl<true, T, pair<Seq<L...>, Seq<R...>>>
-    {
-      using type = pair<Seq<L..., T>, Seq<R...>>;
-    };
-
-    template<class T, template<class...> class Seq, class... L, class... R>
-    struct partition_impl<false, T, pair<Seq<L...>, Seq<R...>>>
-    {
-      using type = pair<Seq<L...>, Seq<R..., T>>;
-    };
-
     template<class ProtectedPred>
-    struct partition_test
+    struct not_pred
     {
-      template<class State, class Element>
+      template<class... Ts>
       struct apply
       {
-        using bool_ = brigand::apply<typename ProtectedPred::type, Element>;
-        using type = typename partition_impl<bool_::value, Element, State>::type;
+        using type = bool_<!brigand::apply<typename ProtectedPred::type, Ts...>::value>;
       };
     };
   }
 
   template<class Seq, class Pred>
-  using partition = fold<
-    Seq,
-    pair<clear<Seq>, clear<Seq>>,
-    detail::partition_test<protect<Pred>>
-  >;
+  using partition = pair<remove_if<Seq, detail::not_pred<protect<Pred>>>, remove_if<Seq, Pred>>;
 }
