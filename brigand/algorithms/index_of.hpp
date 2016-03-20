@@ -8,6 +8,7 @@
 
 #include <brigand/algorithms/find.hpp>
 #include <brigand/sequences/size.hpp>
+#include <brigand/types/integer.hpp>
 #include <brigand/types/no_such_type.hpp>
 
 namespace brigand
