@@ -235,6 +235,7 @@ set(test_files
     test/for_each.cpp
     test/identity.cpp
     test/if_test.cpp
+    test/index_of.cpp
     test/include_test.cpp
     test/inherit.cpp
     test/inherit_linearly.cpp
