@@ -17,20 +17,12 @@
 
 namespace brigand
 {
-namespace detail
-{
-    template<std::size_t Index, class L>
-    struct erase_c_impl
-    {
-        using type = append<
-            front<split_at<L, size_t<Index>>>,
-            pop_front<back<split_at<L, size_t<Index>>>>
-        >;
-    };
-}
 
     template<class L, std::size_t Index>
-    using erase_c = typename detail::erase_c_impl<Index, L>::type;
+    using erase_c = append<
+        front<split_at<L, size_t<Index>>>,
+        pop_front<back<split_at<L, size_t<Index>>>>
+    >;
 
 namespace detail
 {
@@ -129,11 +121,6 @@ namespace detail
 
 namespace detail
 {
-    template< class L, class Index >
-    struct erase_impl
-    {
-        using type = erase_c<L, Index::value>;
-    };
 
     template< class L1, template<class> class Pred, class L2 >
     struct erase_if_impl;
@@ -188,7 +175,7 @@ namespace detail
     template<class L, class I, bool>
     struct erase_dispatch
     {
-        using type = typename erase_impl<L, I>::type;
+        using type = erase_c<L, I::value>;
     };
 
     template<class C, class K>
