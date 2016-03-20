@@ -5,33 +5,32 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <brigand/sequences/append.hpp>
-#include <brigand/sequences/clear.hpp>
+#include <brigand/algorithms/split_at.hpp>
 
+#include <brigand/sequences/append.hpp>
+#include <brigand/sequences/back.hpp>
+#include <brigand/sequences/front.hpp>
+
+#include <brigand/types/integer.hpp>
 #include <brigand/types/type.hpp>
+
 
 namespace brigand
 {
 namespace detail
 {
-    template<int Index, class L1, class L2>
-    struct erase_c_impl;
-
-    template< int Index,
-            template<class...> class L1, class First, class... T,
-      template<class...> class L2, class... U >
-    struct erase_c_impl<Index, L1<First, T...>, L2<U...>>
+    template<std::size_t Index, class L>
+    struct erase_c_impl
     {
-        using type = typename erase_c_impl<Index-1, L1<T...>, L2<U..., First>>::type;
-    };
-
-    template< template<class...> class L1, class First, class... T,
-            template<class...> class L2, class... U >
-    struct erase_c_impl<0, L1<First, T...>, L2<U...>>
-    {
-        using type = L2<U..., T...>;
+        using type = append<
+            front<split_at<L, size_t<Index>>>,
+            pop_front<back<split_at<L, size_t<Index>>>>
+        >;
     };
 }
+
+    template<class L, std::size_t Index>
+    using erase_c = typename detail::erase_c_impl<Index, L>::type;
 
 namespace detail
 {
@@ -127,9 +126,6 @@ namespace detail
     };
 
 }
-
- template< class L, int Index >
-  using erase_c = typename detail::erase_c_impl<Index, L, clear<L>>::type;
 
 namespace detail
 {
