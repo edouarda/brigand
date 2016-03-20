@@ -229,6 +229,7 @@ set(test_files
     test/bitwise_test.cpp
     test/comparison_test.cpp
     test/eval_if_test.cpp
+    test/erase_c_test.cpp
     test/find.cpp
     test/flatten.cpp
     test/fold.cpp
