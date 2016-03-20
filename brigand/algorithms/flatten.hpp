@@ -20,22 +20,22 @@ namespace detail
         using type = L;
     };
 
-    template <template<class...> class L, class Head, class... Tail>
-    struct flatten_impl<L<Head, Tail...>>
+    template <template<class...> class L, class T>
+    struct flatten_element_impl
     {
-        using tail_type = L<Tail...>;
-        using flattened_tail_type = typename flatten_impl<tail_type>::type;
-        using type = typename brigand::append<L<Head>, flattened_tail_type>;
+        using type = L<T>;
     };
 
-    template <template<class...> class L, class... HeadElements, class... Tail>
-    struct flatten_impl<L<L<HeadElements...>, Tail...>>
+    template <template<class...> class L, class... Ts>
+    struct flatten_element_impl<L, L<Ts...>>
+    : append_impl<typename flatten_element_impl<L, Ts>::type...>
     {
-        using head_type = L<HeadElements...>;
-        using flattened_head_type = typename flatten_impl<head_type>::type;
-        using tail_type = L<Tail...>;
-        using flattened_tail_type = typename flatten_impl<tail_type>::type;
-        using type = typename brigand::append<flattened_head_type, flattened_tail_type>;
+    };
+
+    template <template<class...> class L, class... Ts>
+    struct flatten_impl<L<Ts...>>
+    : flatten_element_impl<L, L<Ts...>>
+    {
     };
 
 }
