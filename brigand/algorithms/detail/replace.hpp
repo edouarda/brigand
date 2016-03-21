@@ -8,14 +8,7 @@
 #pragma once
 
 #include <brigand/functions/lambda/apply.hpp>
-#include <brigand/types/bool.hpp>
 #include <type_traits>
-
-#if defined(_MSC_VER) && (_MSC_VER < 1900)
-#define BRIGAND_DEDUCED_TEMPLATE template
-#else
-#define BRIGAND_DEDUCED_TEMPLATE
-#endif
 
 namespace brigand
 {
@@ -28,19 +21,17 @@ struct replace_if_impl
     using type = Sequence;
 };
 
-template <typename Predicate, typename T, typename NewType>
-struct predicate_test
-{
-    using type = typename std::conditional<
-        /*B=*/brigand::BRIGAND_DEDUCED_TEMPLATE apply<Predicate, T>::type::value,
-        /*T=*/NewType,
-        /*F=*/T>::type;
-};
+template <class Condition, class NewType, class T>
+struct condition_test
+: std::conditional<Condition::value, NewType, T>
+{};
 
 template <template <class...> class Sequence, typename Predicate, typename NewType, typename... T>
 struct replace_if_impl<Sequence<T...>, Predicate, NewType>
 {
-    using type = Sequence<typename predicate_test<Predicate, T, NewType>::type...>;
+    using type = Sequence<typename condition_test<
+        ::brigand::apply<Predicate, T>, NewType, T
+    >::type...>;
 };
 }
 }

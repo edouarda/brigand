@@ -1,4 +1,5 @@
 #include <brigand/algorithms/replace.hpp>
+#include <brigand/functions/lambda/quote.hpp>
 #include <type_traits>
 
 brigand::replace<brigand::list<>, int, float> replace_on_empty_list = brigand::list<>{};
