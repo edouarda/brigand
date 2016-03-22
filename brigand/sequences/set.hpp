@@ -12,6 +12,7 @@
 #include <brigand/types/bool.hpp>
 
 #include <brigand/algorithms/wrap.hpp>
+#include <brigand/algorithms/remove.hpp>
 
 #include <brigand/sequences/append.hpp>
 #include <brigand/sequences/list.hpp>
@@ -53,7 +54,7 @@ namespace detail
 
     public:
         template <class K>
-        static wrap<decltype(exact_eraser<T...>::erase(type_<K>{})), detail::set_impl> erase(type_<K>);
+        static append<set_impl<>, typename std::conditional<std::is_same<T, K>::value, list<>, list<T>>::type...> erase(type_<K>);
 
     private:
         template<class K>
