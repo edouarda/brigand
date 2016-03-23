@@ -52,9 +52,16 @@ namespace detail
         template <typename U>
         static contains_predicate<type_<U>> has_key(type_<U>);
 
+    private:
+        template<class U, class K>
+        struct erase_pred_impl
+        : std::conditional<std::is_same<U, K>::value, list<>, list<U>>
+        {
+        };
+
     public:
         template <class K>
-        static typename detail::append_impl<set_impl<>, typename std::conditional<std::is_same<T, K>::value, list<>, list<T>>::type...>::type erase(type_<K>);
+        static typename detail::append_impl<set_impl<>, typename erase_pred_impl<T, K>::type...>::type erase(type_<K>);
 
     private:
         template<class K>
