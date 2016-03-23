@@ -54,7 +54,7 @@ namespace detail
 
     public:
         template <class K>
-        static append<set_impl<>, typename std::conditional<std::is_same<T, K>::value, list<>, list<T>>::type...> erase(type_<K>);
+        static typename detail::append_impl<set_impl<>, typename std::conditional<std::is_same<T, K>::value, list<>, list<T>>::type...>::type erase(type_<K>);
 
     private:
         template<class K>
