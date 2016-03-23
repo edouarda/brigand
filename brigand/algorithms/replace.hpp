@@ -7,8 +7,6 @@
 #pragma once
 
 #include <brigand/algorithms/detail/replace.hpp>
-#include <brigand/functions/lambda/bind.hpp>
-#include <brigand/functions/lambda/quote.hpp>
 #include <brigand/sequences/list.hpp>
 
 namespace brigand
@@ -21,7 +19,7 @@ using replace_if = typename detail::replace_if_impl<Sequence, Predicate, NewType
 
 template <typename Sequence, typename OldType, typename NewType>
 using replace = typename detail::replace_if_impl<Sequence,
-                                                 brigand::bind<brigand::quote<std::is_same>, OldType, brigand::_1>,
+                                                 std::is_same<OldType, brigand::_1>,
                                                  NewType>;
 }
 
