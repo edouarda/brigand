@@ -22,7 +22,7 @@ namespace lazy
 
     template <template<class...> class L, typename... Ts, typename Pred>
     struct remove_if<L<Ts...>, Pred>
-    : ::brigand::detail::append_impl<L<>, typename std::conditional<brigand::apply<Pred,Ts>::value, list<>, list<Ts>>::type...>
+    : ::brigand::detail::append_impl<L<>, typename std::conditional<lambda<Pred>::template apply<Ts>::type::value, list<>, list<Ts>>::type...>
     {
     };
 }
