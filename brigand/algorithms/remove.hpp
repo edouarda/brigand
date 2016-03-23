@@ -15,46 +15,20 @@
 
 namespace brigand
 {
-namespace detail
-{
-    template <bool B, typename T>
-    struct remove_if_wrap
-    {
-        using type = brigand::list<T>;
-    };
-    template <typename T>
-    struct remove_if_wrap<true, T>
-    {
-        using type = brigand::list<>;
-    };
-
-    template <typename Pred, typename T> // MSVC work around
-    using remove_if_pred = brigand::apply<Pred, T>;
-    template <typename T,
-              typename U> // MSVC can't expand two instances of the same pack in one expression
-    struct call_remove_if_wrap
-    {
-        using type = typename remove_if_wrap<remove_if_pred<T, U>::value, U>::type;
-    };
-
-    template <typename T, typename Pred>
-    struct remove_if_impl;
-
-    template <template <class...> class L, typename... Ts, typename Pred>
-    struct remove_if_impl<L<Ts...>, Pred>
-    {
-        using type = brigand::append<L<>, typename call_remove_if_wrap<Pred, Ts>::type...>;
-    };
-}
-
 namespace lazy
 {
     template <typename L, typename Pred>
-    using remove_if = typename detail::remove_if_impl<L, Pred>;
+    struct remove_if;
+
+    template <template<class...> class L, typename... Ts, typename Pred>
+    struct remove_if<L<Ts...>, Pred>
+    : ::brigand::detail::append_impl<L<>, typename std::conditional<brigand::apply<Pred,Ts>::value, list<>, list<Ts>>::type...>
+    {
+    };
 }
 
 template <typename L, typename Pred>
-using remove_if = typename ::brigand::lazy::remove_if<L, Pred>::type;
+using remove_if = typename lazy::remove_if<L, Pred>::type;
 
 namespace lazy
 {
