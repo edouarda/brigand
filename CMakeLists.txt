@@ -13,6 +13,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcxx-exceptions")
 endif()
 
+include(FindPythonInterp)
 find_package(Boost)
 
 if(Boost_FOUND)
@@ -30,12 +31,11 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E copy
 
 set ( STANDALONE_GROUP
     script/embed.py
-    standalone/brigand.hpp
 )
 
 add_custom_target(standalone
     COMMAND ${CMAKE_COMMAND} -E remove ${PROJECT_SOURCE_DIR}/standalone/brigand.hpp
-    COMMAND python ${PROJECT_SOURCE_DIR}/script/embed.py -I./ --include-match=brigand/* brigand/brigand.hpp -o standalone/brigand.hpp
+    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/script/embed.py -I./ --include-match=brigand/* ${PROJECT_SOURCE_DIR}/brigand/brigand.hpp -o ${PROJECT_SOURCE_DIR}/standalone/brigand.hpp
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMENT "Building standalone header file"
     VERBATIM
