@@ -56,23 +56,18 @@ namespace lazy
 template <typename L, typename Pred>
 using remove_if = typename ::brigand::lazy::remove_if<L, Pred>::type;
 
-namespace detail
-{
-	template <typename T, typename U>
-	struct  remove_pred{
-		using type = brigand::list<U>;
-	};
-	template <typename T>
-	struct remove_pred<T,T>{
-		using type = brigand::list<>;
-	};
-}
 namespace lazy
 {
     template <typename L, typename T>
-    using remove = brigand::wrap<brigand::append<brigand::list<brigand::clear<L>>,brigand::transform<L, detail::remove_pred<T,brigand::_1>>>, brigand::append>;
+    struct remove;
+
+    template <template<class...> class L, typename... Ts, typename T>
+    struct remove<L<Ts...>, T>
+    : ::brigand::detail::append_impl<L<>, typename std::conditional<std::is_same<Ts,T>::value, list<>, list<Ts>>::type...>
+    {
+    };
 }
 
 template <typename L, typename T>
-using remove = lazy::remove<L, T>; 
+using remove = typename lazy::remove<L, T>::type;
 }
