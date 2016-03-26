@@ -9,10 +9,6 @@
 #include <type_traits>
 
 #include <brigand/types/type.hpp>
-#include <brigand/types/bool.hpp>
-
-#include <brigand/algorithms/wrap.hpp>
-#include <brigand/algorithms/remove.hpp>
 
 #include <brigand/sequences/append.hpp>
 #include <brigand/sequences/list.hpp>
@@ -28,6 +24,7 @@ namespace detail
     template<class... Ts>
     struct make_set;
 
+    // Visual Studio helper
     template<class U, class K>
     struct set_erase_pred_impl
     : std::conditional<std::is_same<U, K>::value, list<>, list<U>>
