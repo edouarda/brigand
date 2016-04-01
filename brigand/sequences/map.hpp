@@ -14,7 +14,7 @@ namespace brigand
 {
 
     template <typename M, typename K>
-    using lookup = decltype(M::at(type_<K>{}));
+    using lookup = type_from<decltype(M::at(type_<K>{}))>;
 
 namespace detail
 {
@@ -47,7 +47,7 @@ namespace detail
     struct map_impl<>
     {
         template <typename U>
-        static no_such_type_ at(U);
+        static type_<no_such_type_> at(U);
 
         template <class K>
         static map_impl<K> insert(type_<K>);
@@ -60,14 +60,14 @@ namespace detail
         struct Pack : pair<typename Ts::first_type, Ts>... {};
 
         template<class K, class P>
-        static typename P::second_type at_impl(pair<K,P>*);
+        static type_<typename P::second_type> at_impl(pair<K,P>*);
 
     public:
         template<class K>
         static decltype(at_impl<K>(static_cast<Pack*>(nullptr))) at(type_<K>);
 
         template<class K>
-        static no_such_type_ at(K);
+        static type_<no_such_type_> at(K);
     };
 
     // if you have a "class already a base" error message, it means you have defined a map with the same key present more

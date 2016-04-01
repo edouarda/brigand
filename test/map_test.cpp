@@ -10,6 +10,8 @@ static_assert(brigand::detail::has_at_method<brigand::map<>>::value, "at not det
 // empty maps are allowed
 static_assert(brigand::size<brigand::map<>>::value == 0, "empty map isn't empty");
 static_assert(std::is_same<brigand::lookup<brigand::map<>, int>, brigand::no_such_type_>::value, "should find no such type in empty map");
+static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<int, int[1]>>, int>, int[1]>::value, "should be int[1]");
+static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<int[1], int>>, int[1]>, int>::value, "should be int");
 
 using map_test = brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>>;
 
