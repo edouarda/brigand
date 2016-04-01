@@ -16,8 +16,11 @@ namespace brigand
 namespace lazy
 {
     template <typename M, typename K>
-    using lookup = decltype(M::at(type_<K>{}));
+    struct lookup
+    : decltype(M::at(type_<K>{}))
+    {};
 }
+
     template <typename M, typename K>
     using lookup = typename lazy::lookup<M,K>::type;
 
