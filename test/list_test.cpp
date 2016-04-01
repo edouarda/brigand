@@ -117,6 +117,8 @@ static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 2>, bool>::valu
               "invalid at result");
 static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 3>, int>::value,
               "invalid at result");
+static_assert(std::is_same<brigand::at_c<brigand::list<int[1]>, 0>, int[1]>::value,
+              "invalid at result");
 
 static_assert(
     std::is_same<brigand::at<int_bool_bool_int_list, std::integral_constant<int, 0>>, int>::value,
@@ -197,6 +199,8 @@ static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 1>, bool>::valu
 static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 2>, bool>::value,
               "invalid at result");
 static_assert(std::is_same<brigand::at_c<int_bool_bool_int_list, 3>, int>::value,
+              "invalid at result");
+static_assert(std::is_same<brigand::at_c<custom_list<int[1]>, 0>, int[1]>::value,
               "invalid at result");
 
 static_assert(

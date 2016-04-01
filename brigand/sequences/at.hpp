@@ -19,15 +19,15 @@ namespace brigand
     template<class... Ts>
     struct element_at<list<Ts...>>
     {
-      template<class T> T static at(Ts..., T*, ...);
+      template<class T> type_<T> static at(Ts..., T*, ...);
     };
 
     template<std::size_t N, typename Seq> struct at_impl;
 
     template<std::size_t N, template<typename...> class L, class... Ts>
     struct at_impl<N,L<Ts...>>
+    : decltype(element_at<brigand::filled_list<void const *, N>>::at(static_cast<Ts*>(nullptr)...))
     {
-      using type = decltype(element_at<brigand::filled_list<void const *, N>>::at(static_cast<Ts*>(nullptr)...));
     };
   }
 
