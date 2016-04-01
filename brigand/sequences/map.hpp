@@ -13,8 +13,13 @@
 namespace brigand
 {
 
+namespace lazy
+{
     template <typename M, typename K>
-    using lookup = type_from<decltype(M::at(type_<K>{}))>;
+    using lookup = decltype(M::at(type_<K>{}));
+}
+    template <typename M, typename K>
+    using lookup = typename lazy::lookup<M,K>::type;
 
 namespace detail
 {
