@@ -48,6 +48,7 @@ set(BRIGAND_GROUP
     brigand/adapted.hpp
     brigand/algorithms.hpp
     brigand/brigand.hpp
+    brigand/config.hpp
     brigand/functions.hpp
     brigand/sequences.hpp
     brigand/types.hpp
@@ -228,6 +229,7 @@ set(test_files
     test/bind.cpp
     test/bitwise_test.cpp
     test/comparison_test.cpp
+    test/config_test.cpp
     test/eval_if_test.cpp
     test/erase_c_test.cpp
     test/find.cpp
