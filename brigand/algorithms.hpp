@@ -14,6 +14,7 @@
 #include <brigand/algorithms/fold.hpp>
 #include <brigand/algorithms/for_each.hpp>
 #include <brigand/algorithms/for_each_args.hpp>
+#include <brigand/algorithms/index_of.hpp>
 #include <brigand/algorithms/is_set.hpp>
 #include <brigand/algorithms/none.hpp>
 #include <brigand/algorithms/partition.hpp>
