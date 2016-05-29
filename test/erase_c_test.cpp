@@ -7,3 +7,5 @@ static_assert(std::is_same<brigand::erase_c<brigand::list<int>, 0>, brigand::lis
 static_assert(std::is_same<brigand::erase_c<brigand::list<int, char, bool>, 0>, brigand::list<char, bool>>::value, "invalid erase_c result");
 static_assert(std::is_same<brigand::erase_c<brigand::list<int, char, bool>, 1>, brigand::list<int, bool>>::value, "invalid erase_c result");
 static_assert(std::is_same<brigand::erase_c<brigand::list<int, char, bool>, 2>, brigand::list<int, char>>::value, "invalid erase_c result");
+static_assert(std::is_same<brigand::erase_c<brigand::list<int, char, bool, int&>, 3>, brigand::list<int, char, bool>>::value, "invalid erase_c result");
+static_assert(std::is_same<brigand::erase_c<brigand::list<int, char, bool, int&, void>, 4>, brigand::list<int, char, bool, int&>>::value, "invalid erase_c result");
