@@ -12,6 +12,10 @@ static_assert(brigand::size<brigand::map<>>::value == 0, "empty map isn't empty"
 static_assert(std::is_same<brigand::lookup<brigand::map<>, int>, brigand::no_such_type_>::value, "should find no such type in empty map");
 static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<int, int[1]>>, int>, int[1]>::value, "should be int[1]");
 static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<int[1], int>>, int[1]>, int>::value, "should be int");
+static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<void, int&>>, void>, int&>::value, "should be int");
+static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<int&, void>>, int&>, void>::value, "should be int");
+static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<void, int&>>, int&>, brigand::no_such_type_>::value, "should be int");
+static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<int&, void>>, void>, brigand::no_such_type_>::value, "should be int");
 
 using map_test = brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>>;
 
@@ -85,6 +89,9 @@ static_assert(std::is_same<brigand::insert<map_of_nine, pair_nine>, map_of_nine>
 using map_of_ten = brigand::map<pair_one, pair_two, pair_three, pair_four, pair_five, pair_six, pair_seven, pair_eight, pair_nine, pair_ten>;
 static_assert(std::is_same<brigand::insert<map_of_nine, pair_ten>, map_of_ten>::value, "insertion failed");
 static_assert(std::is_same<brigand::insert<map_of_ten, pair_ten>, map_of_ten>::value, "insertion failed");
+
+static_assert(std::is_same<brigand::insert<brigand::map<>, brigand::pair<void, int&>>, brigand::map<brigand::pair<void, int&>>>::value, "insertion failed");
+static_assert(std::is_same<brigand::insert<brigand::map<>, brigand::pair<int&, void>>, brigand::map<brigand::pair<int&, void>>>::value, "insertion failed");
 
 // try exhaustive on big map, we don't do a brigand::fold because we want to test map and insert only we don't want a potential problem in
 // fold to interfere with this test

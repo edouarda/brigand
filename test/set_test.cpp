@@ -31,6 +31,23 @@ static_assert(std::is_same<brigand::erase<set_test, char>, brigand::set<int>>::v
 static_assert(std::is_same<brigand::erase<set_test, bool>, set_test>::value,   "invalid erase result");
 static_assert(std::is_same<brigand::erase<set_test, void>, set_test>::value,   "invalid erase result");
 
+
+static_assert(brigand::contains<brigand::set<void, int&>, int&>::value, "should be int&");
+static_assert(brigand::contains<brigand::set<int&, void>, void>::value, "should be void");
+
+static_assert(brigand::has_key<brigand::set<void, int&>, int&>::value, "invalid has_key result");
+static_assert(brigand::has_key<brigand::set<int&, void>, void>::value, "invalid has_key result");
+
+static_assert(std::is_same<brigand::insert<brigand::set<>, int&>, brigand::set<int&>>::value,   "invalid insert result");
+static_assert(std::is_same<brigand::insert<brigand::set<int&>, int&>, brigand::set<int&>>::value,   "invalid insert result");
+static_assert(std::is_same<brigand::insert<brigand::set<int>, int&>, brigand::set<int, int&>>::value,   "invalid insert result");
+
+static_assert(std::is_same<brigand::erase<brigand::set<int&>, int&>, brigand::set<>>::value,   "invalid erase result");
+static_assert(std::is_same<brigand::erase<brigand::set<int&, int>, int&>, brigand::set<int>>::value,   "invalid erase result");
+static_assert(std::is_same<brigand::erase<brigand::set<void>, void>, brigand::set<>>::value,   "invalid erase result");
+static_assert(std::is_same<brigand::erase<brigand::set<int&, void>, void>, brigand::set<int&>>::value,   "invalid erase result");
+
+
 struct type_one {};
 struct type_two {};
 struct type_three {};

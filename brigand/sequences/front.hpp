@@ -57,7 +57,7 @@ namespace brigand
     struct pop_front_element<L, list<Ts...>>
     {
       template<class... Us>
-      static L<Us...> impl(Ts..., Us*...);
+      static L<Us...> impl(Ts..., type_<Us>*...);
     };
 
     template<template<class...> class L, class... Ts, std::size_t N>
@@ -65,7 +65,7 @@ namespace brigand
     {
       using type = decltype(pop_front_element<L, filled_list<
         void const *, N
-      >>::impl(static_cast<Ts*>(nullptr)...));
+      >>::impl(static_cast<type_<Ts>*>(nullptr)...));
     };
   }
 
