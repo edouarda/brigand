@@ -143,27 +143,26 @@ static_assert(
     std::is_same<brigand::append<int_bool_list, bool_int_list>, int_bool_bool_int_list>::value,
     "invalid append result");
 
-// list with reference
 
-template<class> struct check_t { constexpr bool operator==(check_t) const { return true; } };
+// list with reference
 
 using ref_list = brigand::list<int&,double&>;
 
-static_assert(check_t<int&>{} == check_t<brigand::at_c<ref_list, 0>>{}, "at");
-static_assert(check_t<int&>{} == check_t<brigand::front<ref_list>>{}, "front");
-static_assert(check_t<double&>{} == check_t<brigand::at_c<ref_list, 1>>{}, "at");
-static_assert(check_t<double&>{} == check_t<brigand::back<ref_list>>{}, "back");
+static_assert(std::is_same<int&, brigand::at_c<ref_list, 0>>::value, "invalid at");
+static_assert(std::is_same<int&, brigand::front<ref_list>>::value, "invalid front");
+static_assert(std::is_same<double&, brigand::at_c<ref_list, 1>>::value, "invalid at");
+static_assert(std::is_same<double&, brigand::back<ref_list>>::value, "invalid back");
 
-static_assert(check_t<brigand::list<int&>>{} == check_t<brigand::pop_back<ref_list>>{}, "pop_back");
-static_assert(check_t<brigand::list<>>{} == check_t<brigand::pop_back<ref_list, std::integral_constant<int, 2>>>{}, "pop_back");
-static_assert(check_t<ref_list>{} == check_t<brigand::pop_back<ref_list, std::integral_constant<int, 0>>>{}, "pop_back");
+static_assert(std::is_same<brigand::list<int&>, brigand::pop_back<ref_list>>::value, "invalid pop_back");
+static_assert(std::is_same<brigand::list<>, brigand::pop_back<ref_list, std::integral_constant<int, 2>>>::value, "invalid pop_back");
+static_assert(std::is_same<ref_list, brigand::pop_back<ref_list, std::integral_constant<int, 0>>>::value, "invalid pop_back");
 
-static_assert(check_t<brigand::list<double&>>{} == check_t<brigand::pop_front<ref_list>>{}, "pop_front");
-static_assert(check_t<brigand::list<>>{} == check_t<brigand::pop_front<ref_list, std::integral_constant<int, 2>>>{}, "pop_front");
-static_assert(check_t<ref_list>{} == check_t<brigand::pop_front<ref_list, std::integral_constant<int, 0>>>{}, "pop_front");
+static_assert(std::is_same<brigand::list<double&>, brigand::pop_front<ref_list>>::value, "invalid pop_front");
+static_assert(std::is_same<brigand::list<>, brigand::pop_front<ref_list, std::integral_constant<int, 2>>>::value, "invalid pop_front");
+static_assert(std::is_same<ref_list, brigand::pop_front<ref_list, std::integral_constant<int, 0>>>::value, "invalid pop_front");
 
-static_assert(check_t<brigand::list<char&,int&,double&>>{} == check_t<brigand::push_front<ref_list, char&>>{}, "push_front");
-static_assert(check_t<brigand::list<int&,double&,char&>>{} == check_t<brigand::push_back<ref_list, char&>>{}, "push_back");
+static_assert(std::is_same<brigand::list<char&,int&,double&>, brigand::push_front<ref_list, char&>>::value, "invalid push_front");
+static_assert(std::is_same<brigand::list<int&,double&,char&>, brigand::push_back<ref_list, char&>>::value, "invalid push_back");
 
 
 // custom list tests
