@@ -26,42 +26,6 @@ namespace brigand
 
 namespace detail
 {
-
-    template< class L1, template<class> class Pred, class L2 >
-    struct erase_if_impl;
-
-    template< class L1, template<class> class Pred, class L2, bool >
-    struct erase_if_shortcut;
-
-    template< template<class...> class L1, class T, class... Ts,
-            template<class> class Pred,
-            template<class...> class L2, class... Us >
-    struct erase_if_shortcut<L1<T, Ts...>, Pred, L2<Us...>, true>
-    {
-        using type = L2<Us..., Ts...>;
-    };
-
-    template< template<class...> class L1, class T, class... Ts,
-            template<class> class Pred,
-            template<class...> class L2, class... Us >
-    struct erase_if_shortcut<L1<T, Ts...>, Pred, L2<Us...>, false>
-    : erase_if_impl<L1<Ts...>, Pred, L2<Us..., T>>
-    {};
-
-    template< template<class...> class L1, class T, class... Ts,
-            template<class> class Pred, class L2 >
-    struct erase_if_impl<L1<T, Ts...>, Pred, L2>
-    : erase_if_shortcut<L1<T, Ts...>, Pred, L2, bool(Pred<T>::value)>
-    {};
-
-    template< template<class...> class L1,
-            template<class> class Pred,
-            class L2 >
-    struct erase_if_impl<L1<>, Pred, L2>
-    {
-        using type = L2;
-    };
-
     template <typename T>
     struct has_erase_method
     {
