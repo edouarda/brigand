@@ -8,6 +8,7 @@
 
 #include <type_traits>
 
+#include <brigand/config.hpp>
 #include <brigand/sequences/list.hpp>
 
 namespace brigand
@@ -17,16 +18,22 @@ namespace brigand
     template<class T, class, class, T>
     struct range_cat;
 
+#ifndef BRIGAND_COMP_MSVC
     template<class T, T Start, T Int>
     struct int_plus
     {
       using type = std::integral_constant<T, Start + Int>;
     };
+#endif
 
     template<class T, class... Ts, T... Ints, T Start>
     struct range_cat<T, list<Ts...>, list<std::integral_constant<T, Ints>...>, Start>
     {
+#ifndef BRIGAND_COMP_MSVC
+      using type = list<Ts..., std::integral_constant<T, Start + Ints>...>;
+#else
       using type = list<Ts..., typename int_plus<T, Start, Ints>::type...>;
+#endif
     };
 
     template<class T, T Start, std::size_t N>
