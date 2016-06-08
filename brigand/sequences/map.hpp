@@ -29,15 +29,6 @@ namespace detail
     template <class... T>
     struct map_impl;
 
-    template <class K, class... T>
-    struct map_inserter_impl
-    {
-        using index_type = typename K::first_type;
-        using map_type = map_impl<T...>;
-        using find_result = lookup<map_type, index_type>;
-        using type = decltype(map_type::template insert_impl<K>(find_result{}));
-    };
-
     template <>
     struct map_impl<>
     {
@@ -57,12 +48,11 @@ namespace detail
         template<class K, class P>
         static type_<typename P::second_type> at_impl(pair<K,P>*);
 
-    public:
         template <class K, typename U>
         static map_impl<Ts...> insert_impl(U);
 
         template <class K>
-        static map_impl<Ts..., K> insert_impl(no_such_type_);
+        static map_impl<Ts..., K> insert_impl(type_<no_such_type_>);
 
     public:
         template<class K>
@@ -71,8 +61,8 @@ namespace detail
         template<class K>
         static type_<no_such_type_> at(K);
 
-        template <class K>
-        static typename map_inserter_impl<K, Ts...>::type insert(type_<K>);
+        template <class P>
+        static decltype(insert_impl<P>(at(type_<typename P::first_type>{}))) insert(type_<P>);
     };
 
     // if you have a "class already a base" error message, it means you have defined a map with the same key present more
