@@ -48,9 +48,6 @@ namespace detail
         template<class K, class P>
         static type_<typename P::second_type> at_impl(pair<K,P>*);
 
-        template <class P>
-        static map_impl insert_impl(pair<typename P::first_type, P>*);
-
     public:
         template<class K>
         static decltype(at_impl<K>(static_cast<Pack*>(nullptr))) at(type_<K>);
@@ -58,8 +55,8 @@ namespace detail
         template<class K>
         static type_<no_such_type_> at(K);
 
-        template <class P>
-        static decltype(insert_impl<P>(static_cast<Pack*>(nullptr))) insert(type_<P>);
+        template <class P, class = decltype(static_cast<pair<typename P::first_type, P>*>(static_cast<Pack*>(nullptr)))>
+        static map_impl insert(type_<P>);
 
         template <class P>
         static map_impl<Ts..., typename P::type> insert(P);
