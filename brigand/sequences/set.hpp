@@ -55,21 +55,14 @@ namespace detail
         template <typename U>
         static contains_predicate<type_<U>> has_key(type_<U>);
 
-    public:
         template <class K>
         static append<set_impl<>, typename set_erase_pred_impl<T, K>::type...> erase(type_<K>);
 
-    private:
-        template<class K>
-        static set_impl<T..., K> insert_impl(std::false_type);
+        template<class K, class = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
+        static set_impl insert(type_<K>);
 
         template<class K>
-        static set_impl insert_impl(std::true_type);
-
-    public:
-        template<class K>
-        static decltype(set_impl<T...>::insert_impl<K>(contains_predicate<type_<K>>())) insert(type_<K>);
-
+        static set_impl<T..., typename K::type> insert(K);
     };
 
     // if you have a "class already a base" error message, it means you have defined a set with the same key present more
