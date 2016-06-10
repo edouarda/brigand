@@ -34,11 +34,11 @@ namespace detail
     template <class... T>
     struct set_impl
     {
-        template <typename U, typename = decltype(static_cast<type_<U>>(make_set<T...>()))>
-        static std::true_type contains(type_<U>);
+        template <typename K, typename = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
+        static std::true_type contains(type_<K>);
 
-        template <typename U>
-        static std::false_type contains(U);
+        template <typename K>
+        static std::false_type contains(K);
 
     private:
         // Visual Studio helper
