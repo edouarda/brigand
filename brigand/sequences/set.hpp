@@ -27,8 +27,14 @@ namespace detail
     // Visual Studio helper
     template<class U, class K>
     struct set_erase_pred_impl
-    : std::conditional<std::is_same<U, K>::value, list<>, list<U>>
     {
+        using type = list<U>;
+    };
+
+    template<class K>
+    struct set_erase_pred_impl<K,K>
+    {
+        using type = list<>;
     };
 
     template <class... T>
