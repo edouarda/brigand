@@ -40,20 +40,11 @@ namespace detail
         template <typename K>
         static std::false_type contains(K);
 
-    private:
-        // Visual Studio helper
-        template <class K>
-        struct contains_predicate_impl
-        {
-            using type = decltype(set_impl<T...>::contains(K{}));
-        };
+        template <typename K, typename = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
+        static std::true_type has_key(type_<K>);
 
         template <typename K>
-        using contains_predicate = typename contains_predicate_impl<K>::type;
-
-    public:
-        template <typename U>
-        static contains_predicate<type_<U>> has_key(type_<U>);
+        static std::false_type has_key(K);
 
         template <class K>
         static append<set_impl<>, typename set_erase_pred_impl<T, K>::type...> erase(type_<K>);
