@@ -8,6 +8,7 @@
 
 #include <type_traits>
 
+#include <brigand/config.hpp>
 #include <brigand/sequences/list.hpp>
 
 namespace brigand
@@ -17,16 +18,22 @@ namespace brigand
     template<class T, class, class, T>
     struct range_cat;
 
+#ifdef BRIGAND_COMP_MSVC
     template<class T, T Start, T Int>
     struct int_plus
     {
       using type = std::integral_constant<T, Start + Int>;
     };
+#endif
 
     template<class T, class... Ts, T... Ints, T Start>
     struct range_cat<T, list<Ts...>, list<std::integral_constant<T, Ints>...>, Start>
     {
+#ifdef BRIGAND_COMP_MSVC
       using type = list<Ts..., typename int_plus<T, Start, Ints>::type...>;
+#else
+      using type = list<Ts..., std::integral_constant<T, Start + Ints>...>;
+#endif
     };
 
     template<class T, T Start, std::size_t N>
@@ -55,16 +62,22 @@ namespace brigand
     template<class T, class, class, T>
     struct reverse_range_cat;
 
+#ifdef BRIGAND_COMP_MSVC
     template<class T, T Start, T Int>
     struct int_minus
     {
       using type = std::integral_constant<T, Int - Start>;
     };
+#endif
 
     template<class T, class... Ts, T... Ints, T Start>
     struct reverse_range_cat<T, list<Ts...>, list<std::integral_constant<T, Ints>...>, Start>
     {
+#ifdef BRIGAND_COMP_MSVC
       using type = list<Ts..., typename int_minus<T, Start, Ints>::type...>;
+#else
+      using type = list<Ts..., std::integral_constant<T, Ints - Start>...>;
+#endif
     };
 
     template<class T, T Start, std::size_t N>
