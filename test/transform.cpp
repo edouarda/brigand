@@ -55,6 +55,29 @@ static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::
 static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::value,
               "invalid binary transform on list");
 
+static_assert(std::is_same<brigand::transform<
+  brigand::list<char, short, int>,
+  brigand::list<float, double, long double>,
+  brigand::list<unsigned, void, void*>,
+  brigand::list<brigand::_1, brigand::_2, brigand::_3>
+>, brigand::list<
+  brigand::list<char, float, unsigned>,
+  brigand::list<short, double, void>,
+  brigand::list<int, long double, void*>
+>>::value, "invalid transform on list");
+
+static_assert(std::is_same<brigand::transform<
+  brigand::list<char, short, int>,
+  brigand::list<float, double, long double>,
+  brigand::list<unsigned, void, void*>,
+  brigand::list<char*, int*, long*>,
+  brigand::list<brigand::_1, brigand::_2, brigand::_3, brigand::_4>
+>, brigand::list<
+  brigand::list<char, float, unsigned, char*>,
+  brigand::list<short, double, void, int*>,
+  brigand::list<int, long double, void*, long*>
+>>::value, "invalid transform on list");
+
 static_assert(
     std::is_same<
         brigand::transform<brigand::list<void, char, int>,
