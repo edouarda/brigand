@@ -10,7 +10,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <brigand/sequences/at.hpp>
 #include <brigand/sequences/back.hpp>
 #include <brigand/sequences/front.hpp>
-#include <brigand/sequences/last_element.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/make_sequence.hpp>
 #include <brigand/sequences/map.hpp>
