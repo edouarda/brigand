@@ -27,49 +27,39 @@ namespace detail
     // Visual Studio helper
     template<class U, class K>
     struct set_erase_pred_impl
-    : std::conditional<std::is_same<U, K>::value, list<>, list<U>>
     {
+        using type = list<U>;
+    };
+
+    template<class K>
+    struct set_erase_pred_impl<K,K>
+    {
+        using type = list<>;
     };
 
     template <class... T>
     struct set_impl
     {
-        template <typename U, typename = decltype(static_cast<type_<U>>(make_set<T...>()))>
-        static std::true_type contains(type_<U>);
-
-        template <typename U>
-        static std::false_type contains(U);
-
-    private:
-        // Visual Studio helper
-        template <class K>
-        struct contains_predicate_impl
-        {
-            using type = decltype(set_impl<T...>::contains(K{}));
-        };
+        template <typename K, typename = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
+        static std::true_type contains(type_<K>);
 
         template <typename K>
-        using contains_predicate = typename contains_predicate_impl<K>::type;
+        static std::false_type contains(K);
 
-    public:
-        template <typename U>
-        static contains_predicate<type_<U>> has_key(type_<U>);
+        template <typename K, typename = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
+        static std::true_type has_key(type_<K>);
 
-    public:
+        template <typename K>
+        static std::false_type has_key(K);
+
         template <class K>
         static append<set_impl<>, typename set_erase_pred_impl<T, K>::type...> erase(type_<K>);
 
-    private:
-        template<class K>
-        static set_impl<T..., K> insert_impl(std::false_type);
+        template<class K, class = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
+        static set_impl insert(type_<K>);
 
         template<class K>
-        static set_impl insert_impl(std::true_type);
-
-    public:
-        template<class K>
-        static decltype(set_impl<T...>::insert_impl<K>(contains_predicate<type_<K>>())) insert(type_<K>);
-
+        static set_impl<T..., typename K::type> insert(K);
     };
 
     // if you have a "class already a base" error message, it means you have defined a set with the same key present more
