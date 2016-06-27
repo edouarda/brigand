@@ -166,7 +166,6 @@ set(SEQUENCES_GROUP
     brigand/sequences/at.hpp
     brigand/sequences/back.hpp
     brigand/sequences/front.hpp
-    brigand/sequences/last_element.hpp
     brigand/sequences/keys_as_sequence.hpp
     brigand/sequences/list.hpp
     brigand/sequences/make_sequence.hpp
