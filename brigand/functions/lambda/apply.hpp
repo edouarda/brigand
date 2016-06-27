@@ -11,17 +11,28 @@
 
 namespace brigand
 {
-  namespace detail
-  {
-    template<typename Lambda, typename Args> struct apply;
+template <template <typename...> class F>
+struct call
+{
+};
 
-    template<typename Lambda, template<class...> class List, typename... Args>
-    struct apply < Lambda, List<Args...> >
+namespace detail
+{
+    template <typename Lambda, typename Args>
+    struct apply;
+
+    template <typename Lambda, template <class...> class List, typename... Args>
+    struct apply<Lambda, List<Args...>>
     {
-      using type = typename Lambda::template apply<Args...>::type;
+        using type = typename Lambda::template apply<Args...>::type;
     };
-  }
+    template <template <class...> class F, template <class...> class List, typename... Args>
+    struct apply<lambda<call<F>>, List<Args...>>
+    {
+        using type = F<Args...>;
+    };
+}
 
-  template<typename Lambda, typename... Args>
-  using apply = typename detail::apply<lambda<Lambda>,brigand::list<Args...>>::type;
+template <typename Lambda, typename... Args>
+using apply = typename detail::apply<lambda<Lambda>, brigand::list<Args...>>::type;
 }
