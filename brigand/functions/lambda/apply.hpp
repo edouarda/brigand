@@ -26,8 +26,17 @@ template <typename T>
 struct pin
 {
 };
+//select args from one layer higher in cascading lambdas
+template <typename T>
+struct parent
+{
+};
 namespace detail
 {
+    template <typename T, typename... Ts>
+    struct packaged_lcall		//this is used in ourder to propagate args from super lambdas to sub lambdas
+    {
+    };
     template <typename T, typename Args, typename... Ls>
 	struct apply {
 		using type = T;  //default is interpreted as if it were a pin<T>
@@ -58,6 +67,23 @@ namespace detail
 	{
 		using type = at_c<L, N>;
 	};
+	//parent case
+	template <typename T, typename L, typename...Ls>
+	struct apply<parent<T>, L, Ls...> : apply<T,Ls...>
+	{
+	};
+	//lcall case
+	template <typename Lambda, typename L, typename...Ls>
+	struct apply<lcall<Lambda>, L, Ls...>
+	{
+		using type = packaged_lcall<Lambda, L, Ls...>;
+	};
+	//packaged_lcall case
+	template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
+	struct apply<packaged_lcall<Lambda<Ts...>,PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>
+	{
+	};
+
 
 }
 
