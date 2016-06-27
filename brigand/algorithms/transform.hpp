@@ -82,11 +82,22 @@ namespace brigand
       using type = Seq<brigand::apply<Func, T>...>;
     };
 
+	template<template<class...> class Seq, class... T, template<typename...> class Func>
+	struct transform_selector<0, Seq<T...>, call<Func>>
+	{
+		using type = Seq<Func<T>...>;
+	};
+
     template<template<class...> class Seq1, class... T1, template<class...> class Seq2, class... T2, class Func>
     struct transform_selector<1, Seq1<T1...>, Seq2<T2...>, Func>
     {
       using type = Seq1<brigand::apply<Func, T1, T2>...>;
     };
+	template<template<class...> class Seq1, class... T1, template<class...> class Seq2, class... T2, template<typename...> class Func>
+	struct transform_selector<1, Seq1<T1...>, Seq2<T2...>, call<Func>>
+	{
+		using type = Seq1<Func<T1, T2>...>;
+	};
   }
 
   namespace lazy
