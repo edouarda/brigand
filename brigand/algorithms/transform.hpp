@@ -75,11 +75,16 @@ namespace brigand
       typename rot90<filled_list<list<>, size<Seq1>::value>, pop_back<list<FuncOrSeqs...>>>::type>
     {};
 
-
-    template<template<class...> class Seq, class... T, class Func>
+    template <template <class...> class Seq, class... T, class Func>
     struct transform_selector<0, Seq<T...>, Func>
     {
-      using type = Seq<brigand::apply<Func, T>...>;
+        using type = Seq<brigand::apply<Func, T>...>;
+    };
+
+    template <template <class...> class Seq, class... T, template <typename...> class Func>
+    struct transform_selector<0, Seq<T...>, call<Func>>
+    {
+        using type = Seq<Func, T>... > ;
     };
 
     template<template<class...> class Seq1, class... T1, template<class...> class Seq2, class... T2, class Func>
