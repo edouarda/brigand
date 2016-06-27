@@ -14,10 +14,6 @@ namespace brigand
   // args metafunction class
   template<std::size_t Index> struct args
   {
-    template<typename... Ts> struct apply
-    {
-      using type = brigand::at_c<brigand::list<Ts...>,Index>;
-    };
   };
 
   // Predefined placeholders
