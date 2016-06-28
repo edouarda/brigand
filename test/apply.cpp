@@ -16,5 +16,5 @@ struct is_int
 	using type = typename std::is_same<T, int>::type;
 };
 
-static_assert(brigand::apply<is_int<_1>, float>::value == false, "invalid apply1 result");
-static_assert(brigand::apply<is_int<_1>, int>::value == true, "invalid apply2 result");
+static_assert(brigand::apply<is_int<brigand::_1>, float>::value == false, "invalid apply1 result");
+static_assert(brigand::apply<is_int<brigand::_1>, int>::value == true, "invalid apply2 result");
