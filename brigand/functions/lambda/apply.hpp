@@ -51,8 +51,8 @@ namespace detail
 
 	//lazy call cases
 	//lambda case (more specialized but SFINAE)
-	template <template <typename...> class Lambda, typename... Ts, typename...LTs, typename... Ls>
-	struct apply<typename has_type<typename Lambda<typename apply<void, Ts, list<LTs...>, Ls...>::type...>::type>::type, Lambda<Ts...>, list<LTs...>, Ls...> : Lambda<typename apply<void, Ts, list<LTs...>, Ls...>::type...>
+	template <template <typename...> class Lambda, typename... Ts, typename... Ls>
+	struct apply<typename has_type<typename Lambda<typename apply<void, Ts, list<LTs...>, Ls...>::type...>::type>::type, Lambda<Ts...>, Ls...> : Lambda<typename apply<void, Ts, Ls...>::type...>
 	{
 	};
 	//wrapper case (less specialized)
