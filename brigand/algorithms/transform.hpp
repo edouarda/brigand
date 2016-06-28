@@ -69,32 +69,39 @@ namespace brigand
       using type = Seq1<typename transform_apply<Func, T1, T2, Seqs>::type...>;
     };
 
-    template<std::size_t n, class Seq1, class Seq2, class... FuncOrSeqs>
-    struct transform_selector
-    : transform_impl<at_c<list<FuncOrSeqs...>, n-1>, Seq1, Seq2,
+    template<class Seq1, class Seq2, class... FuncOrSeqs>
+    struct transform
+    : transform_impl<back<list<FuncOrSeqs...>>, Seq1, Seq2,
       typename rot90<filled_list<list<>, size<Seq1>::value>, pop_back<list<FuncOrSeqs...>>>::type>
     {};
 
 
     template<template<class...> class Seq, class... T, class Func>
-    struct transform_selector<0, Seq<T...>, Func>
+    struct transform<Seq<T...>, Func>
     {
       using type = Seq<brigand::apply<Func, T>...>;
     };
 
 	template<template<class...> class Seq, class... T, template<typename...> class Func>
-	struct transform_selector<0, Seq<T...>, call<Func>>
+	struct transform<Seq<T...>, call<Func>>
 	{
 		using type = Seq<Func<T>...>;
 	};
 
+	//fast track for one arg
+	template<template<class...> class Seq, class... T, template<typename...> class Func>
+	struct transform<Seq<T...>, Func<_1>>
+	{
+		using type = Seq<typename Func<T>::type...>;
+	}; 
+	  
     template<template<class...> class Seq1, class... T1, template<class...> class Seq2, class... T2, class Func>
-    struct transform_selector<1, Seq1<T1...>, Seq2<T2...>, Func>
+    struct transform<Seq1<T1...>, Seq2<T2...>, Func>
     {
       using type = Seq1<brigand::apply<Func, T1, T2>...>;
     };
 	template<template<class...> class Seq1, class... T1, template<class...> class Seq2, class... T2, template<typename...> class Func>
-	struct transform_selector<1, Seq1<T1...>, Seq2<T2...>, call<Func>>
+	struct transform<Seq1<T1...>, Seq2<T2...>, call<Func>>
 	{
 		using type = Seq1<Func<T1, T2>...>;
 	};
@@ -103,11 +110,11 @@ namespace brigand
   namespace lazy
   {
     template<typename Sequence1, typename OpSeq1, typename... OpSeq2>
-    using transform = typename detail::transform_selector<sizeof...(OpSeq2), Sequence1, OpSeq1, OpSeq2...>;
+    using transform = typename detail::transform<Sequence1, OpSeq1, OpSeq2...>;
   }
 
   // Main transform entry point
   template<typename Sequence1, typename OpSeq1, typename... OpSeq2>
-  using transform = typename detail::transform_selector<sizeof...(OpSeq2), Sequence1, OpSeq1, OpSeq2...>::type;
+  using transform = typename detail::transform<Sequence1, OpSeq1, OpSeq2...>::type;
 
 }
