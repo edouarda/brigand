@@ -8,12 +8,12 @@
 
 namespace brigand
 {
-  namespace detail
+  namespace lazy
   {
     template <class A, template<class...> class B> struct wrap_impl;
 
     template<template<class...> class A, class... T, template<class...> class B>
-    struct wrap_impl<A<T...>, B>
+    struct wrap<A<T...>, B>
     {
       using type = B<T...>;
     };
