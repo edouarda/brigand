@@ -37,7 +37,7 @@ namespace detail
     struct packaged_lcall		//this is used in ourder to propagate args from super lambdas to sub lambdas
     {
     };
-    template <typename Void, typename T, typename Args, typename... Ls>
+    template <typename Void, typename T, typename... Ls>
 	struct apply {
 		using type = T;  //default is interpreted as if it were a pin<T>
 	};
