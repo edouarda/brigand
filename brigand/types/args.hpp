@@ -17,7 +17,7 @@ namespace brigand
   };
 
   // Predefined placeholders
-  using _1 = args<0>;
+  struct _1{};
   using _2 = args<1>;
   using _3 = args<2>;
   using _4 = args<3>;

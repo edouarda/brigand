@@ -82,8 +82,9 @@ namespace brigand
       using type = Seq<brigand::apply<Func, T>...>;
     };
 
+	//fast track for call
 	template<template<class...> class Seq, class... T, template<typename...> class Func>
-	struct transform<Seq<T...>, call<Func>>
+	struct transform<Seq<T...>, call<Func, _1>>
 	{
 		using type = Seq<Func<T>...>;
 	};

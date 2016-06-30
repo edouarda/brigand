@@ -12,7 +12,7 @@
 namespace brigand
 {
 	//greedy call
-template <template <typename...> class F>
+template <template <typename...> class, typename...>
 struct call
 {
 };
@@ -33,6 +33,7 @@ struct parent
 };
 namespace detail
 {
+
     template <typename T, typename... Ts>
     struct packaged_lcall		//this is used in ourder to propagate args from super lambdas to sub lambdas
     {
@@ -43,24 +44,24 @@ namespace detail
 	};
 
 	//eager call case
-	template <template<typename...> class Lambda, typename... Args, typename...Ls>
-	struct apply<void,call<Lambda>, list<Args...>, Ls...>
+	template <template<typename...> class F, typename...Ts, typename... Args>
+	struct apply<void,call<F,Ts...>, Args...>
 	{
-		using type = Lambda<Args...>;
+		using type = F<typename apply<void,Ts, Args...>::type...>;
 	};
 
 	//lazy call cases
 	//lambda case (more specialized but SFINAE)
 	template <template <typename...> class Lambda, typename... Ts, typename...LTs, typename... Ls>
-	struct apply<typename has_type<typename Lambda<typename apply<void, Ts, list<LTs...>, Ls...>::type...>::type>::type, Lambda<Ts...>, list<LTs...>, Ls...> : Lambda<typename apply<void, Ts, list<LTs...>, Ls...>::type...>
+	struct apply<void/*typename has_type<typename Lambda<typename apply<void, Ts, list<LTs...>, Ls...>::type...>::type>::type*/, Lambda<Ts...>, list<LTs...>, Ls...> : Lambda<typename apply<void, Ts, list<LTs...>, Ls...>::type...>
 	{
 	};
-	//wrapper case (less specialized)
-	template <template <typename...> class Lambda, typename... Ts, typename... Ls, typename V>
-	struct apply<V, Lambda<Ts...>, Ls...>  
-	{
-		using type = Lambda<typename apply<void, Ts, Ls...>::type...>;
-	};
+	////wrapper case (less specialized)
+	//template <template <typename...> class Lambda, typename T, typename... Ts, typename... Ls, typename V>
+	//struct apply<V, Lambda<T,Ts...>, Ls...>  
+	//{
+	//	using type = Lambda<typename apply<void, T, Ts, Ls...>::type...>;
+	//};
     //pin case
 	template <typename T, typename... Args, typename...Ls>
 	struct apply<void,pin<T>, list<Args...>, Ls...>
@@ -75,7 +76,7 @@ namespace detail
 	};
 	//arg fast track
 	template <typename T, typename...Ts, typename...Ls>
-	struct apply<void, args<0>, list<T,Ts...>, Ls...>
+	struct apply<void, _1, list<T,Ts...>, Ls...>
 	{
 		using type = T;
 	};
