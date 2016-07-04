@@ -7,6 +7,7 @@
 #pragma once
 
 #include <brigand/types/bool.hpp>
+#include <brigand/types/args.hpp>
 
 namespace brigand
 {
