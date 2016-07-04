@@ -8,6 +8,7 @@
 
 #include <brigand/functions/lambda/bind.hpp>
 #include <brigand/sequences/list.hpp>
+#include <brigand/types/args.hpp>
 
 namespace brigand
 {
