@@ -15,14 +15,19 @@
 
 namespace brigand
 {
+	namespace detail {
+		template<typename Pred, typename Val>
+		struct one_or_none : std::conditional<::brigand::apply<Pred, Val>::value, list<>, list<Val>> {};
+	}
 namespace lazy
 {
+
     template <typename L, typename Pred>
     struct remove_if;
 
     template <template<class...> class L, typename... Ts, typename Pred>
     struct remove_if<L<Ts...>, Pred>
-    : ::brigand::detail::append_impl<L<>, typename std::conditional<apply<Pred,Ts>::type::value, list<>, list<Ts>>::type...>
+    : ::brigand::detail::append_impl<L<>, typename ::brigand::detail::one_or_none<Pred,Ts>::type...>
     {
     };
 }
