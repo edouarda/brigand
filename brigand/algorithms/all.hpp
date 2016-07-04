@@ -17,12 +17,10 @@ namespace brigand
     template <bool...> struct bools_ {};
     template< typename Sequence, typename Predicate, typename... Ts> struct all_impl;
 
-    template<typename P, typename T> using invoked = brigand::apply<P,T>;
-
     template< template<class...> class Sequence, typename Predicate, typename... Ts>
     struct  all_impl<Sequence<Ts...>,Predicate>
-          : std::is_same< bools_<true, invoked<Predicate,Ts>::value...>
-                        , bools_<invoked<Predicate,Ts>::value..., true>
+          : std::is_same< bools_<true, ::brigand::apply<Predicate,Ts>::value...>
+                        , bools_<::brigand::apply<Predicate,Ts>::value..., true>
                         >
     {};
   }

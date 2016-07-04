@@ -9,7 +9,6 @@ Distributed under the Boost Software License, Version 1.0.
 #include <brigand/algorithms/wrap.hpp>
 #include <brigand/functions/comparison/less.hpp>
 #include <brigand/functions/lambda/apply.hpp>
-#include <brigand/functions/lambda/quote.hpp>
 #include <brigand/sequences/append.hpp>
 
 namespace brigand
@@ -162,6 +161,6 @@ namespace detail
     };
 }
 
-template <typename Seq, typename Comp = quote<less>>
+template <typename Seq, typename Comp = less<_1,_2>>
 using sort = typename detail::sort_impl<Seq, Comp>::type;
 }
