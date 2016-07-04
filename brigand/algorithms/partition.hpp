@@ -18,7 +18,7 @@ namespace brigand
     template<typename T>
     struct not_pred
     {
-		using type = std::bool_constant<(!T::value)>;
+		using type = std::integral_constant<bool,(!T::value)>;
     };
   }
 

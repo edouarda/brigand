@@ -29,9 +29,9 @@ struct condition_test
 template <template <class...> class Sequence, typename Predicate, typename NewType, typename... T>
 struct replace_if_impl<Sequence<T...>, Predicate, NewType>
 {
-    using type = Sequence<std::conditional_t<
+    using type = Sequence<typename std::conditional<
         ::brigand::apply<Predicate, T>::value, NewType, T
-    >...>;
+    >::type...>;
 };
 }
 }
