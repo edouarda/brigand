@@ -47,9 +47,8 @@ namespace detail
 	};
 
 	//lazy call cases
-	//lambda case (more specialized but SFINAE)
-	template <template <typename...> class F, typename... Ts, typename...LTs, typename... Ls>
-	struct apply<F<Ts...>, list<LTs...>, Ls...> : F<typename apply<Ts, list<LTs...>, Ls...>::type...>
+	template <template <typename...> class F, typename... Ts, typename L, typename... Ls>
+	struct apply<F<Ts...>, L, Ls...> : F<typename apply<Ts, L, Ls...>::type...>
 	{
 	};
 
@@ -82,7 +81,7 @@ namespace detail
 	struct apply<parent<T>, L, Ls...> : apply<T,Ls...>
 	{
 	};
-	//lcall case
+	//defer case
 	template <typename Lambda, typename L, typename...Ls>
 	struct apply<defer<Lambda>, L, Ls...>
 	{
