@@ -16,6 +16,8 @@ Should you wish to learn more, feel free to [watch our Meeting C++ 2015 lightnin
 # Tutorials
 
  * [Introduction](https://github.com/edouarda/brigand/wiki/Introduction)
+ * [Algorithms](https://github.com/edouarda/brigand/wiki/Algorithms)
+ * [Runtime](https://github.com/edouarda/brigand/wiki/Runtime)
 
 # Documentation
 
