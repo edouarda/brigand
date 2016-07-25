@@ -1,6 +1,8 @@
 Brigand Meta-programming library
 ================================
 
+![A brigand](https://raw.githubusercontent.com/wiki/edouarda/brigand/brigand_small.jpg)
+
 [![Build Status](https://travis-ci.org/edouarda/brigand.svg?branch=master)](https://travis-ci.org/edouarda/brigand)
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/edouarda/brigand)](https://ci.appveyor.com/project/edouarda/brigand)
