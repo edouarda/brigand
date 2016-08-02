@@ -28,6 +28,11 @@ static_assert(
                  brigand::integral_list<std::uint32_t, 0, 0>>::value,
     "invalid remove_if result");
 
+static_assert(
+    std::is_same<brigand::remove_if<remove_test_int_list, brigand::call<brigand::not_>>,
+                 brigand::integral_list<std::uint32_t, 1, 2>>::value,
+    "invalid remove_if result");
+
 static_assert(std::is_same<brigand::remove<remove_test_list, int>,
                            brigand::list<bool, char, float, double>>::value,
               "invalid remove result");
