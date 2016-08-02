@@ -11,10 +11,22 @@
 #include <brigand/functions/lambda/apply.hpp>
 #include <brigand/sequences/append.hpp>
 #include <brigand/sequences/clear.hpp>
+#include <brigand/config.hpp>
 #include <type_traits>
 
 namespace brigand
 {
+
+#ifdef BRIGAND_COMP_MSVC
+namespace detail {
+    template<class Pred, class T>
+    struct msvc_remove_if_apply
+    {
+        using type = ::brigand::apply<Pred, T>;
+    };
+}
+#endif
+
 namespace lazy
 {
     template <typename L, typename Pred>
@@ -22,7 +34,13 @@ namespace lazy
 
     template <template<class...> class L, typename... Ts, typename Pred>
     struct remove_if<L<Ts...>, Pred>
-    : ::brigand::detail::append_impl<L<>, typename std::conditional<apply<Pred, Ts>::value, list<>, list<Ts>>::type...>
+    : ::brigand::detail::append_impl<L<>, typename std::conditional<
+#ifdef BRIGAND_COMP_MSVC
+        ::brigand::detail::msvc_remove_if_apply<Pred, Ts>::type::value,
+#else
+        apply<Pred, Ts>::value,
+#endif
+        list<>, list<Ts>>::type...>
     {
     };
 }
