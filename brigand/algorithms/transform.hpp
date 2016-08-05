@@ -106,7 +106,7 @@ namespace brigand
   namespace lazy
   {
     template<typename Sequence1, typename OpSeq1, typename... OpSeq2>
-    using transform = typename detail::transform<sizeof...(OpSeq2), Sequence1, OpSeq1, OpSeq2...>;
+    using transform = detail::transform<sizeof...(OpSeq2), Sequence1, OpSeq1, OpSeq2...>;
   }
 
   // Main transform entry point
