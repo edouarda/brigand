@@ -52,6 +52,10 @@ namespace detail
     {
     };
 }
+namespace lazy {
+	template <typename... Ts>
+	using append = detail::append_impl<Ts...>;
+}
 template <typename... Ts>
 using append = typename detail::append_impl<Ts...>::type;
 }
