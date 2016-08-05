@@ -87,10 +87,16 @@ namespace detail
 	{
 		using type = packaged_lcall<Lambda, L, Ls...>;
 	};
-	//packaged_lcall case
+	//packaged_lcall lazy case
 	template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
-	struct apply<packaged_lcall<Lambda<Ts...>,PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>
+	struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>::type
 	{
+	};
+	//packaged_lcall eager case
+	template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
+	struct apply<packaged_lcall<bind<Lambda,Ts...>, PLs...>, L, Ls...> 
+	{
+		using type = Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>;
 	};
 
 
