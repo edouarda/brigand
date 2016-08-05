@@ -44,18 +44,30 @@ namespace detail
               typename... T12s, typename... T13s, typename... T14s, typename... T15s,
               typename... T16s, typename... Us>
     struct append_impl<L<Ts...>, L1<T1s...>, L2<T2s...>, L3<T3s...>, L4<T4s...>, L5<T5s...>,
-                     L6<T6s...>, L7<T7s...>, L8<T8s...>, L9<T9s...>, L10<T10s...>, L11<T11s...>,
-                     L12<T12s...>, L13<T13s...>, L14<T14s...>, L15<T15s...>, L16<T16s...>, Us...>
+                       L6<T6s...>, L7<T7s...>, L8<T8s...>, L9<T9s...>, L10<T10s...>, L11<T11s...>,
+                       L12<T12s...>, L13<T13s...>, L14<T14s...>, L15<T15s...>, L16<T16s...>, Us...>
         : append_impl<L<Ts..., T1s..., T2s..., T3s..., T4s..., T5s..., T6s..., T7s..., T8s...,
                         T9s..., T10s..., T11s..., T12s..., T13s..., T14s..., T15s..., T16s...>,
                       Us...>
     {
     };
 }
-namespace lazy {
+namespace lazy
+{
 	template <typename... Ts>
 	using append = detail::append_impl<Ts...>;
 }
 template <typename... Ts>
 using append = typename detail::append_impl<Ts...>::type;
+
+
+namespace lazy
+{
+	template <typename T>
+	struct join {
+		using type = wrap<T, append>;
+	};
+}
+template <typename T>
+using join = wrap<T,append>;
 }
