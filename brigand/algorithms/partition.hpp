@@ -6,7 +6,6 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/functions/lambda/protect.hpp>
 #include <brigand/functions/lambda/apply.hpp>
 #include <brigand/algorithms/remove.hpp>
 #include <brigand/sequences/pair.hpp>
@@ -16,20 +15,13 @@ namespace brigand
 {
   namespace detail
   {
-    template<class ProtectedPred>
+    template<typename T>
     struct not_pred
     {
-      template<class... Ts>
-      class apply
-      {
-        using bool_type = brigand::apply<typename ProtectedPred::type, Ts...>;
-
-      public:
-        using type = bool_<!bool_type::value>;
-      };
+		using type = std::integral_constant<bool,(!T::value)>;
     };
   }
 
   template<class Seq, class Pred>
-  using partition = pair<remove_if<Seq, detail::not_pred<protect<Pred>>>, remove_if<Seq, Pred>>;
+  using partition = pair<remove_if<Seq, detail::not_pred<Pred>>, remove_if<Seq, Pred>>;
 }

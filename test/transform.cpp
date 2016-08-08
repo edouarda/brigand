@@ -19,179 +19,175 @@ using expect1b = brigand::list<std::pair<int, int>>;
 using list2 = brigand::list<float, double, int, char, void *>;
 using expect2 = brigand::list<float *, double *, int *, char *, void **>;
 using expect2b =
-    brigand::list<std::pair<float, float>, std::pair<double, double>, std::pair<int, int>,
-                  std::pair<char, char>, std::pair<void *, void *>>;
+brigand::list<std::pair<float, float>, std::pair<double, double>, std::pair<int, int>,
+	std::pair<char, char>, std::pair<void *, void *>>;
 using expect2c = brigand::list<float *, double *, int *, char *, void *>;
 
 // local functors to apply
 using ptr_t = std::add_pointer<brigand::_1>;
-using pair_t = std::pair<brigand::_1, brigand::_2>;
+using pair_t = brigand::bind<std::pair, brigand::_1, brigand::_2>;
 
 static_assert(std::is_same<brigand::transform<list0, std::add_pointer<brigand::_1>>, list0>::value,
-              "invalid unary transform on empty list");
+	"invalid unary transform on empty list");
 
 static_assert(std::is_same<brigand::transform<list0, ptr_t>, list0>::value,
-              "invalid unary transform on empty list");
+	"invalid unary transform on empty list");
 
 static_assert(std::is_same<brigand::transform<list0, list0, pair_t>, list0>::value,
-              "invalid binary transform on empty list");
+	"invalid binary transform on empty list");
 
 static_assert(std::is_same<brigand::transform<list1, ptr_t>, expect1>::value,
-              "invalid unary transform on list");
+	"invalid unary transform on list");
 
 static_assert(
-    std::is_same<brigand::transform<list1, std::add_pointer<brigand::_1>>, expect1>::value,
-    "invalid unary transform on list");
+	std::is_same<brigand::transform<list1, std::add_pointer<brigand::_1>>, expect1>::value,
+	"invalid unary transform on list");
 
 static_assert(std::is_same<brigand::transform<list1, list1, pair_t>, expect1b>::value,
-              "invalid binary transform on list");
+	"invalid binary transform on list");
 
 static_assert(std::is_same<brigand::transform<list2, ptr_t>, expect2>::value,
-              "invalid unary transform on list");
+	"invalid unary transform on list");
 
 static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::value,
-              "invalid binary transform on list");
+	"invalid binary transform on list");
 
 static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::value,
-              "invalid binary transform on list");
+	"invalid binary transform on list");
 
 static_assert(std::is_same<brigand::transform<
-  brigand::list<char, short, int>,
-  brigand::list<float, double, long double>,
-  brigand::list<unsigned, void, void*>,
-  brigand::list<brigand::_1, brigand::_2, brigand::_3>
+	brigand::list<char, short, int>,
+	brigand::list<float, double, long double>,
+	brigand::list<unsigned, void, void*>,
+	brigand::bind<brigand::list, brigand::_1, brigand::_2, brigand::_3>
 >, brigand::list<
-  brigand::list<char, float, unsigned>,
-  brigand::list<short, double, void>,
-  brigand::list<int, long double, void*>
->>::value, "invalid transform on list");
+	brigand::list<char, float, unsigned>,
+	brigand::list<short, double, void>,
+	brigand::list<int, long double, void*>
+	>>::value, "invalid transform on list");
 
 static_assert(std::is_same<brigand::transform<
-  brigand::list<char, short, int>,
-  brigand::list<float, double, long double>,
-  brigand::list<unsigned, void, void*>,
-  brigand::list<char*, int*, long*>,
-  brigand::list<brigand::_1, brigand::_2, brigand::_3, brigand::_4>
+	brigand::list<char, short, int>,
+	brigand::list<float, double, long double>,
+	brigand::list<unsigned, void, void*>,
+	brigand::list<char*, int*, long*>,
+	brigand::bind<brigand::list, brigand::_1, brigand::_2, brigand::_3, brigand::_4>
 >, brigand::list<
-  brigand::list<char, float, unsigned, char*>,
-  brigand::list<short, double, void, int*>,
-  brigand::list<int, long double, void*, long*>
->>::value, "invalid transform on list");
+	brigand::list<char, float, unsigned, char*>,
+	brigand::list<short, double, void, int*>,
+	brigand::list<int, long double, void*, long*>
+	>>::value, "invalid transform on list");
 
 static_assert(
-    std::is_same<
-        brigand::transform<brigand::list<void, char, int>,
-                           std::add_pointer<std::add_pointer<std::add_pointer<brigand::_1>>>>,
-        brigand::list<void ***, char ***, int ***>>::value,
-    "invalid transform on list");
+	std::is_same<
+	brigand::transform<brigand::list<void, char, int>,
+	std::add_pointer<std::add_pointer<std::add_pointer<brigand::_1>>>>,
+	brigand::list<void ***, char ***, int ***>>::value,
+	"invalid transform on list");
 
 static_assert(std::is_same<brigand::transform<list2, brigand::if_<std::is_pointer<brigand::_1>,
-                                                                  brigand::identity<brigand::_1>,
-                                                                  std::add_pointer<brigand::_1>>>,
-                           expect2c>::value,
-              "invalid binary transform on list");
+	brigand::identity<brigand::_1>,
+	std::add_pointer<brigand::_1>>>,
+	expect2c>::value,
+	"invalid binary transform on list");
 
 using sum_list = brigand::integral_list<int, 1, 2, 3>;
 
 static_assert(std::is_same<brigand::as_integral_list<brigand::transform<
-                               sum_list, sum_list, brigand::plus<brigand::_1, brigand::_2>>>,
-                           brigand::integral_list<int, 2, 4, 6>>::value,
-              "invalid transform sum");
+	sum_list, sum_list, brigand::plus<brigand::_1, brigand::_2>>>,
+	brigand::integral_list<int, 2, 4, 6>>::value,
+	"invalid transform sum");
 
 static_assert(
-    std::is_same<brigand::as_integral_list<brigand::transform<
-                     sum_list, brigand::plus<brigand::_1, std::integral_constant<int, 2>>>>,
-                 brigand::integral_list<int, 3, 4, 5>>::value,
-    "invalid transform sum");
+	std::is_same<brigand::as_integral_list<brigand::transform<
+	sum_list, brigand::plus<brigand::_1, std::integral_constant<int, 2>>>>,
+	brigand::integral_list<int, 3, 4, 5>>::value,
+	"invalid transform sum");
 
 static_assert(
-    std::is_same<brigand::as_integral_list<brigand::transform<
-                     sum_list, brigand::minus<std::integral_constant<int, 10>, brigand::_1>>>,
-                 brigand::integral_list<int, 9, 8, 7>>::value,
-    "invalid transform sum");
+	std::is_same<brigand::as_integral_list<brigand::transform<
+	sum_list, brigand::minus<std::integral_constant<int, 10>, brigand::_1>>>,
+	brigand::integral_list<int, 9, 8, 7>>::value,
+	"invalid transform sum");
 
 namespace custom
 {
-template <class...>
-class custom_list
-{
-};
+	template <class...>
+	class custom_list
+	{
+	};
 
-template <int... Is>
-using custom_int_list = brigand::wrap<brigand::integral_list<int, Is...>, custom_list>;
-using list0 = custom_list<>;
+	template <int... Is>
+	using custom_int_list = brigand::wrap<brigand::integral_list<int, Is...>, custom_list>;
+	using list0 = custom_list<>;
 
-using list1 = custom_list<int>;
-using expect1 = custom_list<int *>;
-using expect1b = custom_list<std::pair<int, int>>;
+	using list1 = custom_list<int>;
+	using expect1 = custom_list<int *>;
+	using expect1b = custom_list<std::pair<int, int>>;
 
-using list2 = custom_list<float, double, int, char, void *>;
-using expect2 = custom_list<float *, double *, int *, char *, void **>;
-using expect2b = custom_list<std::pair<float, float>, std::pair<double, double>,
-                             std::pair<int, int>, std::pair<char, char>, std::pair<void *, void *>>;
-using expect2c = custom_list<float *, double *, int *, char *, void *>;
+	using list2 = custom_list<float, double, int, char, void *>;
+	using expect2 = custom_list<float *, double *, int *, char *, void **>;
+	using expect2b = custom_list<std::pair<float, float>, std::pair<double, double>,
+		std::pair<int, int>, std::pair<char, char>, std::pair<void *, void *>>;
+	using expect2c = custom_list<float *, double *, int *, char *, void *>;
 
-// local functors to apply
-using ptr_t = std::add_pointer<brigand::_1>;
-using pair_t = std::pair<brigand::_1, brigand::_2>;
+	static_assert(std::is_same<brigand::transform<list0, std::add_pointer<brigand::_1>>, list0>::value,
+		"invalid unary transform on empty list");
 
-static_assert(std::is_same<brigand::transform<list0, std::add_pointer<brigand::_1>>, list0>::value,
-              "invalid unary transform on empty list");
+	static_assert(std::is_same<brigand::transform<list0, ptr_t>, list0>::value,
+		"invalid unary transform on empty list");
 
-static_assert(std::is_same<brigand::transform<list0, ptr_t>, list0>::value,
-              "invalid unary transform on empty list");
+	static_assert(std::is_same<brigand::transform<list0, list0, pair_t>, list0>::value,
+		"invalid binary transform on empty list");
 
-static_assert(std::is_same<brigand::transform<list0, list0, pair_t>, list0>::value,
-              "invalid binary transform on empty list");
+	static_assert(std::is_same<brigand::transform<list1, ptr_t>, expect1>::value,
+		"invalid unary transform on list");
 
-static_assert(std::is_same<brigand::transform<list1, ptr_t>, expect1>::value,
-              "invalid unary transform on list");
+	static_assert(
+		std::is_same<brigand::transform<list1, std::add_pointer<brigand::_1>>, expect1>::value,
+		"invalid unary transform on list");
 
-static_assert(
-    std::is_same<brigand::transform<list1, std::add_pointer<brigand::_1>>, expect1>::value,
-    "invalid unary transform on list");
+	static_assert(std::is_same<brigand::transform<list1, list1, pair_t>, expect1b>::value,
+		"invalid binary transform on list");
 
-static_assert(std::is_same<brigand::transform<list1, list1, pair_t>, expect1b>::value,
-              "invalid binary transform on list");
+	static_assert(std::is_same<brigand::transform<list2, ptr_t>, expect2>::value,
+		"invalid unary transform on list");
 
-static_assert(std::is_same<brigand::transform<list2, ptr_t>, expect2>::value,
-              "invalid unary transform on list");
+	static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::value,
+		"invalid binary transform on list");
 
-static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::value,
-              "invalid binary transform on list");
+	static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::value,
+		"invalid binary transform on list");
 
-static_assert(std::is_same<brigand::transform<list2, list2, pair_t>, expect2b>::value,
-              "invalid binary transform on list");
+	static_assert(
+		std::is_same<
+		brigand::transform<custom_list<void, char, int>,
+		std::add_pointer<std::add_pointer<std::add_pointer<brigand::_1>>>>,
+		custom_list<void ***, char ***, int ***>>::value,
+		"invalid transform on list");
 
-static_assert(
-    std::is_same<
-        brigand::transform<custom_list<void, char, int>,
-                           std::add_pointer<std::add_pointer<std::add_pointer<brigand::_1>>>>,
-        custom_list<void ***, char ***, int ***>>::value,
-    "invalid transform on list");
+	static_assert(std::is_same<brigand::transform<list2, brigand::if_<std::is_pointer<brigand::_1>,
+		brigand::identity<brigand::_1>,
+		std::add_pointer<brigand::_1>>>,
+		expect2c>::value,
+		"invalid binary transform on list");
 
-static_assert(std::is_same<brigand::transform<list2, brigand::if_<std::is_pointer<brigand::_1>,
-                                                                  brigand::identity<brigand::_1>,
-                                                                  std::add_pointer<brigand::_1>>>,
-                           expect2c>::value,
-              "invalid binary transform on list");
+	using sum_list = custom_int_list<1, 2, 3>;
 
-using sum_list = custom_int_list<1, 2, 3>;
+	static_assert(std::is_same<brigand::as_integral_list<brigand::transform<
+		sum_list, sum_list, brigand::plus<brigand::_1, brigand::_2>>>,
+		custom_int_list<2, 4, 6>>::value,
+		"invalid transform sum");
 
-static_assert(std::is_same<brigand::as_integral_list<brigand::transform<
-                               sum_list, sum_list, brigand::plus<brigand::_1, brigand::_2>>>,
-                           custom_int_list<2, 4, 6>>::value,
-              "invalid transform sum");
+	static_assert(
+		std::is_same<brigand::as_integral_list<brigand::transform<
+		sum_list, brigand::plus<brigand::_1, std::integral_constant<int, 2>>>>,
+		custom_int_list<3, 4, 5>>::value,
+		"invalid transform sum");
 
-static_assert(
-    std::is_same<brigand::as_integral_list<brigand::transform<
-                     sum_list, brigand::plus<brigand::_1, std::integral_constant<int, 2>>>>,
-                 custom_int_list<3, 4, 5>>::value,
-    "invalid transform sum");
-
-static_assert(
-    std::is_same<brigand::as_integral_list<brigand::transform<
-                     sum_list, brigand::minus<std::integral_constant<int, 10>, brigand::_1>>>,
-                 custom_int_list<9, 8, 7>>::value,
-    "invalid transform sum");
+	static_assert(
+		std::is_same<brigand::as_integral_list<brigand::transform<
+		sum_list, brigand::minus<std::integral_constant<int, 10>, brigand::_1>>>,
+		custom_int_list<9, 8, 7>>::value,
+		"invalid transform sum");
 }

@@ -7,12 +7,16 @@
 #pragma once
 
 #include <brigand/types/bool.hpp>
+#include <brigand/types/args.hpp>
 
-namespace brigand { namespace detail
+namespace brigand
 {
-  // Default find-like predicate
-  struct non_null
-  {
-    template<typename Args> struct apply : bool_< Args::value != 0> {};
-  };
-} }
+namespace detail
+{
+    // Default find-like predicate
+
+    template <typename Args>
+	struct non_null_impl : bool_<Args::value != 0>{};
+    using non_null = non_null_impl<_1>;
+}
+}

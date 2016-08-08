@@ -15,9 +15,13 @@ namespace lazy
 {
     template <class Sequence, class State, class Functor>
     using fold = typename detail::fold_impl<Functor, State, Sequence>;
+    template <class Sequence, class State, class Functor>
+    using reverse_fold = typename detail::reverse_fold_impl<Functor, State, Sequence>;
 }
 
-  // Main fold entry point
-  template <class Sequence, class State, class Functor>
-  using fold = typename ::brigand::lazy::fold<Sequence, State, Functor>::type;
+// Main fold entry point
+template <class Sequence, class State, class Functor>
+using fold = typename ::brigand::lazy::fold<Sequence, State, Functor>::type;
+template <class Sequence, class State, class Functor>
+using reverse_fold = typename ::brigand::lazy::reverse_fold<Sequence, State, Functor>::type;
 }
