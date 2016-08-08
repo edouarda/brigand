@@ -89,7 +89,7 @@ namespace detail
 	};
 	//packaged_lcall lazy case
 	template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
-	struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>::type
+	struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>
 	{
 	};
 	//packaged_lcall eager case
