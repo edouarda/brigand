@@ -28,7 +28,7 @@ using lo = brigand::list<float, double>;
 using cart = brigand::reverse_fold<brigand::list<li, lo>, brigand::list<brigand::list<>>, brigand::bind<brigand::join, brigand::bind<brigand::transform, brigand::_2, brigand::defer<brigand::bind<brigand::join, brigand::bind<brigand::transform, brigand::parent<brigand::_1>, brigand::defer<brigand::bind<brigand::list, brigand::bind<brigand::push_front, brigand::_1, brigand::parent<brigand::_1>>>>>>>>>>;
 using lazy_cart = brigand::reverse_fold<brigand::list<li, lo>, brigand::list<brigand::list<>>, brigand::lazy::join<brigand::lazy::transform< brigand::_2, brigand::defer<brigand::lazy::join< brigand::lazy::transform< brigand::parent<brigand::_1>, brigand::defer<brigand::bind<brigand::list, brigand::lazy::push_front< brigand::_1, brigand::parent<brigand::_1>>>>>>>>>>;
 using cart_expected = brigand::list<brigand::list<int, float>, brigand::list<int, double>, brigand::list<bool, float>, brigand::list<bool, double>, brigand::list<char, float>, brigand::list<char, double> >;
-static_assert(std::is_same<cart, cart_expected>::value, "");
-static_assert(std::is_same<lazy_cart, cart_expected>::value, "");
+static_assert(std::is_same<cart, cart_expected>::value, "invalid cartesian product");
+static_assert(std::is_same<lazy_cart, cart_expected>::value, "invalid cartesian product");
 
 
