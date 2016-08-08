@@ -7,6 +7,7 @@
 #pragma once
 
 #include <brigand/sequences/list.hpp>
+#include <brigand/algorithms/wrap.hpp>
 
 namespace brigand
 {
@@ -64,8 +65,10 @@ using append = typename detail::append_impl<Ts...>::type;
 namespace lazy
 {
 	template <typename T>
-	struct join {
-		using type = wrap<T, append>;
+	struct join;
+	template<template<typename...> class L, typename...Ts>
+	struct join<L<Ts...>> : ::brigand::detail::append_impl<L<>,Ts...>
+	{
 	};
 }
 template <typename T>
