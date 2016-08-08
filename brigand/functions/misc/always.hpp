@@ -11,6 +11,6 @@ namespace brigand
   template<class T>
   struct always
   {
-    template<typename X> struct apply { using type = T; };
+     using type = T; 
   };
 }

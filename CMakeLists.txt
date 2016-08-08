@@ -138,10 +138,6 @@ set(FUNCTIONS_LAMBDA_GROUP
     brigand/functions/lambda/substitute.hpp
     brigand/functions/lambda/apply.hpp
     brigand/functions/lambda/bind.hpp
-    brigand/functions/lambda/lambda.hpp
-    brigand/functions/lambda/protect.hpp
-    brigand/functions/lambda/quote.hpp
-    brigand/functions/lambda/unpack.hpp
 )
 
 set(FUNCTIONS_MISC_GROUP
@@ -180,12 +176,10 @@ set(SEQUENCES_GROUP
 set(TYPES_GROUP
     brigand/types/bool.hpp
     brigand/types/empty_base.hpp
-    brigand/types/has_placeholders.hpp
     brigand/types/has_type.hpp
     brigand/types/integer.hpp
     brigand/types/inherit.hpp
     brigand/types/inherit_linearly.hpp
-    brigand/types/is_placeholder.hpp
     brigand/types/args.hpp
     brigand/types/no_such_type.hpp
     brigand/types/type.hpp
@@ -244,7 +238,6 @@ set(test_files
     test/integer.cpp
     test/integral_list_test.cpp
     test/integral_test.cpp
-    test/is_placeholder.cpp
     test/is_set_test.cpp
     test/keys_as_sequence.cpp
     test/list_test.cpp
@@ -255,8 +248,6 @@ set(test_files
     test/pair_test.cpp
     test/partition_test.cpp
     test/predicate_reduction_test.cpp
-    test/protect.cpp
-    test/quote.cpp
     test/range_test.cpp
     test/real.cpp
     test/remove_test.cpp
@@ -271,7 +262,6 @@ set(test_files
     test/split_at.cpp
     test/transform.cpp
     test/tuple_test.cpp
-    test/unpack.cpp
     test/values_as_sequence.cpp
 )
 

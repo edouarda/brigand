@@ -8,7 +8,6 @@
 
 #include <brigand/functions/arithmetic/next.hpp>
 #include <brigand/functions/lambda/apply.hpp>
-#include <brigand/functions/lambda/quote.hpp>
 #include <brigand/sequences/append.hpp>
 #include <brigand/sequences/list.hpp>
 
@@ -66,6 +65,6 @@ namespace detail
     };
 }
 
-    template<class Start, unsigned N, class Next = quote<next>, template<class...> class List = list>
+    template<class Start, unsigned N, class Next = next<_1>, template<class...> class List = list>
     using make_sequence = typename detail::make_sequence_impl<List, Start, N, Next, (N<=8)>::type;
 }

@@ -165,4 +165,40 @@ namespace brigand { namespace detail
   >
   {};
 
+  template<typename Functor, typename State, typename Sequence>
+  struct reverse_fold_impl
+  {
+	  using type = State;
+  };
+
+  template <typename Functor, typename State, template <typename...> class L, typename T, typename... Ts>
+  struct reverse_fold_impl<Functor, State, L<T, Ts...>>
+  {
+      using type =
+          brigand::apply<Functor, typename reverse_fold_impl<Functor, State, L<Ts...>>::type, T>;
+  };
+
+  template<
+	  typename Functor, typename State, template <typename...> class L,
+	  typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename... Ts>
+	  struct reverse_fold_impl<Functor, State, L<T0, T1, T2, T3, T4, T5, T6, T7, Ts...>>{
+	  using type = brigand::apply<Functor,
+		  brigand::apply<Functor,
+		  brigand::apply<Functor,
+		  brigand::apply<Functor,
+		  brigand::apply<Functor,
+		  brigand::apply<Functor,
+		  brigand::apply<Functor,
+		  brigand::apply<Functor,
+		  typename reverse_fold_impl<Functor, State, L<Ts...>>::type, T7
+		  >, T6
+		  >, T5
+		  >, T4
+		  >, T3
+		  >, T2
+		  >, T1
+		  >, T0
+		  >;
+  };
+
 } }

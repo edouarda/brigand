@@ -13,7 +13,7 @@ namespace brigand
 namespace detail
 {
     template <bool b, typename O, typename L, std::size_t I>
-    struct split_at_impl; // is you get an error here your index is out of bounds
+    struct split_at_impl; // if you get an error here your index is out of bounds
     template <template <typename...> class S, typename... Os, typename T, typename... Ts>
     struct split_at_impl<false, S<Os...>, S<T, Ts...>, 0>
     {

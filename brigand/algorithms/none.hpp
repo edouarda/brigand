@@ -17,16 +17,14 @@ namespace brigand
   {
     template<typename Sequence, typename Pred> struct none_impl
     {
+		template<typename T>
       struct nope
       {
-        template<typename T> struct apply
-        {
           using that = brigand::apply<Pred,T>;
           using type = bool_<!that::value>;
-        };
       };
 
-      using type = all<Sequence,nope>;
+      using type = all<Sequence,nope<_1>>;
     };
   }
 
