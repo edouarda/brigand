@@ -99,6 +99,8 @@ namespace detail
 		using type = Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>;
 	};
 
+	template<typename T, typename...Ts>
+	using bound_apply = typename apply<T, brigand::list<Ts...>>::type;
 
 }
 

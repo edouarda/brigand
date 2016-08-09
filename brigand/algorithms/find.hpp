@@ -21,8 +21,20 @@ namespace lazy
 {
 
     // find uses Predicate, it's very effective
-    template <typename Sequence, typename Predicate = brigand::detail::non_null>
-    using find = typename detail::find_if_impl<Predicate, Sequence>;
+    template <typename Sequence, typename Predicate = ::brigand::detail::non_null>
+    struct find;
+    template <template <typename...> class Sequence, typename... Ls, typename Pred>
+    struct find<Sequence<Ls...>, Pred>
+        : detail::finder<Sequence, detail::bound_apply, Pred>::template find<
+              false, false, void, void, void, void, void, void, void, void, Ls...>
+    {
+    };
+    template <template <typename...> class Sequence, typename... Ls, template <typename...> class F>
+    struct find<Sequence<Ls...>, bind<F, _1>>
+        : detail::finder<Sequence, F>::template find<false, false, void, void, void, void, void,
+                                                     void, void, void, Ls...>
+    {
+    };
 }
 
 // find uses Predicate, it's very effective
