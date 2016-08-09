@@ -17,7 +17,7 @@ namespace brigand
 	namespace detail
 	{
 		template <typename T, typename Pred, typename NewType>
-		struct replacer : std::conditional<apply<Pred, T>::value, NewType, T>
+		struct replacer : std::conditional<::brigand::apply<Pred, T>::value, NewType, T>
 		{
 		};
 		template <typename T, template <typename...> class F, typename NewType>
