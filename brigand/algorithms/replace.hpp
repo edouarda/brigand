@@ -6,6 +6,7 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/functions/lambda/apply.hpp>
 #include <brigand/sequences/list.hpp>
 #include <type_traits>
 
