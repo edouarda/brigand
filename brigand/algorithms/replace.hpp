@@ -6,21 +6,37 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/algorithms/detail/replace.hpp>
 #include <brigand/sequences/list.hpp>
+#include <type_traits>
 
 namespace brigand
 {
 namespace lazy
 {
 
-template <typename Sequence, typename Predicate, typename NewType>
-using replace_if = typename detail::replace_if_impl<Sequence, Predicate, NewType>;
+    template <typename Sequence, typename Predicate, typename NewType>
+    struct replace_if;
+    template <template <typename...> class S, typename... Ts, typename Predicate, typename NewType>
+    struct replace_if<S<Ts...>, Predicate, NewType>
+    {
+        using type =
+            S<typename std::conditional<apply<Predicate, Ts>::value, NewType, Ts>::type...>;
+    };
+    template <template <typename...> class S, typename... Ts, template <typename...> class F,
+              typename NewType>
+    struct replace_if<S<Ts...>, bind<F, _1>, NewType>
+    {
+        using type = S<typename std::conditional<F<Ts>::value, NewType, Ts>::type...>;
+    };
+    template <template <typename...> class S, typename... Ts, template <typename...> class F,
+              typename NewType>
+    struct replace_if<S<Ts...>, F<_1>, NewType>
+    {
+        using type = S<typename std::conditional<F<Ts>::type::value, NewType, Ts>::type...>;
+    };
 
-template <typename Sequence, typename OldType, typename NewType>
-using replace = typename detail::replace_if_impl<Sequence,
-                                                 std::is_same<OldType, brigand::_1>,
-                                                 NewType>;
+    template <typename Sequence, typename OldType, typename NewType>
+    using replace = replace_if<Sequence, std::is_same<_1, pin<OldType>>, NewType>;
 }
 
 template <typename Sequence, typename Predicate, typename NewType>

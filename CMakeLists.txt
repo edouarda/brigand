@@ -92,7 +92,6 @@ set(ALGORITHMS_DETAIL_GROUP
     brigand/algorithms/detail/find.hpp
     brigand/algorithms/detail/fold.hpp
     brigand/algorithms/detail/non_null.hpp
-    brigand/algorithms/detail/replace.hpp
 )
 
 set(FUNCTIONS_ARITHMETIC_GROUP
