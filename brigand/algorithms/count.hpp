@@ -7,6 +7,7 @@
 #pragma once
 #include <type_traits>
 #include <brigand/types/integer.hpp>
+#include <brigand/functions/lambda.hpp>
 
 namespace brigand
 {
