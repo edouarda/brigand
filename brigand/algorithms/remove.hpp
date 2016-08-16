@@ -15,19 +15,32 @@
 
 namespace brigand
 {
-	namespace detail {
-		template<typename Pred, typename Val>
-		struct one_or_none : std::conditional<::brigand::apply<Pred, Val>::value, list<>, list<Val>> {};
-	}
+namespace detail
+{
+    // this is essentially just a work around because MSVC can't expand variadic packs properly
+    template <typename Pred, typename T, bool B>
+    struct empty_if_true : std::conditional<::brigand::apply<Pred, T>::value == B, list<>, list<T>>
+    {
+    };
+    template <template <typename...> class F, typename T, bool B>
+    struct empty_if_true<bind<F, _1>, T, B> : std::conditional<F<T>::value == B, list<>, list<T>>
+    {
+    };
+    template <template <typename...> class F, typename T, bool B>
+    struct empty_if_true<F<_1>, T, B> : std::conditional<F<T>::type::value == B, list<>, list<T>>
+    {
+    };
+}
 namespace lazy
 {
 
     template <typename L, typename Pred>
     struct remove_if;
 
-    template <template<class...> class L, typename... Ts, typename Pred>
+    template <template <class...> class L, typename... Ts, typename Pred>
     struct remove_if<L<Ts...>, Pred>
-    : ::brigand::detail::append_impl<L<>, typename ::brigand::detail::one_or_none<Pred,Ts>::type...>
+        : ::brigand::detail::append_impl<
+              L<>, typename ::brigand::detail::empty_if_true<Pred, Ts, true>::type...>
     {
     };
 }
@@ -40,13 +53,31 @@ namespace lazy
     template <typename L, typename T>
     struct remove;
 
-    template <template<class...> class L, typename... Ts, typename T>
+    template <template <class...> class L, typename... Ts, typename T>
     struct remove<L<Ts...>, T>
-    : ::brigand::detail::append_impl<L<>, typename std::conditional<std::is_same<Ts,T>::value, list<>, list<Ts>>::type...>
+        : ::brigand::detail::append_impl<
+              L<>, typename std::conditional<std::is_same<Ts, T>::value, list<>, list<Ts>>::type...>
     {
     };
 }
 
 template <typename L, typename T>
 using remove = typename lazy::remove<L, T>::type;
+
+namespace lazy
+{
+
+    template <typename L, typename Pred>
+    struct filter;
+
+    template <template <class...> class L, typename... Ts, typename Pred>
+    struct filter<L<Ts...>, Pred>
+        : ::brigand::detail::append_impl<
+              L<>, typename ::brigand::detail::empty_if_true<Pred, Ts, false>::type...>
+    {
+    };
+}
+
+template <typename L, typename Pred>
+using filter = typename lazy::filter<L, Pred>::type;
 }

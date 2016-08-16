@@ -221,6 +221,7 @@ set(test_files
     test/bind.cpp
     test/bitwise_test.cpp
     test/comparison_test.cpp
+    test/count_test.cpp
     test/config_test.cpp
     test/eval_if_test.cpp
     test/erase_c_test.cpp

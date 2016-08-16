@@ -6,22 +6,12 @@
 =================================================================================================**/
 #pragma once
 
-#include <brigand/functions/lambda/apply.hpp>
 #include <brigand/algorithms/remove.hpp>
+#include <brigand/functions/lambda/apply.hpp>
 #include <brigand/sequences/pair.hpp>
-#include <brigand/types/bool.hpp>
 
 namespace brigand
 {
-  namespace detail
-  {
-    template<typename T>
-    struct not_pred
-    {
-		using type = std::integral_constant<bool,(!T::value)>;
-    };
-  }
-
-  template<class Seq, class Pred>
-  using partition = pair<remove_if<Seq, detail::not_pred<Pred>>, remove_if<Seq, Pred>>;
+template <class Seq, class Pred>
+using partition = pair<filter<Seq, Pred>, remove_if<Seq, Pred>>;
 }
