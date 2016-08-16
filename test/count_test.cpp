@@ -2,6 +2,7 @@
 #include <brigand/algorithms/count.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/types/integer.hpp>
+#include <brigand/types/bool.hpp>
 #include <type_traits>
 
 
