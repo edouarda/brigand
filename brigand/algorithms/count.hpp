@@ -7,6 +7,7 @@
 #pragma once
 #include <brigand/functions/lambda.hpp>
 #include <brigand/types/integer.hpp>
+#include <brigand/config.hpp>
 #include <type_traits>
 
 namespace brigand
@@ -52,7 +53,7 @@ namespace lazy
         using type = ::brigand::size_t<0>;
     };
 
-#ifdef __GNUC__  //not MSVC
+#ifndef BRIGAND_COMP_MSVC  //not MSVC
 
 	template <template<typename...> class S, typename... Ts, typename Pred>
 	struct count_if<S<Ts...>, Pred>
