@@ -88,7 +88,8 @@ namespace brigand
       typename reverse_range_impl<T, Start, N - N/2>::type,
       N/2
     >
-    {};
+    {
+    };
 
     template<class T, T Start>
     struct reverse_range_impl<T, Start, 1>
@@ -101,11 +102,18 @@ namespace brigand
     {
       using type = list<>;
     };
+
+    template <class T, T Start, T Stop>
+    struct reverse_range_safe
+    {
+        static_assert(Start >= Stop, "Invalid parameters. reverse_range<> syntax is reverse_range<type, from, down_to>");
+        using type = typename reverse_range_impl<T, Start, Start-Stop>::type;
+    };
   }
 
   template<class T, T Start, T Stop>
   using range = typename detail::range_impl<T, Start, Stop-Start>::type;
 
   template<class T, T Start, T Stop>
-  using reverse_range = typename detail::reverse_range_impl<T, Start, Start-Stop>::type;
+  using reverse_range = typename detail::reverse_range_safe<T, Start, Stop>::type;
 }
