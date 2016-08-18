@@ -1,0 +1,11 @@
+brigand (1.2.0) unstable; urgency=low
+
+  * New split_at algorithm
+  * New pop_back_n and pop_front_n functions
+  * New keys_as_sequence, values_as_sequence and as_sequence functions
+  * New index_of and index_if functions
+  * Added basic compiler detection macros
+  * The standalone header is now correctly updated at each build
+  * Fixed algorithms that didn't work with types other than brigand::list
+
+ -- The Brigand Team <brigand-dev@googlegroups.com>  Mon, 20 Jun 2016 09:35:48 +0200
