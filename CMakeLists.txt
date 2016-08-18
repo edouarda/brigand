@@ -278,6 +278,15 @@ add_executable(brigand_test ${test_files})
 
 add_test(brigand brigand_test)
 
+configure_file(libbrigand.pc.in
+    libbrigand.pc
+    @ONLY
+)
+
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/brigand
-    DESTINATION .
+    DESTINATION include
+)
+
+install(FILES ${CMAKE_BINARY_DIR}/libbrigand.pc
+    DESTINATION lib/pkgconfig
 )

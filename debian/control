@@ -1,0 +1,15 @@
+Source: brigand
+Priority: optional
+Maintainer: Edouard Alligand <brigand-dev@googlegroups.com>
+Build-Depends: debhelper (>= 9), cmake
+Standards-Version: 3.9.5
+Section: libs
+Homepage: https://github.com/edouarda/brigand
+
+Package: libbrigand-dev
+Section: libdevel
+Architecture: all
+Depends: ${misc:Depends}
+Description: C++ 11 meta-programming library.
+ Light-weight, fully functional, instant-compile time C++ 11 meta-programming library.
+ Everything you were doing with Boost.MPL can be done with Brigand.
