@@ -38,10 +38,13 @@ namespace detail
         static type_<no_such_type_> at(U);
 
         template <class K>
+        static std::false_type has_key(type_<K>);
+
+        template <class K>
         static map_impl erase(type_<K>);
 
         template <class P>
-        static map_impl< P> insert(type_<P>);
+        static map_impl<P> insert(type_<P>);
     };
 
     template <class... Ts>
@@ -59,6 +62,12 @@ namespace detail
 
         template<class K>
         static type_<no_such_type_> at(K);
+
+        template <class K, class = decltype(at_impl<K>(static_cast<Pack*>(nullptr)))>
+        static std::true_type has_key(type_<K>);
+
+        template <class K>
+        static std::false_type has_key(K);
 
         template <class K>
         static append<map_impl<>, typename std::conditional<std::is_same<K, typename Ts::first_type>::value, list<>, list<Ts>>::type...> erase(type_<K>);
