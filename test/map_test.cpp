@@ -21,6 +21,10 @@ static_assert(std::is_same<brigand::lookup<brigand::map<brigand::pair<int&, void
 
 using map_test = brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>>;
 
+static_assert(std::is_same<brigand::lookup<map_test, int>, bool>::value, "should be bool");
+static_assert(std::is_same<brigand::lookup<map_test, char>, int>::value, "should be int");
+static_assert(std::is_same<brigand::lookup<map_test, bool>, brigand::no_such_type_>::value, "should be not found");
+
 void map_has_key_test()
 {
   brigand::has_key<map_test, int>{} = std::true_type{};
