@@ -76,6 +76,7 @@ set(ALGORITHMS_GROUP
     brigand/algorithms/for_each_args.hpp
     brigand/algorithms/index_of.hpp
     brigand/algorithms/is_set.hpp
+    brigand/algorithms/merge.hpp
     brigand/algorithms/none.hpp
     brigand/algorithms/partition.hpp
     brigand/algorithms/remove.hpp
@@ -245,6 +246,7 @@ set(test_files
     test/main.cpp
     test/make_sequence_test.cpp
     test/map_test.cpp
+    test/merge_test.cpp
     test/pair_test.cpp
     test/partition_test.cpp
     test/predicate_reduction_test.cpp
