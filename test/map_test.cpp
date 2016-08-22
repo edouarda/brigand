@@ -3,6 +3,8 @@
 #include <brigand/sequences/map.hpp>
 #include <brigand/sequences/size.hpp>
 #include <brigand/sequences/at.hpp>
+#include <brigand/sequences/erase.hpp>
+#include <brigand/sequences/has_key.hpp>
 #include <brigand/sequences/insert.hpp>
 
 static_assert(brigand::detail::has_at_method<brigand::map<>>::value, "at not detected!");
@@ -22,6 +24,24 @@ using map_test = brigand::map<brigand::pair<int, bool>, brigand::pair<char, int>
 static_assert(std::is_same<brigand::lookup<map_test, int>, bool>::value, "should be bool");
 static_assert(std::is_same<brigand::lookup<map_test, char>, int>::value, "should be int");
 static_assert(std::is_same<brigand::lookup<map_test, bool>, brigand::no_such_type_>::value, "should be not found");
+
+void map_has_key_test()
+{
+  brigand::has_key<map_test, int>{} = std::true_type{};
+  brigand::has_key<map_test, char>{} = std::true_type{};
+  brigand::has_key<map_test, bool>{} = std::false_type{};
+  brigand::has_key<map_test, void>{} = std::false_type{};
+  brigand::has_key<brigand::map<>, void>{} = std::false_type{};
+}
+
+void map_erase_test()
+{
+  brigand::erase<map_test, int>{} = brigand::map<brigand::pair<char, int>>{};
+  brigand::erase<map_test, char>{} = brigand::map<brigand::pair<int, bool>>{};
+  brigand::erase<map_test, bool>{} = map_test{};
+  brigand::erase<map_test, void>{} = map_test{};
+  brigand::erase<brigand::map<>, void>{} = brigand::map<>{};
+}
 
 using big_map = brigand::map<
     brigand::pair<type_one, int>,
