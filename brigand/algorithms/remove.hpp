@@ -15,6 +15,48 @@
 
 namespace brigand
 {
+#if defined(BRIGAND_COMP_GCC) || defined(BRIGAND_COMP_CLANG) // not MSVC
+	namespace lazy
+	{
+
+		template <typename L, typename Pred>
+		struct remove_if;
+
+		template <template <class...> class L, typename... Ts, typename Pred>
+		struct remove_if<L<Ts...>, Pred>
+			: ::brigand::detail::append_impl<
+			L<>, typename std::conditional<::brigand::apply<Pred, Ts>::value, list<>, list<Ts>>::type...>
+		{
+		};
+	}
+
+	namespace lazy
+	{
+		template <typename L, typename T>
+		struct remove;
+
+		template <template <class...> class L, typename... Ts, typename T>
+		struct remove<L<Ts...>, T>
+			: ::brigand::detail::append_impl<
+			L<>, typename std::conditional<std::is_same<Ts, T>::value, list<>, list<Ts>>::type...>
+		{
+		};
+	}
+
+	namespace lazy
+	{
+
+		template <typename L, typename Pred>
+		struct filter;
+
+		template <template <class...> class L, typename... Ts, typename Pred>
+		struct filter<L<Ts...>, Pred>
+			: ::brigand::detail::append_impl<
+			L<>, typename std::conditional<::brigand::apply<Pred, Ts>::value, list<Ts>, list<>>::type...>
+		{
+		};
+	}
+#else
 namespace detail
 {
     // this is essentially just a work around because MSVC can't expand variadic packs properly
@@ -31,6 +73,7 @@ namespace detail
     {
     };
 }
+
 namespace lazy
 {
 
@@ -45,9 +88,6 @@ namespace lazy
     };
 }
 
-template <typename L, typename Pred>
-using remove_if = typename lazy::remove_if<L, Pred>::type;
-
 namespace lazy
 {
     template <typename L, typename T>
@@ -60,9 +100,6 @@ namespace lazy
     {
     };
 }
-
-template <typename L, typename T>
-using remove = typename lazy::remove<L, T>::type;
 
 namespace lazy
 {
@@ -77,6 +114,12 @@ namespace lazy
     {
     };
 }
+#endif
+template <typename L, typename Pred>
+using remove_if = typename lazy::remove_if<L, Pred>::type;
+
+template <typename L, typename T>
+using remove = typename lazy::remove<L, T>::type;
 
 template <typename L, typename Pred>
 using filter = typename lazy::filter<L, Pred>::type;
