@@ -29,35 +29,32 @@ namespace brigand
 #else
 	namespace detail
 	{
-		struct all_true
+		struct all_same
 		{
 			const bool value = false;
-			constexpr all_true(...) {}
+			constexpr all_same(...) {}
 			template <typename T>
-			constexpr all_true(std::initializer_list<T *>) : value{ true }
+			constexpr all_same(std::initializer_list<T *>) : value{ true }
 			{
 			}
 		};
 
-		template <bool...>
-		struct bools_
-		{
-		};
-		template <typename Sequence, typename Predicate, typename... Ts>
-		struct all_impl;
+		template <typename Sequence, typename Predicate>
+		struct all_impl : bool_<true>{};
 
-		template <template <class...> class Sequence, typename Predicate, typename... Ts>
-		struct all_impl<Sequence<Ts...>, Predicate>
-			: std::is_same<bools_<true, ::brigand::apply<Predicate, Ts>::value...>,
-			bools_<::brigand::apply<Predicate, Ts>::value..., true>>
+		template <template <class...> class Sequence, typename Predicate, typename T, typename... Ts>
+		struct all_impl<Sequence<T,Ts...>, Predicate>
 		{
+			static constexpr all_same tester{ static_cast<::brigand::apply<Predicate, T> *>(nullptr),
+				static_cast<::brigand::apply<Predicate, Ts> *>(nullptr)... };
+			using type = bool_<(::brigand::apply<Predicate, T>::value != 0 && tester.value)>;
 		};
 
 		template <template <class...> class Sequence, template <typename...> class F, typename T,
 			typename... Ts>
 			struct all_impl<Sequence<T, Ts...>, bind<F, _1>>
 		{
-			static constexpr all_true tester{ static_cast<F<T> *>(nullptr),
+			static constexpr all_same tester{ static_cast<F<T> *>(nullptr),
 				static_cast<F<Ts> *>(nullptr)... };
 			using type = bool_<(F<T>::value != 0 && tester.value)>;
 		};
@@ -66,7 +63,7 @@ namespace brigand
 			typename... Ts>
 			struct all_impl<Sequence<T, Ts...>, F<_1>>
 		{
-			static constexpr all_true tester{ static_cast<typename F<T>::type *>(nullptr),
+			static constexpr all_same tester{ static_cast<typename F<T>::type *>(nullptr),
 				static_cast<typename F<Ts>::type *>(nullptr)... };
 			using type = bool_<(F<T>::type::value != 0 && tester.value)>;
 		};
