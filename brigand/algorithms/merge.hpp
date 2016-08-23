@@ -93,5 +93,5 @@ namespace brigand
   }
 
   template<class Seq1, class Seq2, class Comp = less<_1,_2>>
-  using merge = append<clear<Seq1>, typename detail::merge_impl<clear<Seq1>, wrap<Seq1, list>, wrap<Seq2, list>, Comp>::type>;
+  using merge = append<clear<Seq1>, typename detail::merge_impl<list<>, wrap<Seq1, list>, wrap<Seq2, list>, Comp>::type>;
 }
