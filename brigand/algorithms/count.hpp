@@ -55,6 +55,18 @@ namespace lazy
 
 #if defined(BRIGAND_COMP_GCC) || defined(BRIGAND_COMP_CLANG)  //not MSVC
 
+	template <template <typename...> class S, template <typename...> class F>
+	struct count_if<S<>, bind<F, _1>>
+	{
+		using type = ::brigand::size_t<0>;
+	};
+
+	template <template <typename...> class S, template <typename...> class F>
+	struct count_if<S<>, F<_1>>
+	{
+		using type = ::brigand::size_t<0>;
+	};
+
 	template <template<typename...> class S, typename... Ts, typename Pred>
 	struct count_if<S<Ts...>, Pred>
 	{

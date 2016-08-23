@@ -23,3 +23,9 @@ using l2 = brigand::count_if<full_list, lazy_is_odd<brigand::_1>>;
 
 static_assert(l1::value == 6, "eager count_if error");
 static_assert(l2::value == 6, "lazy count_if error");
+static_assert(brigand::count_if<brigand::list<>, lazy_is_odd<brigand::_1>>::value == 0, "eager empty count_if error");
+static_assert(brigand::count_if<brigand::list<>, lazy_is_odd<brigand::_1>>::value == 0, "lazy empty count_if error");
+static_assert(brigand::count_if<size_t_list<3>, lazy_is_odd<brigand::_1>>::value == 1, "eager single count_if error");
+static_assert(brigand::count_if<size_t_list<3>, lazy_is_odd<brigand::_1>>::value == 1, "lazy single count_if error");
+static_assert(brigand::count_if<size_t_list<2>, lazy_is_odd<brigand::_1>>::value == 0, "eager single count_if error");
+static_assert(brigand::count_if<size_t_list<2>, lazy_is_odd<brigand::_1>>::value == 0, "lazy single count_if error");
