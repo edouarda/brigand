@@ -17,12 +17,26 @@ namespace brigand
     template <bool...> struct bools_ {};
     template< typename Sequence, typename Predicate, typename... Ts> struct all_impl;
 
-    template< template<class...> class Sequence, typename Predicate, typename... Ts>
-    struct  all_impl<Sequence<Ts...>,Predicate>
-          : std::is_same< bools_<true, ::brigand::apply<Predicate,Ts>::value...>
-                        , bools_<::brigand::apply<Predicate,Ts>::value..., true>
-                        >
-    {};
+	template< template<class...> class Sequence, typename Predicate, typename... Ts>
+	struct  all_impl<Sequence<Ts...>, Predicate>
+		: std::is_same< bools_<true, ::brigand::apply<Predicate, Ts>::value...>
+		, bools_<::brigand::apply<Predicate, Ts>::value..., true>
+		>
+	{};
+
+	template< template<class...> class Sequence, template<typename...> class F, typename... Ts>
+	struct  all_impl<Sequence<Ts...>, bind<F,_1>>
+		: std::is_same< bools_<true, F<Ts>::value...>
+		, bools_<F<Ts>::value..., true>
+		>
+	{};
+
+	template< template<class...> class Sequence, template<typename...> class F, typename... Ts>
+	struct  all_impl<Sequence<Ts...>, F<_1>>
+		: std::is_same< bools_<true, F<Ts>::type::value...>
+		, bools_<F<Ts>::type::value..., true>
+		>
+	{};
   }
 
   // Is a predicate true for every type ?
