@@ -18,7 +18,6 @@ namespace brigand
 #if defined(BRIGAND_COMP_GCC) || defined(BRIGAND_COMP_CLANG) // not MSVC
 	namespace lazy
 	{
-
 		template <typename L, typename Pred>
 		struct remove_if;
 
@@ -26,6 +25,20 @@ namespace brigand
 		struct remove_if<L<Ts...>, Pred>
 			: ::brigand::detail::append_impl<
 			L<>, typename std::conditional<::brigand::apply<Pred, Ts>::value, list<>, list<Ts>>::type...>
+		{
+		};
+
+		template <template <class...> class L, typename... Ts, template<typename...> class F>
+		struct remove_if<L<Ts...>, bind<F,_1>>
+			: ::brigand::detail::append_impl<
+			L<>, typename std::conditional<F<Ts>::value, list<>, list<Ts>>::type...>
+		{
+		};
+
+		template <template <class...> class L, typename... Ts, template<typename...> class F>
+		struct remove_if<L<Ts...>, F<_1>>
+			: ::brigand::detail::append_impl<
+			L<>, typename std::conditional<F<Ts>::type::value, list<>, list<Ts>>::type...>
 		{
 		};
 	}
@@ -53,6 +66,20 @@ namespace brigand
 		struct filter<L<Ts...>, Pred>
 			: ::brigand::detail::append_impl<
 			L<>, typename std::conditional<::brigand::apply<Pred, Ts>::value, list<Ts>, list<>>::type...>
+		{
+		};
+
+		template <template <class...> class L, typename... Ts, template<typename...> class F>
+		struct filter<L<Ts...>, bind<F, _1>>
+			: ::brigand::detail::append_impl<
+			L<>, typename std::conditional<F<Ts>::value, list<Ts>, list<>>::type...>
+		{
+		};
+
+		template <template <class...> class L, typename... Ts, template<typename...> class F>
+		struct filter<L<Ts...>, F<_1>>
+			: ::brigand::detail::append_impl<
+			L<>, typename std::conditional<F<Ts>::type::value, list<Ts>, list<>>::type...>
 		{
 		};
 	}
