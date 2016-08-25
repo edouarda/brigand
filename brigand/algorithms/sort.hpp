@@ -201,7 +201,7 @@ namespace detail
               T201, T202, T203, T204, T205, T206, T207, T208, T209, T210, T211, T212, T213, T214, T215, T216, T217, T218, T219, T220, T221,
               T222, T223, T224, T225, T226, T227, T228, T229, T230, T231, T232, T233, T234, T235, T236, T237, T238, T239, T240, T241, T242,
               T243, T244, T245, T246, T247, T248, T249, T250, T251, T252, T253, T254>, Comp>::type,
-            typename sort_impl<list<>, list<T255, Ts...>, Comp>::type
+            typename sort_impl<list<>, list<T255, Ts...>, Comp>::type, Comp
         >;
     };
 }
