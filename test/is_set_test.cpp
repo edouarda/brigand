@@ -5,6 +5,10 @@
 static_assert(!brigand::is_set<int, int, int>::value, "error in brigand::is_set");
 static_assert(!brigand::is_set<int, int>::value, "error in brigand::is_set");
 static_assert(!brigand::is_set<void, int&, int, int>::value, "error in brigand::is_set");
+static_assert(!brigand::is_set<void, const int, int, int>::value, "error in brigand::is_set");
+static_assert(!brigand::is_set<void, const int, const int>::value, "error in brigand::is_set");
+static_assert(brigand::is_set<void, int&, int>::value, "error in brigand::is_set");
+static_assert(brigand::is_set<void, const int, int>::value, "error in brigand::is_set");
 static_assert(brigand::is_set<int>::value, "error in brigand::is_set");
 static_assert(brigand::is_set<>::value, "error in brigand::is_set");
 static_assert(brigand::is_set<int, short>::value, "error in brigand::is_set");
