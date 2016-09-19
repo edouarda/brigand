@@ -4,7 +4,7 @@
 
 static_assert(!brigand::is_set<int, int, int>::value, "error in brigand::is_set");
 static_assert(!brigand::is_set<int, int>::value, "error in brigand::is_set");
-//fails with msvc:  static_assert(!brigand::is_set<void, int&, int, int>::value, "error in brigand::is_set");
+static_assert(!brigand::is_set<void, int&, int, int>::value, "error in brigand::is_set");
 static_assert(brigand::is_set<int>::value, "error in brigand::is_set");
 static_assert(brigand::is_set<>::value, "error in brigand::is_set");
 static_assert(brigand::is_set<int, short>::value, "error in brigand::is_set");
