@@ -1562,8 +1562,11 @@ namespace brigand
 #else
 namespace detail
 {
+    template<class Pred, class T>
+    struct empty_helper : ::brigand::apply<Pred, T>
+    {};
     template <typename Pred, typename T, bool B>
-    struct empty_if_true : std::conditional<::brigand::apply<Pred, T>::value == B, list<>, list<T>>
+    struct empty_if_true : std::conditional<empty_helper<Pred, T>::value == B, list<>, list<T>>
     {
     };
     template <template <typename...> class F, typename T, bool B>
