@@ -16,8 +16,14 @@ namespace brigand
 //#ifdef BRIGAND_COMP_MSVC
   namespace detail
   {
+    template<typename Pred, typename T>
+    struct rep_helper
+    {
+      using type = brigand::apply<Pred, T>;
+    };
+
     template <typename T, typename Pred, typename NewType>
-    struct replacer : std::conditional<::brigand::apply<Pred, T>::value, NewType, T>
+    struct replacer : std::conditional< rep_helper<Pred,T>::type::value, NewType, T>
     {
     };
     template <typename T, template <typename...> class F, typename NewType>
