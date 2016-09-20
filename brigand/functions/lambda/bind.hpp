@@ -10,8 +10,8 @@
 
 namespace brigand
 {
-	template <template <typename...> class, typename...>
-	struct bind
-	{
-	};
+  template <template <typename...> class, typename...>
+  struct bind
+  {
+  };
 }

@@ -16,7 +16,7 @@ namespace detail
     // Default find-like predicate
 
     template <typename Args>
-	struct non_null_impl : bool_<Args::value != 0>{};
+  struct non_null_impl : bool_<Args::value != 0>{};
     using non_null = non_null_impl<_1>;
 }
 }
