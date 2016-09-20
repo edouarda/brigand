@@ -17,14 +17,18 @@ namespace brigand
 #if defined(BRIGAND_COMP_MSVC_2013) || defined(BRIGAND_COMP_CUDA) || defined(BRIGAND_COMP_INTEL)
   namespace detail
   {
+    template<class P, class T>
+    struct all_helper : ::brigand::apply<P, T>
+    {};
+
     template <bool...> struct bools_ {};
     template< typename Sequence, typename Predicate, typename... Ts> struct all_impl;
 
     template< template<class...> class Sequence, typename Predicate, typename... Ts>
     struct  all_impl<Sequence<Ts...>, Predicate>
-      : std::is_same< bools_<true, ::brigand::apply<Predicate, Ts>::value...>
-      , bools_<::brigand::apply<Predicate, Ts>::value..., true>
-      >
+      : std::is_same< bools_<true, all_helper<Predicate, Ts>::value...>
+                    , bools_<all_helper<Predicate, Ts>::value..., true>
+                    >
     {};
   }
 #else

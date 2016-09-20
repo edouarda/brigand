@@ -833,13 +833,16 @@ namespace brigand
 #ifdef BRIGAND_COMP_MSVC_2013
   namespace detail
   {
+    template<class P, class T>
+    struct all_helper : ::brigand::apply<P, T>
+    {};
     template <bool...> struct bools_ {};
     template< typename Sequence, typename Predicate, typename... Ts> struct all_impl;
     template< template<class...> class Sequence, typename Predicate, typename... Ts>
     struct  all_impl<Sequence<Ts...>, Predicate>
-      : std::is_same< bools_<true, ::brigand::apply<Predicate, Ts>::value...>
-      , bools_<::brigand::apply<Predicate, Ts>::value..., true>
-      >
+      : std::is_same< bools_<true, all_helper<Predicate, Ts>::value...>
+                    , bools_<all_helper<Predicate, Ts>::value..., true>
+                    >
     {};
   }
 #else
@@ -1465,7 +1468,7 @@ namespace detail
     static auto is_set(Us...) -> decltype(true_fn(static_cast<Us>(Pack())...));
     static std::false_type is_set(...);
 #ifdef BRIGAND_COMP_MSVC_2013
-    using type = decltype(is_set(Ts()...));
+    using type = decltype( is_set(std::declval<Ts>()...) );
 #else
     using type = decltype(is_set(type_<Ts>()...));
 #endif
