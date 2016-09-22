@@ -15,7 +15,7 @@ namespace brigand
 {
 
 
-#ifdef BRIGAND_COMP_MSVC_2013
+#if defined(BRIGAND_COMP_MSVC_2013) || defined(BRIGAND_COMP_CUDA) || defined(BRIGAND_COMP_INTEL)
 	namespace detail
 	{
 		template<typename Sequence, typename Pred> struct none_impl

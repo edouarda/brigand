@@ -14,7 +14,7 @@ Distributed under the Boost Software License, Version 1.0.
 
 namespace brigand
 {
-#ifdef BRIGAND_COMP_MSVC_2013
+#if defined(BRIGAND_COMP_MSVC_2013) || defined(BRIGAND_COMP_CUDA) || defined(BRIGAND_COMP_INTEL)
 	namespace detail
 	{
 		template <bool...> struct bools_ {};
