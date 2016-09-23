@@ -14,11 +14,21 @@ namespace detail
 {
     template <bool b, typename O, typename L, std::size_t I>
     struct split_at_impl; // if you get an error here your index is out of bounds
+
+#if defined(BRIGAND_COMP_INTEL)
     template <template <typename...> class S, typename... Os>
     struct split_at_impl<false, S<Os...>, S<>, 0>
     {
         using type = S<S<Os...>, S<> >;
     };
+#else
+    template <template <typename...> class S, typename... Os, typename... Ts>
+    struct split_at_impl<false, S<Os...>, S<Ts...>, 0>
+    {
+        using type = S<S<Os...>, S<Ts...>>;
+    };
+#endif
+
     template <template <typename...> class S, typename... Os, typename T, typename... Ts>
     struct split_at_impl<false, S<Os...>, S<T, Ts...>, 0>
     {
