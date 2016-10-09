@@ -15,6 +15,8 @@ Everything you were doing with Boost.MPL can be done with Brigand. And if that's
 
 Should you wish to learn more, feel free to [watch our Meeting C++ 2015 lightning talk](https://www.youtube.com/watch?v=B8XSDhWx7hY)!
 
+Want more? Our [CppCon 2016 presentation](https://www.youtube.com/watch?v=ky0JdPh_LgE) explains in details the library concepts and goes through two concrete usages.
+
 # Tutorials
 
  * [Introduction](https://github.com/edouarda/brigand/wiki/Introduction)
