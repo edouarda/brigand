@@ -13,9 +13,13 @@ Brigand is a light-weight, fully functional, instant-compile time C++ 11 meta-pr
 
 Everything you were doing with Boost.MPL can be done with Brigand. And if that's not the case, open an issue!
 
+# Learning
+
 Should you wish to learn more, feel free to [watch our Meeting C++ 2015 lightning talk](https://www.youtube.com/watch?v=B8XSDhWx7hY)!
 
 Want more? Our [CppCon 2016 presentation](https://www.youtube.com/watch?v=ky0JdPh_LgE) explains in details the library concepts and goes through two concrete usages.
+
+If you are looking to learn the concepts of metaprogramming, [have a look at our free e-book](http://www.oreilly.com/programming/free/practical-c-plus-plus-metaprogramming.csp).
 
 # Tutorials
 
