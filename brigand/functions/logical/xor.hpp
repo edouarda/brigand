@@ -10,5 +10,5 @@
 namespace brigand
 {
   template <typename A, typename B>
-  struct xor_ : std::integral_constant<typename A::value_type, A::value != B::value> {};
+  struct xor_ : std::integral_constant<typename A::value_type, A::value ^ B::value> {};
 }
