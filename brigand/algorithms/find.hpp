@@ -12,7 +12,6 @@
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/size.hpp>
 #include <brigand/types/bool.hpp>
-#include <brigand/types/bool.hpp>
 
 namespace brigand
 {
