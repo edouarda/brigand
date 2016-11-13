@@ -17,6 +17,11 @@ namespace brigand
 {
 namespace detail
 {
+    template <class Comp, class T1, class U>
+    struct merge_helper : ::brigand::apply<Comp, T1, U>
+    {
+    };
+
     template <class L, class Seq1, class Seq2, class Comp>
     struct merge_impl;
 
@@ -25,7 +30,7 @@ namespace detail
 
     template <class... R, class T0, class T1, class... Ts, class U, class... Us, class Comp>
     struct merge_insert<true, list<R...>, list<T0, T1, Ts...>, list<U, Us...>, Comp>
-        : merge_insert<::brigand::apply<Comp, T1, U>::value, list<R..., T0>, list<T1, Ts...>,
+        : merge_insert<merge_helper<Comp, T1, U>::value, list<R..., T0>, list<T1, Ts...>,
                        list<U, Us...>, Comp>
     {
     };
@@ -40,7 +45,7 @@ namespace detail
 
     template <class... R, class T, class... Ts, class U0, class U1, class... Us, class Comp>
     struct merge_insert<false, list<R...>, list<T, Ts...>, list<U0, U1, Us...>, Comp>
-        : merge_insert<::brigand::apply<Comp, T, U1>::value, list<R..., U0>, list<T, Ts...>,
+        : merge_insert<merge_helper<Comp, T, U1>::value, list<R..., U0>, list<T, Ts...>,
                        list<U1, Us...>, Comp>
     {
     };
@@ -59,7 +64,7 @@ namespace detail
     struct merge_impl<list<R...>, list<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, Ts...>,
                       list<U0, U1, U2, U3, U4, U5, U6, U7, U8, U9, Us...>, Comp>
     {
-        using sub = merge_insert<::brigand::apply<Comp, T0, U0>::value, list<>,
+        using sub = merge_insert<merge_helper<Comp, T0, U0>::value, list<>,
                                  list<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>,
                                  list<U0, U1, U2, U3, U4, U5, U6, U7, U8, U9>, Comp>;
         using type = typename merge_impl<append<list<R...>, typename sub::list>,
@@ -69,7 +74,7 @@ namespace detail
 
     template <class... R, class T, class... Ts, class U, class... Us, class Comp>
     struct merge_impl<list<R...>, list<T, Ts...>, list<U, Us...>, Comp>
-        : std::conditional<::brigand::apply<Comp, T, U>::value,
+        : std::conditional<merge_helper<Comp, T, U>::value,
                            merge_impl<list<R..., T>, list<Ts...>, list<U, Us...>, Comp>,
                            merge_impl<list<R..., U>, list<T, Ts...>, list<Us...>, Comp>>::type
     {

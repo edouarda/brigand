@@ -14,11 +14,13 @@ namespace brigand
 {
 namespace detail
 {
+#if defined(BRIGAND_COMP_GCC) || defined(BRIGAND_COMP_CLANG) // not MSVC
     constexpr std::size_t count_bools(bool const * const begin, bool const * const end,
                                       std::size_t n)
     {
         return begin == end ? n : detail::count_bools(begin + 1, end, n + *begin);
     }
+#endif
 
     template <bool... Bs>
     struct template_count_bools
@@ -71,29 +73,38 @@ namespace lazy
     struct count_if<S<Ts...>, Pred>
     {
         static constexpr bool s_v[] = {::brigand::apply<Pred, Ts>::type::value...};
-        using type = brigand::size_t<::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
+        using type = brigand::size_t< ::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
     };
 
     template <template <typename...> class S, typename... Ts, template <typename...> class F>
     struct count_if<S<Ts...>, bind<F, _1>>
     {
         static constexpr bool s_v[] = {F<Ts>::value...};
-        using type = brigand::size_t<::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
+        using type = brigand::size_t< ::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
     };
 
     template <template <typename...> class S, typename... Ts, template <typename...> class F>
     struct count_if<S<Ts...>, F<_1>>
     {
         static constexpr bool s_v[] = {F<Ts>::type::value...};
-        using type = brigand::size_t<::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
+        using type = brigand::size_t< ::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
+    };
+#else
+#if defined(BRIGAND_COMP_MSVC_2015)
+    template <template <typename...> class S, typename... Ts, typename Pred>
+    struct count_if<S<Ts...>, Pred>
+        : ::brigand::detail::template_count_bools< ::brigand::apply<Pred, Ts>::value...>
+    {
     };
 #else
     template <template <typename...> class S, typename... Ts, typename Pred>
     struct count_if<S<Ts...>, Pred>
-        : ::brigand::detail::template_count_bools<::brigand::apply<Pred, Ts>::value...>
     {
+        template <typename T>
+        using val_t = brigand::apply<Pred, T>;
+        using type = typename ::brigand::detail::template_count_bools<val_t<Ts>::value...>::type;
     };
-
+#endif
 #endif
 }
 

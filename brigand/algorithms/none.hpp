@@ -13,7 +13,6 @@
 
 namespace brigand
 {
-
 #if defined(BRIGAND_COMP_MSVC_2013) || defined(BRIGAND_COMP_CUDA) || defined(BRIGAND_COMP_INTEL)
 namespace detail
 {
@@ -26,7 +25,6 @@ namespace detail
             using that = brigand::apply<Pred, T>;
             using type = bool_<!that::value>;
         };
-
         using type = all<Sequence, nope<_1>>;
     };
 }
@@ -43,8 +41,8 @@ namespace detail
     struct none_impl<Sequence<T, Ts...>, Predicate>
     {
         static constexpr all_same tester{
-            static_cast<::brigand::apply<Predicate, T> *>(nullptr),
-            static_cast<::brigand::apply<Predicate, Ts> *>(nullptr)...};
+            static_cast< ::brigand::apply<Predicate, T> *>(nullptr),
+            static_cast< ::brigand::apply<Predicate, Ts> *>(nullptr)...};
         using type = bool_<(::brigand::apply<Predicate, T>::value == 0 && tester.value)>;
     };
 

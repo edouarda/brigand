@@ -23,8 +23,8 @@ namespace brigand
   }
 
   namespace lazy {
-	  template<class L, class... T>
-	  struct push_front : detail::push_front_impl<L, T...>{};
+    template<class L, class... T>
+    struct push_front : detail::push_front_impl<L, T...>{};
   }
 
   template<class L, class... T>
@@ -74,8 +74,8 @@ namespace brigand
     };
   }
   namespace lazy {
-	  template <class L, class N = std::integral_constant<std::size_t, 1>>
-	  struct pop_front : detail::pop_front_impl<L, N::value> {};
+    template <class L, class N = std::integral_constant<std::size_t, 1>>
+    struct pop_front : detail::pop_front_impl<L, N::value> {};
   }
   template <class L, class N = std::integral_constant<std::size_t, 1>>
   using pop_front = typename detail::pop_front_impl<L, N::value>::type;

@@ -55,8 +55,8 @@ namespace detail
 }
 namespace lazy
 {
-	template <typename... Ts>
-	using append = detail::append_impl<Ts...>;
+  template <typename... Ts>
+  using append = detail::append_impl<Ts...>;
 }
 template <typename... Ts>
 using append = typename detail::append_impl<Ts...>::type;
@@ -64,12 +64,12 @@ using append = typename detail::append_impl<Ts...>::type;
 
 namespace lazy
 {
-	template <typename T>
-	struct join;
-	template<template<typename...> class L, typename...Ts>
-	struct join<L<Ts...>> : ::brigand::detail::append_impl<L<>,Ts...>
-	{
-	};
+  template <typename T>
+  struct join;
+  template<template<typename...> class L, typename...Ts>
+  struct join<L<Ts...>> : ::brigand::detail::append_impl<L<>,Ts...>
+  {
+  };
 }
 template <typename T>
 using join = wrap<T,append>;

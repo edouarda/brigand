@@ -8,9 +8,9 @@ namespace brigand
 namespace detail
 {
     template <typename Pair>
-	struct get_second {
-		using type = typename Pair::second_type;
-	};
+  struct get_second {
+    using type = typename Pair::second_type;
+  };
 } // namespace detail
 
 template <typename Map, template <class...> class Sequence = brigand::list>

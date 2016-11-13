@@ -52,8 +52,8 @@ namespace detail
     template <class T0, class T1, class Comp>
     struct mini_sort<list<T0, T1>, Comp>
     {
-        using type = typename std::conditional<::brigand::apply<Comp, T0, T1>::value, list<T0, T1>,
-                                               list<T1, T0>>::type;
+        using base = ::brigand::apply<Comp, T0, T1>;
+        using type = typename std::conditional<base::value, list<T0, T1>, list<T1, T0>>::type;
     };
 
     template <class T0, class Comp>

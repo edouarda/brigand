@@ -17,6 +17,11 @@ namespace brigand
 #if defined(BRIGAND_COMP_MSVC_2013) || defined(BRIGAND_COMP_CUDA) || defined(BRIGAND_COMP_INTEL)
 namespace detail
 {
+    template <class P, class T>
+    struct all_helper : ::brigand::apply<P, T>
+    {
+    };
+
     template <bool...>
     struct bools_
     {
@@ -26,8 +31,8 @@ namespace detail
 
     template <template <class...> class Sequence, typename Predicate, typename... Ts>
     struct all_impl<Sequence<Ts...>, Predicate>
-        : std::is_same<bools_<true, ::brigand::apply<Predicate, Ts>::value...>,
-                       bools_<::brigand::apply<Predicate, Ts>::value..., true>>
+        : std::is_same<bools_<true, all_helper<Predicate, Ts>::value...>,
+                       bools_<all_helper<Predicate, Ts>::value..., true>>
     {
     };
 }
@@ -53,8 +58,8 @@ namespace detail
     struct all_impl<Sequence<T, Ts...>, Predicate>
     {
         static constexpr all_same tester{
-            static_cast<::brigand::apply<Predicate, T> *>(nullptr),
-            static_cast<::brigand::apply<Predicate, Ts> *>(nullptr)...};
+            static_cast< ::brigand::apply<Predicate, T> *>(nullptr),
+            static_cast< ::brigand::apply<Predicate, Ts> *>(nullptr)...};
         using type = bool_<(::brigand::apply<Predicate, T>::value != 0 && tester.value)>;
     };
 

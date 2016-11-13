@@ -24,7 +24,7 @@ namespace lazy
     template <template <class...> class L, typename... Ts, typename Pred>
     struct remove_if<L<Ts...>, Pred>
         : ::brigand::detail::append_impl<
-              L<>, typename std::conditional<::brigand::apply<Pred, Ts>::value, list<>,
+              L<>, typename std::conditional< ::brigand::apply<Pred, Ts>::value, list<>,
                                              list<Ts>>::type...>
     {
     };
@@ -66,7 +66,7 @@ namespace lazy
     template <template <class...> class L, typename... Ts, typename Pred>
     struct filter<L<Ts...>, Pred>
         : ::brigand::detail::append_impl<
-              L<>, typename std::conditional<::brigand::apply<Pred, Ts>::value, list<Ts>,
+              L<>, typename std::conditional< ::brigand::apply<Pred, Ts>::value, list<Ts>,
                                              list<>>::type...>
     {
     };
@@ -88,9 +88,14 @@ namespace lazy
 #else
 namespace detail
 {
+    template <class Pred, class T>
+    struct empty_helper : ::brigand::apply<Pred, T>
+    {
+    };
+
     // this is essentially just a work around because MSVC can't expand variadic packs properly
     template <typename Pred, typename T, bool B>
-    struct empty_if_true : std::conditional<::brigand::apply<Pred, T>::value == B, list<>, list<T>>
+    struct empty_if_true : std::conditional<empty_helper<Pred, T>::value == B, list<>, list<T>>
     {
     };
     template <template <typename...> class F, typename T, bool B>
