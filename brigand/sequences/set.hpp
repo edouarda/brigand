@@ -72,6 +72,12 @@ namespace detail
 
 }
 
+    template <typename... T>
+    using set_wrapper = typename detail::make_set<T...>::type;
+
+    template <typename L>
+    using as_set = wrap<L, set_wrapper>;
+
     template<class... Ts>
     using set = typename detail::make_set<Ts...>::type;
 
