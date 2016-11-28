@@ -11,6 +11,7 @@
 #include <brigand/algorithms/transform.hpp>
 #include <brigand/sequences/back.hpp>
 #include <brigand/sequences/front.hpp>
+#include <brigand/sequences/keys_as_sequence.hpp>
 #include <brigand/types/no_such_type.hpp>
 #include <type_traits>
 
