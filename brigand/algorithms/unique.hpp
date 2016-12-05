@@ -15,25 +15,25 @@
 
 namespace brigand
 {
-	template <class L>
-	using unique = fold<
-		L,
-		list<>,
-		bind<
-			join,
-			bind<
-				list,
-				_1,
-				bind<
-					type_from,
-					bind<
-						eval_if,
-						bind<has_key, bind<as_set, _1>, _2>,
-						bind<type_, bind<list>>,
-						bind<type_, bind<list, _2>>
-					>
-				>
-			>
-		>
-	>;
+  template <class L>
+  using unique = fold<
+    L,
+    list<>,
+    bind<
+      join,
+      bind<
+        list,
+        _1,
+        bind<
+          type_from,
+          bind<
+            eval_if,
+            bind<has_key, bind<as_set, _1>, _2>,
+            bind<type_, bind<list>>,
+            bind<type_, bind<list, _2>>
+          >
+        >
+      >
+    >
+  >;
 }
