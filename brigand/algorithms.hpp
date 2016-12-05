@@ -18,6 +18,7 @@
 #include <brigand/algorithms/is_set.hpp>
 #include <brigand/algorithms/none.hpp>
 #include <brigand/algorithms/partition.hpp>
+#include <brigand/algorithms/product.hpp>
 #include <brigand/algorithms/remove.hpp>
 #include <brigand/algorithms/replace.hpp>
 #include <brigand/algorithms/reverse.hpp>
