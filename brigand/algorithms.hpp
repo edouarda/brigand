@@ -26,4 +26,5 @@
 #include <brigand/algorithms/split_at.hpp>
 #include <brigand/algorithms/sort.hpp>
 #include <brigand/algorithms/transform.hpp>
+#include <brigand/algorithms/unique.hpp>
 #include <brigand/algorithms/wrap.hpp>
