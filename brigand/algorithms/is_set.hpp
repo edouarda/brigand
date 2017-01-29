@@ -8,20 +8,17 @@
 
 #include <brigand/sequences/range.hpp>
 #include <brigand/types/type.hpp>
+#include <brigand/types/bool.hpp>
 
 namespace brigand
 {
+
+#ifdef BRIGAND_COMP_MSVC
+
 namespace detail
 {
   template<class, class T> struct unique_x_t
-#ifdef BRIGAND_COMP_MSVC_2013
   { operator T (); };
-#elif defined(BRIGAND_COMP_GCC)
-  : type_<T> // better with gcc, very bad with clang when the list contains many same elements
-  {};
-#else
-  { operator type_<T> (); };
-#endif
 
   template<class Ints, class... Ts>
   struct is_set_impl;
@@ -43,14 +40,9 @@ namespace detail
     static auto is_set(Us...) -> decltype(true_fn(static_cast<Us>(Pack())...));
     static std::false_type is_set(...);
 
-#ifdef BRIGAND_COMP_MSVC_2013
     using type = decltype(is_set(Ts()...));
-#else
-    using type = decltype(is_set(type_<Ts>()...));
-#endif
   };
 
-#ifdef BRIGAND_COMP_MSVC_2013
   template<class> struct qrref {};
   template<class> struct qref {};
   template<class> struct qnoref {};
@@ -72,13 +64,32 @@ namespace detail
   {
     using type = qrref<T>;
   };
-#endif
 }
 
   template<class... Ts>
-#ifdef BRIGAND_COMP_MSVC_2013
-  using is_set = typename detail::is_set_impl<range<int, 0, sizeof...(Ts)>, detail::msvc_quali_ref<Ts>...>::type;
+  using is_set = typename detail::is_set_impl<range<std::size_t, 0, sizeof...(Ts)>, detail::msvc_quali_ref<Ts>...>::type;
+
 #else
-  using is_set = typename detail::is_set_impl<range<int, 0, sizeof...(Ts)>, Ts...>::type;
+
+namespace detail
+{
+  template<class, class T>
+  struct unique_x_t
+  : type_<T>
+  {};
+
+  template<class Ints, class... Ts>
+  struct is_set_cont;
+
+  template<class... Ints, class... Ts>
+  struct is_set_cont<list<Ints...>, Ts...>
+  : unique_x_t<Ints, Ts>...
+  {
+  };
+}
+
+  template<class... Ts>
+  using is_set = bool_<sizeof(detail::is_set_cont<range<std::size_t, 0, sizeof...(Ts)>, Ts...>) == 1>;
+
 #endif
 }
