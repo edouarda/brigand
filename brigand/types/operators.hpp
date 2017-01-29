@@ -23,6 +23,9 @@ namespace std
 
   template<typename T, T N,T M> std::integral_constant<T,N|M>
   operator|( std::integral_constant<T,N> const&, std::integral_constant<T,M> const& ) { return {}; }
+	
+  template<typename T, T N,T M> std::integral_constant<T,N^M>
+  operator^( std::integral_constant<T,N> const&, std::integral_constant<T,M> const& ) { return {}; }
 
   template<typename T, T N,T M> std::integral_constant<T,N-M>
   operator-( std::integral_constant<T,N> const&, std::integral_constant<T,M> const& ) { return {}; }

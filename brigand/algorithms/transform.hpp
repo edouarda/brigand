@@ -82,20 +82,20 @@ namespace brigand
       using type = Seq<brigand::apply<Func, T>...>;
     };
 
-	//fast track for eager
-	template<template<class...> class Seq, class... T, template<typename...> class Func>
-	struct transform<0, Seq<T...>, bind<Func, _1>>
-	{
-		using type = Seq<Func<T>...>;
-	};
+  //fast track for eager
+  template<template<class...> class Seq, class... T, template<typename...> class Func>
+  struct transform<0, Seq<T...>, bind<Func, _1>>
+  {
+    using type = Seq<Func<T>...>;
+  };
 
-	//fast track for lazy
-	template<template<class...> class Seq, class... T, template<typename...> class Func>
-	struct transform<0, Seq<T...>, Func<_1>>
-	{
-		using type = Seq<typename Func<T>::type...>;
-	}; 
-	  
+  //fast track for lazy
+  template<template<class...> class Seq, class... T, template<typename...> class Func>
+  struct transform<0, Seq<T...>, Func<_1>>
+  {
+    using type = Seq<typename Func<T>::type...>;
+  };
+
     template<template<class...> class Seq1, class... T1, template<class...> class Seq2, class... T2, class Func>
     struct transform<1, Seq1<T1...>, Seq2<T2...>, Func>
     {
@@ -106,7 +106,7 @@ namespace brigand
   namespace lazy
   {
     template<typename Sequence1, typename OpSeq1, typename... OpSeq2>
-	struct transform : detail::transform<sizeof...(OpSeq2), Sequence1, OpSeq1, OpSeq2...> {};
+  struct transform : detail::transform<sizeof...(OpSeq2), Sequence1, OpSeq1, OpSeq2...> {};
   }
 
   // Main transform entry point

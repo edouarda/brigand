@@ -18,8 +18,14 @@ namespace brigand
 namespace lazy
 {
     template <typename M, typename K>
-    struct lookup
-    : decltype(M::at(type_<K>{}))
+    struct lookup_at
+    {
+      using target_t = type_<K>;
+      using type     = decltype(M::at(target_t{}));
+    };
+
+    template <typename M, typename K>
+    struct lookup : lookup_at<M,K>::type
     {};
 }
 
@@ -69,8 +75,16 @@ namespace detail
         template <class K>
         static std::false_type has_key(K);
 
+        template <class K, class X>
+        using erase_t = typename std::conditional < std::is_same<K, typename X::first_type>::value
+                                                  , list<>, list<X>
+                                                  >::type;
+
+        template <class K, typename... Xs>
+        struct erase_return_t  { using type = append< map_impl<>, erase_t<K,Xs>... >; };
+
         template <class K>
-        static append<map_impl<>, typename std::conditional<std::is_same<K, typename Ts::first_type>::value, list<>, list<Ts>>::type...> erase(type_<K>);
+        static typename erase_return_t<K,Ts...>::type erase(type_<K>);
 
         template <class P, class = decltype(static_cast<pair<typename P::first_type, P>*>(static_cast<Pack*>(nullptr)))>
         static map_impl insert(type_<P>);

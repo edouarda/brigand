@@ -10,13 +10,13 @@ using f5 = T5;
 
 
 static_assert (std::is_same < brigand::apply< brigand::bind<f1, brigand::_1>, int>
-	, int
+  , int
 >::value
 , "Invalid bind result"
 );
 
 static_assert (std::is_same < brigand::apply < brigand::bind<f1, brigand::_5>
-	, void, void, void, void, int
+  , void, void, void, void, int
 >
 , int
 >::value
@@ -24,25 +24,25 @@ static_assert (std::is_same < brigand::apply < brigand::bind<f1, brigand::_5>
 );
 
 static_assert (std::is_same
-	< brigand::apply< brigand::bind<f5, brigand::_1, brigand::_2
-	, brigand::_3, brigand::_4
-	, brigand::_5
-	>
-	, void, void, void, void, int
-	>
-	, int
-	>::value
-	, "Invalid bind result"
-	);
+  < brigand::apply< brigand::bind<f5, brigand::_1, brigand::_2
+  , brigand::_3, brigand::_4
+  , brigand::_5
+  >
+  , void, void, void, void, int
+  >
+  , int
+  >::value
+  , "Invalid bind result"
+  );
 
 static_assert (std::is_same
-	< brigand::apply< brigand::bind<f5, brigand::_5, brigand::_3
-	, brigand::_4, brigand::_2
-	, brigand::_1
-	>
-	, int, void, void, void, void
-	>
-	, int
-	>::value
-	, "Invalid bind result"
-	);
+  < brigand::apply< brigand::bind<f5, brigand::_5, brigand::_3
+  , brigand::_4, brigand::_2
+  , brigand::_1
+  >
+  , int, void, void, void, void
+  >
+  , int
+  >::value
+  , "Invalid bind result"
+  );

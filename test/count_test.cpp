@@ -11,7 +11,7 @@ using is_odd = brigand::bool_<(N::value % 2) != 0>;
 
 template <typename N>
 struct lazy_is_odd {
-	using type = brigand::bool_<(N::value % 2) != 0>;
+  using type = brigand::bool_<(N::value % 2) != 0>;
 };
 
 template <std::size_t... List>

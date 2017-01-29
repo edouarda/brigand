@@ -20,7 +20,7 @@ namespace detail
     struct index_if_impl
     {
         using type = ::brigand::size_t<size<Sequence>::value -
-                                       size<::brigand::find<Sequence, Predicate>>::value>;
+                                       size< ::brigand::find<Sequence, Predicate>>::value>;
     };
 
     template <class Sequence, typename Predicate, typename NotFoundType>
@@ -31,7 +31,7 @@ namespace detail
 } // namespace detail
 
 template <class Sequence, class Predicate, class NotFoundType = no_such_type_>
-using index_if = typename detail::index_if_impl<::brigand::found<Sequence, Predicate>::value,
+using index_if = typename detail::index_if_impl< ::brigand::found<Sequence, Predicate>::value,
                                                 Sequence, Predicate, NotFoundType>::type;
 
 template <class Sequence, typename T>

@@ -15,10 +15,16 @@ Distributed under the Boost Software License, Version 1.0.
 #elif _MSC_VER == 1800
 #define BRIGAND_COMP_MSVC_2013
 #endif
+#elif __INTEL_COMPILER
+#define BRIGAND_COMP_INTEL
 #elif __GNUC__
 #ifndef __clang__
 #define BRIGAND_COMP_GCC
 #else
 #define BRIGAND_COMP_CLANG
 #endif
+#endif
+
+#if defined(__CUDACC__)
+#define BRIGAND_COMP_CUDA
 #endif
