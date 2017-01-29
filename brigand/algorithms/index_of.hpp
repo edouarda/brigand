@@ -10,6 +10,7 @@
 #include <brigand/sequences/size.hpp>
 #include <brigand/types/integer.hpp>
 #include <brigand/types/no_such_type.hpp>
+#include <brigand/functions/lambda/apply.hpp>
 
 namespace brigand
 {
@@ -35,6 +36,6 @@ using index_if = typename detail::index_if_impl< ::brigand::found<Sequence, Pred
                                                 Sequence, Predicate, NotFoundType>::type;
 
 template <class Sequence, typename T>
-using index_of = index_if<Sequence, std::is_same<T, ::brigand::_1>>;
+using index_of = index_if<Sequence, std::is_same<typename brigand::pin<T>, ::brigand::_1>>;
 
 } // namespace brigand
