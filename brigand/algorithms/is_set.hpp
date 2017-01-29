@@ -13,7 +13,7 @@
 namespace brigand
 {
 
-#ifdef BRIGAND_COMP_MSVC_2013
+#ifdef BRIGAND_COMP_MSVC
 
 namespace detail
 {
