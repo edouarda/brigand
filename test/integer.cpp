@@ -1,4 +1,5 @@
 #include <brigand/types/integer.hpp>
+#include <type_traits>
 
 static_assert(sizeof(brigand::int8_t<1>::value_type) == 1, "wrong brigand type");
 static_assert(sizeof(brigand::uint8_t<1>::value_type) == 1, "wrong brigand type");

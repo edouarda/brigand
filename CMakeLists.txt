@@ -99,7 +99,7 @@ set(FUNCTIONS_ARITHMETIC_GROUP
     brigand/functions/arithmetic/complement.hpp
     brigand/functions/arithmetic/divides.hpp
     brigand/functions/arithmetic/identity.hpp
-    brigand/functions/arithmetic/max.hpp>
+    brigand/functions/arithmetic/max.hpp
     brigand/functions/arithmetic/min.hpp
     brigand/functions/arithmetic/minus.hpp
     brigand/functions/arithmetic/modulo.hpp
@@ -161,29 +161,37 @@ set(SEQUENCES_GROUP
     brigand/sequences/append.hpp
     brigand/sequences/at.hpp
     brigand/sequences/back.hpp
+    brigand/sequences/clear.hpp
+    brigand/sequences/contains.hpp
+    brigand/sequences/erase.hpp
+    brigand/sequences/filled_list.hpp
     brigand/sequences/front.hpp
+    brigand/sequences/has_key.hpp
+    brigand/sequences/insert.hpp
     brigand/sequences/keys_as_sequence.hpp
     brigand/sequences/list.hpp
     brigand/sequences/make_sequence.hpp
     brigand/sequences/map.hpp
     brigand/sequences/pair.hpp
     brigand/sequences/range.hpp
-    brigand/sequences/size.hpp
     brigand/sequences/set.hpp
+    brigand/sequences/size.hpp
     brigand/sequences/values_as_sequence.hpp
 )
 
 set(TYPES_GROUP
+    brigand/types/args.hpp
     brigand/types/bool.hpp
     brigand/types/empty_base.hpp
     brigand/types/has_type.hpp
-    brigand/types/integer.hpp
     brigand/types/inherit.hpp
     brigand/types/inherit_linearly.hpp
-    brigand/types/args.hpp
+    brigand/types/integer.hpp
+    brigand/types/integral_constant.hpp
     brigand/types/no_such_type.hpp
-    brigand/types/type.hpp
+    brigand/types/operators.hpp
     brigand/types/real.hpp
+    brigand/types/type.hpp
     brigand/types/voidp.hpp
 )
 
@@ -210,6 +218,12 @@ add_library(brigand
     ${ALGORITHMS_GROUP}
     ${ALGORITHMS_DETAIL_GROUP}
     ${FUNCTIONS_GROUPS}
+    ${FUNCTIONS_ARITHMETIC_GROUP}
+    ${FUNCTIONS_BITWISE_GROUP}
+    ${FUNCTIONS_LAMBDA_GROUP}
+    ${FUNCTIONS_LOGICAL_GROUP}
+    ${FUNCTIONS_MISC_GROUP}
+    ${FUNCTIONS_COMPARISON_GROUP}
     ${SEQUENCES_GROUP}
     ${TYPES_GROUP}
     ${PLACEHOLDER_GROUP}

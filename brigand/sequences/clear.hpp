@@ -5,7 +5,6 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <type_traits>
 
 namespace brigand
 {

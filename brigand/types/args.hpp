@@ -12,7 +12,7 @@
 namespace brigand
 {
   // args metafunction class
-  template<std::size_t Index> struct args
+  template<unsigned int Index> struct args
   {
   };
 

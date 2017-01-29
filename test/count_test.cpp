@@ -14,8 +14,8 @@ struct lazy_is_odd {
   using type = brigand::bool_<(N::value % 2) != 0>;
 };
 
-template <std::size_t... List>
-using size_t_list = brigand::integral_list<std::size_t, List...>;
+template <unsigned int... List>
+using size_t_list = brigand::integral_list<unsigned int, List...>;
 using full_list = size_t_list<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11>;
 
 using l1 = brigand::count_if<full_list, brigand::bind<is_odd, brigand::_1>>;

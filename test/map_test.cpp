@@ -27,11 +27,11 @@ static_assert(std::is_same<brigand::lookup<map_test, bool>, brigand::no_such_typ
 
 void map_has_key_test()
 {
-  brigand::has_key<map_test, int>{} = std::true_type{};
-  brigand::has_key<map_test, char>{} = std::true_type{};
-  brigand::has_key<map_test, bool>{} = std::false_type{};
-  brigand::has_key<map_test, void>{} = std::false_type{};
-  brigand::has_key<brigand::map<>, void>{} = std::false_type{};
+  brigand::has_key<map_test, int>{} = brigand::true_type{};
+  brigand::has_key<map_test, char>{} = brigand::true_type{};
+  brigand::has_key<map_test, bool>{} = brigand::false_type{};
+  brigand::has_key<map_test, void>{} = brigand::false_type{};
+  brigand::has_key<brigand::map<>, void>{} = brigand::false_type{};
 }
 
 void map_erase_test()

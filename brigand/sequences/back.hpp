@@ -6,32 +6,35 @@
 =================================================================================================**/
 #pragma once
 
+#include <brigand/algorithms/split_at.hpp>
 #include <brigand/sequences/at.hpp>
+#include <brigand/sequences/front.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/size.hpp>
-#include <brigand/sequences/front.hpp>
-#include <brigand/algorithms/split_at.hpp>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
-  // push_back
-  namespace detail
-  {
-    template<class L, class... T> struct push_back_impl;
+// push_back
+namespace detail
+{
+    template <class L, class... T>
+    struct push_back_impl;
 
-    template<template<class...> class L, class... U, class... T>
+    template <template <class...> class L, class... U, class... T>
     struct push_back_impl<L<U...>, T...>
     {
         using type = L<U..., T...>;
     };
-  }
+}
 
-  template<class L, class... T>
-  using push_back = typename detail::push_back_impl<L, T...>::type;
+template <class L, class... T>
+using push_back = typename detail::push_back_impl<L, T...>::type;
 
-  template <class L>
-  using back = at_c<L, size<L>::value-1>;
+template <class L>
+using back = at_c<L, size<L>::value - 1>;
 
-  template <class L, class N = std::integral_constant<std::size_t, 1>>
-  using pop_back = front<split_at<L, std::integral_constant<std::size_t, size<L>::value - N::value>>>;
+template <class L, class N = brigand::integral_constant<unsigned int, 1>>
+using pop_back =
+    front<split_at<L, brigand::integral_constant<unsigned int, size<L>::value - N::value>>>;
 }

@@ -12,14 +12,14 @@ namespace brigand
 {
 namespace detail
 {
-    template <bool b, typename O, typename L, std::size_t I>
+    template <bool b, typename O, typename L, unsigned int I>
     struct split_at_impl; // if you get an error here your index is out of bounds
 
 #if defined(BRIGAND_COMP_INTEL)
     template <template <typename...> class S, typename... Os>
     struct split_at_impl<false, S<Os...>, S<>, 0>
     {
-        using type = S<S<Os...>, S<> >;
+        using type = S<S<Os...>, S<>>;
     };
 #else
     template <template <typename...> class S, typename... Os, typename... Ts>
@@ -35,7 +35,7 @@ namespace detail
         using type = S<S<Os...>, S<T, Ts...>>;
     };
     template <template <typename...> class S, typename... Os, typename T, typename... Ts,
-              std::size_t I>
+              unsigned int I>
     struct split_at_impl<false, S<Os...>, S<T, Ts...>, I>
         : split_at_impl<false, S<Os..., T>, S<Ts...>, (I - 1)>
     {
@@ -43,7 +43,7 @@ namespace detail
     template <template <typename...> class S, typename... Os, typename T1, typename T2, typename T3,
               typename T4, typename T5, typename T6, typename T7, typename T8, typename T9,
               typename T10, typename T11, typename T12, typename T13, typename T14, typename T15,
-              typename T16, typename... Ts, std::size_t I>
+              typename T16, typename... Ts, unsigned int I>
     struct split_at_impl<
         true, S<Os...>,
         S<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Ts...>, I>

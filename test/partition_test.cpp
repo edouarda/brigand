@@ -8,8 +8,8 @@
 template <typename N>
 using is_odd = brigand::size_t<(N::value % 2) != 0>;
 
-template <std::size_t... List>
-using size_t_list = brigand::integral_list<std::size_t, List...>;
+template <unsigned int... List>
+using size_t_list = brigand::integral_list<unsigned int, List...>;
 
 using odd_list = size_t_list<1, 3, 5, 7, 9, 11>;
 using even_list = size_t_list<0, 2, 4, 6, 8, 10>;
@@ -34,8 +34,8 @@ namespace custom
   class custom_list
   {
   };
-  template <std::size_t... List>
-  using size_t_list = brigand::wrap<brigand::integral_list<std::size_t, List...>, custom_list>;
+  template <unsigned int... List>
+  using size_t_list = brigand::wrap<brigand::integral_list<unsigned int, List...>, custom_list>;
 
   using odd_list = size_t_list<1, 3, 5, 7, 9, 11>;
   using even_list = size_t_list<0, 2, 4, 6, 8, 10>;

@@ -5,10 +5,12 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <type_traits>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
-  template <typename A>
-  struct next : std::integral_constant < typename A::value_type, A::value + 1 > {};
+template <typename A>
+struct next : brigand::integral_constant<typename A::value_type, A::value + 1>
+{
+};
 }

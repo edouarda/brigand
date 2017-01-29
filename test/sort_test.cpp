@@ -6,8 +6,8 @@
 #include <brigand/types/bool.hpp>
 #include <cstddef>
 
-template <std::size_t... List>
-using size_t_list = brigand::integral_list<std::size_t, List...>;
+template <unsigned int... List>
+using size_t_list = brigand::integral_list<unsigned int, List...>;
 
 size_t_list<4> sort_test1 = brigand::sort<size_t_list<4>>{};
 size_t_list<4> sort_test2 = brigand::sort<size_t_list<4>, brigand::greater<brigand::_1, brigand::_2>>{};

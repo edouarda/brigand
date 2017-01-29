@@ -2,6 +2,8 @@
 
 #include <brigand/sequences/list.hpp>
 
+#include <type_traits>
+
 static_assert(
     std::is_same<brigand::empty_sequence, brigand::reverse<brigand::empty_sequence>>::value,
     "reversing an empty list should return the same empty list");

@@ -41,7 +41,7 @@ class custom_list
 };
 template <typename T, T... List>
 using custom_integral_list =
-brigand::wrap<brigand::integral_list<std::size_t, List...>, custom_list>;
+brigand::wrap<brigand::integral_list<unsigned int, List...>, custom_list>;
 
 static_assert(brigand::none<custom_list<>>::value, "invalid none on empty list");
 

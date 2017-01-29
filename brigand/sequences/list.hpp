@@ -6,17 +6,20 @@
 =================================================================================================**/
 #pragma once
 
-#include <type_traits>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
-  // Types list
-  template <class... T> struct list {};
+// Types list
+template <class... T>
+struct list
+{
+};
 
-  // Values list
-  template<typename T, T... Values>
-  using integral_list = brigand::list< std::integral_constant<T,Values>...>;
+// Values list
+template <typename T, T... Values>
+using integral_list = brigand::list<brigand::integral_constant<T, Values>...>;
 
-  // Empty list
-  using empty_sequence = brigand::list<>;
+// Empty list
+using empty_sequence = brigand::list<>;
 }

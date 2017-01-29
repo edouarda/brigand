@@ -6,8 +6,6 @@
 =================================================================================================**/
 #pragma once
 
-#include <type_traits>
-
 #include <brigand/types/type.hpp>
 
 #include <brigand/sequences/append.hpp>
@@ -41,16 +39,16 @@ namespace detail
     struct set_impl
     {
         template <typename K, typename = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
-        static std::true_type contains(type_<K>);
+        static brigand::true_type contains(type_<K>);
 
         template <typename K>
-        static std::false_type contains(K);
+        static brigand::false_type contains(K);
 
         template <typename K, typename = decltype(static_cast<type_<K>*>(static_cast<make_set<T...>*>(nullptr)))>
-        static std::true_type has_key(type_<K>);
+        static brigand::true_type has_key(type_<K>);
 
         template <typename K>
-        static std::false_type has_key(K);
+        static brigand::false_type has_key(K);
 
         template <class K>
         static append<set_impl<>, typename set_erase_pred_impl<T, K>::type...> erase(type_<K>);

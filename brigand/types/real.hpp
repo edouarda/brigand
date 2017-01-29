@@ -5,17 +5,17 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <type_traits>
+#include <brigand/types/integral_constant.hpp>
 #include <cstdint>
 #include <cstring>
 
 namespace brigand
 {
   template<typename RealType, typename Type, Type Value>
-  struct real_ : std::integral_constant<Type,Value>
+  struct real_ : brigand::integral_constant<Type,Value>
   {
     using value_type  = RealType;
-    using parent      = std::integral_constant<Type,Value>;
+    using parent      = brigand::integral_constant<Type,Value>;
 
     // aliasing free implementation - reinterpret_cast is bad
     inline operator value_type() const

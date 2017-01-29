@@ -5,10 +5,10 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <type_traits>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
-  template <bool B>
-  using bool_ = std::integral_constant<bool, B>;
+template <bool B>
+using bool_ = brigand::integral_constant<bool, B>;
 }

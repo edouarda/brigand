@@ -5,10 +5,12 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <type_traits>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
-  template<typename T>
-  struct sizeof_ : std::integral_constant <std::size_t, sizeof(T)> {};
+template <typename T>
+struct sizeof_ : brigand::integral_constant<unsigned int, sizeof(T)>
+{
+};
 }

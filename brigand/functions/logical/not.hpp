@@ -5,10 +5,10 @@
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
 #pragma once
-#include <type_traits>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
   template <typename T>
-  struct not_ : std::integral_constant<typename T::value_type, !T::value> {};
+  struct not_ : brigand::integral_constant<typename T::value_type, !T::value> {};
 }

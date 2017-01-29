@@ -1,5 +1,6 @@
 
 #include <brigand/algorithms/split.hpp>
+#include <type_traits>
 
 static_assert(
     std::is_same<brigand::split<brigand::empty_sequence, void>, brigand::empty_sequence>::value,

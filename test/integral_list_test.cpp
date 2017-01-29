@@ -39,7 +39,7 @@ static_assert(std::is_same<brigand::pop_back<list1>, brigand::empty_sequence>::v
 static_assert(std::is_same<brigand::at_c<listref, 0>, n_>::value,  "invalid at result");
 static_assert(std::is_same<brigand::at_c<listref, 1>, m_>::value, "invalid at result");
 
-static_assert(std::is_same<brigand::at<listref, std::integral_constant<int, 0>>, n_>::value,  "invalid at result");
-static_assert(std::is_same<brigand::at<listref, std::integral_constant<int, 1>>, m_>::value, "invalid at result");
+static_assert(std::is_same<brigand::at<listref, brigand::integral_constant<int, 0>>, n_>::value,  "invalid at result");
+static_assert(std::is_same<brigand::at<listref, brigand::integral_constant<int, 1>>, m_>::value, "invalid at result");
 
 static_assert(std::is_same<brigand::append<list1, list2>, listref>::value, "invalid append result");

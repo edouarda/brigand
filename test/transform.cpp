@@ -100,13 +100,13 @@ static_assert(std::is_same<brigand::as_integral_list<brigand::transform<
 
 static_assert(
   std::is_same<brigand::as_integral_list<brigand::transform<
-  sum_list, brigand::plus<brigand::_1, std::integral_constant<int, 2>>>>,
+  sum_list, brigand::plus<brigand::_1, brigand::integral_constant<int, 2>>>>,
   brigand::integral_list<int, 3, 4, 5>>::value,
   "invalid transform sum");
 
 static_assert(
   std::is_same<brigand::as_integral_list<brigand::transform<
-  sum_list, brigand::minus<std::integral_constant<int, 10>, brigand::_1>>>,
+  sum_list, brigand::minus<brigand::integral_constant<int, 10>, brigand::_1>>>,
   brigand::integral_list<int, 9, 8, 7>>::value,
   "invalid transform sum");
 
@@ -181,13 +181,13 @@ namespace custom
 
   static_assert(
     std::is_same<brigand::as_integral_list<brigand::transform<
-    sum_list, brigand::plus<brigand::_1, std::integral_constant<int, 2>>>>,
+    sum_list, brigand::plus<brigand::_1, brigand::integral_constant<int, 2>>>>,
     custom_int_list<3, 4, 5>>::value,
     "invalid transform sum");
 
   static_assert(
     std::is_same<brigand::as_integral_list<brigand::transform<
-    sum_list, brigand::minus<std::integral_constant<int, 10>, brigand::_1>>>,
+    sum_list, brigand::minus<brigand::integral_constant<int, 10>, brigand::_1>>>,
     custom_int_list<9, 8, 7>>::value,
     "invalid transform sum");
 }

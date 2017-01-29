@@ -59,7 +59,7 @@ namespace detail
     using type = T;
   };
   //arg case
-  template <std::size_t N, typename L, typename...Ls>
+  template <unsigned int N, typename L, typename...Ls>
   struct apply<args<N>, L, Ls...>
   {
     using type = at_c<L, N>;

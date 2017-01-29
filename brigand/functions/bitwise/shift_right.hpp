@@ -6,10 +6,10 @@
 =================================================================================================**/
 #pragma once
 
-#include <type_traits>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
   template <typename A, typename B>
-  struct shift_right : std::integral_constant<typename A::value_type, (A::value >> B::value)> {};
+  struct shift_right : brigand::integral_constant<typename A::value_type, (A::value >> B::value)> {};
 }

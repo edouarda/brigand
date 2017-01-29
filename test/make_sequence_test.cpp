@@ -1,6 +1,7 @@
 #include <brigand/functions/arithmetic/prev.hpp>
 #include <brigand/sequences/make_sequence.hpp>
 #include <brigand/types/integer.hpp>
+#include <type_traits>
 
 static_assert(std::is_same<brigand::make_sequence<brigand::uint32_t<0>, 3>,
                            brigand::integral_list<std::uint32_t, 0, 1, 2>>::value,

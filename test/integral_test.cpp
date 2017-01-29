@@ -2,11 +2,11 @@
 #include <brigand/functions/arithmetic.hpp>
 
 // integral constant tests
-using value_int_one = std::integral_constant<int, 1>;
-using value_int_two = std::integral_constant<int, 2>;
-using value_int_three = std::integral_constant<int, 3>;
-using value_int_ten = std::integral_constant<int, 10>;
-using value_byte_zero = std::integral_constant<unsigned char, 0>;
+using value_int_one = brigand::integral_constant<int, 1>;
+using value_int_two = brigand::integral_constant<int, 2>;
+using value_int_three = brigand::integral_constant<int, 3>;
+using value_int_ten = brigand::integral_constant<int, 10>;
+using value_byte_zero = brigand::integral_constant<unsigned char, 0>;
 
 static_assert(brigand::min<value_int_one, value_int_two>::value == 1, "invalid min result");
 static_assert(brigand::max<value_int_one, value_int_two>::value == 2, "invalid max result");

@@ -7,14 +7,16 @@ Distributed under the Boost Software License, Version 1.0.
 #pragma once
 
 #include <brigand/algorithms/transform.hpp>
+#include <brigand/types/integral_constant.hpp>
 
 namespace brigand
 {
 
-    template <typename T>
-    struct make_integral : std::integral_constant <typename T::value_type, T::value> {};
+template <typename T>
+struct make_integral : brigand::integral_constant<typename T::value_type, T::value>
+{
+};
 
-    template <typename L>
-    using as_integral_list = transform<L, make_integral<brigand::_1>>;
-
+template <typename L>
+using as_integral_list = transform<L, make_integral<brigand::_1>>;
 }
