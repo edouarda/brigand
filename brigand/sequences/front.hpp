@@ -8,6 +8,7 @@
 
 #include <brigand/sequences/filled_list.hpp>
 #include <brigand/types/integral_constant.hpp>
+#include <brigand/types/type.hpp>
 
 namespace brigand
 {
