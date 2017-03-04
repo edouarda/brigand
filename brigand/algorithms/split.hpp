@@ -6,6 +6,7 @@ Distributed under the Boost Software License, Version 1.0.
 =================================================================================================**/
 #pragma once
 
+#include <brigand/config.hpp>
 #include <brigand/sequences/list.hpp>
 
 namespace brigand
@@ -47,10 +48,17 @@ namespace detail
     struct split_helper;
     template<template<typename...> class L, typename T, typename... Ts, typename TDelim>
     struct split_helper<L<T,Ts...>, TDelim> : split_impl<L<>, L<>, TDelim, T, Ts...>{};
+#if defined(BRIGAND_COMP_INTEL)
+    template<template<typename...> class L, typename TDelim>
+    struct split_helper<L<>, TDelim> { //done
+        using type = L<>;
+    };
+#else
     template<template<typename...> class L, typename... T, typename TDelim>
     struct split_helper<L<T...>, TDelim> { //done
         using type = L<>;
     };
+#endif
 
 }
 
