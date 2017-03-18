@@ -4,7 +4,7 @@ import sys
 import os
 import re
 
-pragma_once_pat = re.compile("#pragma(\ |\t)+once")
+pragma_once_pat = re.compile("^(\ |\t)*#pragma(\ |\t)+once")
 
 if __name__ == '__main__':
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
                 for line in f:
 
-                    if pragma_once_pat.match(line):
+                    if not replaced and pragma_once_pat.match(line):
                         all_lines.append("#ifndef " + header_guard + "\n")
                         all_lines.append("#define " + header_guard + "\n")
                         replaced = True

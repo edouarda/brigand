@@ -1,0 +1,19 @@
+{
+    "key": "brigand",
+    "name": "Brigand",
+    "authors": [
+        "Edouard Alligand",
+        "Joel Falcou",
+        "Odin Holmes",
+        "Marek Kurdej",
+        "Jonathan Poelen"
+    ],
+    "maintainers": [
+        "Edouard Alligand",
+        "Joel Falcou"
+    ],
+    "description": "Light-weight, fully functional, instant-compile time C++ 11 meta-programming library.",
+    "category": [
+        "Metaprogramming"
+    ]
+}
