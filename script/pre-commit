@@ -12,8 +12,8 @@ fi
 
 (
 cd $GIT_DIR/..
-python ./script/embed.py -I./ --include-match=brigand/* brigand/brigand.hpp -o standalone/brigand.hpp
-git add standalone/brigand.hpp
+python ./script/embed.py -I./include --include-match=brigand/* include/brigand/brigand.hpp -o include/standalone/brigand.hpp
+git add include/standalone/brigand.hpp
 )
 
 if git diff --cached | grep -E '^\+.*'$'\t' > /dev/null

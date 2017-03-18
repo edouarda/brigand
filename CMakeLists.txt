@@ -17,9 +17,9 @@ include(FindPythonInterp)
 find_package(Boost)
 
 if(Boost_FOUND)
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS})
 else()
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBRIGAND_NO_BOOST_SUPPORT")
 endif()
 
@@ -29,13 +29,13 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/.git/hooks
                )
 
-set ( STANDALONE_GROUP
+set (STANDALONE_GROUP
     script/embed.py
 )
 
 add_custom_target(standalone
-    COMMAND ${CMAKE_COMMAND} -E remove ${PROJECT_SOURCE_DIR}/standalone/brigand.hpp
-    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/script/embed.py -I./ --include-match=brigand/* ${PROJECT_SOURCE_DIR}/brigand/brigand.hpp -o ${PROJECT_SOURCE_DIR}/standalone/brigand.hpp
+    COMMAND ${CMAKE_COMMAND} -E remove ${PROJECT_SOURCE_DIR}/include/standalone/brigand.hpp
+    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/script/embed.py -I${PROJECT_SOURCE_DIR}/include --include-match=brigand/* ${PROJECT_SOURCE_DIR}/include/brigand/brigand.hpp -o ${PROJECT_SOURCE_DIR}/include/standalone/brigand.hpp
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMENT "Building standalone header file"
     VERBATIM
@@ -45,157 +45,155 @@ add_custom_target(standalone
 set(CMAKE_DEBUG_POSTFIX "d")
 
 set(BRIGAND_GROUP
-    brigand/adapted.hpp
-    brigand/algorithms.hpp
-    brigand/brigand.hpp
-    brigand/config.hpp
-    brigand/functions.hpp
-    brigand/sequences.hpp
-    brigand/types.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/brigand.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/config.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types.hpp
 )
 
 set(ADAPTED_GROUP
-    brigand/adapted/fusion.hpp
-    brigand/adapted/integral_list.hpp
-    brigand/adapted/list.hpp
-    brigand/adapted/pair.hpp
-    brigand/adapted/tuple.hpp
-    brigand/adapted/fusion.hpp
-    brigand/adapted/variant.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted/fusion.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted/integral_list.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted/list.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted/pair.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted/tuple.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted/fusion.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/adapted/variant.hpp
 )
 
 set(ALGORITHMS_GROUP
-    brigand/algorithms/all.hpp
-    brigand/algorithms/any.hpp
-    brigand/algorithms/wrap.hpp
-    brigand/algorithms/count.hpp
-    brigand/algorithms/find.hpp
-    brigand/algorithms/flatten.hpp
-    brigand/algorithms/fold.hpp
-    brigand/algorithms/for_each.hpp
-    brigand/algorithms/for_each_args.hpp
-    brigand/algorithms/index_of.hpp
-    brigand/algorithms/is_set.hpp
-    brigand/algorithms/merge.hpp
-    brigand/algorithms/none.hpp
-    brigand/algorithms/partition.hpp
-    brigand/algorithms/remove.hpp
-    brigand/algorithms/replace.hpp
-    brigand/algorithms/reverse.hpp
-    brigand/algorithms/split.hpp
-    brigand/algorithms/split_at.hpp
-    brigand/algorithms/sort.hpp
-    brigand/algorithms/transform.hpp
-    brigand/algorithms/select.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/all.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/any.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/wrap.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/count.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/find.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/flatten.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/fold.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/for_each.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/for_each_args.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/index_of.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/is_set.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/merge.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/none.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/partition.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/remove.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/replace.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/reverse.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/split.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/split_at.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/sort.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/transform.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/select.hpp
 )
 
 set(ALGORITHMS_DETAIL_GROUP
-    brigand/algorithms/detail/find.hpp
-    brigand/algorithms/detail/fold.hpp
-    brigand/algorithms/detail/non_null.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/detail/find.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/detail/fold.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/algorithms/detail/non_null.hpp
 )
 
 set(FUNCTIONS_ARITHMETIC_GROUP
-    brigand/functions/arithmetic/complement.hpp
-    brigand/functions/arithmetic/divides.hpp
-    brigand/functions/arithmetic/identity.hpp
-    brigand/functions/arithmetic/max.hpp
-    brigand/functions/arithmetic/min.hpp
-    brigand/functions/arithmetic/minus.hpp
-    brigand/functions/arithmetic/modulo.hpp
-    brigand/functions/arithmetic/negate.hpp
-    brigand/functions/arithmetic/next.hpp
-    brigand/functions/arithmetic/plus.hpp
-    brigand/functions/arithmetic/prev.hpp
-    brigand/functions/arithmetic/times.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/complement.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/divides.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/identity.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/max.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/min.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/minus.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/modulo.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/negate.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/next.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/plus.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/prev.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic/times.hpp
 )
 
 set(FUNCTIONS_BITWISE_GROUP
-    brigand/functions/bitwise/bitand.hpp
-    brigand/functions/bitwise/bitor.hpp
-    brigand/functions/bitwise/bitxor.hpp
-    brigand/functions/bitwise/shift_left.hpp
-    brigand/functions/bitwise/shift_right.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/bitwise/bitand.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/bitwise/bitor.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/bitwise/bitxor.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/bitwise/shift_left.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/bitwise/shift_right.hpp
 )
 
 set(FUNCTIONS_COMPARISON_GROUP
-    brigand/functions/comparison/equal_to.hpp
-    brigand/functions/comparison/greater.hpp
-    brigand/functions/comparison/greater_equal.hpp
-    brigand/functions/comparison/less.hpp
-    brigand/functions/comparison/less_equal.hpp
-    brigand/functions/comparison/not_equal_to.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/comparison/equal_to.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/comparison/greater.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/comparison/greater_equal.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/comparison/less.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/comparison/less_equal.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/comparison/not_equal_to.hpp
 )
 
 set(FUNCTIONS_LOGICAL_GROUP
-    brigand/functions/logical/and.hpp
-    brigand/functions/logical/not.hpp
-    brigand/functions/logical/or.hpp
-    brigand/functions/logical/xor.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/logical/and.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/logical/not.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/logical/or.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/logical/xor.hpp
 )
 
 set(FUNCTIONS_LAMBDA_GROUP
-    brigand/functions/lambda/substitute.hpp
-    brigand/functions/lambda/apply.hpp
-    brigand/functions/lambda/bind.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/lambda/substitute.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/lambda/apply.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/lambda/bind.hpp
 )
 
 set(FUNCTIONS_MISC_GROUP
-    brigand/functions/misc/always.hpp
-    brigand/functions/misc/sizeof.hpp
-    brigand/functions/misc/repeat.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/misc/always.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/misc/sizeof.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/misc/repeat.hpp
 )
 
 set(FUNCTIONS_GROUPS
-    brigand/functions/arithmetic.hpp
-    brigand/functions/bitwise.hpp
-    brigand/functions/comparisons.hpp
-    brigand/functions/if.hpp
-    brigand/functions/eval_if.hpp
-    brigand/functions/logical.hpp
-    brigand/functions/lambda.hpp
-    brigand/functions/misc.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/arithmetic.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/bitwise.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/comparisons.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/if.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/eval_if.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/logical.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/lambda.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/functions/misc.hpp
 )
 
 set(SEQUENCES_GROUP
-    brigand/sequences/append.hpp
-    brigand/sequences/at.hpp
-    brigand/sequences/back.hpp
-    brigand/sequences/clear.hpp
-    brigand/sequences/contains.hpp
-    brigand/sequences/erase.hpp
-    brigand/sequences/filled_list.hpp
-    brigand/sequences/front.hpp
-    brigand/sequences/has_key.hpp
-    brigand/sequences/insert.hpp
-    brigand/sequences/keys_as_sequence.hpp
-    brigand/sequences/list.hpp
-    brigand/sequences/make_sequence.hpp
-    brigand/sequences/map.hpp
-    brigand/sequences/pair.hpp
-    brigand/sequences/range.hpp
-    brigand/sequences/set.hpp
-    brigand/sequences/size.hpp
-    brigand/sequences/values_as_sequence.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/append.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/at.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/back.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/clear.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/contains.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/erase.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/filled_list.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/front.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/has_key.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/insert.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/keys_as_sequence.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/list.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/make_sequence.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/map.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/pair.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/range.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/set.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/size.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/sequences/values_as_sequence.hpp
 )
 
 set(TYPES_GROUP
-    brigand/types/args.hpp
-    brigand/types/bool.hpp
-    brigand/types/empty_base.hpp
-    brigand/types/has_type.hpp
-    brigand/types/inherit.hpp
-    brigand/types/inherit_linearly.hpp
-    brigand/types/integer.hpp
-    brigand/types/integral_constant.hpp
-    brigand/types/no_such_type.hpp
-    brigand/types/operators.hpp
-    brigand/types/real.hpp
-    brigand/types/type.hpp
-    brigand/types/voidp.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/args.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/bool.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/empty_base.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/has_type.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/inherit.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/inherit_linearly.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/integer.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/integral_constant.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/no_such_type.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/operators.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/real.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/type.hpp
+    ${PROJECT_SOURCE_DIR}/include/brigand/types/voidp.hpp
 )
-
-set(PLACEHOLDER_GROUP brigand/nothing.cpp)
 
 source_group(brigand FILES ${BRIGAND_GROUP})
 source_group(brigand\\adapted FILES ${ADAPTED_GROUP})
@@ -212,7 +210,9 @@ source_group(brigand\\sequences FILES ${SEQUENCES_GROUP})
 source_group(brigand\\types FILES ${TYPES_GROUP})
 source_group(placeholder FILES ${PLACEHOLDER_GROUP})
 
-add_library(brigand
+add_library(brigand INTERFACE)
+
+target_sources(brigand INTERFACE
     ${BRIGAND_GROUP}
     ${ADAPTED_GROUP}
     ${ALGORITHMS_GROUP}
@@ -230,76 +230,77 @@ add_library(brigand
 )
 
 set(test_files
-    test/always.cpp
-    test/apply.cpp
-    test/args.cpp
-    test/bind.cpp
-    test/bitwise_test.cpp
-    test/comparison_test.cpp
-    test/count_test.cpp
-    test/config_test.cpp
-    test/eval_if_test.cpp
-    test/erase_c_test.cpp
-    test/find.cpp
-    test/flatten.cpp
-    test/fold.cpp
-    test/for_each.cpp
-    test/identity.cpp
-    test/if_test.cpp
-    test/index_of.cpp
-    test/include_test.cpp
-    test/inherit.cpp
-    test/inherit_linearly.cpp
-    test/integer.cpp
-    test/integral_list_test.cpp
-    test/integral_test.cpp
-    test/is_set_test.cpp
-    test/keys_as_sequence.cpp
-    test/list_test.cpp
-    test/logical_test.cpp
-    test/main.cpp
-    test/make_sequence_test.cpp
-    test/map_test.cpp
-    test/merge_test.cpp
-    test/pair_test.cpp
-    test/partition_test.cpp
-    test/predicate_reduction_test.cpp
-    test/range_test.cpp
-    test/real.cpp
-    test/remove_test.cpp
-    test/repeat_test.cpp
-    test/replace.cpp
-    test/reverse_test.cpp
-    test/select.cpp
-    test/set_test.cpp
-    test/sizeof.cpp
-    test/sort_test.cpp
-    test/split.cpp
-    test/split_at.cpp
-    test/transform.cpp
-    test/tuple_test.cpp
-    test/values_as_sequence.cpp
+    ${PROJECT_SOURCE_DIR}/test/always.cpp
+    ${PROJECT_SOURCE_DIR}/test/apply.cpp
+    ${PROJECT_SOURCE_DIR}/test/args.cpp
+    ${PROJECT_SOURCE_DIR}/test/bind.cpp
+    ${PROJECT_SOURCE_DIR}/test/bitwise_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/comparison_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/count_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/config_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/eval_if_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/erase_c_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/find.cpp
+    ${PROJECT_SOURCE_DIR}/test/flatten.cpp
+    ${PROJECT_SOURCE_DIR}/test/fold.cpp
+    ${PROJECT_SOURCE_DIR}/test/for_each.cpp
+    ${PROJECT_SOURCE_DIR}/test/identity.cpp
+    ${PROJECT_SOURCE_DIR}/test/if_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/index_of.cpp
+    ${PROJECT_SOURCE_DIR}/test/include_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/inherit.cpp
+    ${PROJECT_SOURCE_DIR}/test/inherit_linearly.cpp
+    ${PROJECT_SOURCE_DIR}/test/integer.cpp
+    ${PROJECT_SOURCE_DIR}/test/integral_list_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/integral_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/is_set_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/keys_as_sequence.cpp
+    ${PROJECT_SOURCE_DIR}/test/list_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/logical_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/main.cpp
+    ${PROJECT_SOURCE_DIR}/test/make_sequence_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/map_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/merge_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/pair_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/partition_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/predicate_reduction_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/range_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/real.cpp
+    ${PROJECT_SOURCE_DIR}/test/remove_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/repeat_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/replace.cpp
+    ${PROJECT_SOURCE_DIR}/test/reverse_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/select.cpp
+    ${PROJECT_SOURCE_DIR}/test/set_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/sizeof.cpp
+    ${PROJECT_SOURCE_DIR}/test/sort_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/split.cpp
+    ${PROJECT_SOURCE_DIR}/test/split_at.cpp
+    ${PROJECT_SOURCE_DIR}/test/transform.cpp
+    ${PROJECT_SOURCE_DIR}/test/tuple_test.cpp
+    ${PROJECT_SOURCE_DIR}/test/values_as_sequence.cpp
 )
 
 if(Boost_FOUND)
     set(test_files
-    ${test_files}
-    test/variant_test.cpp
-    test/fusion_test.cpp)
+        ${test_files}
+        test/variant_test.cpp
+        test/fusion_test.cpp)
 endif()
 
 source_group(tests FILES ${test_files})
 
 add_executable(brigand_test ${test_files})
+target_link_libraries(brigand_test brigand)
 
-add_test(brigand brigand_test)
+add_test(NAME brigand_test COMMAND brigand_test)
 
 configure_file(libbrigand.pc.in
     libbrigand.pc
     @ONLY
 )
 
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/brigand
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include
     DESTINATION include
 )
 
