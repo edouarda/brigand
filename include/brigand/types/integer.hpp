@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_TYPES_INTEGER_HPP
+#define BOOST_BRIGAND_TYPES_INTEGER_HPP
 #include <brigand/types/integral_constant.hpp>
 #include <cstddef>
 #include <cstdint>
@@ -41,3 +42,4 @@ using size_t = brigand::integral_constant<std::size_t, V>;
 template <std::ptrdiff_t V>
 using ptrdiff_t = brigand::integral_constant<std::ptrdiff_t, V>;
 }
+#endif

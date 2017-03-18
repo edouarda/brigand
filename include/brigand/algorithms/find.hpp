@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_FIND_HPP
+#define BOOST_BRIGAND_ALGORITHMS_FIND_HPP
 
 #include <brigand/algorithms/detail/find.hpp>
 #include <brigand/algorithms/detail/non_null.hpp>
@@ -72,3 +73,4 @@ using not_found = typename detail::empty_find<Sequence, Predicate>;
 template <typename Sequence, typename Predicate = detail::non_null>
 using found = typename detail::non_empty_find<Sequence, Predicate>;
 }
+#endif

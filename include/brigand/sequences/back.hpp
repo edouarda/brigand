@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_BACK_HPP
+#define BOOST_BRIGAND_SEQUENCES_BACK_HPP
 
 #include <brigand/algorithms/split_at.hpp>
 #include <brigand/sequences/at.hpp>
@@ -38,3 +39,4 @@ template <class L, class N = brigand::integral_constant<unsigned int, 1>>
 using pop_back =
     front<split_at<L, brigand::integral_constant<unsigned int, size<L>::value - N::value>>>;
 }
+#endif

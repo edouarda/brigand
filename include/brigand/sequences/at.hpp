@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_AT_HPP
+#define BOOST_BRIGAND_SEQUENCES_AT_HPP
 #include <brigand/sequences/filled_list.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/map.hpp>
@@ -71,3 +72,4 @@ namespace detail
 template <class Seq, typename K>
 using at = typename detail::at_dispatch<Seq, K, detail::has_at_method<Seq>::value>::type;
 }
+#endif

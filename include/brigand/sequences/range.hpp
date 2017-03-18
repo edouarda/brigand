@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_RANGE_HPP
+#define BOOST_BRIGAND_SEQUENCES_RANGE_HPP
 
 #include <brigand/config.hpp>
 #include <brigand/sequences/list.hpp>
@@ -109,3 +110,4 @@ using range = typename detail::range_impl<T, Start, Stop - Start>::type;
 template <class T, T Start, T Stop>
 using reverse_range = typename detail::reverse_range_safe<T, Start, Stop>::type;
 }
+#endif

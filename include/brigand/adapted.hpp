@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ADAPTED_HPP
+#define BOOST_BRIGAND_ADAPTED_HPP
 
 #include <brigand/adapted/integral_list.hpp>
 #include <brigand/adapted/list.hpp>
@@ -14,4 +15,5 @@
 #if !defined(BRIGAND_NO_BOOST_SUPPORT)
 #include <brigand/adapted/fusion.hpp>
 #include <brigand/adapted/variant.hpp>
+#endif
 #endif

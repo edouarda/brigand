@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_MAKE_SEQUENCE_HPP
+#define BOOST_BRIGAND_SEQUENCES_MAKE_SEQUENCE_HPP
 
 #include <brigand/functions/arithmetic/next.hpp>
 #include <brigand/functions/lambda/apply.hpp>
@@ -68,3 +69,4 @@ namespace detail
     template<class Start, unsigned N, class Next = next<_1>, template<class...> class List = list>
     using make_sequence = typename detail::make_sequence_impl<List, Start, N, Next, (N<=8)>::type;
 }
+#endif

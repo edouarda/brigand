@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_COUNT_HPP
+#define BOOST_BRIGAND_ALGORITHMS_COUNT_HPP
 #include <brigand/config.hpp>
 #include <brigand/functions/lambda.hpp>
 #include <brigand/types/integer.hpp>
@@ -113,3 +114,4 @@ using count_if = typename lazy::count_if<List, Pred>::type;
 template <class... T>
 using count = brigand::integral_constant<unsigned int, sizeof...(T)>;
 }
+#endif

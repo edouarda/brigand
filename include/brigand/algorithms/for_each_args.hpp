@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_FOR_EACH_ARGS_HPP
+#define BOOST_BRIGAND_ALGORITHMS_FOR_EACH_ARGS_HPP
 
 #include <initializer_list>
 #include <functional>
@@ -16,3 +17,4 @@ namespace brigand
     return (void)std::initializer_list<int>{((void)std::ref(f)(static_cast<Ts&&>(a)),0)...}, f;
   }
 }
+#endif

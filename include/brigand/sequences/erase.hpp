@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_ERASE_HPP
+#define BOOST_BRIGAND_SEQUENCES_ERASE_HPP
 #include <brigand/algorithms/split_at.hpp>
 
 #include <brigand/sequences/append.hpp>
@@ -57,3 +58,4 @@ namespace detail
 template <class L, class K>
 using erase = typename detail::erase_dispatch<L, K, detail::has_erase_method<L>::value>::type;
 }
+#endif

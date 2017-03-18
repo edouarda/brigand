@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_INDEX_OF_HPP
+#define BOOST_BRIGAND_ALGORITHMS_INDEX_OF_HPP
 
 #include <brigand/algorithms/find.hpp>
 #include <brigand/sequences/size.hpp>
@@ -39,3 +40,4 @@ template <class Sequence, typename T>
 using index_of = index_if<Sequence, std::is_same<typename brigand::pin<T>, ::brigand::_1>>;
 
 } // namespace brigand
+#endif

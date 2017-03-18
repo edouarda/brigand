@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_FILLED_LIST_HPP
+#define BOOST_BRIGAND_SEQUENCES_FILLED_LIST_HPP
 
 #include <brigand/sequences/list.hpp>
 
@@ -44,3 +45,4 @@ namespace detail
 template <class T, unsigned int N, template <class...> class List = list>
 using filled_list = typename detail::filled_list_impl<T, List, N>::type;
 }
+#endif

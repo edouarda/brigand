@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_FRONT_HPP
+#define BOOST_BRIGAND_SEQUENCES_FRONT_HPP
 
 #include <brigand/sequences/filled_list.hpp>
 #include <brigand/types/integral_constant.hpp>
@@ -91,3 +92,4 @@ namespace lazy
 template <class L, class N = brigand::integral_constant<unsigned int, 1>>
 using pop_front = typename detail::pop_front_impl<L, N::value>::type;
 }
+#endif

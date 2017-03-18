@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ADAPTED_PAIR_HPP
+#define BOOST_BRIGAND_ADAPTED_PAIR_HPP
 
 #include <brigand/algorithms/wrap.hpp>
 #include <brigand/types/no_such_type.hpp>
@@ -35,3 +36,4 @@ namespace brigand
   template <typename L>
   using as_pair = wrap<L, pair_wrapper>;
 }
+#endif

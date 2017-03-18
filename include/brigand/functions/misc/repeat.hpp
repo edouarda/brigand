@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_FUNCTIONS_MISC_REPEAT_HPP
+#define BOOST_BRIGAND_FUNCTIONS_MISC_REPEAT_HPP
 
 namespace brigand
 {
@@ -73,3 +74,4 @@ namespace lazy
     template<template<class> class F, class N, class T>
     using repeat = typename ::brigand::lazy::repeat<F, N, T>::type;
 }
+#endif

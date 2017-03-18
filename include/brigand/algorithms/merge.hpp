@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_MERGE_HPP
+#define BOOST_BRIGAND_ALGORITHMS_MERGE_HPP
 
 #include <brigand/algorithms/wrap.hpp>
 #include <brigand/functions/comparison/less.hpp>
@@ -104,3 +105,4 @@ using merge =
     append<clear<Seq1>,
            typename detail::merge_impl<list<>, wrap<Seq1, list>, wrap<Seq2, list>, Comp>::type>;
 }
+#endif

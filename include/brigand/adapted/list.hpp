@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ADAPTED_LIST_HPP
+#define BOOST_BRIGAND_ADAPTED_LIST_HPP
 
 #include <brigand/algorithms/wrap.hpp>
 #include <brigand/sequences/list.hpp>
@@ -27,3 +28,4 @@ template <typename L>
 using as_list = as_sequence<L, brigand::list>;
 
 } // namespace brigand
+#endif

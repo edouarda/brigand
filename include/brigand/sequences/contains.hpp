@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_CONTAINS_HPP
+#define BOOST_BRIGAND_SEQUENCES_CONTAINS_HPP
 
 #include <brigand/types/type.hpp>
 
@@ -21,3 +22,4 @@ namespace detail
     template <class L, class K>
     using contains = typename detail::contains_impl<L, K>::type;
 }
+#endif

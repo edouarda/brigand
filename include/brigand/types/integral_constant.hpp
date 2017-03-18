@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_TYPES_INTEGRAL_CONSTANT_HPP
+#define BOOST_BRIGAND_TYPES_INTEGRAL_CONSTANT_HPP
 
 // having our own integral constant fixes brigand on systems with broken std::integral_constant
 // implementations
@@ -32,3 +33,4 @@ const T integral_constant<T, Value>::value;
 using true_type = ::brigand::integral_constant<bool, true>;
 using false_type = ::brigand::integral_constant<bool, false>;
 }
+#endif

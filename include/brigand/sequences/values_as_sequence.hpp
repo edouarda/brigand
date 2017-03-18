@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_VALUES_AS_SEQUENCE_HPP
+#define BOOST_BRIGAND_SEQUENCES_VALUES_AS_SEQUENCE_HPP
 
 #include <brigand/adapted/list.hpp>
 #include <brigand/algorithms/transform.hpp>
@@ -17,3 +18,4 @@ template <typename Map, template <class...> class Sequence = brigand::list>
 using values_as_sequence = transform<as_sequence<Map, Sequence>, detail::get_second<_1>>;
 
 } // namespace brigand
+#endif

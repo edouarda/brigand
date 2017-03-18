@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_SEQUENCES_MAP_HPP
+#define BOOST_BRIGAND_SEQUENCES_MAP_HPP
 #include <brigand/sequences/append.hpp>
 #include <brigand/sequences/list.hpp>
 #include <brigand/sequences/pair.hpp>
@@ -111,3 +112,4 @@ namespace detail
 template <class... Ts>
 using map = typename detail::make_map<Ts...>::type;
 }
+#endif

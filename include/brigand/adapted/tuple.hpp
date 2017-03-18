@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ADAPTED_TUPLE_HPP
+#define BOOST_BRIGAND_ADAPTED_TUPLE_HPP
 
 #include <brigand/algorithms/wrap.hpp>
 #include <tuple>
@@ -17,3 +18,4 @@ namespace brigand
   template <typename L>
   using as_tuple = wrap<L, tuple_wrapper>;
 }
+#endif

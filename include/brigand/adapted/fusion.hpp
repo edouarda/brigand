@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ADAPTED_FUSION_HPP
+#define BOOST_BRIGAND_ADAPTED_FUSION_HPP
 
 #include <brigand/algorithms/wrap.hpp>
 #include <boost/fusion/container/vector/vector_fwd.hpp>
@@ -31,3 +32,4 @@ namespace brigand
   template <typename L> using as_fusion_list   = wrap<L, fusion_list_wrapper>;
   template <typename L> using as_fusion_set    = wrap<L, fusion_set_wrapper>;
 }
+#endif

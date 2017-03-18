@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_REPLACE_HPP
+#define BOOST_BRIGAND_ALGORITHMS_REPLACE_HPP
 
 #include <brigand/functions/lambda/apply.hpp>
 #include <brigand/sequences/list.hpp>
@@ -79,3 +80,4 @@ using replace_if = typename ::brigand::lazy::replace_if<Sequence, Predicate, New
 template <typename Sequence, typename OldType, typename NewType>
 using replace = typename ::brigand::lazy::replace<Sequence, OldType, NewType>::type;
 }
+#endif

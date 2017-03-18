@@ -208,12 +208,8 @@ source_group(brigand\\functions\\misc FILES ${FUNCTIONS_MISC_GROUP})
 source_group(brigand\\functions\\comparison FILES ${FUNCTIONS_COMPARISON_GROUP})
 source_group(brigand\\sequences FILES ${SEQUENCES_GROUP})
 source_group(brigand\\types FILES ${TYPES_GROUP})
-source_group(placeholder FILES ${PLACEHOLDER_GROUP})
 
-add_library(brigand INTERFACE)
-
-target_sources(brigand INTERFACE
-    ${BRIGAND_GROUP}
+set(BRIGAND_HEADERS ${BRIGAND_GROUP}
     ${ADAPTED_GROUP}
     ${ALGORITHMS_GROUP}
     ${ALGORITHMS_DETAIL_GROUP}
@@ -225,9 +221,7 @@ target_sources(brigand INTERFACE
     ${FUNCTIONS_MISC_GROUP}
     ${FUNCTIONS_COMPARISON_GROUP}
     ${SEQUENCES_GROUP}
-    ${TYPES_GROUP}
-    ${PLACEHOLDER_GROUP}
-)
+    ${TYPES_GROUP})
 
 set(test_files
     ${PROJECT_SOURCE_DIR}/test/always.cpp
@@ -291,7 +285,12 @@ endif()
 source_group(tests FILES ${test_files})
 
 add_executable(brigand_test ${test_files})
-target_link_libraries(brigand_test brigand)
+
+IF(${CMAKE_MAJOR_VERSION} GREATER 2)
+    add_library(brigand INTERFACE)
+    add_custom_target(brigand_headers SOURCES ${BRIGAND_HEADERS})
+    target_link_libraries(brigand_test brigand)
+ENDIF()
 
 add_test(NAME brigand_test COMMAND brigand_test)
 

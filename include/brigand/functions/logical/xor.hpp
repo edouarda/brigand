@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_FUNCTIONS_LOGICAL_XOR_HPP
+#define BOOST_BRIGAND_FUNCTIONS_LOGICAL_XOR_HPP
 #include <brigand/types/integral_constant.hpp>
 
 namespace brigand
@@ -12,3 +13,4 @@ namespace brigand
   template <typename A, typename B>
   struct xor_ : brigand::integral_constant<typename A::value_type, A::value != B::value> {};
 }
+#endif

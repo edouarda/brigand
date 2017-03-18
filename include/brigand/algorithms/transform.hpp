@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_TRANSFORM_HPP
+#define BOOST_BRIGAND_ALGORITHMS_TRANSFORM_HPP
 
 #include <brigand/functions/lambda/apply.hpp>
 #include <brigand/sequences/back.hpp>
@@ -106,3 +107,4 @@ namespace lazy
 template <typename Sequence1, typename OpSeq1, typename... OpSeq2>
 using transform = typename detail::transform<sizeof...(OpSeq2), Sequence1, OpSeq1, OpSeq2...>::type;
 }
+#endif

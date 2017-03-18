@@ -4,7 +4,8 @@
   Distributed under the Boost Software License, Version 1.0.
   (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_ANY_HPP
+#define BOOST_BRIGAND_ALGORITHMS_ANY_HPP
 
 #include <brigand/types/bool.hpp>
 #include <brigand/algorithms/detail/non_null.hpp>
@@ -22,3 +23,4 @@ namespace brigand
   template<typename Sequence, typename Predicate = detail::non_null>
   using any = typename detail::any_impl<Sequence,Predicate>::type;
 }
+#endif

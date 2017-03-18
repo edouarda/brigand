@@ -4,7 +4,8 @@ Copyright (c) 2015 Edouard Alligand and Joel Falcou
 Distributed under the Boost Software License, Version 1.0.
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 =================================================================================================**/
-#pragma once
+#ifndef BOOST_BRIGAND_ALGORITHMS_SPLIT_HPP
+#define BOOST_BRIGAND_ALGORITHMS_SPLIT_HPP
 
 #include <brigand/config.hpp>
 #include <brigand/sequences/list.hpp>
@@ -72,3 +73,4 @@ template<typename TList, typename TDelim>
 using split = typename lazy::split<TList, TDelim>::type;
 
 }
+#endif
