@@ -299,7 +299,7 @@ configure_file(libbrigand.pc.in
     @ONLY
 )
 
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/brigand
     DESTINATION include
 )
 
