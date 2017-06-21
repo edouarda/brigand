@@ -1,0 +1,198 @@
+
+# Last updated for Doxygen 1.8.10
+# See https://www.stack.nl/~dimitri/doxygen/manual/config.html
+# for documentation on the commands in this file.
+
+#---------------------------------------------------------------------------
+# Project related configuration options
+#---------------------------------------------------------------------------
+
+PROJECT_NAME           = Brigand
+
+PROJECT_NUMBER         = @brigand_VERSION@
+
+OUTPUT_DIRECTORY       = @PROJECT_BINARY_DIR@/doc
+
+STRIP_FROM_PATH        = @PROJECT_SOURCE_DIR@
+
+JAVADOC_AUTOBRIEF      = YES
+
+MULTILINE_CPP_IS_BRIEF = YES
+
+TAB_SIZE               = 2
+
+ALIASES                = "semantics=<p></p><i>Semantics:</i>" \
+                         "metareturns=<p></p><i>Returns:</i> " \
+                         "return=<p></p><i>Returns:</i> " \
+                         "requires=<p></p><i>Requires:</i> " \
+                         "effects=<p></p><i>Effects:</i> " \
+                         "synchronization=<p></p><i>Synchronization:</i> " \
+                         "postconditions=<p></p><i>Postconditions:</i> " \
+                         "returns=<p></p><i>Returns:</i> " \
+                         "throws=<p></p><i>Throws:</i> " \
+                         "complexity=<p></p><i>Complexity:</i> " \
+                         "remarks=<p></p><i>Remarks:</i> " \
+                         "errorconditions=<p></p><i>Error Conditions:</i> " \
+                         "notes=<p></p><i>Notes:</i> " \
+                         "details=<p></p><h3>Details</h3>" \
+                         "usage=<p></p><h3>Usage</h3>" \
+                         "example=<p></p><h3>Example</h3>" \
+                         "derivedrequires=<p></p><i>Derived Class Requires:</i>"
+
+DISTRIBUTE_GROUP_DOC   = YES
+
+SUBGROUPING            = YES
+
+#---------------------------------------------------------------------------
+# Build related configuration options
+#---------------------------------------------------------------------------
+
+EXTRACT_ALL            = YES
+
+EXTRACT_PRIVATE        = NO
+
+EXTRACT_STATIC         = YES
+
+EXTRACT_LOCAL_CLASSES  = YES
+
+CASE_SENSE_NAMES       = YES
+
+GENERATE_TODOLIST      = NO
+
+GENERATE_TESTLIST      = NO
+
+GENERATE_BUGLIST       = NO
+
+#---------------------------------------------------------------------------
+# configuration options related to the input files
+#---------------------------------------------------------------------------
+
+INPUT                  = @DOXYGEN_GROUPS_FILE@ \
+                         @PROJECT_SOURCE_DIR@
+
+FILE_PATTERNS          = *.cpp \
+                         *.hpp \
+                         *.md
+
+RECURSIVE              = YES
+
+EXCLUDE                =
+
+EXCLUDE_SYMLINKS       = NO
+
+EXCLUDE_PATTERNS = */CMake/* */README.md
+
+EXCLUDE_SYMBOLS = *detail* std*
+
+EXAMPLE_PATH           = @PROJECT_SOURCE_DIR@/test/*
+
+EXAMPLE_PATTERNS       =
+
+EXAMPLE_RECURSIVE      = NO
+
+#---------------------------------------------------------------------------
+# configuration options related to source browsing
+#---------------------------------------------------------------------------
+
+REFERENCED_BY_RELATION = YES
+
+REFERENCES_RELATION    = YES
+
+#---------------------------------------------------------------------------
+# configuration options related to the output
+#---------------------------------------------------------------------------
+
+GENERATE_HTML          = @DOXYGEN_GENERATE_HTML@
+
+# HTML_HEADER            = @PROJECT_SOURCE_DIR@/doc/config/header.html
+
+# HTML_FOOTER            = @PROJECT_SOURCE_DIR@/doc/config/footer.html
+
+GENERATE_LATEX         = NO
+
+GENERATE_RTF           = NO
+
+GENERATE_XML           = @DOXYGEN_GENERATE_XML@
+
+XML_OUTPUT             = xml
+
+#---------------------------------------------------------------------------
+# Configuration options related to the preprocessor
+#---------------------------------------------------------------------------
+
+ENABLE_PREPROCESSING   = YES
+
+MACRO_EXPANSION        = YES
+
+EXPAND_ONLY_PREDEF     = YES
+
+SEARCH_INCLUDES        = YES
+
+PREDEFINED             = BRIGAND_DOXYGEN_INVOKED
+
+#---------------------------------------------------------------------------
+# Configuration::additions related to external references
+#---------------------------------------------------------------------------
+# TAGFILES +=
+
+ALLEXTERNALS           = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the dot tool
+#---------------------------------------------------------------------------
+
+CLASS_DIAGRAMS         = NO
+
+HAVE_DOT               = YES
+
+CLASS_GRAPH            = NO
+
+COLLABORATION_GRAPH    = NO
+
+GROUP_GRAPHS           = NO
+
+UML_LOOK               = YES
+
+TEMPLATE_RELATIONS     = NO
+
+INCLUDE_GRAPH          = NO
+
+INCLUDED_BY_GRAPH      = NO
+
+CALL_GRAPH             = NO
+
+CALLER_GRAPH           = NO
+
+GRAPHICAL_HIERARCHY    = NO
+
+DIRECTORY_GRAPH        = NO
+
+DOT_IMAGE_FORMAT       = png
+
+DOT_PATH               = @DOXYGEN_DOT_PATH@
+
+MAX_DOT_GRAPH_DEPTH    = 0
+
+GENERATE_LEGEND        = NO
+
+#---------------------------------------------------------------------------
+# HTML layout file
+#---------------------------------------------------------------------------
+
+LAYOUT_FILE = @PROJECT_SOURCE_DIR@/doc/config/layout.xml
+
+HTML_EXTRA_FILES       =
+
+# This is not the recommended way of using a completely custom style sheet.
+# It's probably better to have a custom header that uses the style sheet
+# HTML_STYLESHEET = @PROJECT_SOURCE_DIR@/doc/config/doxygen.css
+
+# USE_MDFILE_AS_MAINPAGE = main.md
+
+USE_MATHJAX = YES
+
+#---------------------------------------------------------------------------
+# Configuration::additions related to the search engine
+#---------------------------------------------------------------------------
+
+SEARCHENGINE           = YES

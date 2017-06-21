@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(brigand)
+# When moving to CMake 3.0 and newer the set(brigand_VERSION 1.3.0) should
+# be replaced with project(brigand VERSION 1.3.0)
+set(brigand_VERSION 1.3.0)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 
 enable_testing()
 
@@ -306,3 +311,6 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/brigand
 install(FILES ${CMAKE_BINARY_DIR}/libbrigand.pc
     DESTINATION lib/pkgconfig
 )
+
+include(SetupDoxygen)
+include(SetupStandardese)
