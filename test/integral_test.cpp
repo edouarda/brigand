@@ -22,3 +22,60 @@ static_assert(brigand::prev<brigand::prev<value_int_three>>::value == 1, "invali
 static_assert(brigand::prev<brigand::next<value_int_one>>::value == 1, "invalid prev next result");
 static_assert(brigand::negate<value_int_three>::value == -3, "invalid negate result");
 static_assert(brigand::complement<value_byte_zero>::value == 255, "invalid complement result");
+
+static_assert(std::is_same<typename brigand::min<brigand::integral_constant<short, 10>,
+                                                 brigand::integral_constant<long, 3>>::type,
+                           brigand::integral_constant<long, 3>>::value,
+              "failed min with cast");
+static_assert(std::is_same<typename brigand::min<brigand::integral_constant<long, 10>,
+                                                 brigand::integral_constant<short, 3>>::type,
+                           brigand::integral_constant<long, 3>>::value,
+              "failed min with cast");
+static_assert(std::is_same<typename brigand::max<brigand::integral_constant<short, 10>,
+                                                 brigand::integral_constant<long, 3>>::type,
+                           brigand::integral_constant<long, 10>>::value,
+              "failed max with cast");
+static_assert(std::is_same<typename brigand::max<brigand::integral_constant<long, 10>,
+                                                 brigand::integral_constant<short, 3>>::type,
+                           brigand::integral_constant<long, 10>>::value,
+              "failed max with cast");
+static_assert(std::is_same<typename brigand::plus<brigand::integral_constant<short, 1>,
+                                                  brigand::integral_constant<long, 2>>::type,
+                           brigand::integral_constant<long, 3>>::value,
+              "failed addition with cast");
+static_assert(std::is_same<typename brigand::plus<brigand::integral_constant<long, 1>,
+                                                  brigand::integral_constant<short, 2>>::type,
+                           brigand::integral_constant<long, 3>>::value,
+              "failed addition with cast");
+static_assert(std::is_same<typename brigand::minus<brigand::integral_constant<short, 1>,
+                                                   brigand::integral_constant<long, 2>>::type,
+                           brigand::integral_constant<long, -1>>::value,
+              "failed subtraction with cast");
+static_assert(std::is_same<typename brigand::minus<brigand::integral_constant<long, 1>,
+                                                   brigand::integral_constant<short, 2>>::type,
+                           brigand::integral_constant<long, -1>>::value,
+              "failed subtraction with cast");
+static_assert(std::is_same<typename brigand::times<brigand::integral_constant<short, 1>,
+                                                   brigand::integral_constant<long, 2>>::type,
+                           brigand::integral_constant<long, 2>>::value,
+              "failed times with cast");
+static_assert(std::is_same<typename brigand::times<brigand::integral_constant<long, 1>,
+                                                   brigand::integral_constant<short, 2>>::type,
+                           brigand::integral_constant<long, 2>>::value,
+              "failed times with cast");
+static_assert(std::is_same<typename brigand::divides<brigand::integral_constant<short, 4>,
+                                                     brigand::integral_constant<long, 2>>::type,
+                           brigand::integral_constant<long, 2>>::value,
+              "failed divides with cast");
+static_assert(std::is_same<typename brigand::divides<brigand::integral_constant<long, 4>,
+                                                     brigand::integral_constant<short, 2>>::type,
+                           brigand::integral_constant<long, 2>>::value,
+              "failed divides with cast");
+static_assert(std::is_same<typename brigand::modulo<brigand::integral_constant<short, 10>,
+                                                    brigand::integral_constant<long, 3>>::type,
+                           brigand::integral_constant<long, 1>>::value,
+              "failed modulo with cast");
+static_assert(std::is_same<typename brigand::modulo<brigand::integral_constant<long, 10>,
+                                                    brigand::integral_constant<short, 3>>::type,
+                           brigand::integral_constant<long, 1>>::value,
+              "failed modulo with cast");

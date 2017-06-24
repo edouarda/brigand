@@ -10,10 +10,10 @@
 
 namespace brigand
 {
-  template <typename A, typename B>
-  struct max : brigand::integral_constant < typename A::value_type
-                                      , (A::value < B::value) ? B::value : A::value
-                                      >
-  {};
+template <typename A, typename B>
+struct max : brigand::integral_constant<
+                 typename std::decay<decltype((A::value < B::value) ? B::value : A::value)>::type,
+                 (A::value < B::value) ? B::value : A::value>
+{};
 }
 #endif

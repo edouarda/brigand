@@ -11,7 +11,8 @@
 namespace brigand
 {
 template <typename A, typename B>
-struct plus : brigand::integral_constant<typename A::value_type, A::value + B::value>
+struct plus : brigand::integral_constant<typename std::decay<decltype(A::value + B::value)>::type,
+                                         A::value + B::value>
 {
 };
 }
