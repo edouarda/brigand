@@ -80,11 +80,11 @@ EXCLUDE                =
 
 EXCLUDE_SYMLINKS       = NO
 
-EXCLUDE_PATTERNS = */CMake/* */README.md
+EXCLUDE_PATTERNS = @PROJECT_SOURCE_DIR@/CMake/* */README.md
 
 EXCLUDE_SYMBOLS = *detail* std*
 
-EXAMPLE_PATH           = @PROJECT_SOURCE_DIR@/test/*
+EXAMPLE_PATH           = @PROJECT_SOURCE_DIR@/example
 
 EXAMPLE_PATTERNS       =
 
@@ -187,7 +187,7 @@ HTML_EXTRA_FILES       =
 # It's probably better to have a custom header that uses the style sheet
 # HTML_STYLESHEET = @PROJECT_SOURCE_DIR@/doc/config/doxygen.css
 
-# USE_MDFILE_AS_MAINPAGE = main.md
+USE_MDFILE_AS_MAINPAGE = main.md
 
 USE_MATHJAX = YES
 
