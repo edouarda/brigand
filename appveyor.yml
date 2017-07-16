@@ -59,6 +59,8 @@ build_script:
  - cd c:\sources\brigand\build
  - msbuild /target:brigand_test /p:Configuration=Release;Platform="x64" brigand.sln
  - msbuild /target:brigand_test /p:Configuration=Debug;Platform="x64" brigand.sln
+ - msbuild /target:example /p:Configuration=Debug;Platform="x64" brigand.sln
+ - msbuild /target:example /p:Configuration=Release;Platform="x64" brigand.sln
 
 # scripts to run before tests
 before_test:

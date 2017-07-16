@@ -314,3 +314,5 @@ install(FILES ${CMAKE_BINARY_DIR}/libbrigand.pc
 
 include(SetupDoxygen)
 include(SetupStandardese)
+
+add_subdirectory(example)

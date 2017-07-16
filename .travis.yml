@@ -65,3 +65,4 @@ before_script:
 script:
   - make VERBOSE=1
   - ./brigand_test
+  - make VERBOSE=1 example
