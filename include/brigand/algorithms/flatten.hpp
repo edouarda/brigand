@@ -47,6 +47,18 @@ namespace lazy
     using flatten = typename detail::flatten_impl<Sequence>;
 }
 
+/*!
+ * \ingroup Algorithms
+ * \ingroup List
+ * \brief Merge the contents of several lists into one list
+ *
+ * Given a list of lists and types, returns a new list with the contents of the lists and the types.
+ *
+ * \example
+ * Below is an example of how to use brigand::flatten. The `static_assert` is used to show the
+ * returned list from flatten
+ * \snippet flatten.cpp flatten_simple_example
+ */
 template <typename Sequence>
 using flatten = typename lazy::flatten<Sequence>::type;
 
