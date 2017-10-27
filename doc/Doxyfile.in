@@ -80,7 +80,7 @@ EXCLUDE                =
 
 EXCLUDE_SYMLINKS       = NO
 
-EXCLUDE_PATTERNS = */CMake/* */README.md
+EXCLUDE_PATTERNS = */CMake/* */README.md boost*
 
 EXCLUDE_SYMBOLS = *detail* std*
 
