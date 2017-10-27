@@ -84,7 +84,7 @@ EXCLUDE_PATTERNS = */CMake/* */README.md
 
 EXCLUDE_SYMBOLS = *detail* std*
 
-EXAMPLE_PATH           = @PROJECT_SOURCE_DIR@/test/*
+EXAMPLE_PATH           = @PROJECT_SOURCE_DIR@/examples/
 
 EXAMPLE_PATTERNS       =
 
