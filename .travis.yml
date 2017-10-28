@@ -25,8 +25,8 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
-      env: TOOLSET=g++-5
+          packages: ['g++-5', 'graphviz', 'doxygen']
+      env: TOOLSET=g++-5 GENERATE_DOCUMENTATION=true
 
     - os: linux
       compiler: clang
@@ -65,3 +65,19 @@ before_script:
 script:
   - make VERBOSE=1
   - ./brigand_test
+
+after_success:
+  - if [ "${GENERATE_DOCUMENTATION}" == "true" ]; then
+      cd $TRAVIS_BUILD_DIR/build;
+      make doxygen VERBOSE=1;
+      cd $TRAVIS_BUILD_DIR;
+    fi
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: build/doc/html/
+  github_token: $GITHUB_API_TOKEN
+  on:
+    branch: master
+    condition: $GENERATE_DOCUMENTATION = true
