@@ -1,5 +1,6 @@
 /*!
-@file Example of using brigand::flatten
+@file examples/algorithms/flatten.cpp
+Example of using brigand::flatten
 
 @copyright Edouard Alligand and Joel Falcou 2015-2017
 (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
