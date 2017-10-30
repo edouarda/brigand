@@ -56,21 +56,88 @@ namespace detail
 }
 namespace lazy
 {
+    /*!
+     * \ingroup Sequences
+     * \ingroup List
+     * \brief Lazily combine N lists into a single list
+     *
+     * Similar to brigand::append except that it is a lazy metafunction
+     * instead of an eager metafunction.
+     *
+     * \example
+     * Below is an example of how to use `brigand::lazy::append`. The
+     * `static_assert` is used to show the returned list from `lazy::append`
+     * \snippet append.cpp append_lazy_example
+     *
+     * \see brigand::append
+     */
     template <typename... Ts>
     using append = detail::append_impl<Ts...>;
 }
+/*!
+ * \ingroup Sequences
+ * \ingroup List
+ * \brief Combine N lists into a single list
+ *
+ * Merges the elements in N lists into a single list with the elements in
+ * the resulting list being in the same order as the elements in the
+ * individual lists, with the elements of the first list before the elements
+ * of the second list, etc.
+ *
+ * \example
+ * Below is an example of how to use `brigand::append`. The `static_assert`
+ * is used to show the returned list from `append`
+ * \snippet append.cpp append_simple_example
+ *
+ * \see brigand::join
+ */
 template <typename... Ts>
 using append = typename detail::append_impl<Ts...>::type;
 
 namespace lazy
 {
+    /*!
+     * \ingroup Sequences
+     * \ingroup List
+     * \brief Lazily combine a list of N lists into a single list
+     *
+     * Similar to brigand::join except that it is a lazy metafunction
+     * instead of an eager metafunction.
+     *
+     * \example
+     * Below is an example of how to use `brigand::lazy::join`. The
+     * `static_assert` is used to show the returned list from `lazy::join`
+     * \snippet join.cpp join_lazy_example
+     *
+     * \see brigand::join
+     */
     template <typename T>
     struct join;
+    /// \cond
     template <template <typename...> class L, typename... Ts>
     struct join<L<Ts...>> : ::brigand::detail::append_impl<L<>, Ts...>
     {
     };
+    /// \endcond
 }
+
+/*!
+ * \ingroup Sequences
+ * \ingroup List
+ * \brief Combine a list of N lists into a single list
+ *
+ * For `T` being a list, brigand::join merges the elements in the N sub-lists
+ * into a single list with the elements in the resulting list being in the
+ * same order as the elements in the individual lists, with the elements of
+ * the first list before the elements of the second list, etc.
+ *
+ * \example
+ * Below is an example of how to use `brigand::join`. The `static_assert`
+ * is used to show the returned list from `join`
+ * \snippet join.cpp join_simple_example
+ *
+ * \see brigand::append
+ */
 template <typename T>
 using join = wrap<T, append>;
 }
