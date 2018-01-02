@@ -39,12 +39,12 @@ namespace detail
                         T5::value || T6::value || T7::value || T8::value || T9::value ||
                         T10::value || T11::value || T12::value || T13::value || T14::value ||
                         T15::value || T16::value || T17::value || T18::value || T19::value ||
-                        or_impl<bool(sizeof...(Ts) / 9)>::template f<Ts...>::value>;
+                        or_impl<(sizeof...(Ts) / 9) != 0>::template f<Ts...>::value>;
     };
 }
 
 template<typename...Ts>
-struct or_: detail::or_impl<bool(sizeof...(Ts) / 9)>::template f<Ts...>
+struct or_: detail::or_impl<(sizeof...(Ts) / 9) != 0>::template f<Ts...>
 {};
 
 }
