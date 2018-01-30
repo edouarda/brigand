@@ -6,6 +6,10 @@
 */
 #ifndef BOOST_BRIGAND_ALGORITHMS_COUNT_HPP
 #define BOOST_BRIGAND_ALGORITHMS_COUNT_HPP
+#if __cplusplus >= 201402L
+#include <array>
+#endif
+
 #include <brigand/config.hpp>
 #include <brigand/functions/lambda.hpp>
 #include <brigand/types/integer.hpp>
@@ -16,11 +20,29 @@ namespace brigand
 namespace detail
 {
 #if defined(BRIGAND_COMP_GCC) || defined(BRIGAND_COMP_CLANG) // not MSVC
+#if __cplusplus >= 201402L
+    // Clang chokes on the C++11 compatible version of count_bools when C++1z is enable and is fine
+    // with the std::array version in C++14
+    template <std::size_t length>
+    constexpr unsigned int count_bools(const std::array<bool, length> & s) noexcept
+    {
+        unsigned int number_of_true_elements = 0;
+        for (std::size_t i = 0; i < length; ++i)
+        {
+            if (s[i])
+            {
+                number_of_true_elements++;
+            }
+        }
+        return number_of_true_elements;
+    }
+#else
     constexpr unsigned int count_bools(bool const * const begin, bool const * const end,
-                                      unsigned int n)
+                                       unsigned int n)
     {
         return begin == end ? n : detail::count_bools(begin + 1, end, n + *begin);
     }
+#endif
 #endif
 
     template <bool... Bs>
@@ -73,22 +95,37 @@ namespace lazy
     template <template <typename...> class S, typename... Ts, typename Pred>
     struct count_if<S<Ts...>, Pred>
     {
+#if __cplusplus >= 201402L
+        static constexpr std::array<bool, sizeof...(Ts)> s_v{{::brigand::apply<Pred, Ts>::type::value...}};
+        using type = brigand::size_t<::brigand::detail::count_bools(s_v)>;
+#else
         static constexpr bool s_v[] = {::brigand::apply<Pred, Ts>::type::value...};
         using type = brigand::size_t<::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
+#endif
     };
 
     template <template <typename...> class S, typename... Ts, template <typename...> class F>
     struct count_if<S<Ts...>, bind<F, _1>>
     {
+#if __cplusplus >= 201402L
+        static constexpr std::array<bool, sizeof...(Ts)> s_v{{F<Ts>::type::value...}};
+        using type = brigand::size_t<::brigand::detail::count_bools(s_v)>;
+#else
         static constexpr bool s_v[] = {F<Ts>::value...};
         using type = brigand::size_t<::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
+#endif
     };
 
     template <template <typename...> class S, typename... Ts, template <typename...> class F>
     struct count_if<S<Ts...>, F<_1>>
     {
+#if __cplusplus >= 201402L
+        static constexpr std::array<bool, sizeof...(Ts)> s_v{{F<Ts>::type::value...}};
+        using type = brigand::size_t<::brigand::detail::count_bools(s_v)>;
+#else
         static constexpr bool s_v[] = {F<Ts>::type::value...};
         using type = brigand::size_t<::brigand::detail::count_bools(s_v, s_v + sizeof...(Ts), 0u)>;
+#endif
     };
 #else
 #if defined(BRIGAND_COMP_MSVC_2015)
