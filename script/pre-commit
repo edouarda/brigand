@@ -10,7 +10,7 @@ then
   color_option='--color=auto'
 fi
 
-python ./script/embed.py -I./include --include-match=brigand/* include/brigand/brigand.hpp -o include/standalone/brigand.hpp
+python ./script/embed.py -I./include --include-match=brigand/* --guard-match='^BOOST_BRIGAND.*_HPP$' include/brigand/brigand.hpp -o include/standalone/brigand.hpp
 git add include/standalone/brigand.hpp
 
 if git diff --cached | grep -E '^\+.*'$'\t' > /dev/null
