@@ -53,3 +53,6 @@ namespace custom
   brigand::replace_if<custom_list<int, float, char, double, int, unsigned int>, pred_fp, long>
     replace_test6 = custom_list<int, long, char, long, int, unsigned int>{};
 }
+
+brigand::apply<brigand::lazy::replace<brigand::pin<brigand::list<int>>, int, float>>
+replace_lazy_test1 = brigand::list<float>{};

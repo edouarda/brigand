@@ -1772,7 +1772,7 @@ namespace lazy
         using type = S<typename detail::replacer<Ts, Predicate, NewType>::type...>;
     };
     template <typename Sequence, typename OldType, typename NewType>
-    using replace = replace_if<Sequence, std::is_same<_1, pin<OldType>>, NewType>;
+    struct replace : replace_if<Sequence, std::is_same<_1, pin<OldType>>, NewType> {};
 }
 template <typename Sequence, typename Predicate, typename NewType>
 using replace_if = typename ::brigand::lazy::replace_if<Sequence, Predicate, NewType>::type;
