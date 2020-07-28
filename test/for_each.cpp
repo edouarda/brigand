@@ -28,6 +28,15 @@ struct evil
     evil & operator,(int) { return *this; } // evil operator comma
 };
 
+struct base10 {
+    int result = 0;
+
+    void operator()(int x) {
+        result *= 10;
+        result += x;
+    }
+};
+
 template <class...>
 class custom_list
 {
@@ -51,4 +60,8 @@ void for_each_test()
     r = brigand::for_each<brigand::list<evil, evil, evil>>(value_printer{});
     assert(r.res == 1);
     assert(r.i == 3);
+
+    // Test for_each_args separately
+    auto base10_result = brigand::for_each_args(base10{}, 1, 2, 3, 4).result;
+    assert(base10_result == 1234);
 }
