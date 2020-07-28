@@ -125,3 +125,6 @@ static_assert(std::is_same<brigand::insert<big_map, pair_seven>, big_map>::value
 static_assert(std::is_same<brigand::insert<big_map, pair_eight>, big_map>::value, "insertion failed");
 static_assert(std::is_same<brigand::insert<big_map, pair_nine>, big_map>::value, "insertion failed");
 static_assert(std::is_same<brigand::insert<big_map, pair_ten>, big_map>::value, "insertion failed");
+
+// Test inserting a duplicate key with a different value
+static_assert(std::is_same<brigand::insert<big_map, brigand::pair<type_one, double>>, big_map>::value, "insertion failed");
