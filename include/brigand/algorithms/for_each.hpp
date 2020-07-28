@@ -15,7 +15,7 @@ namespace brigand
   namespace detail
   {
     template<template<class...> class List, typename... Elements, typename Functor>
-    Functor for_each_impl( List<Elements...>&&, Functor f )
+    Functor for_each_impl( type_<List<Elements...>>&&, Functor f )
     {
       return for_each_args( std::move(f), type_<Elements>()... );
     }
@@ -23,7 +23,7 @@ namespace brigand
 
   template<typename List, typename Functor> Functor for_each( Functor f )
   {
-    return detail::for_each_impl( List{}, std::move(f) );
+    return detail::for_each_impl( type_<List>{}, std::move(f) );
   }
 }
 #endif

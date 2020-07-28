@@ -48,9 +48,7 @@ struct base10 {
 };
 
 template <class...>
-class custom_list
-{
-};
+class custom_list;
 
 void for_each_test()
 {
