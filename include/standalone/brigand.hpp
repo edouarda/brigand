@@ -1407,9 +1407,11 @@ namespace brigand
 {
   template<class F, class...Ts> F for_each_args(F f, Ts&&...a)
   {
-    return (void)std::initializer_list<int>{((void)std::ref(f)(static_cast<Ts&&>(a)),0)...}, f;
+    (void)std::initializer_list<int>{((void)std::ref(f)(static_cast<Ts&&>(a)),0)...};
+    return f;
   }
 }
+#include <utility>
 namespace brigand
 {
   namespace detail
@@ -1417,12 +1419,12 @@ namespace brigand
     template<template<class...> class List, typename... Elements, typename Functor>
     Functor for_each_impl( List<Elements...>&&, Functor f )
     {
-      return for_each_args( f, type_<Elements>()... );
+      return for_each_args( std::move(f), type_<Elements>()... );
     }
   }
   template<typename List, typename Functor> Functor for_each( Functor f )
   {
-    return detail::for_each_impl( List{}, f );
+    return detail::for_each_impl( List{}, std::move(f) );
   }
 }
 namespace brigand

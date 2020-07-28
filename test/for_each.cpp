@@ -6,6 +6,10 @@
 struct value_printer
 {
     value_printer() : i{0}, res{1} {}
+    value_printer(const value_printer&) = delete;
+    value_printer(value_printer&&) = default;
+    value_printer& operator=(const value_printer&) = delete;
+    value_printer& operator=(value_printer&&) = default;
 
     template <typename U>
     void operator()(brigand::type_<U>)
@@ -29,6 +33,12 @@ struct evil
 };
 
 struct base10 {
+    base10() = default;
+    base10(const base10&) = delete;
+    base10(base10&&) = default;
+    base10& operator=(const base10&) = delete;
+    base10& operator=(base10&&) = default;
+
     int result = 0;
 
     void operator()(int x) {
