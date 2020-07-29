@@ -115,7 +115,7 @@ namespace lazy
     struct join;
     /// \cond
     template <template <typename...> class L, typename... Ts>
-    struct join<L<Ts...>> : ::brigand::detail::append_impl<L<>, Ts...>
+    struct join<L<Ts...>> : ::brigand::detail::append_impl<Ts...>
     {
     };
     /// \endcond
