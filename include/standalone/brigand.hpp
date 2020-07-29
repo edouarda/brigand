@@ -81,14 +81,16 @@ namespace brigand
 namespace detail
 {
     template <typename... Ts>
-    struct append_impl
+    struct append_impl;
+    template <>
+    struct append_impl<>
     {
         using type = brigand::empty_sequence;
     };
-    template <typename T>
-    struct append_impl<T>
+    template <template <typename...> class L, typename... T>
+    struct append_impl<L<T...>>
     {
-        using type = T;
+        using type = L<T...>;
     };
     template <template <typename...> class L1, template <typename...> class L2, typename... T1s,
               typename... T2s, typename... Ts>
