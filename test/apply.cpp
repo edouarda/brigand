@@ -22,6 +22,21 @@ struct is_int
 static_assert(brigand::apply<is_int<brigand::_1>, float>::value == false, "invalid apply1 result");
 static_assert(brigand::apply<is_int<brigand::_1>, int>::value == true, "invalid apply2 result");
 
+template <typename T>
+using run_in_defer = brigand::apply<brigand::apply<brigand::defer<T>, char, bool>, double, float>;
+template <typename T>
+using eager_identity = T;
+static_assert(std::is_same<run_in_defer<int>, int>::value, "defer<type> broken");
+static_assert(std::is_same<run_in_defer<brigand::bind<eager_identity, int>>, int>::value, "defer<bind> broken");
+static_assert(std::is_same<run_in_defer<brigand::always<int>>, int>::value, "defer<lazy> broken");
+static_assert(std::is_same<run_in_defer<brigand::pin<brigand::list<int>>>, brigand::list<int>>::value, "defer<pin> broken");
+static_assert(std::is_same<run_in_defer<brigand::_1>, double>::value, "defer<_1> broken");
+static_assert(std::is_same<run_in_defer<brigand::_2>, float>::value, "defer<_2> broken");
+static_assert(std::is_same<run_in_defer<brigand::args<0>>, double>::value, "defer<args> broken");
+static_assert(std::is_same<run_in_defer<brigand::parent<brigand::_1>>, char>::value, "defer<parent> broken");
+static_assert(std::is_same<brigand::apply<run_in_defer<brigand::defer<int>>>, int>::value, "defer<defer> broken");
+static_assert(std::is_same<run_in_defer<brigand::apply<brigand::defer<int>>>, int>::value, "defer<lcall> broken");
+
 using li = brigand::list<int, bool, char>;
 using lo = brigand::list<float, double>;
 

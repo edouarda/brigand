@@ -88,16 +88,70 @@ namespace detail
   {
     using type = packaged_lcall<Lambda, L, Ls...>;
   };
-  //packaged_lcall lazy case
-  template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
-  struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>
-  {
+
+  //packaged_lcall fallback case
+  template <typename T, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<T, PLs...>, L, Ls...> {
+    using type = T;
   };
+
   //packaged_lcall eager case
   template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
   struct apply<packaged_lcall<bind<Lambda,Ts...>, PLs...>, L, Ls...>
   {
     using type = Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>;
+  };
+
+  //packaged_lcall lazy case
+  template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>
+  {
+  };
+
+  //packaged_lcall pin case
+  template <typename T, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<pin<T>, PLs...>, L, Ls...> {
+    using type = T;
+  };
+
+  //packaged_lcall arg case
+  template <unsigned int N, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<args<N>, PLs...>, L, Ls...>
+  {
+    using type = at_c<L, N>;
+  };
+
+  //packaged_lcall arg fast track
+  template <typename... PLs, typename T, typename... Ts, typename...Ls>
+  struct apply<packaged_lcall<_1, PLs...>, list<T, Ts...>, Ls...>
+  {
+    using type = T;
+  };
+
+  //packaged_lcall arg fast track
+  template <typename... PLs, typename T, typename U, typename... Ts, typename...Ls>
+  struct apply<packaged_lcall<_2, PLs...>, list<T, U, Ts...>, Ls...>
+  {
+    using type = U;
+  };
+
+  //packaged_lcall parent case
+  template <typename T, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<parent<T>, PLs...>, L, Ls...> : apply<T, Ls..., PLs...>
+  {
+  };
+
+  //packaged_lcall defer case
+  template <typename Lambda, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<defer<Lambda>, PLs...>, L, Ls...>
+  {
+    using type = packaged_lcall<Lambda, L, Ls..., PLs...>;
+  };
+
+  //packaged_lcall packaged_lcall case
+  template <typename... LcallArgs, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<packaged_lcall<LcallArgs...>, PLs...>, L, Ls...> : apply<packaged_lcall<LcallArgs...>, L, Ls..., PLs...>
+  {
   };
 
   template<typename T, typename...Ts>
