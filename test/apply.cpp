@@ -37,6 +37,15 @@ static_assert(std::is_same<run_in_defer<brigand::parent<brigand::_1>>, char>::va
 static_assert(std::is_same<brigand::apply<run_in_defer<brigand::defer<int>>>, int>::value, "defer<defer> broken");
 static_assert(std::is_same<run_in_defer<brigand::apply<brigand::defer<int>>>, int>::value, "defer<lcall> broken");
 
+template <typename T>
+using run_in_nested_defer = brigand::apply<brigand::apply<brigand::defer<brigand::apply<brigand::apply<brigand::defer<brigand::defer<T>>, int>, float>>, double>, bool>;
+using test_capture = brigand::bind<brigand::list, brigand::_1, brigand::parent<brigand::_1>, brigand::parent<brigand::parent<brigand::_1>>>;
+static_assert(std::is_same<run_in_nested_defer<brigand::bind<eager_identity, test_capture>>, brigand::list<bool, float, int>>::value, "parent broken in defer<bind>");
+static_assert(std::is_same<run_in_nested_defer<brigand::always<test_capture>>, brigand::list<bool, float, int>>::value, "parent broken in defer<lazy>");
+static_assert(std::is_same<run_in_nested_defer<brigand::parent<brigand::bind<brigand::list, brigand::_1, brigand::parent<brigand::_1>>>>, brigand::list<float, int>>::value, "parent broken in defer<parent>");
+static_assert(std::is_same<brigand::apply<run_in_nested_defer<brigand::defer<test_capture>>, char>, brigand::list<char, bool, float>>::value, "parent broken in defer<defer>");
+// The capture groups in defer<lcall> are ignored
+
 using li = brigand::list<int, bool, char>;
 using lo = brigand::list<float, double>;
 

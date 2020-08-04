@@ -99,12 +99,12 @@ namespace detail
   template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
   struct apply<packaged_lcall<bind<Lambda,Ts...>, PLs...>, L, Ls...>
   {
-    using type = Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>;
+    using type = Lambda<typename apply<Ts, L, PLs...>::type...>;
   };
 
   //packaged_lcall lazy case
   template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
-  struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>
+  struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, PLs...>::type...>
   {
   };
 
@@ -137,7 +137,7 @@ namespace detail
 
   //packaged_lcall parent case
   template <typename T, typename... PLs, typename L, typename...Ls>
-  struct apply<packaged_lcall<parent<T>, PLs...>, L, Ls...> : apply<T, Ls..., PLs...>
+  struct apply<packaged_lcall<parent<T>, PLs...>, L, Ls...> : apply<T, PLs...>
   {
   };
 
@@ -145,12 +145,14 @@ namespace detail
   template <typename Lambda, typename... PLs, typename L, typename...Ls>
   struct apply<packaged_lcall<defer<Lambda>, PLs...>, L, Ls...>
   {
-    using type = packaged_lcall<Lambda, L, Ls..., PLs...>;
+    using type = packaged_lcall<Lambda, L, PLs...>;
   };
 
   //packaged_lcall packaged_lcall case
+  // PLs... will not be used by the inner lcall, so no need to pass
+  // them on.
   template <typename... LcallArgs, typename... PLs, typename L, typename...Ls>
-  struct apply<packaged_lcall<packaged_lcall<LcallArgs...>, PLs...>, L, Ls...> : apply<packaged_lcall<LcallArgs...>, L, Ls..., PLs...>
+  struct apply<packaged_lcall<packaged_lcall<LcallArgs...>, PLs...>, L, Ls...> : apply<packaged_lcall<LcallArgs...>, L>
   {
   };
 
