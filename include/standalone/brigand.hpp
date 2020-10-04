@@ -370,14 +370,50 @@ namespace detail
   {
     using type = packaged_lcall<Lambda, L, Ls...>;
   };
-  template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
-  struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>
-  {
+  template <typename T, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<T, PLs...>, L, Ls...> {
+    using type = T;
   };
   template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
   struct apply<packaged_lcall<bind<Lambda,Ts...>, PLs...>, L, Ls...>
   {
-    using type = Lambda<typename apply<Ts, L, Ls..., PLs...>::type...>;
+    using type = Lambda<typename apply<Ts, L, PLs...>::type...>;
+  };
+  template <template <typename...> class Lambda, typename... Ts, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<Lambda<Ts...>, PLs...>, L, Ls...> : Lambda<typename apply<Ts, L, PLs...>::type...>
+  {
+  };
+  template <typename T, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<pin<T>, PLs...>, L, Ls...> {
+    using type = T;
+  };
+  template <unsigned int N, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<args<N>, PLs...>, L, Ls...>
+  {
+    using type = at_c<L, N>;
+  };
+  template <typename... PLs, typename T, typename... Ts, typename...Ls>
+  struct apply<packaged_lcall<_1, PLs...>, list<T, Ts...>, Ls...>
+  {
+    using type = T;
+  };
+  template <typename... PLs, typename T, typename U, typename... Ts, typename...Ls>
+  struct apply<packaged_lcall<_2, PLs...>, list<T, U, Ts...>, Ls...>
+  {
+    using type = U;
+  };
+  template <typename T, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<parent<T>, PLs...>, L, Ls...> : apply<T, PLs...>
+  {
+  };
+  template <typename Lambda, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<defer<Lambda>, PLs...>, L, Ls...>
+  {
+    using type = packaged_lcall<Lambda, L, PLs...>;
+  };
+  template <typename... LcallArgs, typename... PLs, typename L, typename...Ls>
+  struct apply<packaged_lcall<packaged_lcall<LcallArgs...>, PLs...>, L, Ls...> : apply<packaged_lcall<LcallArgs...>, L>
+  {
   };
   template<typename T, typename...Ts>
   using bound_apply = typename apply<T, brigand::list<Ts...>>::type;
