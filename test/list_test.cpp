@@ -267,4 +267,9 @@ using bool_int_list = custom_list<bool, int>;
 static_assert(
     std::is_same<brigand::append<int_bool_list, bool_int_list>, int_bool_bool_int_list>::value,
     "invalid append result");
+
+static_assert(
+    std::is_same<brigand::join<custom_list<brigand::list<int>>>,
+                 brigand::lazy::join<custom_list<brigand::list<int>>>::type>::value,
+    "join lazy and eager versions disagree");
 }
