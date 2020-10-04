@@ -218,8 +218,7 @@ namespace detail
         };
         template <class K>
         static typename erase_return_t<K, Ts...>::type erase(type_<K>);
-        template <class P, class = decltype(static_cast<pair<typename P::first_type, P> *>(
-                               static_cast<Pack *>(nullptr)))>
+        template <class P, class = decltype(at_impl<typename P::first_type>(static_cast<Pack *>(nullptr)))>
         static map_impl insert(type_<P>);
         template <class P>
         static map_impl<Ts..., typename P::type> insert(P);
