@@ -6,6 +6,10 @@
 struct value_printer
 {
     value_printer() : i{0}, res{1} {}
+    value_printer(const value_printer&) = delete;
+    value_printer(value_printer&&) = default;
+    value_printer& operator=(const value_printer&) = delete;
+    value_printer& operator=(value_printer&&) = default;
 
     template <typename U>
     void operator()(brigand::type_<U>)
@@ -28,10 +32,23 @@ struct evil
     evil & operator,(int) { return *this; } // evil operator comma
 };
 
-template <class...>
-class custom_list
-{
+struct base10 {
+    base10() = default;
+    base10(const base10&) = delete;
+    base10(base10&&) = default;
+    base10& operator=(const base10&) = delete;
+    base10& operator=(base10&&) = default;
+
+    int result = 0;
+
+    void operator()(int x) {
+        result *= 10;
+        result += x;
+    }
 };
+
+template <class...>
+class custom_list;
 
 void for_each_test()
 {
@@ -51,4 +68,8 @@ void for_each_test()
     r = brigand::for_each<brigand::list<evil, evil, evil>>(value_printer{});
     assert(r.res == 1);
     assert(r.i == 3);
+
+    // Test for_each_args separately
+    auto base10_result = brigand::for_each_args(base10{}, 1, 2, 3, 4).result;
+    assert(base10_result == 1234);
 }
