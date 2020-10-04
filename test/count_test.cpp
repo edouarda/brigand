@@ -29,3 +29,17 @@ static_assert(brigand::count_if<size_t_list<3>, lazy_is_odd<brigand::_1>>::value
 static_assert(brigand::count_if<size_t_list<3>, lazy_is_odd<brigand::_1>>::value == 1, "lazy single count_if error");
 static_assert(brigand::count_if<size_t_list<2>, lazy_is_odd<brigand::_1>>::value == 0, "eager single count_if error");
 static_assert(brigand::count_if<size_t_list<2>, lazy_is_odd<brigand::_1>>::value == 0, "lazy single count_if error");
+
+template <typename>
+struct true_false {
+  static constexpr bool value = true;
+  using type = brigand::false_type;
+};
+template <typename>
+struct lazy_true_false {
+  using type = true_false<void>;
+};
+static_assert(brigand::count_if<brigand::list<int>, lazy_true_false<void>>::value == 1, "lazy count_if error");
+static_assert(brigand::count_if<brigand::list<int>, lazy_true_false<brigand::_1>>::value == 1, "lazy count_if error");
+static_assert(brigand::count_if<brigand::list<int>, brigand::bind<true_false, void>>::value == 1, "eager count_if error");
+static_assert(brigand::count_if<brigand::list<int>, brigand::bind<true_false, brigand::_1>>::value == 1, "eager count_if error");
