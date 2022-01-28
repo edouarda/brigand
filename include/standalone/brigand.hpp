@@ -712,7 +712,7 @@ namespace lazy
     struct count_if<S<Ts...>, bind<F, _1>>
     {
 #if __cplusplus >= 201402L
-        static constexpr std::array<bool, sizeof...(Ts)> s_v{{F<Ts>::type::value...}};
+        static constexpr std::array<bool, sizeof...(Ts)> s_v{{F<Ts>::value...}};
         using type = brigand::size_t<::brigand::detail::count_bools(s_v)>;
 #else
         static constexpr bool s_v[] = {F<Ts>::value...};
