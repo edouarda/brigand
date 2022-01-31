@@ -1,0 +1,36 @@
+
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - gh-pages
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit_tests:
+    name: Unit
+    strategy:
+      matrix:
+        host: [ubuntu-latest, macos-latest]
+        # Test with these compilers. Currently, we just select whichever version
+        # is the default on the host. Note that the default `g++` is only a
+        # wrapper around AppleClang on macOS.
+        compiler: [g++, clang++]
+      fail-fast: false
+    runs-on: ${{ matrix.host }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build and test
+        run: |
+          mkdir build && cd build
+          cmake \
+            -D CMAKE_CXX_COMPILER=${{ matrix.compiler }} \
+            ..
+          make
+          make test
