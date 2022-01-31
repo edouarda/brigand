@@ -14,7 +14,9 @@
 
 namespace brigand
 {
-#if defined(BRIGAND_COMP_MSVC_2013) || defined(BRIGAND_COMP_CUDA) || defined(BRIGAND_COMP_INTEL)
+// defined(_LIBCPP_VERSION) && __cplusplus < 201402L
+// - std::initializer_list is not a literal type in libc++ until C++14
+#if defined(BRIGAND_COMP_MSVC_2013) || defined(BRIGAND_COMP_CUDA) || defined(BRIGAND_COMP_INTEL) || (defined(_LIBCPP_VERSION) && __cplusplus < 201402L)
 namespace detail
 {
     template <typename Sequence, typename Pred>
