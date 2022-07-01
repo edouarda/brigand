@@ -1193,8 +1193,10 @@ using find = typename lazy::find<Sequence, Predicate>::type;
 namespace lazy
 {
     template <typename Sequence, typename Predicate = detail::non_null>
-    using reverse_find =
-        ::brigand::lazy::reverse< ::brigand::find<brigand::reverse<Sequence>, Predicate>>;
+    struct reverse_find {
+      using type =
+          ::brigand::reverse< ::brigand::find<brigand::reverse<Sequence>, Predicate>>;
+    };
 }
 template <typename Sequence, typename Predicate = detail::non_null>
 using reverse_find = typename ::brigand::lazy::reverse_find<Sequence, Predicate>::type;
