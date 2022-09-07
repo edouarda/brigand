@@ -46,8 +46,10 @@ namespace lazy
 
     // reverse_find uses reverse and find :o
     template <typename Sequence, typename Predicate = detail::non_null>
-    using reverse_find =
-        ::brigand::lazy::reverse< ::brigand::find<brigand::reverse<Sequence>, Predicate>>;
+    struct reverse_find {
+      using type =
+          ::brigand::reverse< ::brigand::find<brigand::reverse<Sequence>, Predicate>>;
+    };
 }
 
 template <typename Sequence, typename Predicate = detail::non_null>
