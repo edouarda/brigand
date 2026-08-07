@@ -1441,12 +1441,11 @@ template <class Sequence, class State, class Functor>
 using reverse_fold = typename ::brigand::lazy::reverse_fold<Sequence, State, Functor>::type;
 }
 #include <initializer_list>
-#include <functional>
 namespace brigand
 {
-  template<class F, class...Ts> F for_each_args(F f, Ts&&...a)
+  template<class F, class...Ts> constexpr F for_each_args(F f, Ts&&...a)
   {
-    (void)std::initializer_list<int>{((void)std::ref(f)(static_cast<Ts&&>(a)),0)...};
+    (void)std::initializer_list<int>{((void)f(static_cast<Ts&&>(a)),0)...};
     return f;
   }
 }
@@ -1456,12 +1455,12 @@ namespace brigand
   namespace detail
   {
     template<template<class...> class List, typename... Elements, typename Functor>
-    Functor for_each_impl( type_<List<Elements...>>&&, Functor f )
+    constexpr Functor for_each_impl( type_<List<Elements...>>&&, Functor f )
     {
       return for_each_args( std::move(f), type_<Elements>()... );
     }
   }
-  template<typename List, typename Functor> Functor for_each( Functor f )
+  template<typename List, typename Functor> constexpr Functor for_each( Functor f )
   {
     return detail::for_each_impl( type_<List>{}, std::move(f) );
   }

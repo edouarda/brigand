@@ -8,13 +8,12 @@
 #define BOOST_BRIGAND_ALGORITHMS_FOR_EACH_ARGS_HPP
 
 #include <initializer_list>
-#include <functional>
 
 namespace brigand
 {
-  template<class F, class...Ts> F for_each_args(F f, Ts&&...a)
+  template<class F, class...Ts> constexpr F for_each_args(F f, Ts&&...a)
   {
-    (void)std::initializer_list<int>{((void)std::ref(f)(static_cast<Ts&&>(a)),0)...};
+    (void)std::initializer_list<int>{((void)f(static_cast<Ts&&>(a)),0)...};
     return f;
   }
 }
